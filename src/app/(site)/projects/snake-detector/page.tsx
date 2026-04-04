@@ -90,7 +90,7 @@ export default function SnakeDetectorCaseStudyPage() {
             boundary, and limitations are explicit so the story stays honest for
             readers of the case study and anyone reproducing from the repo.
             {demoUrl
-              ? " A live demo is hosted separately so you can try uploads without treating this portfolio site as the app runtime."
+              ? " A live demo runs on a separate host so you can try uploads in the browser."
               : " Proof lives in this case study and the training repository, with a reproducible path from the code."}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">

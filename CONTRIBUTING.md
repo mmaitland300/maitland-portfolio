@@ -33,7 +33,8 @@ Rules:
 
 ## Merge policy
 
-- Land work on **`main`** through **pull requests** with **CI green** before merge.
+- **Default:** land work on **`main`** through **pull requests** with **CI green** before merge.
+- **Maintainer exception:** small, single-focus polish (docs, copy, config) may be pushed directly to **`main`** when **CI is green** (for example after running the same checks locally). Use PRs for anything risky, multi-file, or behavior-changing so review and history stay clear.
 - **Default for this repo:** use GitHub's **merge commit** option (not squash-only) so PR boundaries stay visible in history. Write a clear **PR title** (and edit the merge commit subject when GitHub allows) so `git log` stays readable - conventional `type(scope):` titles are welcome when they fit.
 - **Squash merge** is fine for small, single-concern PRs when you want one commit on `main`.
 - Keep each PR focused on one concern; avoid unrelated drive-by changes in the same PR.
