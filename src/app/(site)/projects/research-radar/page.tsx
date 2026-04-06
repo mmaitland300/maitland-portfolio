@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import {
   ArrowLeft,
@@ -148,7 +149,7 @@ function buildLiveRoute(demoUrl: string | undefined, route: string) {
 export default function ResearchRadarCaseStudyPage() {
   const project = getProjectBySlug("research-radar");
   if (!project?.github) {
-    throw new Error("Missing project data for research-radar");
+    notFound();
   }
 
   const liveDemoUrl = project.demo;
@@ -312,6 +313,7 @@ export default function ResearchRadarCaseStudyPage() {
                       src={target.src}
                       alt={target.alt}
                       fill
+                      unoptimized
                       className="object-cover object-top"
                       sizes="(max-width: 768px) 100vw, 896px"
                     />
