@@ -1,3 +1,4 @@
+import { getResearchRadarDemoUrl } from "@/lib/research-radar";
 import { getSnakeDemoUrl } from "@/lib/snake-demo";
 
 /**
@@ -6,6 +7,7 @@ import { getSnakeDemoUrl } from "@/lib/snake-demo";
  * with explicit artifacts/tradeoffs/current-state/evidence links).
  */
 const snakeDemoUrl = getSnakeDemoUrl();
+const researchRadarDemoUrl = getResearchRadarDemoUrl();
 
 export type ProjectCategory = "featured" | "experiment";
 export type ProjectStatus = "in-progress" | "operational" | "shipped" | "archived";
@@ -94,6 +96,65 @@ export const projects: Project[] = [
     image: "/images/stringflux/ui-advanced.png",
     demo: "/stringflux",
     caseStudy: "/projects/stringflux",
+    category: "featured",
+  },
+  {
+    slug: "research-radar",
+    title: "Research Radar",
+    description:
+      "An explainable research-discovery prototype for MIR and audio ML papers. It materializes ranking runs with visible signal breakdowns, paper-detail similarity, topic trends, and baseline comparisons instead of hiding behind opaque relevance.",
+    problem:
+      "Paper discovery tools often collapse into popularity sorting or semantic black boxes. I wanted a narrower prototype that makes ranking logic inspectable and keeps the evaluation story visible.",
+    constraints:
+      "The corpus is intentionally curated and still limited. The stable core is heuristic ranking plus transparency, while bridge and semantic work need to stay honest about what is and is not production-ready yet.",
+    tradeoff:
+      "I prioritized materialized runs, versioned artifacts, and clear explanation seams over squeezing every experimental signal into the default ranking. That keeps the product credible even when some ML work is still exploratory.",
+    outcome:
+      "The current prototype includes ranked recommendation families, paper detail with similar papers, corpus-scoped trends, and an evaluation surface that compares ranked output against simple baselines.",
+    status: researchRadarDemoUrl ? "operational" : "in-progress",
+    evidence:
+      "The strongest stable claim today is explainable, materialized ranking over a curated MIR/audio-ML slice. Bridge score is real and inspectable, but the default bridge weight stays at 0.0 while that family remains experimental.",
+    knownLimits:
+      "Bridge recommendations are still structurally informed experimental reordering, not a clearly distinct production-ready family. semantic_score remains null in ranking, bootstrap sources are still narrow, and there is still at least one mojibake survivor in the corpus.",
+    proofLinks: [
+      {
+        label: "Research Radar case study",
+        href: "/projects/research-radar",
+        kind: "artifact",
+      },
+      {
+        label: "Research Radar source repo",
+        href: "https://github.com/mmaitland300/Research-Radar",
+        kind: "repo",
+      },
+      {
+        label: "Roadmap and ML notes",
+        href: "https://github.com/mmaitland300/Research-Radar/blob/main/docs/roadmap.md",
+        kind: "post",
+      },
+      {
+        label: "Ranked recommendation tests",
+        href: "https://github.com/mmaitland300/Research-Radar/blob/main/apps/api/tests/test_recommendations_ranked.py",
+        kind: "test",
+      },
+      {
+        label: "Evaluation compare tests",
+        href: "https://github.com/mmaitland300/Research-Radar/blob/main/apps/api/tests/test_evaluation_compare.py",
+        kind: "test",
+      },
+    ],
+    tags: [
+      "Next.js",
+      "FastAPI",
+      "Postgres",
+      "pgvector",
+      "Python",
+      "Ranking",
+    ],
+    github: "https://github.com/mmaitland300/Research-Radar",
+    demo: researchRadarDemoUrl,
+    image: "/images/projects/research-radar-artifact.svg",
+    caseStudy: "/projects/research-radar",
     category: "featured",
   },
   {

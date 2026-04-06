@@ -23,6 +23,7 @@ const appEnvSchema = z.object({
   UPSTASH_REDIS_REST_TOKEN: optionalTrimmedString,
   NEXT_PUBLIC_SITE_URL: optionalTrimmedString,
   NEXT_PUBLIC_CONTACT_EMAIL: optionalTrimmedString,
+  NEXT_PUBLIC_RESEARCH_RADAR_URL: optionalTrimmedString,
   VERCEL_PROJECT_PRODUCTION_URL: optionalTrimmedString,
   VERCEL_URL: optionalTrimmedString,
 });

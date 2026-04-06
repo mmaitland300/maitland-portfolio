@@ -8,6 +8,7 @@ const publicRoutes = [
   "/projects/stringflux",
   "/projects/full-swing-tech-support",
   "/projects/portfolio-site",
+  "/projects/research-radar",
   "/blog",
   "/contact",
   "/music",

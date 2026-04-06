@@ -38,6 +38,11 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.65,
     },
     {
+      url: `${baseUrl}/projects/research-radar`,
+      changeFrequency: "monthly",
+      priority: 0.65,
+    },
+    {
       url: `${baseUrl}/projects/snake-detector`,
       changeFrequency: "monthly",
       priority: 0.55,
