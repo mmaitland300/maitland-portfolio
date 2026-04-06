@@ -13,7 +13,7 @@ import {
   Mail,
   ShieldCheck,
 } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import {
   resumeSkillTiers,
   resumeExperience as experience,

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { ProjectCard } from "@/components/sections/project-card";
 import { SectionHeader } from "@/components/ui/section-header";
 import { getHomepageFeaturedProjects } from "@/content/projects";

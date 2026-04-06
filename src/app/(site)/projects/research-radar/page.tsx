@@ -17,7 +17,7 @@ import { MainContentAnchor } from "@/components/layout/main-content-anchor";
 import { ProjectComments } from "@/components/sections/project-comments";
 import { CaseStudyEvidenceFooter } from "@/components/sections/case-study-evidence-footer";
 import { Badge } from "@/components/ui/badge";
-import { buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button-variants";
 import { getProjectBySlug } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
