@@ -115,7 +115,7 @@ export const projects: Project[] = [
     evidence:
       "The strongest stable claim today is explainable, materialized ranking over a curated MIR/audio-ML slice. Bridge score is real and inspectable, but the default bridge weight stays at 0.0 while that family remains experimental.",
     knownLimits:
-      "Bridge recommendations are still structurally informed experimental reordering, not a clearly distinct production-ready family. semantic_score remains null in ranking, bootstrap sources are still narrow, and there is still at least one mojibake survivor in the corpus.",
+      "Bridge recommendations are still structurally informed experimental reordering, not a clearly distinct production-ready family. semantic_score remains null in ranking, and bootstrap sources are still narrower than the long-term corpus brief.",
     proofLinks: [
       {
         label: "Research Radar case study",

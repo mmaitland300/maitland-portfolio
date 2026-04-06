@@ -105,7 +105,7 @@ const currentState = {
   caveats: [
     "semantic_score remains null in ranking.",
     "Default production bridge weight should stay 0.0.",
-    "Bootstrap sources are still narrower in code than the long-term corpus brief, and at least one mojibake survivor remains in titles.",
+    "Bootstrap sources are still narrower in code than the long-term corpus brief.",
   ],
 };
 
