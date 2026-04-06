@@ -63,31 +63,41 @@ const technicalPoints = [
   },
 ];
 
-const screenshotTargets = [
+const screenshotGallery = [
   {
     title: "Recommended: emerging",
+    src: "/images/projects/research-radar/recommended-emerging.png",
     route: "/recommended?family=emerging",
     why: "Best first screenshot for the core value proposition: materialized recommendations with visible reasoning.",
+    alt: "Research Radar recommended emerging page showing ranked paper cards with visible signal breakdowns",
   },
   {
     title: "Evaluation",
+    src: "/images/projects/research-radar/evaluation-emerging.png",
     route: "/evaluation?family=emerging",
     why: "Shows the product's honesty. The page makes comparison and proxy-metric boundaries visible instead of hiding them.",
+    alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
   },
   {
     title: "Trends",
+    src: "/images/projects/research-radar/trends.png",
     route: "/trends",
     why: "Useful for showing the prototype is not only a feed: it also exposes topic momentum inside the curated corpus slice.",
+    alt: "Research Radar trends page showing topic momentum inside the curated corpus slice",
   },
   {
     title: "Paper detail with similar papers",
-    route: "/papers/{real-openalex-work-id}",
-    why: "Use a real included work with a populated similar-papers block. This is the cleanest way to show metadata, explainability, and exploratory retrieval together.",
+    src: "/images/projects/research-radar/paper-detail-similar.png",
+    route: "/papers/https%3A%2F%2Fopenalex.org%2FW3093121331",
+    why: "Paper detail with metadata and embedding-backed similar papers (GiantMIDI Piano example).",
+    alt: "Research Radar paper detail page for GiantMIDI Piano showing metadata and similar papers",
   },
   {
     title: "Bridge family (experimental)",
+    src: "/images/projects/research-radar/recommended-bridge-experimental.png",
     route: "/recommended?family=bridge",
-    why: "Optional fifth screenshot. If included, the caption should explicitly say the bridge family is experimental and structurally informed, not yet a clearly distinct production-ready family.",
+    why: "Bridge family is experimental and structurally informed, not yet a clearly distinct production-ready family.",
+    alt: "Research Radar bridge recommendation page showing bridge scores with experimental framing",
   },
 ];
 
@@ -274,40 +284,59 @@ export default function ResearchRadarCaseStudyPage() {
         >
           <div className="mb-4 flex items-center gap-2">
             <Sparkles className="h-5 w-5 text-amber-400" />
-            <h2 className="text-xl font-semibold">Visual walkthrough and screenshot plan</h2>
+            <h2 className="text-xl font-semibold">Visual walkthrough</h2>
           </div>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            The live app should stay separate from the portfolio. For the portfolio
-            page, the strongest presentation is a tight case-study narrative plus a
-            small, specific screenshot set from the live prototype.
+            These captures were taken from a production-style run against the current
+            API, with ranking pinned to{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
+              ml2-5a-qual-r2-k6-20260405
+            </code>{" "}
+            and similar papers using{" "}
+            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
+              v1-title-abstract-1536-cleantext-r2
+            </code>
+            . The app stays deployed separately from the portfolio; this section shows
+            what the live prototype looked like at that pin.
           </p>
-          <div className="space-y-3">
-            {screenshotTargets.map((target) => {
+          <div className="space-y-6">
+            {screenshotGallery.map((target) => {
               const liveHref = buildLiveRoute(liveDemoUrl, target.route);
               return (
-                <div
+                <figure
                   key={target.title}
-                  className="rounded-lg border border-border bg-card/30 px-4 py-4 text-sm"
+                  className="overflow-hidden rounded-lg border border-border bg-card/30"
                 >
-                  <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
-                    <h3 className="font-medium text-foreground">{target.title}</h3>
-                    {liveHref ? (
-                      <a
-                        href={liveHref}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-cyan-400 underline-offset-4 hover:underline"
-                      >
-                        {target.route}
-                      </a>
-                    ) : (
-                      <code className="rounded bg-muted px-2 py-1 text-xs text-foreground">
-                        {target.route}
-                      </code>
-                    )}
+                  <div className="relative aspect-[1440/2200] w-full bg-muted/20">
+                    <Image
+                      src={target.src}
+                      alt={target.alt}
+                      fill
+                      className="object-cover object-top"
+                      sizes="(max-width: 768px) 100vw, 896px"
+                    />
                   </div>
-                  <p className="mt-2 text-muted-foreground">{target.why}</p>
-                </div>
+                  <figcaption className="space-y-2 border-t border-border px-4 py-4 text-sm">
+                    <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
+                      <h3 className="font-medium text-foreground">{target.title}</h3>
+                      {liveHref ? (
+                        <a
+                          href={liveHref}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-cyan-400 underline-offset-4 hover:underline"
+                        >
+                          {target.route}
+                        </a>
+                      ) : (
+                        <code className="rounded bg-muted px-2 py-1 text-xs text-foreground">
+                          {target.route}
+                        </code>
+                      )}
+                    </div>
+                    <p className="text-muted-foreground">{target.why}</p>
+                  </figcaption>
+                </figure>
               );
             })}
           </div>
