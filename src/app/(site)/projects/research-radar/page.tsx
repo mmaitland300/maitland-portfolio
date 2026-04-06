@@ -27,40 +27,40 @@ const mainSurfaces = [
   {
     title: "Ranked recommendations",
     detail:
-      "Emerging, bridge, and undercited feeds come from materialized ranking runs instead of ad hoc front-end sorting, so the current ranking version and reasons stay inspectable.",
+      "Visitors can browse emerging papers, undercited papers, and an experimental bridge view. Each list is generated ahead of time and includes enough detail to show why a paper was recommended.",
   },
   {
     title: "Paper detail with similar papers",
     detail:
-      "Each paper detail page exposes metadata plus embedding-backed similar papers. That similarity layer is useful and real, but it is still separate from the default family ranking.",
+      "Each paper page shows metadata plus a related-papers section, so someone can move from one useful paper to the next without starting over from search every time.",
   },
   {
-    title: "Trends inside the curated slice",
+    title: "Trends in the current dataset",
     detail:
-      "The trends surface stays scoped to the current corpus policy rather than pretending to summarize the whole field from generic topic counts.",
+      "The trends page gives a quick read on which topics are gaining momentum in the current dataset, without pretending to summarize the whole field.",
   },
   {
     title: "Evaluation as transparency",
     detail:
-      "The evaluation page compares ranked output against citation- and date-ordered baselines so visitors can inspect list behavior without mistaking proxy metrics for universal relevance proof.",
+      "The evaluation page compares the ranking against simpler baselines like citation count and recency. That makes it easier to inspect how the system behaves without pretending there is one perfect relevance score.",
   },
 ];
 
 const technicalPoints = [
   {
-    title: "Stable ranking seam first",
+    title: 'Recommendations should answer "why is this here?"',
     detail:
-      "The durable product seam is versioned ranking runs plus per-signal rows in Postgres. That makes the prototype explainable even while some ML work is still changing.",
+      "The app keeps a saved record of how each ranked list was built and which signals fed into it, like showing your work instead of just giving a final answer. That makes the system easier to debug, easier to compare across versions, and easier to explain to another person.",
   },
   {
-    title: "Product, API, and pipeline are separate on purpose",
+    title: "Splitting the site from the prototype is intentional",
     detail:
-      "The live app stays its own deployment, while the portfolio links out to it. The architecture split is clean: Next.js web, FastAPI API, Postgres with pgvector, and a Python pipeline for ingest, embeddings, ranking, and clustering.",
+      "This page is the case study, while the prototype runs as its own app. Under the hood there is a Next.js frontend, a FastAPI backend, Postgres with pgvector for storage and similarity search, and Python jobs for ingest, ranking, and clustering. Keeping those pieces separate makes it easier to update the ranking workflow without turning every change into a full-site deploy.",
   },
   {
-    title: "Experimental work is visible, not overstated",
+    title: "Experimental ideas stay visible and clearly bounded",
     detail:
-      "bridge_score is persisted and inspectable, but the default bridge weight remains 0.0 because current geometry still does not produce a clearly distinct bridge head. semantic_score stays null in ranking rather than being faked.",
+      "Some ideas are still exploratory, especially bridge-style recommendations that try to connect papers across areas. I left them visible because they are real product work, but they are not positioned as finished or used as the default experience.",
   },
 ];
 
@@ -69,61 +69,61 @@ const screenshotGallery = [
     title: "Recommended: emerging",
     src: "/images/projects/research-radar/recommended-emerging.png",
     route: "/recommended?family=emerging",
-    why: "Best first screenshot for the core value proposition: materialized recommendations with visible reasoning.",
+    why: "The clearest introduction to the product: a ranked list with visible recommendation signals.",
     alt: "Research Radar recommended emerging page showing ranked paper cards with visible signal breakdowns",
   },
   {
     title: "Evaluation",
     src: "/images/projects/research-radar/evaluation-emerging.png",
     route: "/evaluation?family=emerging",
-    why: "Shows the product's honesty. The page makes comparison and proxy-metric boundaries visible instead of hiding them.",
+    why: "Shows the project's honesty. The ranking is compared against simpler baselines instead of being presented as unquestionable.",
     alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
   },
   {
     title: "Trends",
     src: "/images/projects/research-radar/trends.png",
     route: "/trends",
-    why: "Useful for showing the prototype is not only a feed: it also exposes topic momentum inside the curated corpus slice.",
+    why: "Shows that the prototype is not only a recommendation feed; it also gives a quick view of topic momentum in the dataset.",
     alt: "Research Radar trends page showing topic momentum inside the curated corpus slice",
   },
   {
     title: "Paper detail with similar papers",
     src: "/images/projects/research-radar/paper-detail-similar.png",
     route: "/papers/https%3A%2F%2Fopenalex.org%2FW3093121331",
-    why: "Paper detail with metadata and embedding-backed similar papers (GiantMIDI Piano example).",
+    why: "Shows how someone can move from one paper into a useful cluster of related work.",
     alt: "Research Radar paper detail page for GiantMIDI Piano showing metadata and similar papers",
   },
   {
     title: "Bridge family (experimental)",
     src: "/images/projects/research-radar/recommended-bridge-experimental.png",
     route: "/recommended?family=bridge",
-    why: "Bridge family is experimental and structurally informed, not yet a clearly distinct production-ready family.",
+    why: "An honest look at the experimental bridge view, which is still exploratory rather than a finished recommendation mode.",
     alt: "Research Radar bridge recommendation page showing bridge scores with experimental framing",
   },
 ];
 
 const currentState = {
   stable: [
-    "Heuristic ranking is the stable core, and ranking runs are materialized with inspectable signal breakdowns.",
-    "bridge_score is real and inspectable in the data model.",
-    "Paper detail, trends, and evaluation are implemented product surfaces rather than roadmap-only promises.",
+    "The main product is a set of ranked paper feeds that show why items appear where they do.",
+    "Paper detail, trends, and evaluation are all working parts of the prototype.",
+    "The strongest current value is helping someone inspect and compare recommendations, not hiding the ranking logic.",
   ],
   experimental: [
-    "Bridge recommendations are currently structural experimental reordering, not a clearly separate family.",
-    "The weighted harness exists, but weighted experiments on the current geometry did not produce a distinct bridge head.",
-    "The next likely bridge direction is neighbor-based signal plus tighter eligibility and gating, not more weight on the current setup.",
+    "Bridge recommendations are still experimental, not a mature standalone feature.",
+    "I tested weighted variations, but the current setup did not produce a meaningfully different bridge list.",
+    "The next step is likely better bridge signals and tighter filtering, not simply increasing the current weight.",
   ],
   caveats: [
-    "semantic_score remains null in ranking.",
-    "Default production bridge weight should stay 0.0.",
-    "Bootstrap sources are still narrower in code than the long-term corpus brief.",
+    "Semantic ranking is not part of the default ranking today.",
+    "Bridge stays off by default in production.",
+    "The corpus is still curated and narrower than the long-term vision.",
   ],
 };
 
 const lessonsLearned = [
-  "A ranking product gets more credible when versioning and explanation land before more sophisticated modeling.",
-  "Keeping experimental bridge behavior visible but unweighted is better than burying uncertainty behind a confident-looking feed.",
-  "Evaluation pages earn trust when they frame proxy metrics as debugging aids rather than as universal quality proof.",
+  "Building explanation and versioning in early made the project easier to trust and easier to improve.",
+  "It is better to label an idea as experimental than to oversell a result that is not there yet.",
+  "Evaluation became more useful once I treated it as a way to inspect behavior, not as a claim that the ranking problem was solved.",
 ];
 
 export const metadata: Metadata = {
@@ -176,17 +176,16 @@ export default function ResearchRadarCaseStudyPage() {
             Research Radar: explainable discovery for MIR and audio ML papers
           </h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">
-            Research Radar is an explainable research-discovery prototype for music
-            information retrieval and audio ML papers. It materializes ranking runs
-            with visible signal breakdowns instead of hiding behind opaque relevance,
-            and it keeps the live app separate from the portfolio so the case study
-            can explain the work without pretending the prototype is a finished
-            product.
+            Research Radar is a research-discovery prototype for music information
+            retrieval and audio ML papers. I built it to make recommendations easier
+            to understand: you can browse ranked feeds, open a paper, explore
+            trends, and compare the output against simpler baselines.
           </p>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            Bridge recommendations are currently experimental and based on structural
-            embedding-space signals. Evaluation is here for transparency and product
-            inspection, not as a claim of universal relevance quality.
+            The live app stays separate from this portfolio, and the experimental
+            parts are labeled honestly. Bridge recommendations are still exploratory,
+            and the evaluation view is there to show how the system behaves, not to
+            claim the ranking problem is solved.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             {liveDemoUrl ? (
@@ -267,7 +266,9 @@ export default function ResearchRadarCaseStudyPage() {
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <div className="mb-4 flex items-center gap-2">
             <Network className="h-5 w-5 text-purple-400" />
-            <h2 className="text-xl font-semibold">Why it is technically interesting</h2>
+            <h2 className="text-xl font-semibold">
+              Engineering choices, in plain language
+            </h2>
           </div>
           <div className="space-y-4">
             {technicalPoints.map((point) => (
@@ -288,17 +289,21 @@ export default function ResearchRadarCaseStudyPage() {
             <h2 className="text-xl font-semibold">Visual walkthrough</h2>
           </div>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            These captures were taken from a production-style run against the current
-            API, with ranking pinned to{" "}
+            These captures were taken from a recent run of the prototype against the
+            current API. I pinned the ranking and embedding versions so this
+            walkthrough reflects a real, reproducible state rather than a mocked-up
+            demo:{" "}
+            <span className="sr-only">ranking version </span>
             <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
               ml2-5a-qual-r2-k6-20260405
             </code>{" "}
-            and similar papers using{" "}
+            and{" "}
+            <span className="sr-only">embedding version </span>
             <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
               v1-title-abstract-1536-cleantext-r2
             </code>
-            . The app stays deployed separately from the portfolio; this section shows
-            what the live prototype looked like at that pin.
+            . The app stays deployed separately from the portfolio; this section
+            shows what the live prototype looked like at that pin.
           </p>
           <div className="space-y-6">
             {screenshotGallery.map((target) => {
@@ -392,10 +397,10 @@ export default function ResearchRadarCaseStudyPage() {
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-3 text-xl font-semibold">Tech stack</h2>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            The product surface is a Next.js app backed by a FastAPI service. Data
-            lives in Postgres with pgvector, while the Python pipeline handles
-            ingest, text cleanup, embeddings, ranking runs, and clustering
-            experiments.
+            The interface is built in Next.js, the API is built in FastAPI, and the
+            data lives in Postgres with pgvector. A separate Python pipeline handles
+            ingest, cleanup, embeddings, ranking, and clustering experiments behind
+            the scenes.
           </p>
           <div className="flex flex-wrap gap-2">
             {[

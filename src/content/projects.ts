@@ -102,20 +102,20 @@ export const projects: Project[] = [
     slug: "research-radar",
     title: "Research Radar",
     description:
-      "An explainable research-discovery prototype for MIR and audio ML papers. It materializes ranking runs with visible signal breakdowns, paper-detail similarity, topic trends, and baseline comparisons instead of hiding behind opaque relevance.",
+      "A prototype for finding MIR and audio ML papers, with explainable recommendations, paper detail, topic trends, and transparent evaluation.",
     problem:
-      "Paper discovery tools often collapse into popularity sorting or semantic black boxes. I wanted a narrower prototype that makes ranking logic inspectable and keeps the evaluation story visible.",
+      "I wanted a paper-discovery tool that was easier to understand than a popularity list and less opaque than a generic AI-style search box.",
     constraints:
-      "The corpus is intentionally curated and still limited. The stable core is heuristic ranking plus transparency, while bridge and semantic work need to stay honest about what is and is not production-ready yet.",
+      "The corpus is intentionally curated and still limited. The strongest current result is clear, explainable ranking, while some experimental ranking ideas still need more work.",
     tradeoff:
-      "I prioritized materialized runs, versioned artifacts, and clear explanation seams over squeezing every experimental signal into the default ranking. That keeps the product credible even when some ML work is still exploratory.",
+      "I focused first on saving ranking runs, exposing signal breakdowns, and making the prototype understandable before pushing harder on more experimental ranking ideas.",
     outcome:
-      "The current prototype includes ranked recommendation families, paper detail with similar papers, corpus-scoped trends, and an evaluation surface that compares ranked output against simple baselines.",
+      "The current prototype includes ranked recommendation feeds, paper detail with similar papers, corpus-scoped trends, and an evaluation view for comparing output against simple baselines.",
     status: researchRadarDemoUrl ? "operational" : "in-progress",
     evidence:
-      "The strongest stable claim today is explainable, materialized ranking over a curated MIR/audio-ML slice. Bridge score is real and inspectable, but the default bridge weight stays at 0.0 while that family remains experimental.",
+      "The strongest stable claim today is that the prototype makes its ranking behavior visible and understandable over a curated set of MIR and audio ML papers.",
     knownLimits:
-      "Bridge recommendations are still structurally informed experimental reordering, not a clearly distinct production-ready family. semantic_score remains null in ranking, and bootstrap sources are still narrower than the long-term corpus brief.",
+      "Bridge recommendations are still experimental, semantic ranking is not part of the default ranking, and the corpus is still narrower than the long-term plan.",
     proofLinks: [
       {
         label: "Research Radar case study",
