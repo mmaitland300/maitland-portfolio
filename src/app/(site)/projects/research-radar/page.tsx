@@ -40,7 +40,7 @@ const mainSurfaces = [
       "The trends page gives a quick read on which topics are gaining momentum in the current dataset, without pretending to summarize the whole field.",
   },
   {
-    title: "Evaluation as transparency",
+    title: "Evaluation and comparison",
     detail:
       "The evaluation page compares the ranking against simpler baselines like citation count and recency. That makes it easier to inspect how the system behaves without pretending there is one perfect relevance score.",
   },
@@ -76,7 +76,7 @@ const screenshotGallery = [
     title: "Evaluation",
     src: "/images/projects/research-radar/evaluation-emerging.png",
     route: "/evaluation?family=emerging",
-    why: "Shows the project's honesty. The ranking is compared against simpler baselines instead of being presented as unquestionable.",
+    why: "Shows how the ranking compares with simpler baselines instead of presenting one output as the only answer.",
     alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
   },
   {
@@ -97,7 +97,7 @@ const screenshotGallery = [
     title: "Bridge family (experimental)",
     src: "/images/projects/research-radar/recommended-bridge-experimental.png",
     route: "/recommended?family=bridge",
-    why: "An honest look at the experimental bridge view, which is still exploratory rather than a finished recommendation mode.",
+    why: "Shows the experimental bridge view, which is still exploratory rather than a finished recommendation mode.",
     alt: "Research Radar bridge recommendation page showing bridge scores with experimental framing",
   },
 ];
@@ -121,9 +121,9 @@ const currentState = {
 };
 
 const lessonsLearned = [
-  "Building explanation and versioning in early made the project easier to trust and easier to improve.",
-  "It is better to label an idea as experimental than to oversell a result that is not there yet.",
-  "Evaluation became more useful once I treated it as a way to inspect behavior, not as a claim that the ranking problem was solved.",
+  "Building explanation and versioning in early made it easier to compare changes and improve the system over time.",
+  "Keeping experimental features visible but off by default kept the core product more focused.",
+  "Evaluation worked best as a comparison tool, not as a single score that was supposed to settle the problem.",
 ];
 
 export const metadata: Metadata = {
@@ -182,10 +182,9 @@ export default function ResearchRadarCaseStudyPage() {
             trends, and compare the output against simpler baselines.
           </p>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            The live app stays separate from this portfolio, and the experimental
-            parts are labeled honestly. Bridge recommendations are still exploratory,
-            and the evaluation view is there to show how the system behaves, not to
-            claim the ranking problem is solved.
+            The live app stays separate from this portfolio. Bridge
+            recommendations are still exploratory, and the evaluation view helps
+            inspect how the ranking behaves against simpler baselines.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             {liveDemoUrl ? (
@@ -366,7 +365,7 @@ export default function ResearchRadarCaseStudyPage() {
           <div className="rounded-xl border border-amber-500/35 bg-amber-500/5 p-6">
             <div className="mb-3 flex items-center gap-2">
               <BarChart3 className="h-5 w-5 text-amber-400" />
-              <h2 className="text-xl font-semibold">Experimental notes</h2>
+              <h2 className="text-xl font-semibold">What is still experimental</h2>
             </div>
             <ul className="space-y-2 text-sm text-muted-foreground">
               {currentState.experimental.map((item) => (
