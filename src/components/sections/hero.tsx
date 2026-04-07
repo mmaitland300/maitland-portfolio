@@ -16,7 +16,7 @@ export function Hero() {
         >
           <div className="cyber-pill mb-6 inline-flex items-center gap-3 rounded-full px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-[rgba(196,206,223,0.82)] backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-[rgba(136,212,255,0.95)] shadow-[0_0_12px_rgba(67,188,255,0.45)]" />
-            Systems Troubleshooting - Production Web - Audio DSP
+            Support Engineering - Shipped Web Demos - Audio DSP
           </div>
         </motion.div>
 
@@ -47,9 +47,11 @@ export function Hero() {
         >
           I work at Auxillium supporting Full Swing simulator environments where
           hardware, software, networking, and OS behavior overlap. Outside of work
-          I build web software, develop StringFlux, and write and produce music as
-          NEUROCHEMICAL ENTROPY. This site is where those threads meet:
-          troubleshooting, software, and sound.
+          I ship small production web prototypes—paper discovery with Research Radar,
+          a bounded computer-vision demo—and I develop StringFlux, a JUCE plugin for
+          guitar-forward granular delay. I also write and produce music as
+          NEUROCHEMICAL ENTROPY. This site is where those threads meet: triage,
+          shipped software, and sound.
         </motion.p>
 
         <motion.p

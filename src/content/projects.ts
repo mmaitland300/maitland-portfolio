@@ -42,9 +42,10 @@ export interface Project {
   category: ProjectCategory;
 }
 
+/** Homepage grid: flagship DSP, a live shipped prototype, and employer story. */
 export const HOMEPAGE_FEATURED_SLUGS = [
   "stringflux",
-  "portfolio-site",
+  "research-radar",
   "full-swing-tech-support",
 ] as const;
 

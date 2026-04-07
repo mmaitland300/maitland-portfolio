@@ -27,21 +27,21 @@ const PROOF_HEADLINES = {
         ["artifact", "post"].includes(l.kind ?? "")
       ),
   },
-  "portfolio-site": {
-    what: "This site in production",
+  "research-radar": {
+    what: "Research Radar (live prototype)",
     whyItMatters:
-      "Next.js 16 with server-side validation, rate limiting, optional persistence, and CI plus smoke tests. Built to degrade gracefully when optional services are missing.",
+      "Explainable paper discovery for MIR and audio ML: ranked feeds with signal breakdowns, corpus-scoped trends, and evaluation against baselines. The app is deployed separately; the portfolio links out when a demo URL is configured.",
     linkPick: (links: ProofLink[]) => {
       const byKind = (k: ProofLink["kind"]) =>
         links.find((l) => l.kind === k);
       const picked: ProofLink[] = [];
       const artifact = byKind("artifact");
       const post = byKind("post");
-      const ci = byKind("ci");
+      const repo = byKind("repo");
       const test = links.find((l) => l.kind === "test");
       if (artifact) picked.push(artifact);
       if (post) picked.push(post);
-      if (ci) picked.push(ci);
+      if (repo) picked.push(repo);
       else if (test) picked.push(test);
       return picked;
     },

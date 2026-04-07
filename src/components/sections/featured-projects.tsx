@@ -24,7 +24,7 @@ export function FeaturedProjects() {
           <SectionHeader
             eyebrow="Selected Work"
             title="Featured Projects"
-            description="A small set of builds where constraints, tradeoffs, and outcomes are explicit: DSP, production web, and multi-layer support."
+            description="Flagship audio DSP, a live explainability-first web prototype, and public support-engineering depth—with full case studies for this site, Snake Detector, and more on the projects page."
             headingLevel={2}
           />
         </motion.div>
