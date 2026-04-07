@@ -47,10 +47,11 @@ export function Hero() {
         >
           I work at Auxillium supporting Full Swing simulator environments where
           hardware, software, networking, and OS behavior overlap. Outside of work
-          I build web software and other side projects. The work I&apos;m pushing
-          hardest on in audio is StringFlux, a JUCE plugin for guitar-forward
-          granular delay. I also write and produce music as NEUROCHEMICAL ENTROPY.
-          This site is where those threads meet: triage, software, and sound.
+          I build web software and whatever other side projects get my interest. The
+          work that currently takes most of my time is StringFlux, a JUCE plugin for
+          guitar responsive granular effects. I also write and produce music as
+          NEUROCHEMICAL ENTROPY. This site is where those interests meet:
+          troubleshooting, software, and sound.
         </motion.p>
 
         <motion.p
