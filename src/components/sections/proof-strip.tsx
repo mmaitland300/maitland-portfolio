@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { getResearchRadarDemoUrl } from "@/lib/research-radar";
 import {
   HOMEPAGE_FEATURED_SLUGS,
   getHomepageFeaturedProjects,
@@ -16,21 +17,16 @@ type ProofHeadline = {
   linkPick: (links: ProofLink[]) => ProofLink[];
 };
 
-/** Curated proof-first copy; URLs come from each project's proofLinks (see projects.ts). */
-const PROOF_HEADLINES = {
-  "full-swing-tech-support": {
-    what: "Production troubleshooting",
-    whyItMatters:
-      "Remote triage across calibration, licensing, display, networking, and Windows behavior. The public case study shows how multi-layer failures are isolated under incomplete information.",
-    linkPick: (links: ProofLink[]) =>
-      links.filter((l) =>
-        ["artifact", "post"].includes(l.kind ?? "")
-      ),
-  },
-  "research-radar": {
-    what: "Research Radar (live prototype)",
-    whyItMatters:
-      "Explainable paper discovery for MIR and audio ML: ranked feeds with signal breakdowns, corpus-scoped trends, and evaluation against baselines. The app is deployed separately; the portfolio links out when a demo URL is configured.",
+function researchRadarProofHeadline(
+  demoUrl: string | undefined
+): ProofHeadline {
+  const core =
+    "Paper discovery for MIR and audio ML with ranked feeds, visible signal breakdowns, corpus-scoped trends, and evaluation against baselines.";
+  return {
+    what: demoUrl ? "Research Radar (demo linked)" : "Research Radar",
+    whyItMatters: demoUrl
+      ? `${core} The project card links out to the hosted app.`
+      : `${core} There is no outbound demo link from this site right now, so the case study and repository carry the proof.`,
     linkPick: (links: ProofLink[]) => {
       const byKind = (k: ProofLink["kind"]) =>
         links.find((l) => l.kind === k);
@@ -45,6 +41,19 @@ const PROOF_HEADLINES = {
       else if (test) picked.push(test);
       return picked;
     },
+  };
+}
+
+/** Curated proof-first copy; URLs come from each project's proofLinks (see projects.ts). */
+const PROOF_HEADLINES_BASE = {
+  "full-swing-tech-support": {
+    what: "Production troubleshooting",
+    whyItMatters:
+      "Remote triage across calibration, licensing, display, networking, and Windows behavior. The public case study shows how multi-layer failures are isolated under incomplete information.",
+    linkPick: (links: ProofLink[]) =>
+      links.filter((l) =>
+        ["artifact", "post"].includes(l.kind ?? "")
+      ),
   },
   stringflux: {
     what: "StringFlux (JUCE / C++)",
@@ -53,10 +62,18 @@ const PROOF_HEADLINES = {
     linkPick: (links: ProofLink[]) =>
       links.filter((l) => ["artifact", "post"].includes(l.kind ?? "")),
   },
-} satisfies Record<HomepageFeaturedSlug, ProofHeadline>;
+} satisfies Omit<Record<HomepageFeaturedSlug, ProofHeadline>, "research-radar">;
+
+function proofHeadlinesForDeploy(): Record<HomepageFeaturedSlug, ProofHeadline> {
+  return {
+    ...PROOF_HEADLINES_BASE,
+    "research-radar": researchRadarProofHeadline(getResearchRadarDemoUrl()),
+  };
+}
 
 export function ProofStrip() {
   const featured = getHomepageFeaturedProjects();
+  const proofHeadlines = proofHeadlinesForDeploy();
 
   return (
     <section aria-label="Proof points" className="pb-8">
@@ -64,7 +81,7 @@ export function ProofStrip() {
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((project) => {
             const curated = isHomepageFeaturedSlug(project.slug)
-              ? PROOF_HEADLINES[project.slug]
+              ? proofHeadlines[project.slug]
               : undefined;
             const links = project.proofLinks ?? [];
             const proofLinks = curated

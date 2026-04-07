@@ -7,9 +7,14 @@ import { buttonVariants } from "@/components/ui/button-variants";
 import { ProjectCard } from "@/components/sections/project-card";
 import { SectionHeader } from "@/components/ui/section-header";
 import { getHomepageFeaturedProjects } from "@/content/projects";
+import { getResearchRadarDemoUrl } from "@/lib/research-radar";
 
 export function FeaturedProjects() {
   const featured = getHomepageFeaturedProjects();
+  const researchRadarDemoUrl = getResearchRadarDemoUrl();
+  const featuredDescription = researchRadarDemoUrl
+    ? "StringFlux, Research Radar with a linked hosted prototype, and Full Swing support in public—plus case studies for this site, Snake Detector, and more on the projects page."
+    : "StringFlux, Research Radar (case study and repository as proof), and Full Swing support in public—plus case studies for this site, Snake Detector, and more on the projects page.";
 
   return (
     <section className="py-24 relative z-10">
@@ -24,7 +29,7 @@ export function FeaturedProjects() {
           <SectionHeader
             eyebrow="Selected Work"
             title="Featured Projects"
-            description="Flagship audio DSP, a live explainability-first web prototype, and public support-engineering depth—with full case studies for this site, Snake Detector, and more on the projects page."
+            description={featuredDescription}
             headingLevel={2}
           />
         </motion.div>
