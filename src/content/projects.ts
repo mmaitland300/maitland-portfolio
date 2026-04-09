@@ -270,7 +270,7 @@ export const projects: Project[] = [
     description:
       "Bounded snake vs no-snake computer vision with a reproducible evaluation workflow, explicit limits, and a public case study plus training repo.",
     problem:
-      "The original prototype was easy to overstate: noisy data, uneven image quality, and weak licensing assumptions made headline accuracy a bad proxy for real reliability.",
+      "The original prototype was easy to overstate: noisy data, uneven image quality, and weak licensing assumptions made headline accuracy a bad proxy for operational reliability.",
     outcome:
       "Scripted training and evaluation with inspectable artifacts; limits and disclaimers are documented in the case study.",
     status: snakeDemoUrl ? "operational" : "shipped",

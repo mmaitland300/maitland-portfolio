@@ -99,7 +99,7 @@ export const resumeExperience: ResumeExperienceItem[] = [
     company: "Auxillium (technical support for Full Swing)",
     period: "April 2024 - Present",
     description:
-      "Diagnose remote simulator issues across calibration, licensing, display, networking, OS, and peripheral layers in real customer environments.",
+      "Diagnose remote simulator issues across calibration, licensing, display, networking, OS, and peripheral layers in customer production environments.",
     highlights: [
       {
         text: "Built repeatable triage paths for recurring failures so escalations rely less on one-off guesses and more on reproducible isolation.",

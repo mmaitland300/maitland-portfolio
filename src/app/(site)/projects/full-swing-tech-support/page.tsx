@@ -137,7 +137,7 @@ export default function FullSwingCaseStudyPage() {
             Full Swing simulator customers. The examples here center on that
             stack; many of the same environments also include Laser Shot or E6
             Golf from TruGolf, supported in the same workflow. The case study is
-            about how multi-layer issues get diagnosed under real constraints,
+            about how multi-layer issues get diagnosed under tight constraints,
             where hardware, software, networking, and operating-system behavior
             frequently overlap.
           </p>

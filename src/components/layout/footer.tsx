@@ -43,7 +43,7 @@ export function Footer() {
             </Link>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
               Engineer focused on reliable web systems, production
-              troubleshooting, and delivery under real constraints.
+              troubleshooting, and delivery under tight constraints.
             </p>
           </div>
 

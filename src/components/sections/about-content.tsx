@@ -40,7 +40,7 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
         <p className="text-lg font-medium text-foreground leading-relaxed">
           Most of my day is diagnosing problems where the symptom and the root
           cause live in different layers. A customer may report bad ball
-          tracking, but the real cause can be a network device, a driver
+          tracking, but the actual cause can be a network device, a driver
           regression, a calibration issue, or a mixed system state after an
           update.
         </p>

@@ -60,7 +60,7 @@ const technicalPoints = [
   {
     title: "Experimental ideas stay visible and clearly bounded",
     detail:
-      "Some ideas are still exploratory, especially bridge-style recommendations that try to connect papers across areas. I left them visible because they are real product work, but they are not positioned as finished or used as the default experience.",
+      "Some ideas are still exploratory, especially bridge-style recommendations that try to connect papers across areas. I left them visible because they are ongoing product work, but they are not positioned as finished or used as the default experience.",
   },
 ];
 
@@ -290,7 +290,7 @@ export default function ResearchRadarCaseStudyPage() {
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
             These captures were taken from a recent run of the prototype against the
             current API. I pinned the ranking and embedding versions so this
-            walkthrough reflects a real, reproducible state rather than a mocked-up
+            walkthrough reflects a reproducible state rather than a mocked-up
             demo:{" "}
             <span className="sr-only">ranking version </span>
             <code className="rounded bg-muted px-1.5 py-0.5 text-xs">

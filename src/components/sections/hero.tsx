@@ -36,7 +36,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
           className="mt-5 mx-auto max-w-4xl text-2xl font-semibold leading-tight text-foreground/95 sm:text-3xl"
         >
-          I debug real systems and build software around the same discipline.
+          I debug production systems and build software around the same discipline.
         </motion.h2>
 
         <motion.p
