@@ -41,7 +41,7 @@ export const resumeSkillTiers: ResumeSkillTier[] = [
     skills: [
       "Troubleshooting",
       "Windows systems",
-      "Networking / TCP-IP",
+      "Networking / TCP/IP",
       "TypeScript",
       "Next.js",
       "React",
