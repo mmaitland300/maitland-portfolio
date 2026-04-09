@@ -199,9 +199,13 @@ export default function ResearchRadarCaseStudyPage() {
               </a>
             ) : (
               <p className="max-w-md text-sm text-muted-foreground">
-                The live prototype is meant to stay deployed separately from this
-                site. Once its public URL is pinned, this page can link out to
-                it directly.
+                The live prototype is deployed separately from this site, but no
+                public demo URL is configured right now. Set{" "}
+                <code className="rounded bg-muted px-1 py-0.5 text-xs">
+                  NEXT_PUBLIC_RESEARCH_RADAR_URL
+                </code>{" "}
+                to a valid https URL (or remove an invalid value) to restore the
+                link.
               </p>
             )}
             <a
