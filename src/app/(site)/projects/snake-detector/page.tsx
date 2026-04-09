@@ -303,7 +303,7 @@ export default function SnakeDetectorCaseStudyPage() {
             evaluation scripts.
             {demoUrl
               ? " The live demo is intentionally narrow so visitors can try the behavior without mistaking it for a general-purpose classifier."
-              : " This portfolio build emphasizes artifacts and reproducibility from the repository rather than a linked demo."}
+              : " This site emphasizes artifacts and reproducibility from the repository rather than a linked demo."}
           </p>
         </section>
 

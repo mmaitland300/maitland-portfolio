@@ -84,7 +84,7 @@ export async function submitContact(
       from: contactDeliveryEnv.CONTACT_FROM_EMAIL,
       to: contactDeliveryEnv.CONTACT_TO_EMAIL,
       replyTo: parsed.data.email,
-      subject: `Portfolio Contact: ${parsed.data.name}`,
+      subject: `Site contact: ${parsed.data.name}`,
       text: [
         `Name: ${parsed.data.name}`,
         `Email: ${parsed.data.email}`,

@@ -182,7 +182,7 @@ export default function ResearchRadarCaseStudyPage() {
             trends, and compare the output against simpler baselines.
           </p>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            The live app stays separate from this portfolio. Bridge
+            The live app stays separate from this site. Bridge
             recommendations are still exploratory, and the evaluation view helps
             inspect how the ranking behaves against simpler baselines.
           </p>
@@ -200,7 +200,7 @@ export default function ResearchRadarCaseStudyPage() {
             ) : (
               <p className="max-w-md text-sm text-muted-foreground">
                 The live prototype is meant to stay deployed separately from this
-                portfolio. Once its public URL is pinned, this page can link out to
+                site. Once its public URL is pinned, this page can link out to
                 it directly.
               </p>
             )}
@@ -240,7 +240,7 @@ export default function ResearchRadarCaseStudyPage() {
               />
             </div>
             <figcaption className="border-t border-border bg-card/50 px-4 py-3 text-center text-xs leading-relaxed text-muted-foreground">
-              Portfolio-side overview of the current prototype surfaces and product
+              High-level overview of the current prototype surfaces and product
               framing. This is an architecture-style summary, not a literal app
               screenshot.
             </figcaption>
@@ -301,7 +301,7 @@ export default function ResearchRadarCaseStudyPage() {
             <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
               v1-title-abstract-1536-cleantext-r2
             </code>
-            . The app stays deployed separately from the portfolio; this section
+            . The app stays deployed separately from this site; this section
             shows what the live prototype looked like at that pin.
           </p>
           <div className="space-y-6">

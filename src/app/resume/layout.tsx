@@ -13,7 +13,7 @@ function isResumePrintPath(pathname: string | null): boolean {
 }
 
 /**
- * /resume uses portfolio chrome; /resume/print stays bare for PDF and paper layout.
+ * /resume uses site chrome; /resume/print stays bare for PDF and paper layout.
  * (Single app/resume tree avoids Next.js route-group merge edge cases for /resume/print.)
  */
 export default function ResumeShellLayout({

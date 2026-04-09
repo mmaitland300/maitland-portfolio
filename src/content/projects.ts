@@ -160,7 +160,7 @@ export const projects: Project[] = [
   },
   {
     slug: "portfolio-site",
-    title: "Portfolio Website",
+    title: "Personal Site",
     description:
       "This site. Next.js 16 with MDX blogging, a contact form that sends email through Resend and falls back gracefully when the database is down, and a GitHub OAuth admin inbox for managing submissions.",
     problem:
@@ -178,7 +178,7 @@ export const projects: Project[] = [
       "Some route-level dynamic behavior remains broader than needed and will be narrowed in later optimization work.",
     proofLinks: [
       {
-        label: "Portfolio case study",
+        label: "Personal site case study",
         href: "/projects/portfolio-site",
         kind: "artifact",
       },

@@ -21,10 +21,10 @@ export const metadata: Metadata = {
     template: "%s | Matt Maitland",
   },
   description:
-    "Matt Maitland: web systems, audio/DSP, and production troubleshooting. Portfolio, blog, and contact.",
+    "Matt Maitland: web systems, audio/DSP, and production troubleshooting. Projects, blog, and contact.",
   keywords: [
     "developer",
-    "portfolio",
+    "personal site",
     "full-stack",
     "Next.js",
     "TypeScript",

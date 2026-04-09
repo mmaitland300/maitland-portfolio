@@ -1,6 +1,6 @@
 ---
 title: "Decision Record: Building the Contact Form"
-description: "How I structured the portfolio contact form: validation, rate limiting, email-first delivery, and optional inbox persistence with minimal operational overhead."
+description: "How I structured this site's contact form: validation, rate limiting, email-first delivery, and optional inbox persistence with minimal operational overhead."
 date: "2026-03-20"
 type: "Decision Record"
 tags: ["Next.js", "Web Architecture"]
@@ -9,7 +9,7 @@ published: true
 
 ## Context
 
-The portfolio contact form looked simple at the UI layer, but production behavior had to cover several non-trivial constraints:
+The contact form looked simple at the UI layer, but production behavior had to cover several non-trivial constraints:
 
 - prevent abuse without degrading legitimate submissions
 - avoid silent data loss between transport and persistence

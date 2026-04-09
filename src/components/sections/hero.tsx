@@ -47,7 +47,7 @@ export function Hero() {
         >
           I work at Auxillium supporting Full Swing simulator environments where
           hardware, software, networking, and OS behavior overlap. Outside of work
-          I build web software and whatever other side projects get my interest. The
+          I build web software and other side projects that interest me. The
           work that currently takes most of my time is StringFlux, a JUCE plugin for
           guitar responsive granular effects. I also write and produce music as
           NEUROCHEMICAL ENTROPY. This site is where those interests meet:

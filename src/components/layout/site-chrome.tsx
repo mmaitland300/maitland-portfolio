@@ -2,7 +2,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
 
-/** Dark portfolio shell: nav, footer, decorative background. */
+/** Dark site shell: nav, footer, decorative background. */
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
     <div className="dark min-h-full flex flex-col relative bg-background text-foreground">

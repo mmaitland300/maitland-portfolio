@@ -172,7 +172,7 @@ export function InboxList({
     }
 
     setReplyingToId(submission.id);
-    setReplySubject(normalizeReplySubject(`Portfolio Contact: ${submission.name}`));
+    setReplySubject(normalizeReplySubject(`Site contact: ${submission.name}`));
     setReplyBody("");
     setReplyErrors({});
     setFeedback(null);
