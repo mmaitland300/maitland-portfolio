@@ -7,8 +7,8 @@ import { buttonVariants } from "@/components/ui/button-variants";
 
 export function Hero() {
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center overflow-hidden">
-      <div className="cyber-frame mx-auto max-w-6xl px-6 py-32 text-center">
+    <section className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden pb-16 md:pb-20">
+      <div className="cyber-frame mx-auto max-w-6xl px-6 py-24 text-center sm:py-28 md:py-32">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
@@ -47,12 +47,41 @@ export function Hero() {
         >
           I work at Auxillium supporting Full Swing simulator environments where
           hardware, software, networking, and OS behavior overlap. Outside of work
-          I build web software and other side projects that interest me. The
-          work that currently takes most of my time is StringFlux, a JUCE plugin for
-          guitar responsive granular effects. I also write and produce music as
-          NEUROCHEMICAL ENTROPY. This site is where those interests meet:
-          troubleshooting, software, and sound.
+          I build web software and other side projects that interest me. This site
+          is where those interests meet: troubleshooting, software, and sound.
         </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.22, ease: "easeOut" }}
+          className="mx-auto mt-5 max-w-xl space-y-1.5 text-center text-sm leading-relaxed text-[rgba(194,203,220,0.78)] sm:text-base"
+        >
+          <p>
+            <Link
+              href="/stringflux"
+              className="font-medium text-foreground/90 underline-offset-4 hover:underline"
+            >
+              StringFlux
+            </Link>
+            <span className="text-muted-foreground">
+              {" "}
+              — JUCE plugin: transient-aware granular delay and freeze for guitar
+            </span>
+          </p>
+          <p>
+            <Link
+              href="/music"
+              className="font-medium text-foreground/90 underline-offset-4 hover:underline"
+            >
+              NEUROCHEMICAL ENTROPY
+            </Link>
+            <span className="text-muted-foreground">
+              {" "}
+              — original music (write, record, produce, master)
+            </span>
+          </p>
+        </motion.div>
 
         <motion.p
           initial={{ opacity: 0, y: 30 }}
@@ -119,19 +148,20 @@ export function Hero() {
           </Link>
         </motion.div>
 
-        {/* Scroll indicator */}
+        {/* Scroll cue: in document flow so it clears ProofStrip / featured cards */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-10 left-1/2 -translate-x-1/2"
+          transition={{ delay: 0.85, duration: 0.8 }}
+          className="mt-10 flex justify-center sm:mt-12"
+          aria-hidden={true}
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
             transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            className="w-6 h-10 border-2 border-muted-foreground/30 rounded-full flex justify-center pt-2"
+            className="flex h-10 w-6 justify-center rounded-full border-2 border-muted-foreground/30 pt-2"
           >
-            <div className="w-1 h-2 bg-muted-foreground/50 rounded-full" />
+            <div className="h-2 w-1 rounded-full bg-muted-foreground/50" />
           </motion.div>
         </motion.div>
       </div>
