@@ -16,7 +16,7 @@ export function Hero() {
         >
           <div className="cyber-pill mb-6 inline-flex items-center gap-3 rounded-full px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-[rgba(196,206,223,0.82)] backdrop-blur-sm">
             <span className="h-1.5 w-1.5 rounded-full bg-[rgba(136,212,255,0.95)] shadow-[0_0_12px_rgba(67,188,255,0.45)]" />
-            Systems Troubleshooting - Web Work - Audio DSP
+            Systems Troubleshooting - Web Application Design - Audio DSP
           </div>
         </motion.div>
 

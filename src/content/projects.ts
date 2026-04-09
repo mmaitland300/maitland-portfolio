@@ -130,17 +130,17 @@ export const projects: Project[] = [
       },
       {
         label: "Roadmap and ML notes",
-        href: "https://github.com/mmaitland300/Research-Radar/blob/main/docs/roadmap.md",
+        href: "https://github.com/mmaitland300/Research-Radar/blob/master/docs/roadmap.md",
         kind: "post",
       },
       {
         label: "Ranked recommendation tests",
-        href: "https://github.com/mmaitland300/Research-Radar/blob/main/apps/api/tests/test_recommendations_ranked.py",
+        href: "https://github.com/mmaitland300/Research-Radar/blob/master/apps/api/tests/test_recommendations_ranked.py",
         kind: "test",
       },
       {
         label: "Evaluation compare tests",
-        href: "https://github.com/mmaitland300/Research-Radar/blob/main/apps/api/tests/test_evaluation_compare.py",
+        href: "https://github.com/mmaitland300/Research-Radar/blob/master/apps/api/tests/test_evaluation_compare.py",
         kind: "test",
       },
     ],
