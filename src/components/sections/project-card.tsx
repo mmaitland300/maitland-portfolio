@@ -32,6 +32,28 @@ const proofKindLabel: Record<
   artifact: "case study",
 };
 
+/** Demo first when present, otherwise case study — matches primary CTA order. */
+function getProjectCardDestination(project: Project): {
+  href: string;
+  external: boolean;
+} | null {
+  if (project.demo) {
+    if (project.demo.startsWith("/")) {
+      return { href: project.demo, external: false };
+    }
+    if (/^https?:\/\//i.test(project.demo)) {
+      return { href: project.demo, external: true };
+    }
+  }
+  if (project.caseStudy?.startsWith("/")) {
+    return { href: project.caseStudy, external: false };
+  }
+  if (project.caseStudy) {
+    return { href: project.caseStudy, external: true };
+  }
+  return null;
+}
+
 export function ProjectCard({ project, index, compact }: ProjectCardProps) {
   const [iframeActive, setIframeActive] = useState(false);
   const internalDemoHref = project.demo?.startsWith("/") ? project.demo : null;
@@ -47,6 +69,8 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
     )
   );
 
+  const cardDestination = getProjectCardDestination(project);
+
   return (
     <motion.article
       initial={{ opacity: 0, y: 30 }}
@@ -55,9 +79,26 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group relative rounded-xl border border-border bg-card/50 backdrop-blur-sm overflow-hidden hover:border-purple-500/30 transition-all duration-300"
     >
+      {cardDestination ? (
+        cardDestination.external ? (
+          <a
+            href={cardDestination.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Open ${project.title}`}
+            className="absolute inset-0 z-[1] rounded-xl outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring"
+          />
+        ) : (
+          <Link
+            href={cardDestination.href}
+            aria-label={`Open ${project.title}`}
+            className="absolute inset-0 z-[1] rounded-xl outline-none ring-offset-background focus-visible:ring-2 focus-visible:ring-ring"
+          />
+        )
+      ) : null}
       {/* Preview area */}
       {project.iframe ? (
-        <div className="relative h-48 bg-black/50 overflow-hidden">
+        <div className="relative z-[2] h-48 overflow-hidden bg-black/50">
           {iframeActive ? (
             <>
               <iframe
@@ -89,18 +130,18 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
           )}
         </div>
       ) : project.image ? (
-        <div className="relative h-48 overflow-hidden bg-black/30">
+        <div className="relative z-[2] h-48 overflow-hidden bg-black/30">
           <Image
             src={project.image}
             alt={`${project.title} preview`}
             fill
             unoptimized={project.image.toLowerCase().endsWith(".svg")}
-            className="object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+            className="object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         </div>
       ) : (
-        <div className="h-48 bg-gradient-to-br from-purple-500/5 via-background to-cyan-500/5 flex flex-col items-center justify-center gap-2 border-b border-border/50">
+        <div className="relative z-[2] flex h-48 flex-col items-center justify-center gap-2 border-b border-border/50 bg-gradient-to-br from-purple-500/5 via-background to-cyan-500/5">
           <div className="flex gap-1.5">
             {project.tags.slice(0, 3).map((tag) => (
               <span
@@ -115,7 +156,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
       )}
 
       {/* Content */}
-      <div className="p-6">
+      <div className="relative z-[2] p-6">
         <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-purple-400 transition-colors">
           {project.title}
         </h3>
@@ -235,14 +276,14 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
         )}
 
         {/* Links: demo first, then case study, then code (GitHub). */}
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+        <div className="relative z-[3] flex flex-wrap items-center gap-x-4 gap-y-2">
           {internalDemoHref ? (
             <Link
               href={internalDemoHref}
               className={
                 compact
-                  ? "flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
-                  : "flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-cyan-400 transition-colors"
+                  ? "flex items-center gap-1.5 text-sm font-medium text-cyan-400 transition-colors hover:text-cyan-300"
+                  : "flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-cyan-400"
               }
             >
               <ExternalLink size={14} /> Try live demo
@@ -254,8 +295,8 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
               rel="noopener noreferrer"
               className={
                 compact
-                  ? "flex items-center gap-1.5 text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors"
-                  : "flex items-center gap-1.5 text-sm font-medium text-foreground hover:text-cyan-400 transition-colors"
+                  ? "flex items-center gap-1.5 text-sm font-medium text-cyan-400 transition-colors hover:text-cyan-300"
+                  : "flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-cyan-400"
               }
             >
               <ExternalLink size={14} /> Try live demo
@@ -264,14 +305,14 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
           {internalCaseStudyHref ? (
             <Link
               href={internalCaseStudyHref}
-              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               <ExternalLink size={14} /> Case study
             </Link>
           ) : project.caseStudy ? (
             <a
               href={project.caseStudy}
-              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               <ExternalLink size={14} /> Case study
             </a>
@@ -281,15 +322,16 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
               href={project.github}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1.5 text-xs text-muted-foreground hover:text-foreground transition-colors"
+              className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               <Github size={14} /> Code
             </a>
           )}
           {project.iframe && (
             <button
+              type="button"
               onClick={() => setIframeActive(!iframeActive)}
-              className="flex items-center gap-1.5 text-xs text-purple-400 hover:text-purple-300 transition-colors"
+              className="flex items-center gap-1.5 text-xs text-purple-400 transition-colors hover:text-purple-300"
             >
               <Gamepad2 size={14} /> {iframeActive ? "Stop" : "Play"}
             </button>

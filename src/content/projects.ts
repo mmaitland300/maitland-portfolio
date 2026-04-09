@@ -154,7 +154,7 @@ export const projects: Project[] = [
     ],
     github: "https://github.com/mmaitland300/Research-Radar",
     demo: researchRadarDemoUrl,
-    image: "/images/projects/research-radar-artifact.svg",
+    image: "/images/projects/research-radar/recommended-emerging.png",
     caseStudy: "/projects/research-radar",
     category: "featured",
   },
