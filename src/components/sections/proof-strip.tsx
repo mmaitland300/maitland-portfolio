@@ -76,7 +76,10 @@ export function ProofStrip() {
   const proofHeadlines = proofHeadlinesForDeploy();
 
   return (
-    <section aria-label="Proof points" className="border-t border-border/30 pt-8 pb-8 md:pt-10">
+    <section
+      aria-label="Evidence links for featured work"
+      className="border-t border-border/30 pt-8 pb-8 md:pt-10"
+    >
       <div className="mx-auto max-w-6xl px-6">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((project) => {
@@ -101,7 +104,7 @@ export function ProofStrip() {
                 </p>
                 <div className="mt-3 border-t border-border/60 pt-3">
                   <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                    Proof
+                    Evidence links
                   </p>
                   <ul className="mt-1.5 space-y-1">
                     {proofLinks.map((item) => {

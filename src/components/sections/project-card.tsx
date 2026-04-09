@@ -249,7 +249,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
 
         {project.proofLinks && project.proofLinks.length > 0 && (
           <div className="mb-4 text-xs">
-            <span className="font-medium text-foreground/80">Proof: </span>
+            <span className="font-medium text-foreground/80">Evidence links: </span>
             <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
               {project.proofLinks.slice(0, 3).map((link) => {
                 const isInternal = link.href.startsWith("/");
