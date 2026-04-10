@@ -1,16 +1,16 @@
 import { describe, expect, it, afterEach } from "vitest";
-import { getSnakeDemoUrl } from "./snake-demo";
+import { getSnakeDemoUrl, SNAKE_DEMO_FALLBACK } from "./snake-demo";
 
 describe("getSnakeDemoUrl", () => {
   afterEach(() => {
     delete process.env.NEXT_PUBLIC_SNAKE_DEMO_URL;
   });
 
-  it("returns undefined when unset or empty", () => {
+  it("returns fallback when unset or whitespace", () => {
     delete process.env.NEXT_PUBLIC_SNAKE_DEMO_URL;
-    expect(getSnakeDemoUrl()).toBeUndefined();
+    expect(getSnakeDemoUrl()).toBe(SNAKE_DEMO_FALLBACK);
     process.env.NEXT_PUBLIC_SNAKE_DEMO_URL = "   ";
-    expect(getSnakeDemoUrl()).toBeUndefined();
+    expect(getSnakeDemoUrl()).toBe(SNAKE_DEMO_FALLBACK);
   });
 
   it("returns the URL when valid http(s)", () => {

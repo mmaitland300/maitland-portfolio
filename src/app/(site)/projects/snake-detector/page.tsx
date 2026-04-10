@@ -110,8 +110,13 @@ export default function SnakeDetectorCaseStudyPage() {
               </a>
             ) : (
               <p className="max-w-md text-sm text-muted-foreground">
-                This build does not link to a hosted demo. Use the proof package
-                and repository below for artifacts and reproduction.
+                No public demo URL is configured. Set{" "}
+                <code className="rounded bg-muted px-1 py-0.5 text-xs">
+                  NEXT_PUBLIC_SNAKE_DEMO_URL
+                </code>{" "}
+                to a valid https URL (or remove an invalid value) to restore the
+                link. Use the proof package and repository below for artifacts
+                and reproduction.
               </p>
             )}
             <a
