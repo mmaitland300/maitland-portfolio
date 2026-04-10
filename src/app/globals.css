@@ -68,6 +68,9 @@
   --brand-violet-muted: #d4cbf9;
   --brand-cyan: #5fd4ef;
   --brand-cyan-hover: #7fe4fa;
+  /* Headline text ramps (hero, `.text-gradient-brand`, utility gradient classes) */
+  --brand-text-gradient-from: #9bdcff;
+  --brand-text-gradient-to: #c9b8ff;
 
   /*
    * Light-theme note: the public site today is dark (`SiteChrome` + `.dark`).
@@ -77,9 +80,9 @@
 }
 
 /*
- * CTA + line gradients (`--brand-cta-*`, `--brand-line-*`, `--brand-text-gradient-*`)
- * are defined only here so they stay scoped to the dark marketing/admin shell. Utilities
- * like `.gradient-border` / `.bg-brand-surface-faint` expect a `.dark` ancestor.
+ * CTA + nav-line gradients (`--brand-cta-*`, `--brand-line-*`) live here only so they
+ * stay scoped to the dark marketing/admin shell. `.gradient-border` /
+ * `.bg-brand-surface-faint` expect a `.dark` ancestor. Headline ramp vars are on `:root`.
  */
 .dark {
   --background: oklch(0.07 0 0);
@@ -111,9 +114,6 @@
   --brand-cta-to-hover: #18aed4;
   --brand-cta-shadow: rgb(87 70 212 / 0.22);
 
-  --brand-text-gradient-from: #9bdcff;
-  --brand-text-gradient-to: #c9b8ff;
-
   --brand-line-from: #8f84f0;
   --brand-line-to: #5ccbeb;
 }
@@ -131,14 +131,14 @@
 }
 
 .gradient-text {
-  color: #88d4ff;
+  color: var(--brand-text-gradient-from);
   text-shadow:
-    0 0 12px rgba(67, 188, 255, 0.18),
-    0 0 28px rgba(122, 92, 255, 0.08);
+    0 0 12px color-mix(in srgb, var(--brand-cyan) 18%, transparent),
+    0 0 28px color-mix(in srgb, var(--brand-violet) 8%, transparent);
 }
 
 .gradient-text-pink {
-  color: #b39dff;
+  color: var(--brand-text-gradient-to);
 }
 
 .section-eyebrow {
@@ -174,10 +174,11 @@
 }
 
 .hero-lead {
-  color: rgba(178, 190, 212, 0.66);
+  color: color-mix(in srgb, var(--muted-foreground) 82%, var(--brand-cyan));
 }
 
 .hero-name {
+  /* Base ramp: `--brand-text-gradient-*` + `--brand-cyan` + `--foreground` (shine layer unchanged) */
   background-image:
     linear-gradient(
       120deg,
@@ -189,16 +190,18 @@
     ),
     linear-gradient(
       108deg,
-      rgba(230, 238, 252, 0.92) 0%,
-      rgba(182, 224, 255, 0.94) 20%,
-      rgba(130, 212, 255, 0.96) 52%,
-      rgba(170, 140, 250, 0.92) 100%
+      color-mix(in srgb, var(--foreground) 8%, white) 0%,
+      color-mix(in srgb, var(--brand-text-gradient-from) 82%, var(--foreground)) 22%,
+      color-mix(in srgb, var(--brand-cyan) 78%, var(--brand-text-gradient-from)) 52%,
+      color-mix(in srgb, var(--brand-text-gradient-to) 85%, var(--brand-violet-muted)) 100%
     );
   background-size: 300% 100%, 100% 100%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 0 24px rgba(67, 188, 255, 0.2));
+  filter: drop-shadow(
+    0 0 24px color-mix(in srgb, var(--brand-cyan) 20%, transparent)
+  );
   animation: hero-shine 1.8s ease-out 0.6s both;
 }
 
@@ -217,10 +220,10 @@
     background-size: 100% 100%;
     background-image: linear-gradient(
       108deg,
-      rgba(230, 238, 252, 0.92) 0%,
-      rgba(182, 224, 255, 0.94) 20%,
-      rgba(130, 212, 255, 0.96) 52%,
-      rgba(170, 140, 250, 0.92) 100%
+      color-mix(in srgb, var(--foreground) 8%, white) 0%,
+      color-mix(in srgb, var(--brand-text-gradient-from) 82%, var(--foreground)) 22%,
+      color-mix(in srgb, var(--brand-cyan) 78%, var(--brand-text-gradient-from)) 52%,
+      color-mix(in srgb, var(--brand-text-gradient-to) 85%, var(--brand-violet-muted)) 100%
     );
   }
 }
