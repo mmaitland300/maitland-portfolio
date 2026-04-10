@@ -103,7 +103,7 @@ export function Navbar() {
                   {isActive && (
                     <motion.span
                       layoutId="navbar-indicator"
-                      className="absolute inset-x-1 -bottom-px h-0.5 bg-gradient-to-r from-purple-500 to-cyan-500 rounded-full"
+                      className="absolute inset-x-1 -bottom-px h-0.5 rounded-full bg-[linear-gradient(to_right,var(--brand-line-from),var(--brand-line-to))]"
                       transition={{
                         type: "spring",
                         stiffness: 380,

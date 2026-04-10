@@ -76,6 +76,22 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: oklch(0.556 0 0);
+
+  /*
+   * Brand gradients — cyan ↔ violet family tuned to match .page-title / .hero-name,
+   * not Tailwind’s default purple-600 / cyan-600 pair.
+   */
+  --brand-cta-from: #5746d4;
+  --brand-cta-to: #1299be;
+  --brand-cta-from-hover: #6a58e8;
+  --brand-cta-to-hover: #18aed4;
+  --brand-cta-shadow: rgb(87 70 212 / 0.22);
+
+  --brand-text-gradient-from: #9bdcff;
+  --brand-text-gradient-to: #c9b8ff;
+
+  --brand-line-from: #8f84f0;
+  --brand-line-to: #5ccbeb;
 }
 
 @layer base {
@@ -246,12 +262,61 @@
   inset: 0;
   padding: 1px;
   border-radius: inherit;
-  background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+  background: linear-gradient(
+    135deg,
+    var(--brand-cta-from),
+    var(--brand-cta-to)
+  );
   mask:
     linear-gradient(#fff 0 0) content-box,
     linear-gradient(#fff 0 0);
   mask-composite: exclude;
   pointer-events: none;
+}
+
+/* Primary CTAs (replaces bg-gradient-to-r from-purple-600 to-cyan-600) */
+.bg-brand-cta-gradient {
+  background-image: linear-gradient(
+    to right,
+    var(--brand-cta-from),
+    var(--brand-cta-to)
+  );
+  transition: background-image 0.15s ease;
+}
+.bg-brand-cta-gradient:hover {
+  background-image: linear-gradient(
+    to right,
+    var(--brand-cta-from-hover),
+    var(--brand-cta-to-hover)
+  );
+}
+
+.shadow-brand-cta {
+  box-shadow:
+    0 10px 15px -3px var(--brand-cta-shadow),
+    0 4px 6px -4px var(--brand-cta-shadow);
+}
+
+/* Large headings that use a saturated gradient (e.g. Stringflux landing) */
+.text-gradient-brand {
+  background-image: linear-gradient(
+    to right,
+    var(--brand-text-gradient-from),
+    var(--brand-text-gradient-to)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* Subtle panel wash (e.g. project card media placeholder) */
+.bg-brand-surface-faint {
+  background: linear-gradient(
+    to bottom right,
+    color-mix(in srgb, var(--brand-cta-from) 5%, transparent),
+    var(--background),
+    color-mix(in srgb, var(--brand-cta-to) 5%, transparent)
+  );
 }
 
 .prose-custom {

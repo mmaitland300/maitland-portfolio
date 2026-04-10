@@ -74,10 +74,7 @@ export default async function AdminLoginPage() {
             await signIn("github", { redirectTo: "/admin/inbox" });
           }}
         >
-          <Button
-            type="submit"
-            className="bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white border-0"
-          >
+          <Button type="submit" variant="brandCta">
             <Github className="mr-2 h-4 w-4" />
             Sign in with GitHub
           </Button>

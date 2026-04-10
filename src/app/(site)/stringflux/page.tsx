@@ -49,7 +49,7 @@ export default function StringFluxPage() {
               In Development
             </Badge>
           </div>
-          <h1 className="bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-4xl font-bold tracking-tight text-transparent sm:text-5xl">
+          <h1 className="text-gradient-brand text-4xl font-bold tracking-tight sm:text-5xl">
             StringFlux
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
@@ -60,7 +60,7 @@ export default function StringFluxPage() {
           <div className="mt-6 flex flex-wrap justify-center gap-3">
             <a
               href="#waitlist"
-              className="inline-flex items-center gap-2 rounded-lg bg-gradient-to-r from-purple-600 to-cyan-600 px-5 py-2.5 text-sm font-medium text-white transition-all hover:from-purple-500 hover:to-cyan-500"
+              className="inline-flex items-center gap-2 rounded-lg border-0 bg-brand-cta-gradient px-5 py-2.5 text-sm font-medium text-white shadow-brand-cta"
             >
               Join the waitlist <ArrowRight className="h-4 w-4" />
             </a>

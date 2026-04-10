@@ -145,7 +145,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
           />
         </div>
       ) : (
-        <div className="relative z-[2] flex h-48 flex-col items-center justify-center gap-2 border-b border-border/50 bg-gradient-to-br from-purple-500/5 via-background to-cyan-500/5">
+        <div className="relative z-[2] flex h-48 flex-col items-center justify-center gap-2 border-b border-border/50 bg-brand-surface-faint">
           <div className="flex gap-1.5">
             {project.tags.slice(0, 3).map((tag) => (
               <span

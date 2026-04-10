@@ -29,7 +29,9 @@ export function createOgImage(title: string, subtitle: string) {
             style={{
               fontSize: 60,
               fontWeight: 800,
-              background: "linear-gradient(135deg, #8b5cf6, #06b6d4)",
+              /* Align with `.page-title` in globals.css (not Tailwind default purple/cyan) */
+              background:
+                "linear-gradient(105deg, rgba(236, 241, 247, 0.96) 0%, rgba(221, 229, 241, 0.94) 42%, rgba(161, 223, 255, 0.9) 82%, rgba(188, 160, 250, 0.88) 100%)",
               backgroundClip: "text",
               color: "transparent",
             }}

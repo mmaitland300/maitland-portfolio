@@ -124,8 +124,9 @@ function ContactFormInstance({ onReset }: ContactFormInstanceProps) {
 
           <Button
             type="submit"
+            variant="brandCta"
             disabled={pending}
-            className="w-full sm:w-auto bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white border-0"
+            className="w-full sm:w-auto"
           >
             {pending ? (
               <span className="flex items-center gap-2">

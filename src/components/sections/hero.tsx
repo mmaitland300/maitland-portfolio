@@ -114,9 +114,8 @@ export function Hero() {
           <Link
             href="/projects"
             className={buttonVariants({
+              variant: "brandCta",
               size: "lg",
-              className:
-                "bg-gradient-to-r from-purple-600 to-cyan-600 hover:from-purple-500 hover:to-cyan-500 text-white border-0 shadow-lg shadow-purple-500/25",
             })}
           >
             See Case Studies <ArrowRight className="ml-2 h-4 w-4" />
