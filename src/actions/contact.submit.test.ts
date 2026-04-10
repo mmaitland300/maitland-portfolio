@@ -74,16 +74,19 @@ describe("submitContact server action", () => {
     const consoleError = vi
       .spyOn(console, "error")
       .mockImplementation(() => undefined);
-    sendMock.mockRejectedValueOnce(new Error("Resend outage"));
+    try {
+      sendMock.mockRejectedValueOnce(new Error("Resend outage"));
 
-    const prev = { success: false as const, message: "" };
-    const result = await submitContact(prev, contactForm());
+      const prev = { success: false as const, message: "" };
+      const result = await submitContact(prev, contactForm());
 
-    expect(result.success).toBe(false);
-    if (!result.success) {
-      expect(result.message).toMatch(/try again later/i);
+      expect(result.success).toBe(false);
+      if (!result.success) {
+        expect(result.message).toMatch(/try again later/i);
+      }
+    } finally {
+      consoleError.mockRestore();
     }
-    consoleError.mockRestore();
   });
 
   it("does not call Resend when honeypot is filled (bot)", async () => {
