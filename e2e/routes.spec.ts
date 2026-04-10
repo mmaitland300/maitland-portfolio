@@ -9,6 +9,7 @@ const publicRoutes = [
   "/projects/full-swing-tech-support",
   "/projects/portfolio-site",
   "/projects/research-radar",
+  "/projects/snake-detector",
   "/blog",
   "/contact",
   "/music",

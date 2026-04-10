@@ -16,6 +16,7 @@ export type ContactState =
     };
 
 let ratelimit: Ratelimit | null = null;
+/** Sliding-window limits only when `UPSTASH_REDIS_*` is set; otherwise contact relies on Zod + honeypot. */
 function getRatelimit() {
   if (ratelimit) return ratelimit;
   if (hasUpstashRedisEnv()) {

@@ -2,15 +2,15 @@
 
 **Live site:** [mmaitland.dev](https://mmaitland.dev)
 
-Portfolio site and engineering case-study repo for mmaitland.dev. Built with Next.js, TypeScript, and Tailwind CSS, with MDX blogging, a rate-limited contact pipeline, and optional admin inbox/auth features behind explicit configuration.
+Personal site and engineering case-study repo for mmaitland.dev. Built with Next.js, TypeScript, and Tailwind CSS, with MDX blogging, a contact pipeline with optional rate limiting, and optional admin inbox/auth features behind explicit configuration.
 
 ## Goals and intent
 
-This project is a **professional portfolio**, not a build diary. The intent is to show how work is reasoned about and verified:
+This project is a **personal site with portfolio depth**, not a build diary. The intent is to show how work is reasoned about and verified:
 
 - **Evidence over hype.** Public claims should point at something checkable: case studies, decision records, tests, CI, or other artifacts. When proof lags copy, **soften the claim** rather than inventing placeholder proof. Messaging changes that touch claims should align with [docs/proof-audit.md](docs/proof-audit.md).
 - **One coherent story across domains.** Production troubleshooting (multi-layer systems), shipping web software (this site), and audio/DSP work are presented as one discipline: **diagnose constraints, then deliver** within them.
-- **Featured work carries a higher bar.** Anything marked **featured** in `src/content/projects.ts` is expected to have a real case-study path: constraints, tradeoffs, status, known limits, and `proofLinks` where applicable. **Experiments** stay visible but separate so they do not dilute the main signal.
+- **Featured work carries a higher bar.** Anything marked **featured** in `src/content/projects.ts` is expected to have a **substantive write-up**: constraints, tradeoffs, status, known limits, and `proofLinks` where applicable. **Experiments** stay visible but separate so they do not dilute the main signal.
 - **Production-shaped engineering.** Optional services (database, auth, email) are **gated by typed env** so the app runs and tests cleanly without them; contact and admin flows degrade predictably when configuration is partial.
 - **CI as part of the story.** Lint, unit/data tests, production build, and Playwright smoke on `main` back the idea that the repo is maintained to the same standard the site describes.
 
@@ -37,7 +37,7 @@ These items support the goals above:
 
 - Structured content for projects (with status, limits, and proof links), resume data, and MDX posts
 - Typed environment and optional-feature gating (`src/lib/env.ts`)
-- Operational safeguards: validation, rate limiting, and graceful behavior when optional services are missing
+- Operational safeguards: validation, **optional** Upstash-backed rate limiting when Redis env is set (otherwise Zod + honeypot on public forms), and graceful behavior when optional services are missing
 - CI-backed quality: lint, tests, production build, and route smoke coverage on `main`
 
 ## Tech Stack
@@ -50,9 +50,13 @@ These items support the goals above:
 - **Prisma** + PostgreSQL (Neon) for persistence
 - **Auth.js v5** (next-auth) with GitHub OAuth
 - **Resend** for contact form emails
-- **Upstash Redis** for server-side rate limiting
+- **Upstash Redis** for optional server-side rate limiting (contact and waitlist)
 
-**Auth.js (next-auth):** The app uses **Auth.js v5** via the `next-auth` package, which is still published as a **5.x beta** while the stable v5 line and docs fully settle. This repo **pins a specific beta** and only enables admin GitHub OAuth when the required env vars are present, so production behavior is gated and testable. Staying on beta is a deliberate tradeoff for **App Router + Auth.js v5 integration**; plan to **revisit the pin** when an appropriate stable release is available and migration cost is low.
+**Auth.js (next-auth):** The app uses **Auth.js v5** via the `next-auth` package, which is still published as a **5.x beta** while the stable v5 line and docs fully settle. This repo **pins a specific beta** and only enables admin GitHub OAuth when the required env vars are present, so production behavior is gated and testable. Staying on beta is a deliberate tradeoff for **App Router + Auth.js v5 integration**. **Upgrade path:** when upstream tags a stable v5 that fits this integration, bump the pin in a focused PR following Auth.js release notes; optionally track with a GitHub issue so the beta dependency does not get lost in routine churn.
+
+**Admin routing:** There is no global `middleware.ts` for auth. `/admin` uses a **layout** plus session checks and **`isAdmin()`** (see [SECURITY.md](SECURITY.md)); that matches optional auth and keeps unauthenticated behavior explicit.
+
+**Observability:** Operator-relevant failures are **`console.error`** today. There is no bundled Sentry or APM; add one only if you want a louder production-operations signal.
 
 **Branching and releases:** Work usually lands on **`main`** through **pull requests**; occasional small maintainer polish may push directly when checks stay green (see [CONTRIBUTING.md](CONTRIBUTING.md) merge policy). CI on `main` runs **lint**, **unit/data tests**, **production build**, and **Playwright smoke tests**. Treat **green `main`** as the release line for deployment (for example Vercel production from `main`).
 
@@ -90,7 +94,7 @@ Copy `.env.example` to `.env` and fill in the values.
 
 **Rows marked No** are only for **admin GitHub OAuth** (`AUTH_*`, `ADMIN_GITHUB_IDS`) and the optional **`NEXT_PUBLIC_RESUME_PDF_LINK_BASE`**. Leave them unset if you do not need those features; the app still runs and tests/build stay predictable. **Database-backed** admin inbox also needs real **Neon** URLs in the **Yes** Prisma rows (see **Database Setup (Optional)**), not just the auth vars.
 
-**Rows marked Yes** cover normal local or production use: public site URL, Resend for contact mail, Upstash Redis for rate limits, and Prisma placeholders for `npm install` / `npm run build`. **CI** only stubs `DATABASE_URL`, `DIRECT_URL`, and `NEXT_PUBLIC_SITE_URL` and does not pass Resend or Redis secrets - the same idea as compiling a production build without those values in the environment.
+**Rows marked Yes** cover normal local or production use: public site URL, Resend for contact mail, and Prisma placeholders for `npm install` / `npm run build`. **Upstash** is optional but recommended for deployments that expect public traffic (see footnote [2]). **CI** only stubs `DATABASE_URL`, `DIRECT_URL`, and `NEXT_PUBLIC_SITE_URL` and does not pass Resend or Redis secrets - the same idea as compiling a production build without those values in the environment.
 
 | Variable | Required | Purpose |
 |---|---|---|
@@ -98,8 +102,8 @@ Copy `.env.example` to `.env` and fill in the values.
 | `RESEND_API_KEY` | Yes | Resend API key for contact form delivery |
 | `CONTACT_FROM_EMAIL` | Yes | Sender address for contact emails |
 | `CONTACT_TO_EMAIL` | Yes | Recipient address for contact emails |
-| `UPSTASH_REDIS_REST_URL` | Yes | Upstash Redis URL for rate limiting |
-| `UPSTASH_REDIS_REST_TOKEN` | Yes | Upstash Redis token |
+| `UPSTASH_REDIS_REST_URL` | Optional[2] | Upstash Redis URL for server-side rate limiting |
+| `UPSTASH_REDIS_REST_TOKEN` | Optional[2] | Upstash Redis token |
 | `DATABASE_URL` | Yes[1] | Placeholder or Neon pooled URL. Required for `prisma generate` (see note below). Runtime DB features need a real Neon URL. |
 | `DIRECT_URL` | Yes[1] | Placeholder or Neon direct URL for Prisma CLI migrations. Same note as `DATABASE_URL`. |
 | `AUTH_SECRET` | No | Auth.js secret (`npx auth secret` to generate). Required for admin auth. |
@@ -109,6 +113,8 @@ Copy `.env.example` to `.env` and fill in the values.
 | `NEXT_PUBLIC_RESUME_PDF_LINK_BASE` | No | Override base URL for absolute links on `/resume/print` (defaults: `www.mmaitland.dev` for this domain and for localhost; otherwise `NEXT_PUBLIC_SITE_URL`). Hostnames without a scheme get `https://` like `NEXT_PUBLIC_SITE_URL`. |
 
 [1] **Prisma tooling:** `prisma.config.ts` reads `DATABASE_URL` and `DIRECT_URL` via `env()`, so they must exist in `.env` for `npm install` (postinstall `prisma generate`) and `npm run build`. Copy the syntactically valid placeholders from `.env.example` until you point them at Neon; no Postgres process is required on your machine for generation or production build.
+
+[2] **Rate limiting:** When both Upstash variables are set, contact and waitlist actions use sliding-window limits. If either is unset, those flows still enforce **Zod validation + honeypot** only. `.env.example` lists the keys under a shared template block; leaving them empty is valid for local smoke runs. See [SECURITY.md](SECURITY.md).
 
 ## Database Setup (Optional)
 
@@ -205,6 +211,6 @@ Rewriting `main` with `git rebase`, `git filter-repo`, or similar and force-push
 
 Set the repository **About** description (mirrors `package.json` / this README):
 
-> Evidence-forward portfolio and case studies for mmaitland.dev - Next.js, MDX, Prisma, optional admin and auth.
+> Personal site and case studies for mmaitland.dev - Next.js, MDX, Prisma, optional admin and auth.
 
 **Suggested topics** (improve discoverability): `nextjs`, `typescript`, `tailwindcss`, `mdx`, `prisma`, `postgresql`, `portfolio`, `next-auth`, `server-actions`, `framer-motion`, `vitest`
