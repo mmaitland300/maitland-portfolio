@@ -32,6 +32,10 @@ const proofKindLabel: Record<
   artifact: "case study",
 };
 
+/** Same on homepage (compact) and /projects so the primary demo CTA reads consistently. */
+const demoPrimaryLinkClass =
+  "flex items-center gap-1.5 text-sm font-medium text-cyan-400 transition-colors hover:text-cyan-300";
+
 /** Demo first when present, otherwise case study — matches primary CTA order. */
 function getProjectCardDestination(project: Project): {
   href: string;
@@ -278,14 +282,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
         {/* Links: demo first, then case study, then code (GitHub). */}
         <div className="relative z-[3] flex flex-wrap items-center gap-x-4 gap-y-2">
           {internalDemoHref ? (
-            <Link
-              href={internalDemoHref}
-              className={
-                compact
-                  ? "flex items-center gap-1.5 text-sm font-medium text-cyan-400 transition-colors hover:text-cyan-300"
-                  : "flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-cyan-400"
-              }
-            >
+            <Link href={internalDemoHref} className={demoPrimaryLinkClass}>
               <ExternalLink size={14} /> Try live demo
             </Link>
           ) : project.demo ? (
@@ -293,11 +290,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
               href={project.demo}
               target="_blank"
               rel="noopener noreferrer"
-              className={
-                compact
-                  ? "flex items-center gap-1.5 text-sm font-medium text-cyan-400 transition-colors hover:text-cyan-300"
-                  : "flex items-center gap-1.5 text-sm font-medium text-foreground transition-colors hover:text-cyan-400"
-              }
+              className={demoPrimaryLinkClass}
             >
               <ExternalLink size={14} /> Try live demo
             </a>
