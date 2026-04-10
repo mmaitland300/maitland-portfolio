@@ -17,7 +17,7 @@ export default function ProjectsPage() {
         <SectionHeader
           eyebrow="Projects"
           title="Case Studies and Experiments"
-          description="Featured case studies first: explicit constraints, decisions, and proof. Experiments and smaller builds are grouped below so the strongest signal stays easy to scan."
+          description="Featured case studies first: explicit constraints, decisions, and evidence. Experiments and smaller builds are grouped below so the main thread stays easy to scan."
           className="mb-12"
         />
         <ProjectGrid />

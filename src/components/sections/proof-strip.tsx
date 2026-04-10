@@ -26,7 +26,7 @@ function researchRadarProofHeadline(
     what: demoUrl ? "Research Radar (demo linked)" : "Research Radar",
     whyItMatters: demoUrl
       ? `${core} The project card links out to the hosted app.`
-      : `${core} There is no outbound demo link from this site right now, so the case study and repository carry the proof.`,
+      : `${core} There is no outbound demo link from this site right now, so the case study and repository carry the evidence.`,
     linkPick: (links: ProofLink[]) => {
       const byKind = (k: ProofLink["kind"]) =>
         links.find((l) => l.kind === k);
@@ -58,7 +58,7 @@ const PROOF_HEADLINES_BASE = {
   stringflux: {
     what: "StringFlux (JUCE / C++)",
     whyItMatters:
-      "Real-time DSP work: transient-aware behavior, safe oversampling transitions, and disciplined feature scope. Public proof is architecture and decision records while core implementation remains private for licensing.",
+      "Real-time DSP work: transient-aware behavior, safe oversampling transitions, and disciplined feature scope. What is public is architecture and decision records; core implementation stays private for licensing.",
     linkPick: (links: ProofLink[]) =>
       links.filter((l) => ["artifact", "post"].includes(l.kind ?? "")),
   },

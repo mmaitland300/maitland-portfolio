@@ -14,7 +14,7 @@ export function FeaturedProjects() {
   const researchRadarDemoUrl = getResearchRadarDemoUrl();
   const featuredDescription = researchRadarDemoUrl
     ? "StringFlux, Research Radar with a linked hosted prototype, and Full Swing support in public—plus case studies for this site, Snake Detector, and more on the projects page."
-    : "StringFlux, Research Radar (case study and repository as proof), and Full Swing support in public—plus case studies for this site, Snake Detector, and more on the projects page.";
+    : "StringFlux, Research Radar (case study and repository as evidence), and Full Swing support in public—plus case studies for this site, Snake Detector, and more on the projects page.";
 
   return (
     <section className="py-24 relative z-10">
