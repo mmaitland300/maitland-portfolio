@@ -1,4 +1,4 @@
-# Matt Maitland - Portfolio
+# Matt Maitland — Personal site & case studies
 
 **Live site:** [mmaitland.dev](https://mmaitland.dev)
 
