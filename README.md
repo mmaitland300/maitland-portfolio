@@ -114,7 +114,7 @@ Copy `.env.example` to `.env` and fill in the values.
 
 [1] **Prisma tooling:** `prisma.config.ts` reads `DATABASE_URL` and `DIRECT_URL` via `env()`, so they must exist in `.env` for `npm install` (postinstall `prisma generate`) and `npm run build`. Copy the syntactically valid placeholders from `.env.example` until you point them at Neon; no Postgres process is required on your machine for generation or production build.
 
-[2] **Rate limiting:** When both Upstash variables are set, contact and waitlist actions use sliding-window limits. If either is unset, those flows still enforce **Zod validation + honeypot** only. `.env.example` lists the keys under a shared template block; leaving them empty is valid for local smoke runs. See [SECURITY.md](SECURITY.md).
+[2] **Rate limiting:** When both Upstash variables are set, contact and waitlist actions use sliding-window limits. If either is unset, those flows still enforce **Zod validation + honeypot** only. `.env.example` places Upstash in its own **Optional but recommended** block after the core contact keys; leaving those lines blank is valid for local smoke runs. See [SECURITY.md](SECURITY.md).
 
 ## Database Setup (Optional)
 
