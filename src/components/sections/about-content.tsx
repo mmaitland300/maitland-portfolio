@@ -103,11 +103,10 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
 
       <motion.section {...fadeUp}>
         <p className="text-lg text-muted-foreground leading-relaxed">
-          Music is not a side note on this site. I write, record, produce, and
-          master original work as NEUROCHEMICAL ENTROPY, and that practice
-          directly affects how I think about timing, feel, interfaces, and
-          audio software. StringFlux exists because those two sides of my work
-          overlap.
+          I write, record, produce, and master original work as NEUROCHEMICAL
+          ENTROPY, and that practice directly affects how I think about timing,
+          feel, interfaces, and audio software. StringFlux exists because those
+          two sides of my work overlap.
         </p>
       </motion.section>
 
