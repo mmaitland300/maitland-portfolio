@@ -59,7 +59,7 @@ export async function ProjectComments({
   return (
     <section className="mt-16 rounded-xl border border-border bg-card/40 p-6">
       <div className="mb-4 flex items-center gap-2">
-        <MessageSquare className="h-5 w-5 text-purple-400" />
+        <MessageSquare className="h-5 w-5 text-brand-violet" />
         <h2 className="text-xl font-semibold">Leave a question or comment</h2>
         {comments.length > 0 && (
           <span className="text-sm text-muted-foreground">

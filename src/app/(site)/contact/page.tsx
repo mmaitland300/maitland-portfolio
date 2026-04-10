@@ -28,8 +28,8 @@ export default function ContactPage() {
           {/* Info */}
           <div className="space-y-6 lg:col-span-1">
             <div className="flex items-start gap-3">
-              <div className="p-2 rounded-lg bg-purple-500/10 shrink-0">
-                <Mail className="h-5 w-5 text-purple-400" />
+              <div className="p-2 rounded-lg bg-brand-violet/10 shrink-0">
+                <Mail className="h-5 w-5 text-brand-violet" />
               </div>
               <div>
                 <h3 className="font-semibold text-sm">Email</h3>
@@ -37,8 +37,8 @@ export default function ContactPage() {
               </div>
             </div>
             <div className="flex items-start gap-3">
-              <div className="p-2 rounded-lg bg-cyan-500/10 shrink-0">
-                <MapPin className="h-5 w-5 text-cyan-400" />
+              <div className="p-2 rounded-lg bg-brand-cyan/10 shrink-0">
+                <MapPin className="h-5 w-5 text-brand-cyan" />
               </div>
               <div>
                 <h3 className="font-semibold text-sm">Location</h3>

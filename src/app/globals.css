@@ -9,6 +9,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
+  /* Marketing accents (`:root` in this file); replaces default purple-400 / cyan-400 */
+  --color-brand-violet: var(--brand-violet);
+  --color-brand-violet-hover: var(--brand-violet-hover);
+  --color-brand-violet-muted: var(--brand-violet-muted);
+  --color-brand-cyan: var(--brand-cyan);
+  --color-brand-cyan-hover: var(--brand-cyan-hover);
   --color-ring: var(--ring);
   --color-input: var(--input);
   --color-border: var(--border);
@@ -55,6 +61,13 @@
   --input: oklch(0.922 0 0);
   --ring: oklch(0.708 0 0);
   --radius: 0.625rem;
+
+  /* Brand accents (marketing + MDX); @theme utilities reference these */
+  --brand-violet: #a894f5;
+  --brand-violet-hover: #c4b8fc;
+  --brand-violet-muted: #d4cbf9;
+  --brand-cyan: #5fd4ef;
+  --brand-cyan-hover: #7fe4fa;
 }
 
 .dark {
@@ -333,7 +346,7 @@
   }
   a {
     @apply underline underline-offset-4 transition-colors hover:text-foreground;
-    color: #7aa2f7;
+    color: var(--brand-violet);
   }
   ul, ol {
     @apply mb-4 pl-6 text-muted-foreground;
@@ -349,7 +362,7 @@
   }
   blockquote {
     @apply pl-4 italic text-muted-foreground my-4;
-    border-left: 2px solid rgba(122, 162, 247, 0.45);
+    border-left: 2px solid color-mix(in srgb, var(--brand-cyan) 45%, transparent);
   }
   hr {
     @apply border-border my-8;

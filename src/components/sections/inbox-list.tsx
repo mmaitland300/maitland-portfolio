@@ -272,7 +272,7 @@ export function InboxList({
             key={sub.id}
             className={cn(
               "overflow-hidden rounded-xl border border-border transition-colors",
-              !sub.read ? "border-purple-500/20 bg-card/80" : "bg-card/30"
+              !sub.read ? "border-brand-violet/20 bg-card/80" : "bg-card/30"
             )}
           >
             <button
@@ -283,7 +283,7 @@ export function InboxList({
                 {sub.read ? (
                   <MailOpen size={16} className="text-muted-foreground" />
                 ) : (
-                  <Mail size={16} className="text-purple-400" />
+                  <Mail size={16} className="text-brand-violet" />
                 )}
               </div>
               <div className="min-w-0 flex-1">

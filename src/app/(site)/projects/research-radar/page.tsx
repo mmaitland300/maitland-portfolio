@@ -228,7 +228,7 @@ export default function ResearchRadarCaseStudyPage() {
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <div className="mb-3 flex items-center gap-2">
-            <SearchCheck className="h-5 w-5 text-cyan-400" />
+            <SearchCheck className="h-5 w-5 text-brand-cyan" />
             <h2 className="text-xl font-semibold">What the project does</h2>
           </div>
           <figure className="overflow-hidden rounded-lg border border-border bg-muted/20">
@@ -268,7 +268,7 @@ export default function ResearchRadarCaseStudyPage() {
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <div className="mb-4 flex items-center gap-2">
-            <Network className="h-5 w-5 text-purple-400" />
+            <Network className="h-5 w-5 text-brand-violet" />
             <h2 className="text-xl font-semibold">
               Engineering choices, in plain language
             </h2>
@@ -334,7 +334,7 @@ export default function ResearchRadarCaseStudyPage() {
                           href={liveHref}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="text-cyan-400 underline-offset-4 hover:underline"
+                          className="text-brand-cyan underline-offset-4 hover:underline"
                         >
                           {target.route}
                         </a>
@@ -355,7 +355,7 @@ export default function ResearchRadarCaseStudyPage() {
         <section className="mb-10 grid gap-4 md:grid-cols-3">
           <div className="rounded-xl border border-border bg-card/40 p-6">
             <div className="mb-3 flex items-center gap-2">
-              <Microscope className="h-5 w-5 text-cyan-400" />
+              <Microscope className="h-5 w-5 text-brand-cyan" />
               <h2 className="text-xl font-semibold">Stable now</h2>
             </div>
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -437,7 +437,7 @@ export default function ResearchRadarCaseStudyPage() {
 
         <CaseStudyEvidenceFooter
           project={project}
-          statusIcon={<Microscope className="h-5 w-5 text-cyan-400" />}
+          statusIcon={<Microscope className="h-5 w-5 text-brand-cyan" />}
         />
 
         <Suspense fallback={null}>

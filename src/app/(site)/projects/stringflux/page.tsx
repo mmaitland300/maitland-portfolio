@@ -144,7 +144,7 @@ export default function StringFluxCaseStudyPage() {
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <div className="mb-3 flex items-center gap-2">
-            <Layers3 className="h-5 w-5 text-cyan-400" />
+            <Layers3 className="h-5 w-5 text-brand-cyan" />
             <h2 className="text-xl font-semibold">Signal Architecture</h2>
           </div>
           <ul className="space-y-2">
@@ -190,7 +190,7 @@ export default function StringFluxCaseStudyPage() {
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <div className="mb-3 flex items-center gap-2">
-            <Network className="h-5 w-5 text-purple-400" />
+            <Network className="h-5 w-5 text-brand-violet" />
             <h2 className="text-xl font-semibold">Grain Scheduling Model</h2>
           </div>
           <ul className="space-y-2">

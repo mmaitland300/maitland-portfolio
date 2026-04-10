@@ -45,7 +45,7 @@ function ResumeHighlightLine({
       className={
         print
           ? "text-blue-900 underline underline-offset-2"
-          : "underline decoration-purple-500/50 underline-offset-4 transition-colors hover:text-foreground"
+          : "underline decoration-brand-violet/50 underline-offset-4 transition-colors hover:text-foreground"
       }
     >
       {highlight.text}
@@ -270,7 +270,7 @@ export function ResumeDocument({
               <div className="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
                 <div>
                   <h3 className="font-semibold text-foreground">{item.role}</h3>
-                  <p className="text-sm text-purple-400">{item.company}</p>
+                  <p className="text-sm text-brand-violet">{item.company}</p>
                 </div>
                 <p className="text-sm text-muted-foreground">{item.period}</p>
               </div>
@@ -282,7 +282,7 @@ export function ResumeDocument({
                   {item.highlights.map((highlight, index) => (
                     <li
                       key={`${highlight.text}-${index}`}
-                      className="text-sm text-muted-foreground pl-3 relative before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-purple-500/50"
+                      className="text-sm text-muted-foreground pl-3 relative before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-brand-violet/50"
                     >
                       <HighlightText highlight={highlight} />
                     </li>

@@ -68,7 +68,7 @@ export function StringFluxSignalDiagram() {
           width="100"
           height="48"
           rx="6"
-          className="fill-purple-500/10 stroke-purple-500/40"
+          className="fill-brand-violet/10 stroke-brand-violet/40"
           strokeWidth="1"
         />
         <text x="202" y="164" textAnchor="middle" className="fill-foreground text-[9px]">
@@ -88,7 +88,7 @@ export function StringFluxSignalDiagram() {
           width="100"
           height="48"
           rx="6"
-          className="fill-purple-500/10 stroke-purple-500/40"
+          className="fill-brand-violet/10 stroke-brand-violet/40"
           strokeWidth="1"
         />
         <text x="334" y="164" textAnchor="middle" className="fill-foreground text-[9px]">
@@ -108,7 +108,7 @@ export function StringFluxSignalDiagram() {
           width="88"
           height="48"
           rx="6"
-          className="fill-purple-500/10 stroke-purple-500/40"
+          className="fill-brand-violet/10 stroke-brand-violet/40"
           strokeWidth="1"
         />
         <text x="460" y="164" textAnchor="middle" className="fill-foreground text-[9px]">
@@ -128,7 +128,7 @@ export function StringFluxSignalDiagram() {
           width="72"
           height="48"
           rx="6"
-          className="fill-purple-500/10 stroke-purple-500/40"
+          className="fill-brand-violet/10 stroke-brand-violet/40"
           strokeWidth="1"
         />
         <text x="572" y="164" textAnchor="middle" className="fill-foreground text-[9px]">
@@ -148,7 +148,7 @@ export function StringFluxSignalDiagram() {
           width="72"
           height="48"
           rx="6"
-          className="fill-purple-500/10 stroke-purple-500/40"
+          className="fill-brand-violet/10 stroke-brand-violet/40"
           strokeWidth="1"
         />
         <text x="676" y="164" textAnchor="middle" className="fill-foreground text-[9px]">
@@ -157,7 +157,7 @@ export function StringFluxSignalDiagram() {
         <path
           d="M 676 136 Q 676 80 400 80 Q 196 80 196 64"
           fill="none"
-          className="stroke-cyan-500/50"
+          className="stroke-brand-cyan/50"
           strokeWidth="1.5"
           strokeDasharray="4 3"
         />

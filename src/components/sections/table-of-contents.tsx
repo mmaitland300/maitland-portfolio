@@ -47,7 +47,7 @@ export function TableOfContents({ toc }: TableOfContentsProps) {
               href={`#${entry.id}`}
               className={`block text-xs leading-relaxed transition-colors ${
                 activeId === entry.id
-                  ? "text-purple-400 font-medium"
+                  ? "text-brand-violet font-medium"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >

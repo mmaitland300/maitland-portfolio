@@ -37,7 +37,7 @@ export const mdxComponents: MDXComponents = {
   li: (props) => <li className="leading-relaxed" {...props} />,
   a: (props) => (
     <a
-      className="text-purple-400 hover:text-purple-300 underline underline-offset-4 transition-colors"
+      className="text-brand-violet hover:text-brand-violet-hover underline underline-offset-4 transition-colors"
       target={props.href?.startsWith("http") ? "_blank" : undefined}
       rel={props.href?.startsWith("http") ? "noopener noreferrer" : undefined}
       {...props}
@@ -45,7 +45,7 @@ export const mdxComponents: MDXComponents = {
   ),
   blockquote: (props) => (
     <blockquote
-      className="border-l-4 border-purple-500/50 pl-4 italic text-muted-foreground my-4"
+      className="border-l-4 border-brand-violet/50 pl-4 italic text-muted-foreground my-4"
       {...props}
     />
   ),
@@ -56,7 +56,7 @@ export const mdxComponents: MDXComponents = {
     if (isInline) {
       return (
         <code
-          className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-purple-300"
+          className="bg-muted px-1.5 py-0.5 rounded text-sm font-mono text-brand-violet-muted"
           {...props}
         />
       );

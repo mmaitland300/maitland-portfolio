@@ -172,7 +172,7 @@ export default function FullSwingCaseStudyPage() {
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <div className="mb-3 flex items-center gap-2">
-            <Wrench className="h-5 w-5 text-cyan-400" />
+            <Wrench className="h-5 w-5 text-brand-cyan" />
             <h2 className="text-xl font-semibold">Diagnostic Workflow</h2>
           </div>
           <figure className="mb-8 overflow-hidden rounded-lg border border-border bg-muted/20">

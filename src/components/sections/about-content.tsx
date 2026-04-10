@@ -71,8 +71,8 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
 
       <motion.section {...fadeUp}>
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 rounded-lg bg-purple-500/10">
-            <Code2 className="h-5 w-5 text-purple-400" />
+          <div className="p-2 rounded-lg bg-brand-violet/10">
+            <Code2 className="h-5 w-5 text-brand-violet" />
           </div>
           <h2 className="text-2xl font-bold">Skills & Technologies</h2>
         </div>
@@ -115,8 +115,8 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
 
       <motion.section {...fadeUp}>
         <div className="flex items-center gap-3 mb-6">
-          <div className="p-2 rounded-lg bg-cyan-500/10">
-            <Briefcase className="h-5 w-5 text-cyan-400" />
+          <div className="p-2 rounded-lg bg-brand-cyan/10">
+            <Briefcase className="h-5 w-5 text-brand-cyan" />
           </div>
           <h2 className="text-2xl font-bold">Experience</h2>
         </div>
@@ -126,9 +126,9 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
               key={`${exp.role}-${exp.company}`}
               className="relative pl-6 border-l-2 border-border"
             >
-              <div className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-purple-500 border-2 border-background" />
+              <div className="absolute -left-[7px] top-1.5 w-3 h-3 rounded-full bg-brand-violet border-2 border-background" />
               <h3 className="font-semibold text-foreground">{exp.role}</h3>
-              <p className="text-sm text-purple-400">{exp.company}</p>
+              <p className="text-sm text-brand-violet">{exp.company}</p>
               <p className="text-xs text-muted-foreground mt-0.5">
                 {exp.period}
               </p>
@@ -140,7 +140,7 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
                   {exp.highlights.map((highlight, index) => (
                     <li
                       key={`${highlight.text}-${index}`}
-                      className="text-sm text-muted-foreground pl-3 relative before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-purple-500/50"
+                      className="text-sm text-muted-foreground pl-3 relative before:absolute before:left-0 before:top-[0.6em] before:h-1 before:w-1 before:rounded-full before:bg-brand-violet/50"
                     >
                       <HighlightText highlight={highlight} />
                     </li>

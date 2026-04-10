@@ -116,14 +116,14 @@ export function ProofStrip() {
                               href={item.href}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                              className="text-sm text-brand-violet hover:text-brand-violet-hover transition-colors"
                             >
                               {item.label}
                             </a>
                           ) : (
                             <Link
                               href={item.href}
-                              className="text-sm text-purple-400 hover:text-purple-300 transition-colors"
+                              className="text-sm text-brand-violet hover:text-brand-violet-hover transition-colors"
                             >
                               {item.label}
                             </Link>

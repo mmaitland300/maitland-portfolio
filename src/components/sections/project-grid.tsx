@@ -37,7 +37,7 @@ export function ProjectGrid() {
           className={cn(
             "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
             !activeTag
-              ? "border border-purple-500/30 bg-purple-500/20 text-purple-400"
+              ? "border border-brand-violet/30 bg-brand-violet/20 text-brand-violet"
               : "bg-muted text-muted-foreground hover:text-foreground"
           )}
         >
@@ -50,7 +50,7 @@ export function ProjectGrid() {
             className={cn(
               "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
               tag === activeTag
-                ? "border border-purple-500/30 bg-purple-500/20 text-purple-400"
+                ? "border border-brand-violet/30 bg-brand-violet/20 text-brand-violet"
                 : "bg-muted text-muted-foreground hover:text-foreground"
             )}
           >
@@ -83,7 +83,7 @@ export function ProjectGrid() {
             className="mb-10 text-center"
           >
             <div className="mb-3 flex items-center justify-center gap-2">
-              <Beaker className="h-5 w-5 text-cyan-400" />
+              <Beaker className="h-5 w-5 text-brand-cyan" />
               <h2 className="text-2xl font-bold tracking-tight">Experiments</h2>
             </div>
             <p className="mx-auto max-w-md text-sm text-muted-foreground">

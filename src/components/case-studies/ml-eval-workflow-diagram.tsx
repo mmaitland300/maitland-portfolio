@@ -125,7 +125,7 @@ export function MlEvalWorkflowDiagram() {
             onClick={() => setActiveIndex(i)}
             className={
               i === activeIndex
-                ? "rounded-md border border-purple-500/30 bg-purple-500/20 px-2.5 py-1 text-xs text-purple-300"
+                ? "rounded-md border border-brand-violet/30 bg-brand-violet/20 px-2.5 py-1 text-xs text-brand-violet-muted"
                 : "rounded-md border border-border bg-card/60 px-2.5 py-1 text-xs text-muted-foreground hover:text-foreground"
             }
           >

@@ -76,7 +76,7 @@ export function StringFluxPluginPreview() {
               onClick={() => setActive(i)}
               className={`rounded-md px-3 py-1 font-mono text-xs transition-colors ${
                 i === active
-                  ? "bg-purple-600/20 text-purple-400"
+                  ? "bg-brand-violet/20 text-brand-violet"
                   : "text-muted-foreground hover:text-foreground"
               }`}
             >

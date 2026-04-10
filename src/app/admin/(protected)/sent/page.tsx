@@ -144,7 +144,7 @@ export default async function AdminSentPage({ searchParams }: Props) {
             {currentPage > 1 ? (
               <Link
                 href={sentHref(currentPage - 1)}
-                className="text-purple-400 hover:text-purple-300"
+                className="text-brand-violet hover:text-brand-violet-hover"
               >
                 Previous
               </Link>
@@ -157,7 +157,7 @@ export default async function AdminSentPage({ searchParams }: Props) {
             {currentPage < totalPages ? (
               <Link
                 href={sentHref(currentPage + 1)}
-                className="text-purple-400 hover:text-purple-300"
+                className="text-brand-violet hover:text-brand-violet-hover"
               >
                 Next
               </Link>

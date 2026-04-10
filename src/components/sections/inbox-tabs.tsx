@@ -94,7 +94,7 @@ export function InboxTabs({
               {currentPage > 1 ? (
                 <Link
                   href={inboxHref(currentTab, currentPage - 1)}
-                  className="text-purple-400 hover:text-purple-300"
+                  className="text-brand-violet hover:text-brand-violet-hover"
                 >
                   Previous
                 </Link>
@@ -107,7 +107,7 @@ export function InboxTabs({
               {currentPage < totalPages ? (
                 <Link
                   href={inboxHref(currentTab, currentPage + 1)}
-                  className="text-purple-400 hover:text-purple-300"
+                  className="text-brand-violet hover:text-brand-violet-hover"
                 >
                   Next
                 </Link>

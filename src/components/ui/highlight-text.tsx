@@ -16,7 +16,7 @@ export function HighlightText({ highlight }: HighlightTextProps) {
       href={highlight.href}
       target={isExternal ? "_blank" : undefined}
       rel={isExternal ? "noopener noreferrer" : undefined}
-      className="underline decoration-purple-500/50 underline-offset-4 transition-colors hover:text-foreground"
+      className="underline decoration-brand-violet/50 underline-offset-4 transition-colors hover:text-foreground"
     >
       {highlight.text}
     </a>

@@ -32,7 +32,7 @@ export function BlogList({ posts, tags }: BlogListProps) {
             className={cn(
               "px-3 py-1.5 rounded-md text-xs font-medium transition-colors",
               !activeTag
-                ? "bg-purple-500/20 text-purple-400 border border-purple-500/30"
+                ? "bg-brand-violet/20 text-brand-violet border border-brand-violet/30"
                 : "bg-muted text-muted-foreground hover:text-foreground"
             )}
           >
@@ -45,7 +45,7 @@ export function BlogList({ posts, tags }: BlogListProps) {
               className={cn(
                 "px-3 py-1.5 rounded-md text-xs font-medium transition-colors",
                 tag === activeTag
-                  ? "bg-purple-500/20 text-purple-400 border border-purple-500/30"
+                  ? "bg-brand-violet/20 text-brand-violet border border-brand-violet/30"
                   : "bg-muted text-muted-foreground hover:text-foreground"
               )}
             >
@@ -67,7 +67,7 @@ export function BlogList({ posts, tags }: BlogListProps) {
           >
             <Link
               href={`/blog/${post.slug}`}
-              className="group block p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm hover:border-purple-500/30 transition-all duration-300"
+              className="group block p-6 rounded-xl border border-border bg-card/50 backdrop-blur-sm hover:border-brand-violet/30 transition-all duration-300"
             >
               <div className="flex items-center gap-4 text-xs text-muted-foreground mb-3">
                 <span className="flex items-center gap-1">
@@ -83,7 +83,7 @@ export function BlogList({ posts, tags }: BlogListProps) {
                 </Badge>
               </div>
 
-              <h2 className="text-xl font-semibold group-hover:text-purple-400 transition-colors mb-2">
+              <h2 className="text-xl font-semibold group-hover:text-brand-violet transition-colors mb-2">
                 {post.frontmatter.title}
               </h2>
               <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -102,7 +102,7 @@ export function BlogList({ posts, tags }: BlogListProps) {
                     </Badge>
                   ))}
                 </div>
-                <span className="text-xs text-muted-foreground group-hover:text-purple-400 transition-colors flex items-center gap-1">
+                <span className="text-xs text-muted-foreground group-hover:text-brand-violet transition-colors flex items-center gap-1">
                   Read more <ArrowRight size={12} />
                 </span>
               </div>

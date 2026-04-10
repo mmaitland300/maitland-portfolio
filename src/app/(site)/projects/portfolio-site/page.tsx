@@ -82,7 +82,7 @@ export default function PortfolioSiteCaseStudyPage() {
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <div className="mb-3 flex items-center gap-2">
-            <FileCode2 className="h-5 w-5 text-cyan-400" />
+            <FileCode2 className="h-5 w-5 text-brand-cyan" />
             <h2 className="text-xl font-semibold">Architecture artifact</h2>
           </div>
           <figure className="overflow-hidden rounded-lg border border-border bg-muted/20">
@@ -106,7 +106,7 @@ export default function PortfolioSiteCaseStudyPage() {
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <div className="mb-3 flex items-center gap-2">
-            <Shield className="h-5 w-5 text-purple-400" />
+            <Shield className="h-5 w-5 text-brand-violet" />
             <h2 className="text-xl font-semibold">What runs in production</h2>
           </div>
           <ul className="space-y-2">

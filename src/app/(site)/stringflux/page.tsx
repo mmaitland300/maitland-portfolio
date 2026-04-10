@@ -15,13 +15,13 @@ export const metadata: Metadata = {
 const howItWorks = [
   {
     icon: Music2,
-    color: "text-purple-400",
+    color: "text-brand-violet",
     title: "You play",
     body: "StringFlux reads your input in real time. It tracks string attacks and captures a rolling history of your signal across three frequency bands.",
   },
   {
     icon: Zap,
-    color: "text-cyan-400",
+    color: "text-brand-cyan",
     title: "Grains fire on transients",
     body: "When you strike a note, a transient-driven scheduler fires grains timed to your playing. A density scheduler fills the space between attacks to build texture.",
   },
@@ -112,7 +112,7 @@ export default function StringFluxPage() {
 
         <section
           id="waitlist"
-          className="rounded-xl border border-purple-500/20 bg-card/60 p-8"
+          className="rounded-xl border border-brand-violet/20 bg-card/60 p-8"
           aria-labelledby="waitlist-section"
         >
           <div className="max-w-lg">

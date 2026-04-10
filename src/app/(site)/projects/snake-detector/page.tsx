@@ -162,7 +162,7 @@ export default function SnakeDetectorCaseStudyPage() {
                   href={demoUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="font-medium text-cyan-400 underline-offset-4 hover:underline"
+                  className="font-medium text-brand-cyan underline-offset-4 hover:underline"
                 >
                   live demo
                 </a>{" "}
@@ -179,7 +179,7 @@ export default function SnakeDetectorCaseStudyPage() {
               Use the{" "}
               <a
                 href="#proof-package"
-                className="text-cyan-400 underline-offset-4 hover:underline"
+                className="text-brand-cyan underline-offset-4 hover:underline"
               >
                 proof package
               </a>{" "}
@@ -256,7 +256,7 @@ export default function SnakeDetectorCaseStudyPage() {
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <div className="mb-3 flex items-center gap-2">
-            <FlaskConical className="h-5 w-5 text-cyan-400" />
+            <FlaskConical className="h-5 w-5 text-brand-cyan" />
             <h2 className="text-xl font-semibold">Why the project matters</h2>
           </div>
           <p className="text-sm leading-relaxed text-muted-foreground">
@@ -272,7 +272,7 @@ export default function SnakeDetectorCaseStudyPage() {
           className="mb-10 scroll-mt-16 rounded-xl border border-border bg-card/40 p-6"
         >
           <div className="mb-3 flex items-center gap-2">
-            <ListChecks className="h-5 w-5 text-purple-400" />
+            <ListChecks className="h-5 w-5 text-brand-violet" />
             <h2 className="text-xl font-semibold">Proof package (artifacts)</h2>
           </div>
           <MlEvalWorkflowDiagram />

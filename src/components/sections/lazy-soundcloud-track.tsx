@@ -40,7 +40,7 @@ export function LazySoundCloudTrack({
             href={trackUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm text-purple-400 hover:text-purple-300 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-brand-violet hover:text-brand-violet-hover transition-colors"
           >
             <ExternalLink className="h-3.5 w-3.5" />
             Open {title} on SoundCloud
@@ -53,7 +53,7 @@ export function LazySoundCloudTrack({
           className="flex h-[300px] w-full flex-col items-center justify-center gap-3 text-center"
           aria-label={`Load SoundCloud player for ${title}`}
         >
-          <span className="rounded-full bg-purple-500/20 p-3 text-purple-300">
+          <span className="rounded-full bg-brand-violet/20 p-3 text-brand-violet-muted">
             <Play className="h-5 w-5" />
           </span>
           <span className="text-sm font-medium text-foreground">

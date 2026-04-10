@@ -49,7 +49,7 @@ export default async function AdminCommentsPage() {
                   on{" "}
                   <a
                     href={`/projects/${comment.projectSlug}`}
-                    className="text-purple-400 hover:text-purple-300 transition-colors"
+                    className="text-brand-violet hover:text-brand-violet-hover transition-colors"
                   >
                     {comment.projectSlug}
                   </a>

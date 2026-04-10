@@ -34,7 +34,7 @@ const proofKindLabel: Record<
 
 /** Same on homepage (compact) and /projects so the primary demo CTA reads consistently. */
 const demoPrimaryLinkClass =
-  "flex items-center gap-1.5 text-sm font-medium text-cyan-400 transition-colors hover:text-cyan-300";
+  "flex items-center gap-1.5 text-sm font-medium text-brand-cyan transition-colors hover:text-brand-cyan-hover";
 
 /** Demo first when present, otherwise case study — matches primary CTA order. */
 function getProjectCardDestination(project: Project): {
@@ -81,7 +81,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      className="group relative rounded-xl border border-border bg-card/50 backdrop-blur-sm overflow-hidden hover:border-purple-500/30 transition-all duration-300"
+      className="group relative rounded-xl border border-border bg-card/50 backdrop-blur-sm overflow-hidden hover:border-brand-violet/30 transition-all duration-300"
     >
       {cardDestination ? (
         cardDestination.external ? (
@@ -124,7 +124,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
               onClick={() => setIframeActive(true)}
               className="w-full h-full flex flex-col items-center justify-center gap-2 cursor-pointer"
             >
-              <div className="p-3 rounded-full bg-purple-500/20 text-purple-400 transition-transform group-hover:scale-110">
+              <div className="p-3 rounded-full bg-brand-violet/20 text-brand-violet transition-transform group-hover:scale-110">
                 <Play size={24} className="ml-0.5" />
               </div>
               <span className="text-xs text-muted-foreground">
@@ -161,7 +161,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
 
       {/* Content */}
       <div className="relative z-[2] p-6">
-        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-purple-400 transition-colors">
+        <h3 className="text-lg font-semibold text-foreground mb-2 group-hover:text-brand-violet transition-colors">
           {project.title}
         </h3>
         <p className="text-sm text-muted-foreground leading-relaxed mb-4">
@@ -324,7 +324,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
             <button
               type="button"
               onClick={() => setIframeActive(!iframeActive)}
-              className="flex items-center gap-1.5 text-xs text-purple-400 transition-colors hover:text-purple-300"
+              className="flex items-center gap-1.5 text-xs text-brand-violet transition-colors hover:text-brand-violet-hover"
             >
               <Gamepad2 size={14} /> {iframeActive ? "Stop" : "Play"}
             </button>
