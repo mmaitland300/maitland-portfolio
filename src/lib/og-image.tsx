@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { PAGE_TITLE_GRADIENT } from "@/lib/page-title-gradient";
 
 export const ogSize = { width: 1200, height: 630 };
 
@@ -29,9 +30,7 @@ export function createOgImage(title: string, subtitle: string) {
             style={{
               fontSize: 60,
               fontWeight: 800,
-              /* Align with `.page-title` in globals.css (not Tailwind default purple/cyan) */
-              background:
-                "linear-gradient(105deg, rgba(236, 241, 247, 0.96) 0%, rgba(221, 229, 241, 0.94) 42%, rgba(161, 223, 255, 0.9) 82%, rgba(188, 160, 250, 0.88) 100%)",
+              background: PAGE_TITLE_GRADIENT,
               backgroundClip: "text",
               color: "transparent",
             }}

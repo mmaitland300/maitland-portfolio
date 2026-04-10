@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, JetBrains_Mono } from "next/font/google";
 import { MotionProvider } from "@/components/layout/motion-provider";
+import { PAGE_TITLE_GRADIENT } from "@/lib/page-title-gradient";
 import { getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
@@ -56,6 +57,13 @@ export default function RootLayout({
       lang="en"
       className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
+      <head>
+        <style
+          dangerouslySetInnerHTML={{
+            __html: `:root{--page-title-gradient:${PAGE_TITLE_GRADIENT}}`,
+          }}
+        />
+      </head>
       <body className="min-h-full flex flex-col relative">
         <MotionProvider>{children}</MotionProvider>
       </body>
