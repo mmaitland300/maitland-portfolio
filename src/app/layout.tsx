@@ -24,12 +24,13 @@ export const metadata: Metadata = {
   description:
     "Matt Maitland: web systems, audio/DSP, and production troubleshooting. Projects, blog, and contact.",
   keywords: [
-    "developer",
-    "personal site",
-    "full-stack",
+    "Matt Maitland",
+    "production troubleshooting",
+    "web systems",
+    "audio DSP",
+    "Full Swing",
     "Next.js",
     "TypeScript",
-    "React",
   ],
   authors: [{ name: "Matt Maitland" }],
   creator: "Matt Maitland",
@@ -55,7 +56,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
+      className={`dark ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <head>
         <style
@@ -64,7 +65,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col relative">
+      <body className="min-h-full flex flex-col relative bg-background text-foreground">
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>

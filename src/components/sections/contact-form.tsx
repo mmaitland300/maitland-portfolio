@@ -44,8 +44,8 @@ function ContactFormInstance({ onReset }: ContactFormInstanceProps) {
     >
       {state.success ? (
         <div className="flex flex-col items-center justify-center py-12 text-center">
-          <div className="p-3 rounded-full bg-green-500/10 mb-4">
-            <CheckCircle2 className="h-8 w-8 text-green-500" />
+          <div className="p-3 rounded-full bg-success/10 mb-4">
+            <CheckCircle2 className="h-8 w-8 text-success" />
           </div>
           <h3 className="text-xl font-semibold mb-2">Message Sent!</h3>
           <p className="text-muted-foreground mb-6">{state.message}</p>

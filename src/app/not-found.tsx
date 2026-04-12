@@ -13,7 +13,7 @@ export default function NotFound() {
     <SiteChrome>
       <div className="min-h-[calc(100vh-4rem)] flex items-center justify-center">
         <div className="text-center px-6">
-          <p className="mb-4 text-8xl font-bold text-[rgba(122,162,247,0.95)]">
+          <p className="mb-4 text-8xl font-bold text-brand-cyan/90">
             404
           </p>
           <h1 className="text-2xl font-semibold mb-2">Page not found</h1>

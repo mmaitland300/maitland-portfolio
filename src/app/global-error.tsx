@@ -19,7 +19,7 @@ export default function GlobalError({
       <body className="min-h-full bg-background text-foreground">
         <div className="min-h-screen flex items-center justify-center px-6">
           <div className="w-full max-w-lg rounded-xl border border-border bg-card/60 p-6 text-center">
-            <div className="mx-auto mb-4 inline-flex rounded-full bg-muted p-3 text-amber-400">
+            <div className="mx-auto mb-4 inline-flex rounded-full bg-warning/10 p-3 text-warning">
               <AlertTriangle className="h-5 w-5" />
             </div>
             <h1 className="text-xl font-semibold">Application error</h1>

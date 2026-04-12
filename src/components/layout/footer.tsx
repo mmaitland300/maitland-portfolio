@@ -1,15 +1,7 @@
 import Link from "next/link";
 import { Github, Mail, Music2 } from "lucide-react";
 import { getPublicMailtoHref } from "@/lib/site-contact";
-
-const navLinks = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/blog", label: "Blog" },
-  { href: "/music", label: "Music" },
-  { href: "/contact", label: "Contact" },
-];
+import { siteNavLinks } from "@/lib/site-nav";
 
 export function Footer() {
   const socialLinks = [
@@ -53,7 +45,7 @@ export function Footer() {
               Navigation
             </h3>
             <ul className="space-y-2">
-              {navLinks.map((link) => (
+              {siteNavLinks.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -97,8 +89,19 @@ export function Footer() {
             &copy; {new Date().getFullYear()} Matt Maitland. All rights
             reserved.
           </p>
-          <p className="text-xs text-muted-foreground">
-            Built with Next.js, TypeScript & Tailwind CSS
+          <p className="text-xs text-muted-foreground text-center sm:text-end">
+            <a
+              href="https://github.com/mmaitland300/mmaitland-portfolio"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline-offset-2 hover:underline hover:text-foreground"
+            >
+              Site source
+            </a>
+            <span className="text-muted-foreground">
+              {" "}
+              — Next.js, TypeScript, Tailwind
+            </span>
           </p>
         </div>
       </div>

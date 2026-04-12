@@ -1,49 +1,56 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { buttonVariants } from "@/components/ui/button-variants";
 
 export function Hero() {
+  const reduceMotion = useReducedMotion();
+  const fade = {
+    initial: { opacity: reduceMotion ? 1 : 0, y: reduceMotion ? 0 : 24 },
+    animate: { opacity: 1, y: 0 },
+  };
+  const fadeTrans = (delay: number) => ({
+    duration: reduceMotion ? 0.01 : 0.55,
+    delay: reduceMotion ? 0 : delay,
+    ease: "easeOut" as const,
+  });
+
   return (
     <section className="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden pb-16 md:pb-20">
-      <div className="cyber-frame mx-auto max-w-6xl px-6 py-24 text-center sm:py-28 md:py-32">
+      <div className="accent-frame mx-auto max-w-6xl px-6 py-24 text-center sm:py-28 md:py-32">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
+          {...fade}
+          transition={fadeTrans(0)}
         >
-          <div className="cyber-pill mb-6 inline-flex items-center gap-3 rounded-full px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-[rgba(196,206,223,0.82)] backdrop-blur-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-[rgba(136,212,255,0.95)] shadow-[0_0_12px_rgba(67,188,255,0.45)]" />
+          <div className="accent-pill mb-6 inline-flex items-center gap-3 rounded-full px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-muted-foreground/90 backdrop-blur-sm">
+            <span className="accent-pill-dot shrink-0" />
             Systems Troubleshooting - Web Application Design - Audio DSP
           </div>
         </motion.div>
 
         <motion.h1
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.1, ease: "easeOut" }}
+          {...fade}
+          transition={fadeTrans(0.08)}
           className="text-5xl font-semibold leading-[1.02] tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
         >
           <span className="hero-lead">Hi, I&apos;m</span>{" "}
-          <span className="cyber-title hero-name">Matt Maitland</span>
+          <span className="accent-title hero-name">Matt Maitland</span>
         </motion.h1>
 
         <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.15, ease: "easeOut" }}
+          {...fade}
+          transition={fadeTrans(0.12)}
           className="mt-5 mx-auto max-w-4xl text-2xl font-semibold leading-tight text-foreground/95 sm:text-3xl"
         >
           I debug production systems and build software around the same discipline.
         </motion.h2>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2, ease: "easeOut" }}
-          className="mt-6 mx-auto max-w-3xl text-lg leading-relaxed text-[rgba(194,203,220,0.82)] sm:text-xl"
+          {...fade}
+          transition={fadeTrans(0.16)}
+          className="mt-6 mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
           I work at Auxillium supporting Full Swing simulator environments where
           hardware, software, networking, and OS behavior overlap. Outside of work
@@ -52,10 +59,9 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.22, ease: "easeOut" }}
-          className="mx-auto mt-5 max-w-xl space-y-1.5 text-center text-sm leading-relaxed text-[rgba(194,203,220,0.78)] sm:text-base"
+          {...fade}
+          transition={fadeTrans(0.18)}
+          className="mx-auto mt-5 max-w-xl space-y-1.5 text-center text-sm leading-relaxed text-muted-foreground/90 sm:text-base"
         >
           <p>
             <Link
@@ -84,9 +90,8 @@ export function Hero() {
         </motion.div>
 
         <motion.p
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.25, ease: "easeOut" }}
+          {...fade}
+          transition={fadeTrans(0.2)}
           className="mt-4 mx-auto max-w-2xl text-center text-sm leading-relaxed text-muted-foreground sm:text-base"
         >
           <Link
@@ -106,9 +111,8 @@ export function Hero() {
         </motion.p>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3, ease: "easeOut" }}
+          {...fade}
+          transition={fadeTrans(0.24)}
           className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link
@@ -129,9 +133,8 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
+          {...fade}
+          transition={fadeTrans(0.32)}
           className="mt-4 flex items-center justify-center gap-6 text-sm text-muted-foreground"
         >
           <a
@@ -147,21 +150,33 @@ export function Hero() {
           </Link>
         </motion.div>
 
-        {/* Scroll cue: in document flow so it clears ProofStrip / featured cards */}
         <motion.div
-          initial={{ opacity: 0 }}
+          initial={{ opacity: reduceMotion ? 1 : 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 0.85, duration: 0.8 }}
+          transition={{
+            delay: reduceMotion ? 0 : 0.72,
+            duration: reduceMotion ? 0.01 : 0.65,
+          }}
           className="mt-10 flex justify-center sm:mt-12"
           aria-hidden={true}
         >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            className="flex h-10 w-6 justify-center rounded-full border-2 border-muted-foreground/30 pt-2"
-          >
-            <div className="h-2 w-1 rounded-full bg-muted-foreground/50" />
-          </motion.div>
+          {reduceMotion ? (
+            <div className="flex h-10 w-6 justify-center rounded-full border-2 border-muted-foreground/30 pt-2">
+              <div className="h-2 w-1 rounded-full bg-muted-foreground/50" />
+            </div>
+          ) : (
+            <motion.div
+              animate={{ y: [0, 6, 0] }}
+              transition={{
+                repeat: Infinity,
+                duration: 2.4,
+                ease: "easeInOut",
+              }}
+              className="flex h-10 w-6 justify-center rounded-full border-2 border-muted-foreground/30 pt-2"
+            >
+              <div className="h-2 w-1 rounded-full bg-muted-foreground/50" />
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>

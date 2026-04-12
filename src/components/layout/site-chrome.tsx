@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 /** Dark site shell: nav, footer, decorative background. */
 export function SiteChrome({ children }: { children: React.ReactNode }) {
   return (
-    <div className="dark min-h-full flex flex-col relative bg-background text-foreground">
+    <div className="min-h-full flex flex-col relative bg-background text-foreground">
       <a
         href="#main-content"
         className={cn(

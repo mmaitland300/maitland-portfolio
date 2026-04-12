@@ -6,15 +6,7 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/blog", label: "Blog" },
-  { href: "/music", label: "Music" },
-  { href: "/contact", label: "Contact" },
-];
+import { siteNavLinks } from "@/lib/site-nav";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -83,7 +75,7 @@ export function Navbar() {
 
         {/* Desktop */}
         <ul className="hidden md:flex items-center gap-1">
-          {links.map((link) => {
+          {siteNavLinks.map((link) => {
             const isActive =
               link.href === "/"
                 ? pathname === "/"
@@ -144,7 +136,7 @@ export function Navbar() {
               data-testid="mobile-nav-menu"
               className="flex flex-col px-6 py-4 gap-1"
             >
-              {links.map((link) => {
+              {siteNavLinks.map((link) => {
                 const isActive =
                   link.href === "/"
                     ? pathname === "/"

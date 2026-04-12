@@ -53,7 +53,7 @@ export function SectionHeader({
             centered ? "justify-center" : "justify-start"
           )}
         >
-          <span className="h-px w-10 bg-[linear-gradient(90deg,rgba(122,162,247,0.9),rgba(122,162,247,0.15))]" />
+          <span className="section-eyebrow-line shrink-0" aria-hidden />
           <p className="section-eyebrow">{eyebrow}</p>
         </div>
       )}
@@ -61,7 +61,7 @@ export function SectionHeader({
         HeadingTag,
         {
           className: cn(
-            "page-title cyber-title text-balance text-4xl font-semibold tracking-tight sm:text-5xl",
+            "page-title accent-title text-balance text-4xl font-semibold tracking-tight sm:text-5xl",
             titleClassName
           ),
         },
