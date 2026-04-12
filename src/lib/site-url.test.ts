@@ -15,20 +15,20 @@ afterEach(() => {
 });
 
 describe("getSiteUrl", () => {
-  it("returns NEXT_PUBLIC_SITE_URL when set", () => {
+  it("normalizes apex mmaitland.dev to canonical www when NEXT_PUBLIC_SITE_URL is set", () => {
     process.env.NEXT_PUBLIC_SITE_URL = "https://mmaitland.dev";
-    expect(getSiteUrl()).toBe("https://mmaitland.dev");
+    expect(getSiteUrl()).toBe("https://www.mmaitland.dev");
   });
 
   it("prepends https:// when NEXT_PUBLIC_SITE_URL has no protocol", () => {
     process.env.NEXT_PUBLIC_SITE_URL = "mmaitland.dev";
-    expect(getSiteUrl()).toBe("https://mmaitland.dev");
+    expect(getSiteUrl()).toBe("https://www.mmaitland.dev");
   });
 
   it("prefers NEXT_PUBLIC_SITE_URL over VERCEL_PROJECT_PRODUCTION_URL", () => {
     process.env.NEXT_PUBLIC_SITE_URL = "https://mmaitland.dev";
     process.env.VERCEL_PROJECT_PRODUCTION_URL = "https://other.vercel.app";
-    expect(getSiteUrl()).toBe("https://mmaitland.dev");
+    expect(getSiteUrl()).toBe("https://www.mmaitland.dev");
   });
 
   it("falls back to VERCEL_PROJECT_PRODUCTION_URL when NEXT_PUBLIC_SITE_URL is unset", () => {
@@ -47,7 +47,12 @@ describe("getSiteUrl", () => {
 
   it("trims whitespace from the configured URL", () => {
     process.env.NEXT_PUBLIC_SITE_URL = "  https://mmaitland.dev  ";
-    expect(getSiteUrl()).toBe("https://mmaitland.dev");
+    expect(getSiteUrl()).toBe("https://www.mmaitland.dev");
+  });
+
+  it("normalizes www host to canonical https://www.mmaitland.dev", () => {
+    process.env.NEXT_PUBLIC_SITE_URL = "https://www.mmaitland.dev/";
+    expect(getSiteUrl()).toBe("https://www.mmaitland.dev");
   });
 });
 

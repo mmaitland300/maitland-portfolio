@@ -1,6 +1,6 @@
 # Matt Maitland — Personal site & case studies
 
-**Live site:** [mmaitland.dev](https://mmaitland.dev)
+**Live site:** [www.mmaitland.dev](https://www.mmaitland.dev)
 
 Personal site and engineering case-study repo for mmaitland.dev. Built with Next.js, TypeScript, and Tailwind CSS, with MDX blogging, a contact pipeline with optional rate limiting, and optional admin inbox/auth features behind explicit configuration.
 
@@ -94,11 +94,11 @@ Copy `.env.example` to `.env` and fill in the values.
 
 **Rows marked No** are only for **admin GitHub OAuth** (`AUTH_*`, `ADMIN_GITHUB_IDS`) and the optional **`NEXT_PUBLIC_RESUME_PDF_LINK_BASE`**. Leave them unset if you do not need those features; the app still runs and tests/build stay predictable. **Database-backed** admin inbox also needs real **Neon** URLs in the **Yes** Prisma rows (see **Database Setup (Optional)**), not just the auth vars.
 
-**Rows marked Yes** cover normal local or production use: public site URL, Resend for contact mail, and Prisma placeholders for `npm install` / `npm run build`. **Upstash** is optional but recommended for deployments that expect public traffic (see footnote [2]). **CI** only stubs `DATABASE_URL`, `DIRECT_URL`, and `NEXT_PUBLIC_SITE_URL` and does not pass Resend or Redis secrets - the same idea as compiling a production build without those values in the environment.
+**Rows marked Yes** cover normal local or production use: public site URL, Resend for contact mail, and Prisma placeholders for `npm install` / `npm run build`. **Upstash** is optional but recommended for deployments that expect public traffic (see footnote [2]). **CI** stubs `DATABASE_URL`, `DIRECT_URL`, and `NEXT_PUBLIC_SITE_URL` (`https://www.mmaitland.dev`, matching production canonical) and does not pass Resend or Redis secrets—the same idea as compiling a production build without those values in the environment.
 
 | Variable | Required | Purpose |
 |---|---|---|
-| `NEXT_PUBLIC_SITE_URL` | Yes | Base URL for metadata, sitemap, OG images |
+| `NEXT_PUBLIC_SITE_URL` | Yes | Base URL for metadata, sitemap, OG images (production: `https://www.mmaitland.dev`) |
 | `RESEND_API_KEY` | Yes | Resend API key for contact form delivery |
 | `CONTACT_FROM_EMAIL` | Yes | Sender address for contact emails |
 | `CONTACT_TO_EMAIL` | Yes | Recipient address for contact emails |
@@ -132,9 +132,12 @@ Note: the contact flow guarantees email delivery first. Database persistence for
 
 To enable the admin dashboard at `/admin`:
 
-1. Create a [GitHub OAuth App](https://github.com/settings/developers) (callback URL: `http://localhost:3000/api/auth/callback/github`).
+1. Create a [GitHub OAuth App](https://github.com/settings/developers) (callback URLs: `http://localhost:3000/api/auth/callback/github` for local dev and `https://www.mmaitland.dev/api/auth/callback/github` for production).
 2. Set `AUTH_SECRET`, `AUTH_GITHUB_ID`, and `AUTH_GITHUB_SECRET` in `.env`.
 3. Set `ADMIN_GITHUB_IDS` to your GitHub numeric user ID (find it at `https://api.github.com/users/YOUR_USERNAME`).
+4. In production, set `AUTH_URL` to `https://www.mmaitland.dev` so OAuth redirects stay on the canonical host.
+
+On Vercel, set **`www.mmaitland.dev`** as the primary domain and keep a **301** from apex `mmaitland.dev` to `www` (the app also declares this redirect in `next.config.ts`). Set **`NEXT_PUBLIC_SITE_URL`** to `https://www.mmaitland.dev` in project env so metadata, sitemap, and robots agree with the host users see.
 
 ## Project Structure
 

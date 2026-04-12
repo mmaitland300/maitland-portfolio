@@ -8,22 +8,36 @@ function normalizeUrl(value: string) {
     : `https://${value}`;
 }
 
+const CANONICAL_MMAITLAND_WWW = "https://www.mmaitland.dev";
+
+/** Apex and www both resolve to the canonical public host for this domain. */
+function canonicalMmaitlandSiteUrl(url: string): string {
+  const trimmed = normalizeUrl(url.trim());
+  try {
+    const { hostname } = new URL(trimmed);
+    if (hostname === "mmaitland.dev" || hostname === "www.mmaitland.dev") {
+      return CANONICAL_MMAITLAND_WWW;
+    }
+  } catch {
+    /* leave unchanged */
+  }
+  return trimmed;
+}
+
 export function getSiteUrl() {
   const env = parseAppEnv();
   const configuredUrl = env.NEXT_PUBLIC_SITE_URL;
   if (configuredUrl) {
-    return normalizeUrl(configuredUrl);
+    return canonicalMmaitlandSiteUrl(configuredUrl);
   }
 
   const deploymentUrl = env.VERCEL_PROJECT_PRODUCTION_URL ?? env.VERCEL_URL;
   if (deploymentUrl) {
-    return normalizeUrl(deploymentUrl);
+    return canonicalMmaitlandSiteUrl(deploymentUrl);
   }
 
   return LOCAL_SITE_URL;
 }
-
-const CANONICAL_MMAITLAND_WWW = "https://www.mmaitland.dev";
 
 /**
  * Base URL for resolving relative `href` values in the print resume / PDF.
