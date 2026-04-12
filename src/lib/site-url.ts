@@ -10,7 +10,31 @@ function normalizeUrl(value: string) {
 
 const CANONICAL_MMAITLAND_WWW = "https://www.mmaitland.dev";
 
-/** Apex and www both resolve to the canonical public host for this domain. */
+/**
+ * mmaitland.dev / www.mmaitland.dev → https://www.mmaitland.dev (paths preserved).
+ * Other hostnames unchanged. Forks that use their own domain never hit this branch.
+ */
+function canonicalizeMmaitlandPublicUrl(url: string): string {
+  const normalized = normalizeUrl(url.trim()).replace(/\/$/, "");
+  try {
+    const u = new URL(normalized);
+    if (u.hostname !== "mmaitland.dev" && u.hostname !== "www.mmaitland.dev") {
+      return normalized;
+    }
+    const out = new URL(normalized);
+    out.protocol = "https:";
+    out.hostname = "www.mmaitland.dev";
+    let href = out.href;
+    if (href.endsWith("/")) {
+      href = href.slice(0, -1);
+    }
+    return href;
+  } catch {
+    return normalized;
+  }
+}
+
+/** Apex and www both resolve to the canonical public origin (no path) for site metadata. */
 function canonicalMmaitlandSiteUrl(url: string): string {
   const trimmed = normalizeUrl(url.trim());
   try {
@@ -47,7 +71,7 @@ export function getSiteUrl() {
 export function getResumePdfLinkBase(): string {
   const override = process.env.NEXT_PUBLIC_RESUME_PDF_LINK_BASE?.trim();
   if (override) {
-    return normalizeUrl(override).replace(/\/$/, "");
+    return canonicalizeMmaitlandPublicUrl(override);
   }
 
   const site = getSiteUrl().replace(/\/$/, "");

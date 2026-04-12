@@ -36,6 +36,11 @@ describe("getSiteUrl", () => {
     expect(getSiteUrl()).toBe("https://myproject.vercel.app");
   });
 
+  it("normalizes apex mmaitland VERCEL_PROJECT_PRODUCTION_URL when NEXT_PUBLIC_SITE_URL is unset", () => {
+    process.env.VERCEL_PROJECT_PRODUCTION_URL = "https://mmaitland.dev";
+    expect(getSiteUrl()).toBe("https://www.mmaitland.dev");
+  });
+
   it("falls back to VERCEL_URL when production URL is unset", () => {
     process.env.VERCEL_URL = "myproject-git-main.vercel.app";
     expect(getSiteUrl()).toBe("https://myproject-git-main.vercel.app");
@@ -64,7 +69,12 @@ describe("getResumePdfLinkBase", () => {
 
   it("prepends https when NEXT_PUBLIC_RESUME_PDF_LINK_BASE has no scheme", () => {
     process.env.NEXT_PUBLIC_RESUME_PDF_LINK_BASE = "mmaitland.dev/staging";
-    expect(getResumePdfLinkBase()).toBe("https://mmaitland.dev/staging");
+    expect(getResumePdfLinkBase()).toBe("https://www.mmaitland.dev/staging");
+  });
+
+  it("rewrites apex resume override with path to canonical www", () => {
+    process.env.NEXT_PUBLIC_RESUME_PDF_LINK_BASE = "https://mmaitland.dev/preview";
+    expect(getResumePdfLinkBase()).toBe("https://www.mmaitland.dev/preview");
   });
 
   it("normalizes mmaitland.dev to https://www.mmaitland.dev", () => {

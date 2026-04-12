@@ -110,7 +110,9 @@ Copy `.env.example` to `.env` and fill in the values.
 | `AUTH_GITHUB_ID` | No | GitHub OAuth app client ID. Required for admin auth. |
 | `AUTH_GITHUB_SECRET` | No | GitHub OAuth app client secret. Required for admin auth. |
 | `ADMIN_GITHUB_IDS` | No | Comma-separated GitHub numeric user IDs for admin access |
-| `NEXT_PUBLIC_RESUME_PDF_LINK_BASE` | No | Override base URL for absolute links on `/resume/print` (defaults: `www.mmaitland.dev` for this domain and for localhost; otherwise `NEXT_PUBLIC_SITE_URL`). Hostnames without a scheme get `https://` like `NEXT_PUBLIC_SITE_URL`. |
+| `NEXT_PUBLIC_RESUME_PDF_LINK_BASE` | No | Override base URL for absolute links on `/resume/print` (defaults: `www.mmaitland.dev` for this domain and for localhost; otherwise `NEXT_PUBLIC_SITE_URL`). Hostnames without a scheme get `https://`. If the host is apex or `www` **mmaitland.dev**, it is rewritten to **`https://www.mmaitland.dev`** with any path kept (for example `mmaitland.dev/staging` → `https://www.mmaitland.dev/staging`). |
+
+**Forks:** `src/lib/site-url.ts` only rewrites **mmaitland.dev** / **www.mmaitland.dev**; any other `NEXT_PUBLIC_SITE_URL` or resume override host passes through unchanged.
 
 [1] **Prisma tooling:** `prisma.config.ts` reads `DATABASE_URL` and `DIRECT_URL` via `env()`, so they must exist in `.env` for `npm install` (postinstall `prisma generate`) and `npm run build`. Copy the syntactically valid placeholders from `.env.example` until you point them at Neon; no Postgres process is required on your machine for generation or production build.
 
@@ -177,7 +179,7 @@ Set `published: false` to keep a post as a draft (hidden from listings and direc
 
 **Regenerate the PDF (automated):** With the site running locally (for example `npm run dev` on port 3000), run `npm run resume:pdf`. That uses Playwright to print the **print-first** route **`/resume/print`** (no site nav/footer; light layout) to `public/resume.pdf`. Override the origin with `RESUME_PDF_ORIGIN` if you use another host or port (for example `RESUME_PDF_ORIGIN=http://127.0.0.1:3001 npm run resume:pdf`).
 
-**Links inside the print resume:** Relative highlight `href` values (for example `/projects/...`) are expanded to absolute URLs for the print layout using **`getResumePdfLinkBase()`** (`src/lib/site-url.ts`): `mmaitland.dev` and local dev both map to **`https://www.mmaitland.dev`** so PDFs stay usable standalone. Forks can set **`NEXT_PUBLIC_RESUME_PDF_LINK_BASE`** (optional env) to override.
+**Links inside the print resume:** Relative highlight `href` values (for example `/projects/...`) are expanded to absolute URLs for the print layout using **`getResumePdfLinkBase()`** (`src/lib/site-url.ts`): `mmaitland.dev` and local dev both map to **`https://www.mmaitland.dev`** so PDFs stay usable standalone. **`NEXT_PUBLIC_RESUME_PDF_LINK_BASE`** overrides that base; apex or `www` **mmaitland.dev** values (including paths) are still rewritten to **`https://www.mmaitland.dev`**. Forks use their own hostname unchanged.
 
 ## Scripts
 
