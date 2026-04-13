@@ -1,21 +1,68 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { siteNavLinks } from "@/lib/site-nav";
+import { VAULT_ROUTE } from "@/lib/vault-route";
+
+const LOGO_VAULT_TAPS = 7;
+/** Reset partial tap sequence after this many ms without another tap. */
+const LOGO_VAULT_IDLE_MS = 2800;
 
 export function Navbar() {
   const pathname = usePathname();
+  const router = useRouter();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
+  const logoVaultTapRef = useRef(0);
+  const logoVaultIdleTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const closeMobile = useCallback(() => setMobileOpen(false), []);
+
+  const scheduleLogoVaultReset = useCallback(() => {
+    if (logoVaultIdleTimerRef.current) {
+      clearTimeout(logoVaultIdleTimerRef.current);
+    }
+    logoVaultIdleTimerRef.current = setTimeout(() => {
+      logoVaultTapRef.current = 0;
+      logoVaultIdleTimerRef.current = null;
+    }, LOGO_VAULT_IDLE_MS);
+  }, []);
+
+  const onLogoClick = useCallback(
+    (e: React.MouseEvent<HTMLAnchorElement>) => {
+      if (logoVaultIdleTimerRef.current) {
+        clearTimeout(logoVaultIdleTimerRef.current);
+        logoVaultIdleTimerRef.current = null;
+      }
+
+      logoVaultTapRef.current += 1;
+      if (logoVaultTapRef.current >= LOGO_VAULT_TAPS) {
+        logoVaultTapRef.current = 0;
+        e.preventDefault();
+        e.stopPropagation();
+        router.push(VAULT_ROUTE);
+        return;
+      }
+
+      scheduleLogoVaultReset();
+    },
+    [router, scheduleLogoVaultReset]
+  );
+
+  useEffect(() => {
+    return () => {
+      if (logoVaultIdleTimerRef.current) {
+        clearTimeout(logoVaultIdleTimerRef.current);
+      }
+    };
+  }, []);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -66,7 +113,10 @@ export function Navbar() {
         <Link
           href="/"
           className="text-xl font-bold tracking-tight"
-          onClick={closeMobile}
+          onClick={(e) => {
+            closeMobile();
+            onLogoClick(e);
+          }}
         >
           <span className="brand-mark">
             M<span className="brand-accent">M</span>

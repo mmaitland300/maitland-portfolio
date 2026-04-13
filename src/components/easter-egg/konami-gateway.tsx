@@ -3,8 +3,7 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { advanceKonamiIndex } from "@/lib/konami-sequence";
-
-const VAULT_PATH = "/vault";
+import { VAULT_ROUTE } from "@/lib/vault-route";
 
 function isTypingTarget(el: EventTarget | null): boolean {
   if (!(el instanceof HTMLElement)) return false;
@@ -13,7 +12,7 @@ function isTypingTarget(el: EventTarget | null): boolean {
 }
 
 /**
- * Listens for the Konami code on the marketing shell and navigates to `/vault`.
+ * Listens for the Konami code on the marketing shell and navigates to the vault route.
  * Renders nothing; skips when focus is in form fields.
  */
 export function KonamiGateway() {
@@ -30,7 +29,7 @@ export function KonamiGateway() {
       if (complete) {
         indexRef.current = 0;
         e.preventDefault();
-        router.push(VAULT_PATH);
+        router.push(VAULT_ROUTE);
         return;
       }
 
