@@ -17,11 +17,11 @@ import { usePathname } from "next/navigation";
 
 const STRIP_CSS_H = 38;
 const STROKE_ALPHA = 0.55;
-/** Base cycles across strip width; slow LFO nudges this slightly (“living” pitch). */
-const CYCLES = 1.42;
-const CYCLES_LFO = 0.11;
-/** Tiny harmonic — large values read as rough high-frequency grit. */
-const H2 = 0.028;
+/** Base cycles across strip width (lower = wider, calmer peaks on wide screens). */
+const CYCLES = 1.14;
+const CYCLES_LFO = 0.07;
+/** Tiny harmonic — keep small to avoid “grit” on the stroke. */
+const H2 = 0.016;
 
 const MAX_SAMPLES = 1400;
 
@@ -69,7 +69,7 @@ function staticSinePath(
   steps: number
 ): string {
   const mid = viewH * 0.5;
-  const amp = viewH * 0.46;
+  const amp = viewH * 0.48;
   const parts: string[] = [];
   for (let i = 0; i <= steps; i++) {
     const t = i / steps;
@@ -86,7 +86,7 @@ function smooth1D(dst: Float32Array, src: Float32Array, len: number) {
   dst[0] = src[0];
   dst[len - 1] = src[len - 1];
   for (let i = 1; i < len - 1; i++) {
-    dst[i] = 0.22 * src[i - 1] + 0.56 * src[i] + 0.22 * src[i + 1];
+    dst[i] = 0.18 * src[i - 1] + 0.64 * src[i] + 0.18 * src[i + 1];
   }
 }
 
@@ -176,7 +176,7 @@ export function SpectrumRibbon() {
       const cw = canvas.width;
       return Math.min(
         MAX_SAMPLES - 1,
-        Math.max(180, Math.floor(cw * 0.85))
+        Math.max(160, Math.floor(cw * 0.68))
       );
     };
 
@@ -188,13 +188,12 @@ export function SpectrumRibbon() {
       const cw = canvas.width;
       const ch = canvas.height;
       const mid = ch * 0.5;
-      const amp = ch * 0.5;
+      const amp = ch * 0.53;
       const n = sampleCount();
       const len = n + 1;
       const ph = phaseRef.current;
       const breathe = 0.88 + 0.12 * Math.sin(now * 0.00075);
-      const cycles =
-        CYCLES + CYCLES_LFO * Math.sin(now * 0.00032);
+      const cycles = CYCLES + CYCLES_LFO * Math.sin(now * 0.00028);
 
       const rawY = rawYRef.current;
       const smY = smYRef.current;
@@ -217,6 +216,7 @@ export function SpectrumRibbon() {
 
       smooth1D(smY, rawY, len);
       smooth1D(rawY, smY, len);
+      smooth1D(smY, rawY, len);
 
       ctx.clearRect(0, 0, cw, ch);
       ctx.save();
@@ -233,7 +233,7 @@ export function SpectrumRibbon() {
       ctx.lineJoin = "round";
 
       ctx.beginPath();
-      strokeSmoothPath(ctx, xBuf, rawY, len);
+      strokeSmoothPath(ctx, xBuf, smY, len);
 
       ctx.strokeStyle = rgba(cyan, 0.14);
       ctx.lineWidth = Math.max(2.4, dpr * 2.6);
@@ -298,7 +298,7 @@ export function SpectrumRibbon() {
             strokeWidth="2"
             strokeLinecap="round"
             vectorEffect="non-scaling-stroke"
-            d={staticSinePath(400, STRIP_CSS_H, CYCLES, 128)}
+            d={staticSinePath(400, STRIP_CSS_H, CYCLES, 160)}
           />
         </svg>
       </div>
