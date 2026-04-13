@@ -1,8 +1,8 @@
 "use client";
 
 /**
- * End-of-page sine-style stroke (not a bar analyzer). Sits after `<Footer />` in
- * document flow so it scrolls with the site; hidden in print.
+ * Sine-style stroke between main content and `<Footer />` (scrolls with the page).
+ * Hidden in print.
  */
 
 import {

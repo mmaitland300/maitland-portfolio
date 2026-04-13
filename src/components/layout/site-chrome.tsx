@@ -21,8 +21,8 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
       <div className="animated-bg-glow" aria-hidden="true" />
       <Navbar />
       <main className="flex-1 relative z-10">{children}</main>
-      <Footer />
       <SpectrumRibbon />
+      <Footer />
     </div>
   );
 }
