@@ -9,6 +9,7 @@ import {
   startTransition,
   useCallback,
   useEffect,
+  useId,
   useRef,
   useState,
 } from "react";
@@ -20,9 +21,6 @@ const STROKE_ALPHA = 0.55;
 /** Base cycles across strip width (lower = wider, calmer peaks on wide screens). */
 const CYCLES = 1.14;
 const CYCLES_LFO = 0.07;
-/** Tiny harmonic — keep small to avoid “grit” on the stroke. */
-const H2 = 0.016;
-
 const MAX_SAMPLES = 1400;
 
 function isResumePrintPath(pathname: string | null) {
@@ -41,13 +39,18 @@ function parseCssHex(hex: string): [number, number, number] | null {
     const r = parseInt(h[1] + h[1], 16);
     const g = parseInt(h[2] + h[2], 16);
     const b = parseInt(h[3] + h[3], 16);
+    if (![r, g, b].every((c) => Number.isFinite(c) && c >= 0 && c <= 255)) {
+      return null;
+    }
     return [r, g, b];
   }
-  return [
-    parseInt(h.slice(1, 3), 16),
-    parseInt(h.slice(3, 5), 16),
-    parseInt(h.slice(5, 7), 16),
-  ];
+  const r = parseInt(h.slice(1, 3), 16);
+  const g = parseInt(h.slice(3, 5), 16);
+  const b = parseInt(h.slice(5, 7), 16);
+  if (![r, g, b].every((c) => Number.isFinite(c) && c >= 0 && c <= 255)) {
+    return null;
+  }
+  return [r, g, b];
 }
 
 function brandRgb(): { cyan: [number, number, number]; violet: [number, number, number] } {
@@ -90,8 +93,33 @@ function smooth1D(dst: Float32Array, src: Float32Array, len: number) {
   }
 }
 
-/** Quadratic spline through (x[i], y[i]) for a smooth stroke. */
-function strokeSmoothPath(
+/** ~Gaussian 5-tap on interior; 3-tap near edges to avoid kinks. */
+function smooth1D5(dst: Float32Array, src: Float32Array, len: number) {
+  if (len < 3) return;
+  dst[0] = src[0];
+  dst[len - 1] = src[len - 1];
+  if (len < 5) {
+    smooth1D(dst, src, len);
+    return;
+  }
+  dst[1] = 0.22 * src[0] + 0.56 * src[1] + 0.22 * src[2];
+  dst[len - 2] =
+    0.22 * src[len - 3] + 0.56 * src[len - 2] + 0.22 * src[len - 1];
+  const w0 = 0.06;
+  const w1 = 0.24;
+  const w2 = 0.4;
+  for (let i = 2; i < len - 2; i++) {
+    dst[i] =
+      w0 * src[i - 2] +
+      w1 * src[i - 1] +
+      w2 * src[i] +
+      w1 * src[i + 1] +
+      w0 * src[i + 2];
+  }
+}
+
+/** Uniform Catmull–Rom → cubic Béziers (smoother than midpoint quadratics). */
+function strokeCatmullPath(
   ctx: CanvasRenderingContext2D,
   xs: Float32Array,
   ys: Float32Array,
@@ -103,22 +131,35 @@ function strokeSmoothPath(
     ctx.lineTo(xs[1], ys[1]);
     return;
   }
-  for (let i = 1; i < len - 2; i++) {
-    const xc = (xs[i] + xs[i + 1]) * 0.5;
-    const yc = (ys[i] + ys[i + 1]) * 0.5;
-    ctx.quadraticCurveTo(xs[i], ys[i], xc, yc);
+  for (let i = 0; i < len - 1; i++) {
+    const i0 = i === 0 ? 0 : i - 1;
+    const i1 = i;
+    const i2 = i + 1;
+    const i3 = i + 2 < len ? i + 2 : len - 1;
+    const p0x = xs[i0];
+    const p0y = ys[i0];
+    const p1x = xs[i1];
+    const p1y = ys[i1];
+    const p2x = xs[i2];
+    const p2y = ys[i2];
+    const p3x = xs[i3];
+    const p3y = ys[i3];
+    const cp1x = p1x + (p2x - p0x) / 6;
+    const cp1y = p1y + (p2y - p0y) / 6;
+    const cp2x = p2x - (p3x - p1x) / 6;
+    const cp2y = p2y - (p3y - p1y) / 6;
+    ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp2y, p2x, p2y);
   }
-  ctx.quadraticCurveTo(
-    xs[len - 2],
-    ys[len - 2],
-    xs[len - 1],
-    ys[len - 1]
-  );
+}
+
+function svgDefId(reactId: string, suffix: string) {
+  return `wave-ribbon-${suffix}-${reactId.replace(/[^a-zA-Z0-9_-]/g, "_")}`;
 }
 
 export function SpectrumRibbon() {
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
+  const svgIds = useId();
   const [mounted, setMounted] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -128,6 +169,14 @@ export function SpectrumRibbon() {
   const rawYRef = useRef<Float32Array | null>(null);
   const smYRef = useRef<Float32Array | null>(null);
   const xBufRef = useRef<Float32Array | null>(null);
+  const brandRef = useRef<{
+    cyan: [number, number, number];
+    violet: [number, number, number];
+  } | null>(null);
+  const strokeGradRef = useRef<{
+    cw: number;
+    grad: CanvasGradient;
+  } | null>(null);
 
   const hide = isResumePrintPath(pathname);
 
@@ -148,11 +197,14 @@ export function SpectrumRibbon() {
     const canvas = canvasRef.current;
     if (!wrap || !canvas) return;
     const w = Math.max(1, Math.floor(wrap.getBoundingClientRect().width));
-    const dpr = Math.min(window.devicePixelRatio ?? 1, 2);
+    /** Slightly above 2 helps thin strokes on 2.5×–3× displays without huge cost (small canvas height). */
+    const dpr = Math.min(window.devicePixelRatio ?? 1, 2.75);
     canvas.width = Math.floor(w * dpr);
     canvas.height = Math.floor(STRIP_CSS_H * dpr);
     canvas.style.width = `${w}px`;
     canvas.style.height = `${STRIP_CSS_H}px`;
+    brandRef.current = brandRgb();
+    strokeGradRef.current = null;
   }, []);
 
   useEffect(() => {
@@ -162,7 +214,10 @@ export function SpectrumRibbon() {
     const wrap = wrapRef.current;
     if (!canvas || !wrap) return;
 
-    const ctx = canvas.getContext("2d", { alpha: true });
+    const ctx = canvas.getContext("2d", {
+      alpha: true,
+      desynchronized: true,
+    });
     if (!ctx) return;
 
     resize();
@@ -176,7 +231,7 @@ export function SpectrumRibbon() {
       const cw = canvas.width;
       return Math.min(
         MAX_SAMPLES - 1,
-        Math.max(160, Math.floor(cw * 0.68))
+        Math.max(180, Math.floor(cw * 0.78))
       );
     };
 
@@ -207,40 +262,54 @@ export function SpectrumRibbon() {
         const t = i / n;
         xBuf[i] = t * cw;
         const u = t * Math.PI * 2 * cycles + ph;
-        rawY[i] =
-          mid +
-          amp *
-            breathe *
-            (Math.sin(u) + H2 * Math.sin(u * 2.02 + ph * 0.35));
+        rawY[i] = mid + amp * breathe * Math.sin(u);
       }
 
       smooth1D(smY, rawY, len);
       smooth1D(rawY, smY, len);
       smooth1D(smY, rawY, len);
+      smooth1D5(rawY, smY, len);
 
       ctx.clearRect(0, 0, cw, ch);
       ctx.save();
-      ctx.translate(0, 0.5);
+      ctx.translate(0.5, 0.5);
 
-      const { cyan, violet } = brandRgb();
-      const grad = ctx.createLinearGradient(0, 0, cw, 0);
-      grad.addColorStop(0, rgba(violet, STROKE_ALPHA * 0.82));
-      grad.addColorStop(0.48, rgba(cyan, STROKE_ALPHA));
-      grad.addColorStop(1, rgba(violet, STROKE_ALPHA * 0.88));
+      const brand = brandRef.current ?? brandRgb();
+      brandRef.current = brand;
+      const { cyan, violet } = brand;
+      let strokeGrad = strokeGradRef.current;
+      if (!strokeGrad || strokeGrad.cw !== cw) {
+        const g = ctx.createLinearGradient(0, 0, cw, 0);
+        g.addColorStop(0, rgba(violet, STROKE_ALPHA * 0.82));
+        g.addColorStop(0.48, rgba(cyan, STROKE_ALPHA));
+        g.addColorStop(1, rgba(violet, STROKE_ALPHA * 0.88));
+        strokeGradRef.current = { cw, grad: g };
+        strokeGrad = strokeGradRef.current;
+      }
 
       const dpr = cw / Math.max(1, wrap.getBoundingClientRect().width);
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
 
       ctx.beginPath();
-      strokeSmoothPath(ctx, xBuf, smY, len);
+      strokeCatmullPath(ctx, xBuf, rawY, len);
 
-      ctx.strokeStyle = rgba(cyan, 0.14);
-      ctx.lineWidth = Math.max(2.4, dpr * 2.6);
+      /* Soft halo: eases stair-stepping on a very thin line (re-stroke same path). */
+      ctx.strokeStyle = rgba(cyan, 0.1);
+      ctx.lineWidth = Math.max(4.2, dpr * 4.8);
+      ctx.shadowBlur = Math.max(5, dpr * 6);
+      ctx.shadowColor = rgba(cyan, 0.28);
       ctx.stroke();
 
-      ctx.strokeStyle = grad;
-      ctx.lineWidth = Math.max(1.35, dpr * 1.55);
+      ctx.shadowBlur = 0;
+      ctx.shadowColor = "transparent";
+
+      ctx.strokeStyle = rgba(cyan, 0.14);
+      ctx.lineWidth = Math.max(2.6, dpr * 2.85);
+      ctx.stroke();
+
+      ctx.strokeStyle = strokeGrad.grad;
+      ctx.lineWidth = Math.max(1.45, dpr * 1.65);
       ctx.stroke();
 
       ctx.restore();
@@ -273,6 +342,8 @@ export function SpectrumRibbon() {
   if (!mounted || hide) return null;
 
   if (reduceMotion) {
+    const gradId = svgDefId(svgIds, "grad");
+    const filtId = svgDefId(svgIds, "filt");
     return (
       <div
         ref={wrapRef}
@@ -286,19 +357,28 @@ export function SpectrumRibbon() {
           preserveAspectRatio="none"
         >
           <defs>
-            <linearGradient id="wave-ribbon-static" x1="0%" y1="0%" x2="100%" y2="0%">
+            <linearGradient id={gradId} x1="0%" y1="0%" x2="100%" y2="0%">
               <stop offset="0%" stopColor="var(--brand-violet-muted)" stopOpacity="0.48" />
               <stop offset="50%" stopColor="var(--brand-cyan)" stopOpacity="0.55" />
               <stop offset="100%" stopColor="var(--brand-violet-muted)" stopOpacity="0.48" />
             </linearGradient>
+            <filter id={filtId} x="-20%" y="-300%" width="140%" height="700%">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="0.55" result="b" />
+              <feMerge>
+                <feMergeNode in="b" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
           </defs>
           <path
             fill="none"
-            stroke="url(#wave-ribbon-static)"
-            strokeWidth="2"
+            filter={`url(#${filtId})`}
+            shapeRendering="geometricPrecision"
+            stroke={`url(#${gradId})`}
+            strokeWidth="2.25"
             strokeLinecap="round"
             vectorEffect="non-scaling-stroke"
-            d={staticSinePath(400, STRIP_CSS_H, CYCLES, 160)}
+            d={staticSinePath(400, STRIP_CSS_H, CYCLES, 220)}
           />
         </svg>
       </div>
