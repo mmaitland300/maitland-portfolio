@@ -1,5 +1,7 @@
 "use client";
 
+/** Viewport-bottom spectrum strip: `z-[25]` sits above footer (`z-20`), below nav (`z-50`). */
+
 import {
   startTransition,
   useCallback,
@@ -12,10 +14,11 @@ import { usePathname } from "next/navigation";
 
 const BAR_CSS = 2;
 const GAP_CSS = 1;
-const STRIP_CSS_PX = 3;
+const STRIP_CSS_PX = 4;
 const LERP = 2.8;
 const TARGET_INTERVAL_MS = 420;
-const MAX_ALPHA = 0.2;
+/** Bar opacity in canvas; keep readable on oklch dark bg without dominating. */
+const MAX_ALPHA = 0.38;
 
 function isResumePrintPath(pathname: string | null) {
   if (!pathname) return false;
@@ -196,10 +199,10 @@ export function SpectrumRibbon() {
   if (reduceMotion) {
     return (
       <div
-        className="pointer-events-none fixed bottom-0 left-0 right-0 z-[15] h-[3px] opacity-[0.38]"
+        className="pointer-events-none fixed bottom-0 left-0 right-0 z-[25] h-1"
         style={{
           background:
-            "linear-gradient(90deg, color-mix(in srgb, var(--brand-violet-muted) 42%, transparent), color-mix(in srgb, var(--brand-cyan) 48%, transparent), color-mix(in srgb, var(--brand-cta-from) 32%, transparent), color-mix(in srgb, var(--brand-cyan) 46%, transparent), color-mix(in srgb, var(--brand-violet-muted) 42%, transparent))",
+            "linear-gradient(90deg, color-mix(in srgb, var(--brand-violet-muted) 62%, transparent), color-mix(in srgb, var(--brand-cyan) 58%, transparent), color-mix(in srgb, var(--brand-cta-from) 48%, transparent), color-mix(in srgb, var(--brand-cyan) 58%, transparent), color-mix(in srgb, var(--brand-violet-muted) 62%, transparent))",
         }}
         aria-hidden
       />
@@ -209,7 +212,7 @@ export function SpectrumRibbon() {
   return (
     <canvas
       ref={canvasRef}
-      className="pointer-events-none fixed bottom-0 left-0 right-0 z-[15]"
+      className="pointer-events-none fixed bottom-0 left-0 right-0 z-[25]"
       aria-hidden
     />
   );

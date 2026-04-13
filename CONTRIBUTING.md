@@ -2,6 +2,13 @@
 
 This repo uses a lightweight workflow. Keep changes small, reviewable, and consistent.
 
+## Branch and release workflow
+
+- **Branch first:** do all work on a **new branch** off up-to-date `main` (one logical change per branch when practical). Do not commit directly on `main` for routine work.
+- **Review before live:** open a **pull request** (or hand off the branch) and let the **maintainer review** before anything is merged to **`main`** / deployed.
+- **No unapproved `git push`:** do not push to **any** remote (including feature branches) unless the maintainer explicitly asked you to publish that work. Never push **`origin/main`** without explicit approval after review.
+- **CI:** keep PRs green with the same checks as [`.github/workflows/ci.yml`](.github/workflows/ci.yml) before requesting merge.
+
 ## Project intent
 
 Contributions should respect the portfolio's **evidence-first** bar (see **Goals and intent** in [README.md](README.md)):
@@ -33,8 +40,8 @@ Rules:
 
 ## Merge policy
 
-- **Default:** land work on **`main`** through **pull requests** with **CI green** before merge.
-- **Maintainer exception:** small, single-focus polish (docs, copy, config) may be pushed directly to **`main`** when **CI is green** (for example after running the same checks locally). Use PRs for anything risky, multi-file, or behavior-changing so review and history stay clear.
+- **Default:** land work on **`main`** only through a **pull request** after **maintainer review**, with **CI green** before merge.
+- **No direct-to-`main` pushes** for routine changes; use a branch and PR (see **Branch and release workflow** above).
 - **Default for this repo:** use GitHub's **merge commit** option (not squash-only) so PR boundaries stay visible in history. Write a clear **PR title** (and edit the merge commit subject when GitHub allows) so `git log` stays readable - conventional `type(scope):` titles are welcome when they fit.
 - **Squash merge** is fine for small, single-concern PRs when you want one commit on `main`.
 - Keep each PR focused on one concern; avoid unrelated drive-by changes in the same PR.
