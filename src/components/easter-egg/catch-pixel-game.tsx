@@ -3,14 +3,17 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 
-const W = 360;
-const H = 240;
-const PADDLE_W = 64;
-const PADDLE_H = 7;
-const PADDLE_MARGIN = 14;
-const BALL = 7;
-const BASE_SPEED = 2.35;
-const MAX_SPEED = 4.4;
+/** Internal canvas resolution (CSS size matches; DPR scales backing store). */
+const W = 640;
+const H = 360;
+const PADDLE_W = 112;
+const PADDLE_H = 9;
+const PADDLE_MARGIN = 20;
+const BALL = 9;
+const BASE_SPEED = 3.15;
+const MAX_SPEED = 5.75;
+/** Pixels per ~16.7ms at full keyboard deflection; scaled by frame delta. */
+const PADDLE_KEYBOARD_SPEED = 15;
 const PADDLE_TOP_Y = H - PADDLE_MARGIN - PADDLE_H;
 
 type GamePhase = "ready" | "playing" | "gameover";
@@ -79,11 +82,16 @@ export function CatchPixelGame() {
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio ?? 1, 2);
-      canvas.width = Math.floor(W * dpr);
-      canvas.height = Math.floor(H * dpr);
-      canvas.style.width = `${W}px`;
-      canvas.style.height = `${H}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const layoutW = wrap.clientWidth > 0 ? wrap.clientWidth : W;
+      const cssW = Math.floor(Math.min(W, Math.max(280, layoutW)));
+      const cssH = Math.floor(cssW * (H / W));
+      canvas.width = Math.floor(cssW * dpr);
+      canvas.height = Math.floor(cssH * dpr);
+      canvas.style.width = `${cssW}px`;
+      canvas.style.height = `${cssH}px`;
+      const sx = (cssW * dpr) / W;
+      const sy = (cssH * dpr) / H;
+      ctx.setTransform(sx, 0, 0, sy, 0, 0);
     };
     resize();
     const ro = new ResizeObserver(resize);
@@ -98,7 +106,7 @@ export function CatchPixelGame() {
         if (!lastTsRef.current) lastTsRef.current = ts;
         const dt = Math.min(40, ts - lastTsRef.current);
         lastTsRef.current = ts;
-        const step = (dt / 16) * 2.8;
+        const step = (dt / 16) * PADDLE_KEYBOARD_SPEED;
         if (keysRef.current.left) paddleRef.current -= step;
         if (keysRef.current.right) paddleRef.current += step;
         paddleRef.current = Math.max(
@@ -161,7 +169,7 @@ export function CatchPixelGame() {
 
       ctx.strokeStyle = "rgba(95, 212, 239, 0.12)";
       ctx.lineWidth = 1;
-      for (let x = 0; x <= W; x += 36) {
+      for (let x = 0; x <= W; x += 40) {
         ctx.beginPath();
         ctx.moveTo(x + 0.5, 0);
         ctx.lineTo(x + 0.5, H);
@@ -190,12 +198,12 @@ export function CatchPixelGame() {
         ctx.fillStyle = "rgba(10, 10, 12, 0.72)";
         ctx.fillRect(0, 0, W, H);
         ctx.fillStyle = "rgba(212, 203, 249, 0.92)";
-        ctx.font = "600 13px var(--font-jetbrains-mono), ui-monospace, monospace";
+        ctx.font = "600 15px var(--font-jetbrains-mono), ui-monospace, monospace";
         ctx.textAlign = "center";
         if (ph === "ready") {
           ctx.fillText("Catch the pixel before it slips past.", W * 0.5, H * 0.44);
           ctx.fillStyle = "rgba(95, 212, 239, 0.85)";
-          ctx.font = "500 11px var(--font-jetbrains-mono), ui-monospace, monospace";
+          ctx.font = "500 13px var(--font-jetbrains-mono), ui-monospace, monospace";
           ctx.fillText("← / → or drag · Space to start", W * 0.5, H * 0.58);
         } else {
           ctx.fillText(
@@ -204,7 +212,7 @@ export function CatchPixelGame() {
             H * 0.46
           );
           ctx.fillStyle = "rgba(95, 212, 239, 0.85)";
-          ctx.font = "500 11px var(--font-jetbrains-mono), ui-monospace, monospace";
+          ctx.font = "500 13px var(--font-jetbrains-mono), ui-monospace, monospace";
           ctx.fillText("Space to play again", W * 0.5, H * 0.58);
         }
       }
@@ -255,7 +263,7 @@ export function CatchPixelGame() {
   };
 
   return (
-    <div className="mx-auto flex w-full max-w-md flex-col items-center gap-6 px-4">
+    <div className="mx-auto flex w-full max-w-3xl flex-col items-center gap-6 px-4">
       <div className="flex w-full items-center justify-between font-mono text-xs text-muted-foreground">
         <span>
           score <span className="text-foreground tabular-nums">{score}</span>
@@ -270,8 +278,7 @@ export function CatchPixelGame() {
       >
         <canvas
           ref={canvasRef}
-          className="block touch-none [image-rendering:pixelated]"
-          style={{ width: W, height: H }}
+          className="block w-full max-w-[640px] touch-none [image-rendering:pixelated]"
           onPointerMove={onPointerMove}
           onPointerDown={(e) => {
             canvasRef.current?.setPointerCapture(e.pointerId);
