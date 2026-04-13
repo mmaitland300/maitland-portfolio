@@ -12,13 +12,17 @@ import {
 import { useReducedMotion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-const BAR_CSS = 2;
-const GAP_CSS = 1;
 const STRIP_CSS_PX = 4;
 const LERP = 2.8;
 const TARGET_INTERVAL_MS = 420;
 /** Bar opacity in canvas; keep readable on oklch dark bg without dominating. */
 const MAX_ALPHA = 0.38;
+
+/** Fewer bins on ultra-wide viewports so the strip reads as a soft wave, not dense noise. */
+const BINS_MIN = 36;
+const BINS_MAX = 88;
+/** Target ~one bin per this many CSS pixels of viewport width. */
+const CSS_PX_PER_BIN = 18;
 
 function isResumePrintPath(pathname: string | null) {
   if (!pathname) return false;
@@ -75,6 +79,7 @@ export function SpectrumRibbon() {
   const lastResampleRef = useRef(0);
   const rafRef = useRef(0);
   const lastFrameRef = useRef(0);
+  const displayScratchRef = useRef<Float32Array | null>(null);
 
   const hide = isResumePrintPath(pathname);
 
@@ -95,8 +100,11 @@ export function SpectrumRibbon() {
     canvas.style.width = `${w}px`;
     canvas.style.height = `${STRIP_CSS_PX}px`;
 
-    const slice = (BAR_CSS + GAP_CSS) * dpr;
-    const n = Math.max(8, Math.floor(canvas.width / slice));
+    const cssW = Math.max(1, w);
+    const n = Math.min(
+      BINS_MAX,
+      Math.max(BINS_MIN, Math.round(cssW / CSS_PX_PER_BIN))
+    );
     const prevV = valuesRef.current;
     const prevT = targetsRef.current;
     if (prevV.length !== n) {
@@ -106,6 +114,7 @@ export function SpectrumRibbon() {
       targetsRef.current = Array.from({ length: n }, (_, i) =>
         prevT[i] ?? 0.22 + Math.random() * 0.58
       );
+      displayScratchRef.current = new Float32Array(n);
     }
   }, []);
 
@@ -153,17 +162,37 @@ export function SpectrumRibbon() {
       const { cyan, violet } = brandRgb();
       const w = Math.max(1, window.innerWidth);
       const dpr = canvas.width / w;
-      const slice = (BAR_CSS + GAP_CSS) * dpr;
-      const barW = BAR_CSS * dpr;
       const ch = canvas.height;
+      const n = vals.length;
+      const scratch = displayScratchRef.current;
+      if (!scratch || scratch.length !== n) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+
+      for (let i = 0; i < n; i++) {
+        let s = 0;
+        for (let j = -2; j <= 2; j++) {
+          const k = Math.min(n - 1, Math.max(0, i + j));
+          s += vals[k];
+        }
+        scratch[i] = s / 5;
+      }
+
+      const phase = now * 0.00085;
+      const binW = canvas.width / n;
+      const gap = Math.max(0.5, dpr * 0.75);
+      const barW = Math.max(1, binW - gap);
 
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.globalAlpha = MAX_ALPHA;
 
-      for (let i = 0; i < vals.length; i++) {
-        const v = vals[i];
-        const h = Math.max(0.5 * dpr, v * ch * 0.92);
-        const x = i * slice;
+      for (let i = 0; i < n; i++) {
+        const t = n > 1 ? i / (n - 1) : 0;
+        const envelope = 0.62 + 0.38 * Math.sin(t * Math.PI * 2 * 1.35 + phase);
+        const v = Math.min(1, Math.max(0.08, scratch[i] * envelope * 1.04));
+        const h = Math.max(0.6 * dpr, v * ch * 0.9);
+        const x = i * binW + gap * 0.5;
         ctx.fillStyle = mix(violet, cyan, v);
         ctx.fillRect(x, ch - h, barW, h);
       }
