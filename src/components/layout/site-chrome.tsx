@@ -1,3 +1,4 @@
+import { KonamiGateway } from "@/components/easter-egg/konami-gateway";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { SpectrumRibbon } from "@/components/layout/spectrum-ribbon";
@@ -19,6 +20,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
       <div className="animated-bg-glow" aria-hidden="true" />
+      <KonamiGateway />
       <Navbar />
       <main className="flex-1 relative z-10">{children}</main>
       <SpectrumRibbon />
