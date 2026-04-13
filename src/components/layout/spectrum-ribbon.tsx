@@ -1,6 +1,9 @@
 "use client";
 
-/** Viewport-bottom spectrum strip: `z-[25]` sits above footer (`z-20`), below nav (`z-50`). */
+/**
+ * End-of-page sine-style stroke (not a bar analyzer). Sits after `<Footer />` in
+ * document flow so it scrolls with the site; hidden in print.
+ */
 
 import {
   startTransition,
@@ -12,17 +15,12 @@ import {
 import { useReducedMotion } from "framer-motion";
 import { usePathname } from "next/navigation";
 
-const STRIP_CSS_PX = 4;
-const LERP = 2.8;
-const TARGET_INTERVAL_MS = 420;
-/** Bar opacity in canvas; keep readable on oklch dark bg without dominating. */
-const MAX_ALPHA = 0.38;
-
-/** Fewer bins on ultra-wide viewports so the strip reads as a soft wave, not dense noise. */
-const BINS_MIN = 36;
-const BINS_MAX = 88;
-/** Target ~one bin per this many CSS pixels of viewport width. */
-const CSS_PX_PER_BIN = 18;
+const STRIP_CSS_H = 26;
+const STROKE_ALPHA = 0.52;
+/** Full cycles of the fundamental across the strip width. */
+const CYCLES = 1.55;
+/** Small harmonic for “scope” feel without reading as separate bars. */
+const H2 = 0.1;
 
 function isResumePrintPath(pathname: string | null) {
   if (!pathname) return false;
@@ -57,29 +55,38 @@ function brandRgb(): { cyan: [number, number, number]; violet: [number, number, 
   return { cyan, violet };
 }
 
-function mix(
-  a: [number, number, number],
-  b: [number, number, number],
-  t: number
+function rgba(c: [number, number, number], a: number) {
+  return `rgba(${c[0]} ${c[1]} ${c[2]} / ${a})`;
+}
+
+/** Fixed viewBox path for reduced-motion (smooth sine, not bars). */
+function staticSinePath(
+  viewW: number,
+  viewH: number,
+  cycles: number,
+  steps: number
 ): string {
-  const u = Math.min(1, Math.max(0, t));
-  const r = Math.round(a[0] + (b[0] - a[0]) * u);
-  const g = Math.round(a[1] + (b[1] - a[1]) * u);
-  const bl = Math.round(a[2] + (b[2] - a[2]) * u);
-  return `rgb(${r} ${g} ${bl})`;
+  const mid = viewH * 0.52;
+  const amp = viewH * 0.38;
+  const parts: string[] = [];
+  for (let i = 0; i <= steps; i++) {
+    const t = i / steps;
+    const x = t * viewW;
+    const y = mid + amp * Math.sin(t * Math.PI * 2 * cycles);
+    parts.push(`${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(2)}`);
+  }
+  return parts.join(" ");
 }
 
 export function SpectrumRibbon() {
   const pathname = usePathname();
   const reduceMotion = useReducedMotion();
   const [mounted, setMounted] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const valuesRef = useRef<number[]>([]);
-  const targetsRef = useRef<number[]>([]);
-  const lastResampleRef = useRef(0);
+  const phaseRef = useRef(0);
   const rafRef = useRef(0);
   const lastFrameRef = useRef(0);
-  const displayScratchRef = useRef<Float32Array | null>(null);
 
   const hide = isResumePrintPath(pathname);
 
@@ -90,113 +97,78 @@ export function SpectrumRibbon() {
   }, []);
 
   const resize = useCallback(() => {
+    const wrap = wrapRef.current;
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!wrap || !canvas) return;
+    const w = Math.max(1, Math.floor(wrap.getBoundingClientRect().width));
     const dpr = Math.min(window.devicePixelRatio ?? 1, 2);
-    const w = Math.floor(window.innerWidth);
-    const h = Math.ceil(STRIP_CSS_PX * dpr);
-    canvas.width = Math.max(1, Math.floor(w * dpr));
-    canvas.height = Math.max(1, h);
+    canvas.width = Math.floor(w * dpr);
+    canvas.height = Math.floor(STRIP_CSS_H * dpr);
     canvas.style.width = `${w}px`;
-    canvas.style.height = `${STRIP_CSS_PX}px`;
-
-    const cssW = Math.max(1, w);
-    const n = Math.min(
-      BINS_MAX,
-      Math.max(BINS_MIN, Math.round(cssW / CSS_PX_PER_BIN))
-    );
-    const prevV = valuesRef.current;
-    const prevT = targetsRef.current;
-    if (prevV.length !== n) {
-      valuesRef.current = Array.from({ length: n }, (_, i) =>
-        prevV[i] ?? 0.22 + Math.random() * 0.58
-      );
-      targetsRef.current = Array.from({ length: n }, (_, i) =>
-        prevT[i] ?? 0.22 + Math.random() * 0.58
-      );
-      displayScratchRef.current = new Float32Array(n);
-    }
+    canvas.style.height = `${STRIP_CSS_H}px`;
   }, []);
 
   useEffect(() => {
     if (!mounted || hide || reduceMotion) return;
 
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    const wrap = wrapRef.current;
+    if (!canvas || !wrap) return;
 
     const ctx = canvas.getContext("2d", { alpha: true });
     if (!ctx) return;
 
     resize();
-    lastResampleRef.current = performance.now();
     lastFrameRef.current = performance.now();
 
-    const pickTargets = () => {
-      const n = targetsRef.current.length;
-      for (let i = 0; i < n; i++) {
-        if (Math.random() < 0.35) {
-          targetsRef.current[i] = 0.12 + Math.random() * 0.88;
-        }
-      }
-    };
-
     const ro = new ResizeObserver(() => resize());
-    ro.observe(document.documentElement);
+    ro.observe(wrap);
     window.addEventListener("resize", resize);
 
+    const samples = () =>
+      Math.min(720, Math.max(160, Math.floor(canvas.width / 2.2)));
+
     const tick = (now: number) => {
-      const dt = Math.min(0.055, Math.max(0, (now - lastFrameRef.current) / 1000));
+      const dt = Math.min(0.06, Math.max(0, (now - lastFrameRef.current) / 1000));
       lastFrameRef.current = now;
+      phaseRef.current += dt * 1.05;
 
-      if (now - lastResampleRef.current > TARGET_INTERVAL_MS) {
-        lastResampleRef.current = now;
-        pickTargets();
-      }
+      const cw = canvas.width;
+      const ch = canvas.height;
+      const mid = ch * 0.52;
+      const amp = ch * 0.38;
+      const n = samples();
+      const ph = phaseRef.current;
+      const breathe = 0.9 + 0.1 * Math.sin(now * 0.0009);
 
-      const vals = valuesRef.current;
-      const targs = targetsRef.current;
-      for (let i = 0; i < vals.length; i++) {
-        vals[i] += (targs[i] - vals[i]) * Math.min(1, dt * LERP);
-      }
+      ctx.clearRect(0, 0, cw, ch);
 
       const { cyan, violet } = brandRgb();
-      const w = Math.max(1, window.innerWidth);
-      const dpr = canvas.width / w;
-      const ch = canvas.height;
-      const n = vals.length;
-      const scratch = displayScratchRef.current;
-      if (!scratch || scratch.length !== n) {
-        rafRef.current = requestAnimationFrame(tick);
-        return;
+      const grad = ctx.createLinearGradient(0, 0, cw, 0);
+      grad.addColorStop(0, rgba(violet, STROKE_ALPHA * 0.85));
+      grad.addColorStop(0.45, rgba(cyan, STROKE_ALPHA));
+      grad.addColorStop(1, rgba(violet, STROKE_ALPHA * 0.9));
+
+      const dpr = cw / Math.max(1, wrap.getBoundingClientRect().width);
+      ctx.lineCap = "round";
+      ctx.lineJoin = "round";
+      ctx.lineWidth = Math.max(1.15, dpr * 1.25);
+
+      ctx.beginPath();
+      for (let i = 0; i <= n; i++) {
+        const t = i / n;
+        const x = t * cw;
+        const u = t * Math.PI * 2 * CYCLES + ph;
+        const y =
+          mid +
+          amp *
+            breathe *
+            (Math.sin(u) + H2 * Math.sin(u * 2.05 + ph * 0.4));
+        if (i === 0) ctx.moveTo(x, y);
+        else ctx.lineTo(x, y);
       }
-
-      for (let i = 0; i < n; i++) {
-        let s = 0;
-        for (let j = -2; j <= 2; j++) {
-          const k = Math.min(n - 1, Math.max(0, i + j));
-          s += vals[k];
-        }
-        scratch[i] = s / 5;
-      }
-
-      const phase = now * 0.00085;
-      const binW = canvas.width / n;
-      const gap = Math.max(0.5, dpr * 0.75);
-      const barW = Math.max(1, binW - gap);
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.globalAlpha = MAX_ALPHA;
-
-      for (let i = 0; i < n; i++) {
-        const t = n > 1 ? i / (n - 1) : 0;
-        const envelope = 0.62 + 0.38 * Math.sin(t * Math.PI * 2 * 1.35 + phase);
-        const v = Math.min(1, Math.max(0.08, scratch[i] * envelope * 1.04));
-        const h = Math.max(0.6 * dpr, v * ch * 0.9);
-        const x = i * binW + gap * 0.5;
-        ctx.fillStyle = mix(violet, cyan, v);
-        ctx.fillRect(x, ch - h, barW, h);
-      }
-      ctx.globalAlpha = 1;
+      ctx.strokeStyle = grad;
+      ctx.stroke();
 
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -228,21 +200,42 @@ export function SpectrumRibbon() {
   if (reduceMotion) {
     return (
       <div
-        className="pointer-events-none fixed bottom-0 left-0 right-0 z-[25] h-1"
-        style={{
-          background:
-            "linear-gradient(90deg, color-mix(in srgb, var(--brand-violet-muted) 62%, transparent), color-mix(in srgb, var(--brand-cyan) 58%, transparent), color-mix(in srgb, var(--brand-cta-from) 48%, transparent), color-mix(in srgb, var(--brand-cyan) 58%, transparent), color-mix(in srgb, var(--brand-violet-muted) 62%, transparent))",
-        }}
+        ref={wrapRef}
+        className="print:hidden pointer-events-none w-full shrink-0 border-t border-border/30 bg-background/90"
         aria-hidden
-      />
+      >
+        <svg
+          className="block w-full"
+          style={{ height: STRIP_CSS_H }}
+          viewBox="0 0 400 26"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="wave-ribbon-static" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%" stopColor="var(--brand-violet-muted)" stopOpacity="0.45" />
+              <stop offset="50%" stopColor="var(--brand-cyan)" stopOpacity="0.5" />
+              <stop offset="100%" stopColor="var(--brand-violet-muted)" stopOpacity="0.45" />
+            </linearGradient>
+          </defs>
+          <path
+            fill="none"
+            stroke="url(#wave-ribbon-static)"
+            strokeWidth="1.6"
+            strokeLinecap="round"
+            d={staticSinePath(400, 26, CYCLES, 96)}
+          />
+        </svg>
+      </div>
     );
   }
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="pointer-events-none fixed bottom-0 left-0 right-0 z-[25]"
+    <div
+      ref={wrapRef}
+      className="print:hidden pointer-events-none w-full shrink-0 border-t border-border/30 bg-background/90"
       aria-hidden
-    />
+    >
+      <canvas ref={canvasRef} className="block w-full" />
+    </div>
   );
 }

@@ -19,10 +19,10 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
       <div className="animated-bg-glow" aria-hidden="true" />
-      <SpectrumRibbon />
       <Navbar />
       <main className="flex-1 relative z-10">{children}</main>
       <Footer />
+      <SpectrumRibbon />
     </div>
   );
 }
