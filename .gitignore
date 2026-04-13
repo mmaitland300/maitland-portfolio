@@ -30,6 +30,8 @@ yarn-error.log*
 .pnpm-debug.log*
 /docs/next-dev-*.txt
 /docs/resume-print-page-*.png
+# Local creative / design notes (not versioned)
+/docs/creative-direction.md
 
 # env files
 .env
