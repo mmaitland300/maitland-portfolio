@@ -1,8 +1,9 @@
 "use client";
 
 /**
- * Smooth sine-style stroke between main content and `<Footer />`.
- * Tuned for a calm “scope / line level” read (music-adjacent) without bar noise.
+ * Smooth waveform-style stroke between main content and `<Footer />`.
+ * Faint graticule + light 2nd harmonic read as “scope / meter” more than a lone sine;
+ * motion stays slow and non-distracting.
  */
 
 import {
@@ -22,6 +23,15 @@ const STROKE_ALPHA = 0.55;
 const CYCLES = 1.14;
 const CYCLES_LFO = 0.07;
 const MAX_SAMPLES = 1400;
+/** Second harmonic weight (bounded so peaks stay ~within strip). */
+const HARM2 = 0.11;
+/** Vertical tick positions (fraction of width) for a subtle scope read. */
+const GRATICULE_X_FRAC = [0.1, 0.26, 0.5, 0.74, 0.9] as const;
+/**
+ * Upper horizontal “rail” below the strip top: offset from vertical center
+ * toward the top edge, as a fraction of full strip height (canvas and SVG).
+ */
+const GRATICULE_UPPER_RAIL_FROM_CENTER_FRAC = 0.21;
 
 function isResumePrintPath(pathname: string | null) {
   if (!pathname) return false;
@@ -74,13 +84,55 @@ function staticSinePath(
   const mid = viewH * 0.5;
   const amp = viewH * 0.48;
   const parts: string[] = [];
+  const ph = 0;
   for (let i = 0; i <= steps; i++) {
     const t = i / steps;
     const x = t * viewW;
-    const y = mid + amp * Math.sin(t * Math.PI * 2 * cycles);
+    const u = t * Math.PI * 2 * cycles + ph;
+    const w =
+      Math.sin(u) + HARM2 * Math.sin(2 * u + ph * 0.38);
+    const y = mid + (amp * w) / (1 + HARM2);
     parts.push(`${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(2)}`);
   }
   return parts.join(" ");
+}
+
+function drawScopeGraticule(
+  ctx: CanvasRenderingContext2D,
+  cw: number,
+  ch: number,
+  mid: number,
+  cyan: [number, number, number],
+  violet: [number, number, number],
+  dpr: number
+) {
+  ctx.save();
+  ctx.lineCap = "round";
+  const tickH = Math.max(2.6, dpr * 3);
+  ctx.lineWidth = Math.max(1, dpr * 1.05);
+  const upperY = mid - GRATICULE_UPPER_RAIL_FROM_CENTER_FRAC * ch;
+
+  ctx.strokeStyle = rgba(violet, 0.065);
+  ctx.beginPath();
+  ctx.moveTo(0, upperY);
+  ctx.lineTo(cw, upperY);
+  ctx.stroke();
+
+  ctx.strokeStyle = rgba(violet, 0.09);
+  ctx.beginPath();
+  ctx.moveTo(0, mid);
+  ctx.lineTo(cw, mid);
+  ctx.stroke();
+
+  ctx.strokeStyle = rgba(cyan, 0.055);
+  for (const fx of GRATICULE_X_FRAC) {
+    const x = fx * cw;
+    ctx.beginPath();
+    ctx.moveTo(x, mid - tickH);
+    ctx.lineTo(x, mid + tickH);
+    ctx.stroke();
+  }
+  ctx.restore();
 }
 
 /** 3-tap blur on interior samples (edges unchanged). */
@@ -262,7 +314,9 @@ export function SpectrumRibbon() {
         const t = i / n;
         xBuf[i] = t * cw;
         const u = t * Math.PI * 2 * cycles + ph;
-        rawY[i] = mid + amp * breathe * Math.sin(u);
+        const w =
+          Math.sin(u) + HARM2 * Math.sin(2 * u + ph * 0.38);
+        rawY[i] = mid + (amp * breathe * w) / (1 + HARM2);
       }
 
       smooth1D(smY, rawY, len);
@@ -290,6 +344,8 @@ export function SpectrumRibbon() {
       const dpr = cw / Math.max(1, wrap.getBoundingClientRect().width);
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
+
+      drawScopeGraticule(ctx, cw, ch, mid, cyan, violet, dpr);
 
       ctx.beginPath();
       strokeCatmullPath(ctx, xBuf, rawY, len);
@@ -370,6 +426,47 @@ export function SpectrumRibbon() {
               </feMerge>
             </filter>
           </defs>
+          <g opacity={0.85}>
+            <line
+              x1="0"
+              x2="400"
+              y1={
+                STRIP_CSS_H *
+                (0.5 - GRATICULE_UPPER_RAIL_FROM_CENTER_FRAC)
+              }
+              y2={
+                STRIP_CSS_H *
+                (0.5 - GRATICULE_UPPER_RAIL_FROM_CENTER_FRAC)
+              }
+              stroke="var(--brand-violet-muted)"
+              strokeOpacity={0.065}
+              strokeWidth="1"
+              vectorEffect="non-scaling-stroke"
+            />
+            <line
+              x1="0"
+              y1={STRIP_CSS_H * 0.5}
+              x2="400"
+              y2={STRIP_CSS_H * 0.5}
+              stroke="var(--brand-violet-muted)"
+              strokeOpacity={0.1}
+              strokeWidth="1"
+              vectorEffect="non-scaling-stroke"
+            />
+            {GRATICULE_X_FRAC.map((fx) => (
+              <line
+                key={fx}
+                x1={400 * fx}
+                y1={STRIP_CSS_H * 0.5 - 5}
+                x2={400 * fx}
+                y2={STRIP_CSS_H * 0.5 + 5}
+                stroke="var(--brand-cyan)"
+                strokeOpacity={0.07}
+                strokeWidth="1"
+                vectorEffect="non-scaling-stroke"
+              />
+            ))}
+          </g>
           <path
             fill="none"
             filter={`url(#${filtId})`}
