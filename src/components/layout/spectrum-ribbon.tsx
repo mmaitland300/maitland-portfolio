@@ -27,11 +27,6 @@ const MAX_SAMPLES = 1400;
 const HARM2 = 0.11;
 /** Vertical tick positions (fraction of width) for a subtle scope read. */
 const GRATICULE_X_FRAC = [0.1, 0.26, 0.5, 0.74, 0.9] as const;
-/**
- * Upper horizontal “rail” below the strip top: offset from vertical center
- * toward the top edge, as a fraction of full strip height (canvas and SVG).
- */
-const GRATICULE_UPPER_RAIL_FROM_CENTER_FRAC = 0.21;
 
 function isResumePrintPath(pathname: string | null) {
   if (!pathname) return false;
@@ -100,7 +95,6 @@ function staticSinePath(
 function drawScopeGraticule(
   ctx: CanvasRenderingContext2D,
   cw: number,
-  ch: number,
   mid: number,
   cyan: [number, number, number],
   violet: [number, number, number],
@@ -110,14 +104,6 @@ function drawScopeGraticule(
   ctx.lineCap = "round";
   const tickH = Math.max(2.6, dpr * 3);
   ctx.lineWidth = Math.max(1, dpr * 1.05);
-  const upperY = mid - GRATICULE_UPPER_RAIL_FROM_CENTER_FRAC * ch;
-
-  ctx.strokeStyle = rgba(violet, 0.065);
-  ctx.beginPath();
-  ctx.moveTo(0, upperY);
-  ctx.lineTo(cw, upperY);
-  ctx.stroke();
-
   ctx.strokeStyle = rgba(violet, 0.09);
   ctx.beginPath();
   ctx.moveTo(0, mid);
@@ -345,7 +331,7 @@ export function SpectrumRibbon() {
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
 
-      drawScopeGraticule(ctx, cw, ch, mid, cyan, violet, dpr);
+      drawScopeGraticule(ctx, cw, mid, cyan, violet, dpr);
 
       ctx.beginPath();
       strokeCatmullPath(ctx, xBuf, rawY, len);
@@ -427,22 +413,6 @@ export function SpectrumRibbon() {
             </filter>
           </defs>
           <g opacity={0.85}>
-            <line
-              x1="0"
-              x2="400"
-              y1={
-                STRIP_CSS_H *
-                (0.5 - GRATICULE_UPPER_RAIL_FROM_CENTER_FRAC)
-              }
-              y2={
-                STRIP_CSS_H *
-                (0.5 - GRATICULE_UPPER_RAIL_FROM_CENTER_FRAC)
-              }
-              stroke="var(--brand-violet-muted)"
-              strokeOpacity={0.065}
-              strokeWidth="1"
-              vectorEffect="non-scaling-stroke"
-            />
             <line
               x1="0"
               y1={STRIP_CSS_H * 0.5}
