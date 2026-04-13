@@ -1,5 +1,6 @@
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { SpectrumRibbon } from "@/components/layout/spectrum-ribbon";
 import { cn } from "@/lib/utils";
 
 /** Dark site shell: nav, footer, decorative background. */
@@ -18,6 +19,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
         Skip to content
       </a>
       <div className="animated-bg-glow" aria-hidden="true" />
+      <SpectrumRibbon />
       <Navbar />
       <main className="flex-1 relative z-10">{children}</main>
       <Footer />
