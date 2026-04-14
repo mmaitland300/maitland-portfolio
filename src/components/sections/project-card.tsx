@@ -36,6 +36,14 @@ const proofKindLabel: Record<
 const demoPrimaryLinkClass =
   "flex items-center gap-1.5 text-sm font-medium text-brand-cyan transition-colors hover:text-brand-cyan-hover";
 
+/** External URLs are playable hosts; same-site paths point at product pages (not live sandboxes). */
+function demoPrimaryLabel(project: Project): string {
+  if (project.demo?.startsWith("/")) {
+    return "Join the waitlist!";
+  }
+  return "Try live demo";
+}
+
 /** Demo first when present, otherwise case study — matches primary CTA order. */
 function getProjectCardDestination(project: Project): {
   href: string;
@@ -283,7 +291,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
         <div className="relative z-[3] flex flex-wrap items-center gap-x-4 gap-y-2">
           {internalDemoHref ? (
             <Link href={internalDemoHref} className={demoPrimaryLinkClass}>
-              <ExternalLink size={14} /> Try live demo
+              <ExternalLink size={14} /> {demoPrimaryLabel(project)}
             </Link>
           ) : project.demo ? (
             <a
@@ -292,7 +300,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
               rel="noopener noreferrer"
               className={demoPrimaryLinkClass}
             >
-              <ExternalLink size={14} /> Try live demo
+              <ExternalLink size={14} /> {demoPrimaryLabel(project)}
             </a>
           ) : null}
           {internalCaseStudyHref ? (

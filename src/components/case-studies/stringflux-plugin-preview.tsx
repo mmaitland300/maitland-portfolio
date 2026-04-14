@@ -3,27 +3,28 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+/** Left-to-right: simplest surface first, then waveform, then advanced. */
 const views = [
   {
-    src: "/images/stringflux/ui-advanced.png",
-    alt: "StringFlux plugin advanced view showing core controls, string transients, modulation sources, modulation matrix, waveform display, and spectrum meters",
-    label: "Advanced",
-    width: 578,
-    height: 1024,
+    src: "/images/stringflux/ui-preset.png",
+    alt: "StringFlux core layout: primary controls and mod-source envelope meters with live levels",
+    label: "Core",
+    width: 577,
+    height: 461,
   },
   {
     src: "/images/stringflux/ui-waveform.png",
-    alt: "StringFlux plugin waveform view showing core controls and waveform display",
+    alt: "StringFlux waveform layout: waveform editor, core controls, and mod-source envelope meters with live levels",
     label: "Waveform",
-    width: 570,
-    height: 570,
+    width: 572,
+    height: 586,
   },
   {
-    src: "/images/stringflux/ui-preset.png",
-    alt: "StringFlux plugin with Ambient Slow Shimmer preset loaded",
-    label: "Preset",
-    width: 583,
-    height: 457,
+    src: "/images/stringflux/ui-advanced.png",
+    alt: "StringFlux advanced layout: modulation matrix, string transients, modulation sources, core controls, and mod-source envelope meters with live levels",
+    label: "Advanced",
+    width: 601,
+    height: 848,
   },
 ] as const;
 
@@ -53,7 +54,7 @@ export function StringFluxPluginPreview() {
             type="button"
             onClick={() => setZoomed(true)}
             className="group flex w-full justify-center cursor-zoom-in"
-            aria-label={`Open ${activeView.label} screenshot in full resolution`}
+            aria-label={`Open StringFlux ${activeView.label} layout screenshot in full resolution`}
           >
             <Image
               key={activeView.src}
@@ -95,7 +96,7 @@ export function StringFluxPluginPreview() {
           onClick={() => setZoomed(false)}
           role="dialog"
           aria-modal="true"
-          aria-label="StringFlux screenshot full resolution preview"
+          aria-label="StringFlux layout full resolution preview"
         >
           <button
             type="button"

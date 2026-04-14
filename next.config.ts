@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    /** Allow `quality={100}` on `next/image` (e.g. StringFlux UI captures). Default is [75] in Next 16. */
+    qualities: [75, 100],
     remotePatterns: [
       {
         protocol: "https",

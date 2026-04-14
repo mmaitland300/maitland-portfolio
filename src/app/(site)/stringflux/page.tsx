@@ -79,9 +79,11 @@ export default function StringFluxPage() {
           </h2>
           <StringFluxPluginPreview />
           <p className="mt-3 text-center text-sm text-muted-foreground">
-            Current plugin UI. Core controls, string transient detection,
-            modulation matrix, and waveform display are functional in the dev
-            build. Custom UI design is planned.
+            Three interface layouts from the dev build: Core (primary controls
+            only), Waveform (grain region editor), and Advanced (modulation matrix and
+            deeper shaping). Preset names visible in the captures are incidental—many
+            presets will use these same panels. Mod-source envelope meters show live
+            activity; polish is ongoing.
           </p>
         </section>
 
