@@ -204,7 +204,7 @@ export function CatchPixelGame() {
           ctx.fillText("Catch the pixel before it slips past.", W * 0.5, H * 0.44);
           ctx.fillStyle = "rgba(95, 212, 239, 0.85)";
           ctx.font = "500 13px var(--font-jetbrains-mono), ui-monospace, monospace";
-          ctx.fillText("← / → or drag · Space to start", W * 0.5, H * 0.58);
+          ctx.fillText("←/→ or A/D · drag · Space to start", W * 0.5, H * 0.58);
         } else {
           ctx.fillText(
             `Game over · ${scoreRef.current} caught`,
@@ -229,8 +229,12 @@ export function CatchPixelGame() {
 
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.code === "ArrowLeft") keysRef.current.left = e.type === "keydown";
-      if (e.code === "ArrowRight") keysRef.current.right = e.type === "keydown";
+      if (e.code === "ArrowLeft" || e.code === "KeyA") {
+        keysRef.current.left = e.type === "keydown";
+      }
+      if (e.code === "ArrowRight" || e.code === "KeyD") {
+        keysRef.current.right = e.type === "keydown";
+      }
       if (e.code === "Space") {
         if (phaseRef.current === "ready" || phaseRef.current === "gameover") {
           e.preventDefault();
