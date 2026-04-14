@@ -14,10 +14,10 @@ const views = [
   },
   {
     src: "/images/stringflux/ui-waveform.png",
-    alt: "StringFlux waveform layout: waveform editor, core controls, and mod-source envelope meters with live levels",
+    alt: "StringFlux waveform layout: core controls, waveform editor with region highlight, and mod-source envelope meters with live levels",
     label: "Waveform",
-    width: 572,
-    height: 586,
+    width: 576,
+    height: 579,
   },
   {
     src: "/images/stringflux/ui-advanced.png",
