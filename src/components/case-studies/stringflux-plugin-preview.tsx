@@ -23,8 +23,8 @@ const views = [
     src: "/images/stringflux/ui-advanced.png",
     alt: "StringFlux advanced layout: modulation matrix, string transients, modulation sources, core controls, and mod-source envelope meters with live levels",
     label: "Advanced",
-    width: 601,
-    height: 848,
+    width: 577,
+    height: 902,
   },
 ] as const;
 
