@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-label="Waveform M hybrid favicon rim glow orb">
+  <defs>
+    <radialGradient id="bg" cx="35%" cy="28%" r="80%">
+      <stop offset="0%" stop-color="#0B1730"/>
+      <stop offset="52%" stop-color="#06101F"/>
+      <stop offset="100%" stop-color="#04060A"/>
+    </radialGradient>
+    <linearGradient id="ring" x1="18%" y1="10%" x2="82%" y2="90%">
+      <stop offset="0%" stop-color="#9CE4FF"/>
+      <stop offset="42%" stop-color="#2BA3FF"/>
+      <stop offset="100%" stop-color="#1749A6"/>
+    </linearGradient>
+    <linearGradient id="mark" x1="5%" y1="15%" x2="95%" y2="85%">
+      <stop offset="0%" stop-color="#F2FBFF"/>
+      <stop offset="38%" stop-color="#9ADDFF"/>
+      <stop offset="100%" stop-color="#84B6FF"/>
+    </linearGradient>
+    <filter id="ringGlow" x="-60%" y="-60%" width="220%" height="220%">
+      <feGaussianBlur stdDeviation="4.5" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.17  0 0 0 0 0.65  0 0 0 0 1.00  0 0 0 0.38 0"/>
+    </filter>
+    <filter id="markGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.2" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.55  0 0 0 0 0.83  0 0 0 0 1.00  0 0 0 0.25 0"/>
+    </filter>
+  </defs>
+  <circle cx="64" cy="64" r="54" fill="url(#bg)"/>
+  <circle cx="64" cy="64" r="54" fill="none" stroke="url(#ring)" stroke-opacity="0.45" stroke-width="2.4" filter="url(#ringGlow)"/>
+  <circle cx="64" cy="64" r="52.6" fill="none" stroke="#16304D" stroke-opacity="0.75" stroke-width="1.2"/>
+  <path d="M28 95V35L45 71L64 52L83 71L100 35V95" fill="none" stroke="#C1ECFF" stroke-opacity="0.2" stroke-width="13.5" stroke-linecap="round" stroke-linejoin="round" filter="url(#markGlow)"/>
+  <path d="M28 95V35L45 71L64 52L83 71L100 35V95" fill="none" stroke="url(#mark)" stroke-width="10.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
