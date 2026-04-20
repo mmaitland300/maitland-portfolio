@@ -4,6 +4,9 @@
  * Smooth waveform-style stroke between main content and `<Footer />`.
  * Faint graticule + light 2nd harmonic read as “scope / meter” more than a lone sine;
  * motion stays slow and non-distracting.
+ *
+ * Vertical ticks sit at spatial quarter-periods of the fundamental (phase 2π·cycles·x),
+ * like scope graticule lines—subsampled so the strip never gets visually noisy.
  */
 
 import {
@@ -19,14 +22,30 @@ import { usePathname } from "next/navigation";
 
 const STRIP_CSS_H = 38;
 const STROKE_ALPHA = 0.55;
-/** Base cycles across strip width (lower = wider, calmer peaks on wide screens). */
-const CYCLES = 1.14;
+/** Base cycles across strip width (higher = shorter wavelength / more “scope” undulation). */
+const CYCLES = 3.45;
 const CYCLES_LFO = 0.07;
 const MAX_SAMPLES = 1400;
 /** Second harmonic weight (bounded so peaks stay ~within strip). */
 const HARM2 = 0.11;
-/** Vertical tick positions (fraction of width) for a subtle scope read. */
-const GRATICULE_X_FRAC = [0.1, 0.26, 0.5, 0.74, 0.9] as const;
+
+/**
+ * Normalized x in (0,1) where sin(2π·cycles·x) hits quarter-period phase (0°, 90°, …),
+ * i.e. x = k/(4·cycles). Subsample when there would be too many lines on a wide canvas.
+ */
+function graticuleXPositionsForCycles(cycles: number, maxTicks = 8): number[] {
+  const denom = 4 * cycles;
+  const raw: number[] = [];
+  for (let k = 1; k < denom; k++) {
+    const t = k / denom;
+    if (t < 1) raw.push(t);
+  }
+  if (raw.length <= maxTicks) return raw;
+  const stride = Math.ceil(raw.length / maxTicks);
+  return raw.filter((_, i) => i % stride === 0);
+}
+
+const GRATICULE_X_FRAC = graticuleXPositionsForCycles(CYCLES);
 
 function isResumePrintPath(pathname: string | null) {
   if (!pathname) return false;
@@ -98,7 +117,8 @@ function drawScopeGraticule(
   mid: number,
   cyan: [number, number, number],
   violet: [number, number, number],
-  dpr: number
+  dpr: number,
+  xFracs: readonly number[]
 ) {
   ctx.save();
   ctx.lineCap = "round";
@@ -111,7 +131,7 @@ function drawScopeGraticule(
   ctx.stroke();
 
   ctx.strokeStyle = rgba(cyan, 0.055);
-  for (const fx of GRATICULE_X_FRAC) {
+  for (const fx of xFracs) {
     const x = fx * cw;
     ctx.beginPath();
     ctx.moveTo(x, mid - tickH);
@@ -331,7 +351,15 @@ export function SpectrumRibbon() {
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
 
-      drawScopeGraticule(ctx, cw, mid, cyan, violet, dpr);
+      drawScopeGraticule(
+        ctx,
+        cw,
+        mid,
+        cyan,
+        violet,
+        dpr,
+        graticuleXPositionsForCycles(cycles)
+      );
 
       ctx.beginPath();
       strokeCatmullPath(ctx, xBuf, rawY, len);
