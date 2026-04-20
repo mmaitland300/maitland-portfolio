@@ -54,7 +54,7 @@ Cons:
 
 ## What This Handles
 
-Spam is controlled by a honeypot field plus Upstash-backed server-side rate limiting, no CAPTCHAs. Validation runs through a single Zod schema on the server, so the client can't submit a shape the backend doesn't expect. The user sees success only after the email actually sends, not optimistically. And because feature availability is env-driven, the whole pipeline degrades gracefully when database or Redis config is missing.
+Spam is controlled by a honeypot field plus Upstash-backed server-side rate limiting, no CAPTCHAs. Validation runs through a single Zod schema on the server, so the client can't submit a shape the backend doesn't expect. The UI only flips to success after Resend accepts the send, so nobody gets a false green checkmark. And because feature availability is env-driven, the whole pipeline degrades gracefully when database or Redis config is missing.
 
 ## Where It Stands
 

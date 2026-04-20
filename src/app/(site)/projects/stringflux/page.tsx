@@ -71,7 +71,7 @@ const tradeoffs = [
   },
   {
     title: "Playable response over maximal density",
-    body: "Scheduler behavior favors transient readability and musical control rather than maximal grain saturation at all times.",
+    body: "Scheduler behavior keeps transient attacks readable and leaves headroom before grain density pegs at the ceiling.",
   },
 ];
 
@@ -79,14 +79,14 @@ const validationChecks = [
   {
     scenario: "Oversampling mode change during active playback",
     observation:
-      "Mode switches are queued and applied at safe boundaries instead of forcing immediate audio-thread reconfiguration.",
+      "Mode switches queue to the next safe boundary so the audio thread never tears down oversamplers mid-callback.",
     whyItMatters:
       "This keeps behavior deterministic and reduces transition instability risk while tuning the wet-path nonlinear stages.",
   },
   {
     scenario: "Repeated transitions across 1x, 2x, and 4x modes in dev sessions",
     observation:
-      "Engine state remains recoverable after mode changes and does not require restarting the plugin instance to continue testing.",
+      "Engine state stays recoverable after mode changes, so dev sessions keep moving without bouncing the plugin instance.",
     whyItMatters:
       "Supports practical iteration speed while validating multiband routing and scheduler behavior.",
   },
@@ -163,8 +163,8 @@ export default function StringFluxCaseStudyPage() {
         <section className="mb-10 overflow-x-auto rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-4 text-xl font-semibold">Oversampling policy (design table)</h2>
           <p className="mb-4 text-sm text-muted-foreground">
-            Not a benchmark; this documents the intended relationship between
-            quality, CPU, and audio-thread safety.
+            Design reference for quality, CPU, and audio-thread safety. CPU
+            numbers stay informal until there is a stable build to measure.
           </p>
           <table className="w-full min-w-[520px] border-collapse text-left text-sm">
             <thead>
@@ -240,9 +240,8 @@ export default function StringFluxCaseStudyPage() {
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-2 text-xl font-semibold">Current Validation Checks</h2>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            These are observed development checks, not formal benchmark claims.
-            Published CPU/latency benchmarking is intentionally deferred until
-            the core behavior is feature-stable.
+            Informal development checks only—no published CPU or latency numbers
+            yet. Benchmarking waits until the core behavior is feature-stable.
           </p>
           <div className="space-y-3">
             {validationChecks.map((item) => (

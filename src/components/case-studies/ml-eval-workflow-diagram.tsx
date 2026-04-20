@@ -29,7 +29,7 @@ const workflowSteps = [
     w: 88,
     label: "Metrics",
     detail:
-      "Track per-class precision/recall and loss trends, not just aggregate accuracy.",
+      "Track per-class precision/recall and loss trends alongside aggregate accuracy.",
   },
   {
     x: 418,

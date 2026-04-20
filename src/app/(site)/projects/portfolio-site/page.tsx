@@ -29,7 +29,7 @@ const safeguards = [
 
 const tradeoffs = [
   {
-    title: "Managed services over custom infrastructure",
+    title: "Managed services to keep solo ops small",
     detail:
       "Used Resend, Upstash, and Neon-backed Prisma integration to reduce ops burden and improve reliability during solo iteration.",
   },
@@ -41,7 +41,7 @@ const tradeoffs = [
   {
     title: "Small, reviewable changes",
     detail:
-      "Incremental PRs and merge gates so fixes stay easy to reason about instead of landing as one large batch.",
+      "Incremental PRs and merge gates so each fix stays review-sized and the history stays legible when something regresses.",
   },
 ];
 

@@ -6,7 +6,7 @@ import { SectionHeader } from "@/components/ui/section-header";
 export const metadata: Metadata = {
   title: "Projects",
   description:
-    "Featured case studies with constraints, evidence, and limits. Smaller experiments are listed separately so learning builds do not dilute the main signal.",
+    "Featured case studies with constraints, evidence, and limits. Experiments sit in their own section so the flagship work stays easy to scan.",
 };
 
 export default function ProjectsPage() {

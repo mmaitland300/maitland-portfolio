@@ -20,7 +20,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Snake Detector: Bounded CV Demo",
   description:
-    "A bounded snake vs no-snake demo with reproducible training workflow, explicit limits, and proof artifacts. Not species ID or field-ready wildlife classification.",
+    "A bounded snake vs no-snake demo with reproducible training workflow, explicit limits, and proof artifacts. Scope stops short of species ID or field wildlife workflows.",
 };
 
 export const dynamic = "force-dynamic";
@@ -29,12 +29,12 @@ const artifactTable = [
   {
     artifact: "Stratified train/val split",
     purpose:
-      "Keep class ratios stable so metrics reflect generalization, not a lucky split.",
+      "Keep class ratios stable so headline metrics track the same class mix across runs.",
   },
   {
     artifact: "Augmentation policy (logged)",
     purpose:
-      "Make image-level changes comparable across runs instead of silently drifting.",
+      "Log image-level changes so augmentation stays comparable run to run.",
   },
   {
     artifact: "Confusion matrix + structured error review",
@@ -263,7 +263,7 @@ export default function SnakeDetectorCaseStudyPage() {
             Most of the value is in dataset hygiene, fixed evaluation splits,
             confusion-driven review, and refusing to let aggregate accuracy hide
             weak classes. That discipline transfers directly to larger vision
-            projects where the failure mode is silent, not loud.
+            projects where bad predictions fail quietly in production.
           </p>
         </section>
 
@@ -308,7 +308,7 @@ export default function SnakeDetectorCaseStudyPage() {
             evaluation scripts.
             {demoUrl
               ? " The live demo is intentionally narrow so visitors can try the behavior without mistaking it for a general-purpose classifier."
-              : " This site emphasizes artifacts and reproducibility from the repository rather than a linked demo."}
+              : " This site leans on the repository artifacts when no demo URL is configured."}
           </p>
         </section>
 

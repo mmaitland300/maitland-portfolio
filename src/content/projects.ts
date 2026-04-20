@@ -56,7 +56,7 @@ export const projects: Project[] = [
     slug: "stringflux",
     title: "StringFlux",
     description:
-      "A multiband granular delay and freeze plugin I'm building for guitar. It listens for transients and uses them to drive grain scheduling, so the texture responds to how you play instead of running on a fixed clock.",
+      "A multiband granular delay and freeze plugin I'm building for guitar. It listens for transients and uses them to drive grain scheduling, so pick attacks and sustained lines steer the grain cloud the same way they steer your hands.",
     problem:
       "Most granular processors treat every input the same. For stringed instruments, that means pick attacks get smeared and the effect feels disconnected from the performance.",
     constraints:
@@ -105,7 +105,7 @@ export const projects: Project[] = [
     description:
       "A prototype for finding MIR and audio ML papers, with explainable recommendations, paper detail, topic trends, and transparent evaluation.",
     problem:
-      "I wanted a paper-discovery tool that was easier to understand than a popularity list and less opaque than a generic AI-style search box.",
+      "Paper discovery tools often hide why something surfaced. I wanted ranked lists where the signals are visible so you can compare versions without guessing what moved.",
     constraints:
       "The corpus is intentionally curated and still limited. The strongest current result is clear, explainable ranking, while some experimental ranking ideas still need more work.",
     tradeoff:
@@ -116,7 +116,7 @@ export const projects: Project[] = [
     evidence:
       "The strongest stable claim today is that the prototype makes its ranking behavior visible and understandable over a curated set of MIR and audio ML papers.",
     knownLimits:
-      "Bridge recommendations are still experimental, semantic ranking is not part of the default ranking, and the corpus is still narrower than the long-term plan.",
+      "Bridge recommendations are still experimental, semantic ranking stays off the default path, and the corpus is still narrower than the long-term plan.",
     proofLinks: [
       {
         label: "Research Radar case study",
@@ -164,11 +164,11 @@ export const projects: Project[] = [
     description:
       "This site. Next.js 16 with MDX blogging, a contact form that sends email through Resend and falls back gracefully when the database is down, and a GitHub OAuth admin inbox for managing submissions.",
     problem:
-      "I needed somewhere to put my work that wasn't just a GitHub profile. It had to accept contact without getting spammed, and I wanted to be able to iterate on it without worrying about breaking production.",
+      "GitHub alone was a weak container for case studies, limits, and proof links. I also needed contact that survives spam without turning into ops work, plus a stack I could iterate on without fearing every deploy.",
     constraints:
       "Solo project, so operational overhead had to stay low. No dedicated backend: managed services (Resend for email, Upstash for rate limiting, Neon for Postgres) handle the heavy parts.",
     tradeoff:
-      "Server Actions over API routes, managed services over self-hosted infra. More vendor lock-in, but significantly less to maintain and debug alone.",
+      "Server Actions plus Resend, Upstash, and Neon keep the solo-operator footprint small; the trade is accepting vendor-shaped limits I can live with on a personal site.",
     outcome:
       "Live at mmaitland.dev with honeypot + Redis rate limiting on contact, GitHub OAuth admin gating, and MDX blog with draft protection.",
     status: "operational",
@@ -232,7 +232,7 @@ export const projects: Project[] = [
     constraints:
       "Incomplete information is the norm. Customers are frustrated, logs aren't always available, and you're working remotely across all of these layers at once.",
     tradeoff:
-      "Slower upfront diagnosis instead of quick one-off fixes. Takes more time per ticket, but the same failure patterns stop coming back.",
+      "More time upfront on isolation and logging pays back when the same failure signature shows up again—you reopen the checklist instead of re-deriving the path from memory.",
     role: "Technical support specialist at Auxillium. Scope is Full Swing simulator deployments plus Laser Shot and E6 Golf from TruGolf when those are part of the install.",
     outcome:
       "Built repeatable triage workflows that I now use across calibration, licensing, display, networking, and OS subsystems. Documented publicly as a case study.",

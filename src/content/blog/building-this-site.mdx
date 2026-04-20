@@ -9,9 +9,9 @@ published: true
 
 ## Why Next.js?
 
-I needed to rebuild my website from scratch as bringing my old site back from the grave was way more work than starting over. Next.js seemed like the obvious modern choice. The App Router gives you server components by default, Server Actions for mutations, and a great developer experience with TypeScript.
+I needed to rebuild from scratch: resurrecting the old Flask + Postgres stack would have eaten more time than a clean cut. I picked Next.js because the App Router already pushes server components, Server Actions cover mutations without a parallel REST layer I have to babysit, and TypeScript runs through the framework examples I was actually reading.
 
-The previous version was a Flask app where I was also managing the PostgreSQL backend. I wanted something that would showcase modern web development practices while being genuinely useful as a personal site that hosts my projects in one place.
+The old site was Flask with a database I operated myself. The new one still had to feel like current web work while staying maintainable as a solo project that hosts case studies, MDX posts, and repo links in one place.
 
 ## The Tech Stack
 
@@ -37,18 +37,18 @@ Tailwind v4 is a significant evolution. It ships as a single package, requires n
 
 ## Design Philosophy
 
-I wanted something between minimal-flat and neon-overload. The dark theme uses a single cyan–violet ramp (CSS variables for CTAs, accents, and links) so the look stays consistent without being distracting. Every animation serves a purpose - guiding attention, not stealing it.
+I wanted something between minimal-flat and neon-overload. The dark theme uses a single cyan–violet ramp (CSS variables for CTAs, accents, and links) so the look stays consistent without being distracting. Motion maps to hierarchy—scroll cues and hover states, nothing purely decorative.
 
 ### Key Design Decisions
 
 1. **Dark by default** - matches the developer aesthetic without feeling generic
 2. **Gradient accents** - shared brand tokens create visual hierarchy
-3. **Framer Motion** - scroll reveals feel polished, not heavy
+3. **Framer Motion** - scroll reveals stay light; easing matches the rest of the chrome
 4. **Clean typography** - Inter for body, JetBrains Mono for code
 
 ## Server Actions Over API Routes
 
-For the contact form, I used a Server Action instead of a traditional API route. Server Actions keep mutation logic on the server and pair cleanly with `useActionState` in the client form component. This particular UI is client-driven (not a plain HTML form post), but the action itself stays server-only and easy to test.
+For the contact form, I used a Server Action with `useActionState` on the client. The browser handles rich validation UX, while validation, rate limits, and Resend calls stay in one server module that Vitest can hit directly.
 
 ```typescript
 "use server";
@@ -65,4 +65,4 @@ export async function submitContact(
 
 Phase 2 added the blog you're reading now. Phase 3 brought database persistence with Prisma and Neon PostgreSQL, a contact inbox with archive/restore, and GitHub OAuth via Auth.js for admin access. A `/music` page with SoundCloud embeds was added outside the original roadmap.
 
-The site is live and under active iteration. The current focus is on tightening content quality and reducing any patterns that feel templated or mechanical.
+The site is live and under active iteration. The current focus is tightening copy so it stays specific—concrete verbs, fewer stock contrasts, less brochure cadence.

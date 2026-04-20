@@ -90,7 +90,7 @@ export const resumeExperience: ResumeExperienceItem[] = [
         href: "https://www.mmaitland.dev/stringflux",
       },
       {
-        text: "Use public case studies and decision records to document architecture choices instead of presenting projects as black boxes.",
+        text: "Publish case studies and decision records so architecture and tradeoffs ship in the same bundle as the demos and repositories.",
       },
     ],
   },
@@ -102,7 +102,7 @@ export const resumeExperience: ResumeExperienceItem[] = [
       "Diagnose remote simulator issues across calibration, licensing, display, networking, OS, and peripheral layers in customer production environments.",
     highlights: [
       {
-        text: "Built repeatable triage paths for recurring failures so escalations rely less on one-off guesses and more on reproducible isolation.",
+        text: "Built repeatable triage paths for recurring failures so similar tickets reopen the same isolation checklist each time the signature returns.",
         href: "/projects/full-swing-tech-support",
       },
       {

@@ -9,7 +9,7 @@ published: true
 
 ## Why Patterns Matter
 
-As I learn TypeScript more deeply, I keep finding patterns that make code safer and easier to reason about. These are the ones I currently reach for most often, with examples pulled from this site's codebase so I'm showing actual usage, not textbook snippets.
+As I learn TypeScript more deeply, I keep finding patterns that make code safer and easier to reason about. These are the ones I currently reach for most often, with examples pulled from this site's codebase so the snippets use concrete imports—no toy `foo`/`bar` placeholders.
 
 ## Discriminated Unions
 
@@ -102,6 +102,6 @@ If I add `"retrying"` to the union later, TypeScript flags the default branch be
 
 ## What I've Learned So Far
 
-The biggest shift for me has been thinking of types as guardrails, not annotations. The env parsing pattern is a good example. The types don't just describe the data, they enforce which features are available based on what's configured. When something is missing, the code knows it at the point of use instead of failing later with a runtime error.
+The biggest shift for me has been treating types as guardrails that shrink what can compile: the env parsing pattern is a good example. Parsed shapes tell you which features are actually configured, so missing keys surface at the call site while you still have local context, long before a production stack trace would.
 
-I'm still learning. The patterns here are not advanced TypeScript wizardry. They're practical tools that have caught actual bugs in this project.
+I'm still learning. None of this is exotic TypeScript, but these patterns already caught real bugs in this repo.

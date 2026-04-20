@@ -44,7 +44,8 @@ export function Hero() {
           transition={fadeTrans(0.12)}
           className="mt-5 mx-auto max-w-4xl text-2xl font-semibold leading-tight text-foreground/95 sm:text-3xl"
         >
-          I debug production systems and build software around the same discipline.
+          I troubleshoot production stacks, then build software with the same
+          evidence-first habits.
         </motion.h2>
 
         <motion.p
@@ -54,8 +55,8 @@ export function Hero() {
         >
           I work at Auxillium supporting Full Swing simulator environments where
           hardware, software, networking, and OS behavior overlap. Outside of work
-          I build web software and other side projects that interest me. This site
-          is where those interests meet: troubleshooting, software, and sound.
+          I build web apps, audio tools, and occasional ML experiments. This site
+          collects the overlap: troubleshooting, shipped software, and sound.
         </motion.p>
 
         <motion.div

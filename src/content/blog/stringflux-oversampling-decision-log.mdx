@@ -22,7 +22,7 @@ The naive implementation risked glitches and instability by rebuilding oversampl
 ## Decision
 
 I moved oversampling reconfiguration out of the immediate audio processing path.  
-Configuration requests are queued and applied only at safe boundaries, not mid-callback mutation points.
+Configuration requests are queued and applied at safe boundaries so oversampling state never changes inside the audio callback.
 
 ## Alternatives Considered
 
@@ -78,4 +78,5 @@ existing signal path. That refactor forced better separation in the engine and
 made behavior less fragile.
 
 The current direction remains disciplined scope over feature sprawl. The goal is
-to make StringFlux feel like a coherent instrument, not a generic effect chain.
+a single playable grain voice across bands—one engine you can lean on in a mix
+instead of a stack of unrelated stompboxes.

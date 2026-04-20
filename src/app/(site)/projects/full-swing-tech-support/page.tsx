@@ -43,7 +43,7 @@ const workflow = [
   {
     step: "3. Isolate likely failure branches",
     detail:
-      "Use branch-based diagnostics rather than ad hoc guessing: test one subsystem at a time and eliminate competing hypotheses with evidence.",
+      "Use branch-based diagnostics: test one subsystem at a time, log each result, and let evidence retire competing hypotheses.",
   },
   {
     step: "4. Apply lowest-risk corrective action",
@@ -86,7 +86,7 @@ const representativeIncident = [
   {
     label: "What changed after",
     detail:
-      "Issue handling became faster on similar escalations because the incident was converted into a repeatable checklist rather than a one-off memory.",
+      "Issue handling sped up on similar escalations once the incident became a checklist the next tech could reopen verbatim.",
   },
 ];
 
@@ -188,9 +188,9 @@ export default function FullSwingCaseStudyPage() {
               />
             </div>
             <figcaption className="border-t border-border bg-card/50 px-4 py-3 text-center text-xs leading-relaxed text-muted-foreground">
-              Same overview as the project card preview: a representative
-              branch-based triage artifact for multi-layer simulator support
-              (not an official Full Swing diagram).
+              Same overview as the project card preview: an Auxillium-authored
+              branch-based triage sketch for multi-layer simulator support, not
+              vendor-supplied artwork from Full Swing.
             </figcaption>
           </figure>
           <p className="mb-4 text-sm text-muted-foreground">
@@ -213,9 +213,9 @@ export default function FullSwingCaseStudyPage() {
             Representative Incident Pattern
           </h2>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            This walkthrough reflects a recurring class of escalations, not a
-            single customer transcript. Details are intentionally anonymized and
-            scoped to troubleshooting patterns I can defend publicly.
+            This walkthrough composites recurring escalation patterns into one
+            narrative; details are anonymized and scoped to troubleshooting I can
+            defend publicly.
           </p>
           <div className="space-y-3">
             {representativeIncident.map((item) => (

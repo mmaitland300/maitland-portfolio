@@ -52,8 +52,10 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
           That same approach carries into everything else I build: web software,
-          audio tools, and music production. I am interested in systems that
-          behave well under constraints, not just ones that demo well.
+          audio tools, and music production.           I want the parts that ship to stay
+          usable under real load: support queues, flaky networks, live audio
+          callbacks, and the messy middle between a clean demo and a customer
+          site.
         </p>
       </motion.section>
 

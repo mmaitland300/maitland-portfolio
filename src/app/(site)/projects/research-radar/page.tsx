@@ -37,12 +37,12 @@ const mainSurfaces = [
   {
     title: "Trends in the current dataset",
     detail:
-      "The trends page gives a quick read on which topics are gaining momentum in the current dataset, without pretending to summarize the whole field.",
+      "The trends page reads momentum inside this corpus slice—helpful for tuning here, scoped to what the ranker actually sees.",
   },
   {
     title: "Evaluation and comparison",
     detail:
-      "The evaluation page compares the ranking against simpler baselines like citation count and recency. That makes it easier to inspect how the system behaves without pretending there is one perfect relevance score.",
+      "The evaluation page compares the ranking against simpler baselines like citation count and recency so you can sanity-check behavior against scores everyone already understands.",
   },
 ];
 
@@ -50,7 +50,7 @@ const technicalPoints = [
   {
     title: 'Recommendations should answer "why is this here?"',
     detail:
-      "The app keeps a saved record of how each ranked list was built and which signals fed into it, like showing your work instead of just giving a final answer. That makes the system easier to debug, easier to compare across versions, and easier to explain to another person.",
+      "Each ranked list stores the signal mix that produced it, same as keeping scratchwork attached to the answer sheet. That makes regressions obvious when ranking code changes and gives another engineer something concrete to react to.",
   },
   {
     title: "Splitting the site from the prototype is intentional",
@@ -60,7 +60,7 @@ const technicalPoints = [
   {
     title: "Experimental ideas stay visible and clearly bounded",
     detail:
-      "Some ideas are still exploratory, especially bridge-style recommendations that try to connect papers across areas. I left them visible because they are ongoing product work, but they are not positioned as finished or used as the default experience.",
+      "Some ideas are still exploratory, especially bridge-style recommendations that try to connect papers across areas. They stay in the UI with explicit framing and stay off the default path until the signals deserve first-class billing.",
   },
 ];
 
@@ -76,14 +76,14 @@ const screenshotGallery = [
     title: "Evaluation",
     src: "/images/projects/research-radar/evaluation-emerging.png",
     route: "/evaluation?family=emerging",
-    why: "Shows how the ranking compares with simpler baselines instead of presenting one output as the only answer.",
+    why: "Shows the ranker next to citation and recency baselines so you can see what changes when the model does.",
     alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
   },
   {
     title: "Trends",
     src: "/images/projects/research-radar/trends.png",
     route: "/trends",
-    why: "Shows that the prototype is not only a recommendation feed; it also gives a quick view of topic momentum in the dataset.",
+    why: "Adds the trends view on top of the feeds so you can see topic momentum inside this corpus slice.",
     alt: "Research Radar trends page showing topic momentum inside the curated corpus slice",
   },
   {
@@ -97,7 +97,7 @@ const screenshotGallery = [
     title: "Bridge family (experimental)",
     src: "/images/projects/research-radar/recommended-bridge-experimental.png",
     route: "/recommended?family=bridge",
-    why: "Shows the experimental bridge view, which is still exploratory rather than a finished recommendation mode.",
+    why: "Shows the experimental bridge view with the same honest framing used in production—interesting, still rough.",
     alt: "Research Radar bridge recommendation page showing bridge scores with experimental framing",
   },
 ];
@@ -106,15 +106,15 @@ const currentState = {
   stable: [
     "The main product is a set of ranked paper feeds that show why items appear where they do.",
     "Paper detail, trends, and evaluation are all working parts of the prototype.",
-    "The strongest current value is helping someone inspect and compare recommendations, not hiding the ranking logic.",
+    "The strongest current value is inspecting and comparing recommendations with the ranking logic in plain sight.",
   ],
   experimental: [
-    "Bridge recommendations are still experimental, not a mature standalone feature.",
-    "I tested weighted variations, but the current setup did not produce a meaningfully different bridge list.",
-    "The next step is likely better bridge signals and tighter filtering, not simply increasing the current weight.",
+    "Bridge recommendations are still experimental and stay behind the main feeds until the signals earn first-class billing.",
+    "I tested weighted variations; with the current signals the deck order barely moved, so the next lever is the bridge features themselves.",
+    "The next step is likely better bridge signals and tighter filtering before touching the scalar weights again.",
   ],
   caveats: [
-    "Semantic ranking is not part of the default ranking today.",
+    "Semantic ranking stays out of the default ranking path for now.",
     "Bridge stays off by default in production.",
     "The corpus is still curated and narrower than the long-term vision.",
   ],
@@ -123,7 +123,7 @@ const currentState = {
 const lessonsLearned = [
   "Building explanation and versioning in early made it easier to compare changes and improve the system over time.",
   "Keeping experimental features visible but off by default kept the core product more focused.",
-  "Evaluation worked best as a comparison tool, not as a single score that was supposed to settle the problem.",
+  "Evaluation stayed useful as a comparison grid; a single headline score never bought enough confidence on its own.",
 ];
 
 export const metadata: Metadata = {
@@ -245,8 +245,8 @@ export default function ResearchRadarCaseStudyPage() {
             </div>
             <figcaption className="border-t border-border bg-card/50 px-4 py-3 text-center text-xs leading-relaxed text-muted-foreground">
               High-level overview of the current prototype surfaces and product
-              framing. This is an architecture-style summary, not a literal app
-              screenshot.
+              framing. Labels match the live app; geometry is simplified for the
+              diagram export.
             </figcaption>
           </figure>
           <div className="mt-6 grid gap-4 md:grid-cols-2">
@@ -292,10 +292,8 @@ export default function ResearchRadarCaseStudyPage() {
             <h2 className="text-xl font-semibold">Visual walkthrough</h2>
           </div>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            These captures were taken from a recent run of the prototype against the
-            current API. I pinned the ranking and embedding versions so this
-            walkthrough reflects a reproducible state rather than a mocked-up
-            demo:{" "}
+            These captures come from a recent prototype run against the current
+            API, with versions pinned to{" "}
             <span className="sr-only">ranking version </span>
             <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
               ml2-5a-qual-r2-k6-20260405
