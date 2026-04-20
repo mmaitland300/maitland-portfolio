@@ -81,11 +81,11 @@ export function StringFluxWaitlistForm() {
         {pending ? (
           <span className="flex items-center gap-2">
             <span className="h-4 w-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-            Sending...
+            Joining...
           </span>
         ) : (
           <span className="flex items-center gap-2">
-            <Mail className="h-4 w-4" /> Request beta updates
+            <Mail className="h-4 w-4" /> Join the waitlist
           </span>
         )}
       </Button>
