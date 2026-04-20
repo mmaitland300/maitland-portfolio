@@ -9,7 +9,7 @@ import { StringFluxWaitlistForm } from "@/components/sections/stringflux-waitlis
 export const metadata: Metadata = {
   title: "StringFlux",
   description:
-    "StringFlux is a transient-aware multiband granular delay and freeze plugin for guitar and other stringed instruments. Join the waitlist for beta access.",
+    "StringFlux is a transient-aware multiband granular delay and freeze plugin for guitar and other stringed instruments. The product page explains the signal flow, shows interface previews, and includes a beta waitlist.",
 };
 
 const howItWorks = [
@@ -62,7 +62,7 @@ export default function StringFluxPage() {
               href="#waitlist"
               className="inline-flex items-center gap-2 rounded-lg border-0 bg-brand-cta-gradient px-5 py-2.5 text-sm font-medium text-white shadow-brand-cta"
             >
-              Join the waitlist <ArrowRight className="h-4 w-4" />
+              Beta updates <ArrowRight className="h-4 w-4" />
             </a>
             <Link
               href="/projects/stringflux"

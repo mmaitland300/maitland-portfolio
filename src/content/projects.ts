@@ -37,6 +37,8 @@ export interface Project {
   tags: string[];
   github?: string;
   demo?: string;
+  /** Primary CTA when `demo` is an on-site path (default: "Visit product page"). */
+  demoCtaLabel?: string;
   caseStudy?: string;
   iframe?: string;
   category: ProjectCategory;
@@ -96,6 +98,7 @@ export const projects: Project[] = [
     ],
     image: "/images/stringflux/ui-advanced.png",
     demo: "/stringflux",
+    demoCtaLabel: "Product page & beta waitlist",
     caseStudy: "/projects/stringflux",
     category: "featured",
   },

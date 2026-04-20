@@ -53,10 +53,11 @@ export function Hero() {
           transition={fadeTrans(0.16)}
           className="mt-6 mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
-          I work at Auxillium supporting Full Swing simulator environments where
-          hardware, software, networking, and OS behavior overlap. Outside of work
-          I build web apps, audio tools, and occasional ML experiments. This site
-          collects the overlap: troubleshooting, shipped software, and sound.
+          I currently work with Auxillium, supporting Full Swing software and
+          technology, where hardware, software, networking, and OS behavior often
+          overlap. Outside of work I build web apps, audio tools, and occasional
+          ML experiments. This site is where I host my projects and where those
+          interests overlap: troubleshooting, software, and sound.
         </motion.p>
 
         <motion.div

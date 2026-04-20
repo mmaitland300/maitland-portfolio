@@ -45,14 +45,14 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
           update.
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-          I do that full-time at Auxillium supporting Full Swing simulator
-          environments, with Laser Shot and E6 Golf often part of the same
+          I do that full-time with Auxillium, supporting Full Swing software and
+          technology. Laser Shot and E6 Golf from TruGolf are often on the same
           install. It taught me to work from observation, isolate variables, and
           distrust fixes that cannot be reproduced.
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
           That same approach carries into everything else I build: web software,
-          audio tools, and music production.           I want the parts that ship to stay
+          audio tools, and music production. I want the parts that ship to stay
           usable under real load: support queues, flaky networks, live audio
           callbacks, and the messy middle between a clean demo and a customer
           site.

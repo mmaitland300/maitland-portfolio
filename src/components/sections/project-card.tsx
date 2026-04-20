@@ -39,7 +39,7 @@ const demoPrimaryLinkClass =
 /** External URLs are playable hosts; same-site paths point at product pages (not live sandboxes). */
 function demoPrimaryLabel(project: Project): string {
   if (project.demo?.startsWith("/")) {
-    return "Join the waitlist!";
+    return project.demoCtaLabel ?? "Visit product page";
   }
   return "Try live demo";
 }
