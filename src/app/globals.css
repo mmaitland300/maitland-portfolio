@@ -70,6 +70,12 @@
   --brand-violet-muted: #d4cbf9;
   --brand-cyan: #5fd4ef;
   --brand-cyan-hover: #7fe4fa;
+  /*
+   * Wordmark / favicon (`src/app/icon.svg` `#mark` gradient stops).
+   * Use for `.brand-mark` / `.brand-accent` only; keep `--brand-cyan` for UI accents.
+   */
+  --brand-wordmark-blue-mid: #bfe8ff;
+  --brand-wordmark-blue: #75c5ff;
   /* Headline text ramps (hero, `.text-gradient-brand`, utility gradient classes) */
   --brand-text-gradient-from: #9bdcff;
   --brand-text-gradient-to: #c9b8ff;
@@ -155,14 +161,14 @@
 }
 
 .brand-mark {
-  color: color-mix(in srgb, var(--foreground) 92%, var(--brand-cyan));
+  color: color-mix(in srgb, var(--foreground) 92%, var(--brand-wordmark-blue-mid));
   letter-spacing: 0.08em;
 }
 
 .brand-accent {
-  color: color-mix(in srgb, var(--brand-cyan) 92%, white);
+  color: color-mix(in srgb, var(--brand-wordmark-blue) 92%, white);
   text-shadow:
-    0 0 14px color-mix(in srgb, var(--brand-cyan) 18%, transparent),
+    0 0 14px color-mix(in srgb, var(--brand-wordmark-blue) 18%, transparent),
     -1px 0 0 color-mix(in srgb, var(--brand-violet) 20%, transparent);
 }
 
