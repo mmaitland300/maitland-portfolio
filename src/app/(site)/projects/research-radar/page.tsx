@@ -64,7 +64,15 @@ const technicalPoints = [
   },
 ];
 
-const screenshotGallery = [
+const screenshotGallery: {
+  title: string;
+  src: string;
+  route: string;
+  why: string;
+  alt: string;
+  /** When false, `route` is caption context only (no deep link to the live demo). */
+  deepLinkable?: boolean;
+}[] = [
   {
     title: "Recommended: emerging",
     src: "/images/projects/research-radar/recommended-emerging.png",
@@ -73,32 +81,40 @@ const screenshotGallery = [
     alt: "Research Radar recommended emerging page showing ranked paper cards with visible signal breakdowns",
   },
   {
-    title: "Evaluation",
+    title: "Recommended: undercited",
+    src: "/images/projects/research-radar/recommended-undercited.png",
+    route: "/recommended?family=undercited",
+    why: "Shows the undercited family with the same explainable breakdown pattern as emerging, scoped to the low-cite pool.",
+    alt: "Research Radar recommended undercited page with ranked cards and visible signals",
+  },
+  {
+    title: "Evaluation: emerging",
     src: "/images/projects/research-radar/evaluation-emerging.png",
     route: "/evaluation?family=emerging",
     why: "Shows the ranker next to citation and recency baselines so you can see what changes when the model does.",
-    alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
+    alt: "Research Radar evaluation page for the emerging family comparing ranked output against baselines",
   },
   {
-    title: "Trends",
-    src: "/images/projects/research-radar/trends.png",
-    route: "/trends",
-    why: "Adds the trends view on top of the feeds so you can see topic momentum inside this corpus slice.",
-    alt: "Research Radar trends page showing topic momentum inside the curated corpus slice",
-  },
-  {
-    title: "Paper detail with similar papers",
-    src: "/images/projects/research-radar/paper-detail-similar.png",
-    route: "/papers/https%3A%2F%2Fopenalex.org%2FW3093121331",
-    why: "Shows how someone can move from one paper into a useful cluster of related work.",
-    alt: "Research Radar paper detail page for GiantMIDI Piano showing metadata and similar papers",
+    title: "Evaluation: bridge",
+    src: "/images/projects/research-radar/evaluation-bridge.png",
+    route: "/evaluation?family=bridge",
+    why: "Same evaluation surface for the experimental bridge family, so comparisons stay apples-to-apples across tabs.",
+    alt: "Research Radar evaluation page for the bridge family comparing ranked output against baselines",
   },
   {
     title: "Bridge family (experimental)",
     src: "/images/projects/research-radar/recommended-bridge-experimental.png",
     route: "/recommended?family=bridge",
-    why: "Shows the experimental bridge view with the same honest framing used in production—interesting, still rough.",
+    why: "Shows the experimental bridge feed with the same honest framing used in production—interesting, still rough.",
     alt: "Research Radar bridge recommendation page showing bridge scores with experimental framing",
+  },
+  {
+    title: "Hosting pins (Railway)",
+    src: "/images/projects/research-radar/railway-project-next-public-pins.png",
+    route: "NEXT_PUBLIC_* variables on Railway (web service)",
+    why: "Documents how the deployed Next.js app picks up public env pins for API base URL and embedding version—small ops proof alongside the product shots.",
+    alt: "Railway project settings showing Next.js public environment variable pins",
+    deepLinkable: false,
   },
 ];
 
@@ -292,23 +308,18 @@ export default function ResearchRadarCaseStudyPage() {
             <h2 className="text-xl font-semibold">Visual walkthrough</h2>
           </div>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            These captures come from a recent prototype run against the current
-            API, with versions pinned to{" "}
-            <span className="sr-only">ranking version </span>
-            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-              ml2-5a-qual-r2-k6-20260405
-            </code>{" "}
-            and{" "}
-            <span className="sr-only">embedding version </span>
-            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-              v1-title-abstract-1536-cleantext-r2
-            </code>
-            . The app stays deployed separately from this site; this section
-            shows what the live prototype looked like at that pin.
+            These captures come from a <strong>2026-04-25</strong> baseline
+            screenshot pass against the deployed prototype (same session and
+            viewport across product routes). The app stays deployed separately
+            from this site; this section shows what that baseline looked like in
+            the browser.
           </p>
           <div className="space-y-6">
             {screenshotGallery.map((target) => {
-              const liveHref = buildLiveRoute(liveDemoUrl, target.route);
+              const liveHref =
+                target.deepLinkable === false
+                  ? null
+                  : buildLiveRoute(liveDemoUrl, target.route);
               return (
                 <figure
                   key={target.title}
