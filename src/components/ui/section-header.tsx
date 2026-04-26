@@ -54,7 +54,9 @@ export function SectionHeader({
           )}
         >
           <span className="section-eyebrow-line shrink-0" aria-hidden />
-          <p className="section-eyebrow">{eyebrow}</p>
+          <p className="section-eyebrow" suppressHydrationWarning>
+            {eyebrow}
+          </p>
         </div>
       )}
       {createElement(

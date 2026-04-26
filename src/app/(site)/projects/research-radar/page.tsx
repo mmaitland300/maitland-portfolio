@@ -21,8 +21,6 @@ import { buttonVariants } from "@/components/ui/button-variants";
 import { getProjectBySlug } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
-const ARTIFACT_SRC = "/images/projects/research-radar-artifact.svg";
-
 const mainSurfaces = [
   {
     title: "Ranked recommendations",
@@ -37,7 +35,7 @@ const mainSurfaces = [
   {
     title: "Trends in the current dataset",
     detail:
-      "The trends page reads momentum inside this corpus slice—helpful for tuning here, scoped to what the ranker actually sees.",
+      "The trends page reads momentum inside this corpus slice. This is helpful for tuning here, scoped to what the ranker actually sees.",
   },
   {
     title: "Evaluation and comparison",
@@ -66,39 +64,32 @@ const technicalPoints = [
 
 const screenshotGallery = [
   {
-    title: "Recommended: emerging",
+    title: "Step 1: ranked feed with visible signals",
     src: "/images/projects/research-radar/recommended-emerging.png",
     route: "/recommended?family=emerging",
-    why: "The clearest introduction to the product: a ranked list with visible recommendation signals.",
+    why: "Start here. The feed is useful only if someone can inspect why each paper surfaced and how it was scored.",
     alt: "Research Radar recommended emerging page showing ranked paper cards with visible signal breakdowns",
   },
   {
-    title: "Evaluation",
-    src: "/images/projects/research-radar/evaluation-emerging.png",
-    route: "/evaluation?family=emerging",
-    why: "Shows the ranker next to citation and recency baselines so you can see what changes when the model does.",
-    alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
-  },
-  {
-    title: "Trends",
-    src: "/images/projects/research-radar/trends.png",
-    route: "/trends",
-    why: "Adds the trends view on top of the feeds so you can see topic momentum inside this corpus slice.",
-    alt: "Research Radar trends page showing topic momentum inside the curated corpus slice",
-  },
-  {
-    title: "Paper detail with similar papers",
+    title: "Step 2: paper dossier + embedding neighbors",
     src: "/images/projects/research-radar/paper-detail-similar.png",
     route: "/papers/https%3A%2F%2Fopenalex.org%2FW3093121331",
-    why: "Shows how someone can move from one paper into a useful cluster of related work.",
+    why: "Open a paper to inspect metadata and ranking placement, then pivot into embedding-backed similar papers.",
     alt: "Research Radar paper detail page for GiantMIDI Piano showing metadata and similar papers",
   },
   {
-    title: "Bridge family (experimental)",
-    src: "/images/projects/research-radar/recommended-bridge-experimental.png",
-    route: "/recommended?family=bridge",
-    why: "Shows the experimental bridge view with the same honest framing used in production—interesting, still rough.",
-    alt: "Research Radar bridge recommendation page showing bridge scores with experimental framing",
+    title: "Step 3: baseline comparison in evaluation",
+    src: "/images/projects/research-radar/evaluation-emerging.png",
+    route: "/evaluation?family=emerging",
+    why: "Use this to compare ranking output against citation and recency baselines before making quality claims.",
+    alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
+  },
+  {
+    title: "Step 4: corpus-scoped trends",
+    src: "/images/projects/research-radar/trends.png",
+    route: "/trends",
+    why: "This adds momentum context inside this curated corpus, not a claim about the full field.",
+    alt: "Research Radar trends page showing topic momentum inside the curated corpus slice",
   },
 ];
 
@@ -131,8 +122,6 @@ export const metadata: Metadata = {
   description:
     "Case study for Research Radar, an explainable paper-discovery prototype for MIR and audio ML papers with ranked feeds, similarity, trends, and transparent evaluation.",
 };
-
-export const dynamic = "force-dynamic";
 
 function buildLiveRoute(demoUrl: string | undefined, route: string) {
   if (!demoUrl || route.includes("{")) {
@@ -176,38 +165,17 @@ export default function ResearchRadarCaseStudyPage() {
             Research Radar: explainable discovery for MIR and audio ML papers
           </h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">
-            Research Radar is a research-discovery prototype for music information
-            retrieval and audio ML papers. I built it to make recommendations easier
-            to understand: you can browse ranked feeds, open a paper, explore
-            trends, and compare the output against simpler baselines.
+            Research Radar is a paper-discovery prototype for MIR and audio ML.
+            The goal is simple: make ranking behavior inspectable, not hidden.
+            You can move from ranked feeds to evaluation, trends, and paper
+            detail without losing the reasoning behind the order.
           </p>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            The live app stays separate from this site. Bridge
-            recommendations are still exploratory, and the evaluation view helps
-            inspect how the ranking behaves against simpler baselines.
+            The live app is deployed separately from this case study. Bridge
+            recommendations remain exploratory, while the core flow focuses on
+            explainable ranking plus transparent baseline comparison.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            {liveDemoUrl ? (
-              <a
-                href={liveDemoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(buttonVariants({ variant: "default", size: "lg" }))}
-              >
-                <ExternalLink className="mr-1.5 h-4 w-4" />
-                Open live prototype
-              </a>
-            ) : (
-              <p className="max-w-md text-sm text-muted-foreground">
-                The live prototype is deployed separately from this site, but no
-                public demo URL is configured right now. Set{" "}
-                <code className="rounded bg-muted px-1 py-0.5 text-xs">
-                  NEXT_PUBLIC_RESEARCH_RADAR_URL
-                </code>{" "}
-                to a valid https URL (or remove an invalid value) to restore the
-                link.
-              </p>
-            )}
             <a
               href={project.github}
               target="_blank"
@@ -226,39 +194,27 @@ export default function ResearchRadarCaseStudyPage() {
           </div>
         </header>
 
-        <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
-          <div className="mb-3 flex items-center gap-2">
+        <section className="mb-10 rounded-xl border border-border bg-card/40 p-6 sm:p-7">
+          <div className="mb-4 flex items-center gap-2">
             <SearchCheck className="h-5 w-5 text-brand-cyan" />
             <h2 className="text-xl font-semibold">What the project does</h2>
           </div>
-          <figure className="overflow-hidden rounded-lg border border-border bg-muted/20">
-            <div className="relative aspect-[1400/900] w-full">
-              <Image
-                src={ARTIFACT_SRC}
-                alt="Overview graphic showing Research Radar's ranked recommendations, paper detail, trends, evaluation, and current product framing"
-                fill
-                unoptimized
-                className="object-contain object-center p-2 sm:p-4"
-                sizes="(max-width: 768px) 100vw, 896px"
-                priority
-              />
-            </div>
-            <figcaption className="border-t border-border bg-card/50 px-4 py-3 text-center text-xs leading-relaxed text-muted-foreground">
-              High-level overview of the current prototype surfaces and product
-              framing. Labels match the live app; geometry is simplified for the
-              diagram export.
-            </figcaption>
-          </figure>
-          <div className="mt-6 grid gap-4 md:grid-cols-2">
+          <p className="max-w-3xl text-[15px] leading-7 text-muted-foreground">
+            Research Radar focuses on one reviewer workflow: inspect ranked
+            recommendations, open a paper dossier, compare against baselines, and
+            read trends in corpus context. The core value is transparency, not a
+            black-box recommendation claim.
+          </p>
+          <div className="mt-6 grid gap-3 md:grid-cols-2">
             {mainSurfaces.map((surface) => (
               <div
                 key={surface.title}
-                className="rounded-lg border border-border bg-card/30 px-4 py-4"
+                className="rounded-lg border border-border bg-card/30 px-4 py-4 sm:px-5"
               >
-                <h3 className="text-sm font-medium text-foreground">
+                <h3 className="text-[15px] font-semibold text-foreground">
                   {surface.title}
                 </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {surface.detail}
                 </p>
               </div>
@@ -283,6 +239,20 @@ export default function ResearchRadarCaseStudyPage() {
           </div>
         </section>
 
+        <section className="mb-10 rounded-xl border border-amber-500/35 bg-amber-500/5 p-6">
+          <h2 className="mb-3 text-xl font-semibold">Scope and evaluation boundaries</h2>
+          <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
+            Current corpus scope is intentionally narrow. The deployed slice is a
+            curated prototype around the currently wired bootstrap sources, and it
+            should not be read as a comprehensive index of audio-ML literature.
+          </p>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Evaluation here is proxy-only: citation/date baselines, topic-mix and
+            recency checks, plus distribution-level comparisons. There is not yet a
+            human-labeled relevance benchmark.
+          </p>
+        </section>
+
         <section
           id="visual-walkthrough"
           className="mb-10 scroll-mt-16 rounded-xl border border-border bg-card/40 p-6"
@@ -292,19 +262,9 @@ export default function ResearchRadarCaseStudyPage() {
             <h2 className="text-xl font-semibold">Visual walkthrough</h2>
           </div>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            These captures come from a recent prototype run against the current
-            API, with versions pinned to{" "}
-            <span className="sr-only">ranking version </span>
-            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-              ml2-5a-qual-r2-k6-20260405
-            </code>{" "}
-            and{" "}
-            <span className="sr-only">embedding version </span>
-            <code className="rounded bg-muted px-1.5 py-0.5 text-xs">
-              v1-title-abstract-1536-cleantext-r2
-            </code>
-            . The app stays deployed separately from this site; this section
-            shows what the live prototype looked like at that pin.
+            These captures come from the live prototype and are ordered to match
+            the intended user journey: start in a ranked feed, open a dossier,
+            verify against baselines, and then inspect broader corpus momentum.
           </p>
           <div className="space-y-6">
             {screenshotGallery.map((target) => {
@@ -318,6 +278,7 @@ export default function ResearchRadarCaseStudyPage() {
                     <Image
                       src={target.src}
                       alt={target.alt}
+                      data-testid="research-radar-walkthrough-image"
                       fill
                       unoptimized
                       className="object-cover object-top"
@@ -348,6 +309,39 @@ export default function ResearchRadarCaseStudyPage() {
               );
             })}
           </div>
+          <div className="mt-6 border-t border-border pt-4">
+            {liveDemoUrl ? (
+              <a
+                href={liveDemoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={cn(buttonVariants({ variant: "default", size: "lg" }))}
+              >
+                <ExternalLink className="mr-1.5 h-4 w-4" />
+                Continue to live prototype
+              </a>
+            ) : (
+              <p className="max-w-md text-sm text-muted-foreground">
+                The live prototype is deployed separately from this site, but no
+                public demo URL is configured right now. Set{" "}
+                <code className="rounded bg-muted px-1 py-0.5 text-xs">
+                  NEXT_PUBLIC_RESEARCH_RADAR_URL
+                </code>{" "}
+                to a valid https URL (or remove an invalid value) to restore the
+                link.
+              </p>
+            )}
+          </div>
+        </section>
+
+        <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
+          <h2 className="mb-3 text-xl font-semibold">Operational proof</h2>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            Operational evidence here is public and reviewer-facing: repository
+            history, roadmap notes, test coverage, and reproducible walkthrough
+            captures. The live prototype is linked above when configured, but this
+            section intentionally avoids internal hosting configuration details.
+          </p>
         </section>
 
         <section className="mb-10 grid gap-4 md:grid-cols-3">

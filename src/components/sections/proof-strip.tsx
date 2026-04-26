@@ -25,7 +25,7 @@ function researchRadarProofHeadline(
   return {
     what: demoUrl ? "Research Radar (demo linked)" : "Research Radar",
     whyItMatters: demoUrl
-      ? `${core} The project card links out to the hosted app.`
+      ? `${core} The case study is the primary portfolio entry point, with the hosted prototype linked as secondary evidence.`
       : `${core} There is no outbound demo link from this site right now, so the case study and repository carry the evidence.`,
     linkPick: (links: ProofLink[]) => {
       const byKind = (k: ProofLink["kind"]) =>

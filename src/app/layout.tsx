@@ -58,6 +58,7 @@ export default function RootLayout({
       lang="en"
       className={`dark ${inter.variable} ${jetbrainsMono.variable} h-full antialiased`}
       data-scroll-behavior="smooth"
+      suppressHydrationWarning
     >
       <head>
         <style
@@ -66,7 +67,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="min-h-full flex flex-col relative bg-background text-foreground">
+      <body
+        className="min-h-full flex flex-col relative bg-background text-foreground"
+        suppressHydrationWarning
+      >
         <MotionProvider>{children}</MotionProvider>
       </body>
     </html>
