@@ -44,9 +44,8 @@ export function Hero() {
           transition={fadeTrans(0.12)}
           className="mt-5 mx-auto max-w-4xl text-2xl font-semibold leading-tight text-foreground/95 sm:text-3xl"
         >
-          I build reliable web and tooling systems, with a support-engineering
-          background that makes me unusually strong at debugging messy
-          production failures.
+          I like building interesting software—web apps, audio tools, and side
+          projects—and I would welcome doing more of that kind of work over time.
         </motion.h2>
 
         <motion.p
@@ -56,10 +55,10 @@ export function Hero() {
         >
           I currently work with Auxillium supporting Full Swing software and
           simulator systems, where hardware, software, networking, and Windows
-          behavior often overlap. Outside of work I build production-shaped web
-          apps, audio tools, and data/ML prototypes. This site collects the
-          projects, case studies, and engineering notes that show how I reason
-          under constraints.
+          behavior often overlap. When I have time outside that, I tinker on
+          things I care enough about to document: case studies for the bigger
+          pieces, and longer posts when I want to spell out what I tried and
+          what I would change next time.
         </motion.p>
 
         <motion.div
@@ -109,9 +108,9 @@ export function Hero() {
             href="/blog"
             className="text-foreground/90 underline-offset-4 hover:underline"
           >
-            engineering notes
+            blog posts
           </Link>
-          {" document constraints, evidence, and limits."}
+          {" capture tradeoffs, what I checked, and what is still open."}
         </motion.p>
 
         <motion.div
@@ -126,7 +125,7 @@ export function Hero() {
               size: "lg",
             })}
           >
-            View strongest case studies <ArrowRight className="ml-2 h-4 w-4" />
+            Browse case studies <ArrowRight className="ml-2 h-4 w-4" />
           </Link>
           <Link
             href="/resume"
