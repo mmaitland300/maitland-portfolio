@@ -106,7 +106,7 @@ const currentState = {
   ],
   caveats: [
     "Semantic ranking stays out of the default ranking path for now.",
-    "Bridge stays off by default in production.",
+    "Bridge is available as an explicitly labeled experimental feed, but it is not the default recommendation path.",
     "The corpus is still curated and narrower than the long-term vision.",
   ],
 };
@@ -339,9 +339,10 @@ export default function ResearchRadarCaseStudyPage() {
           <p className="text-sm leading-relaxed text-muted-foreground">
             Operational evidence is public and reviewer-facing: repository
             history, linked tests, roadmap notes, and the screenshot baseline
-            captured from the deployed prototype below. Internal hosting
-            details are intentionally omitted; the live prototype is linked
-            when explicitly configured.
+            shown in the walkthrough above. Internal hosting
+            details are intentionally omitted; the live prototype uses the stable
+            radar.mmaitland.dev subdomain, with an environment override
+            available for preview or migration deployments.
           </p>
         </section>
 

@@ -1,7 +1,7 @@
 import { afterEach, describe, expect, it } from "vitest";
 import {
   getResearchRadarDemoUrl,
-  RESEARCH_RADAR_DEMO_FALLBACK,
+  RESEARCH_RADAR_CANONICAL_DEMO_URL,
 } from "./research-radar";
 
 describe("getResearchRadarDemoUrl", () => {
@@ -9,11 +9,11 @@ describe("getResearchRadarDemoUrl", () => {
     delete process.env.NEXT_PUBLIC_RESEARCH_RADAR_URL;
   });
 
-  it("returns fallback when unset or whitespace", () => {
+  it("returns canonical URL when unset or whitespace", () => {
     delete process.env.NEXT_PUBLIC_RESEARCH_RADAR_URL;
-    expect(getResearchRadarDemoUrl()).toBe(RESEARCH_RADAR_DEMO_FALLBACK);
+    expect(getResearchRadarDemoUrl()).toBe(RESEARCH_RADAR_CANONICAL_DEMO_URL);
     process.env.NEXT_PUBLIC_RESEARCH_RADAR_URL = "   ";
-    expect(getResearchRadarDemoUrl()).toBe(RESEARCH_RADAR_DEMO_FALLBACK);
+    expect(getResearchRadarDemoUrl()).toBe(RESEARCH_RADAR_CANONICAL_DEMO_URL);
   });
 
   it("returns the URL when valid http(s)", () => {
