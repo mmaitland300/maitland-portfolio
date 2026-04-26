@@ -44,8 +44,9 @@ export function Hero() {
           transition={fadeTrans(0.12)}
           className="mt-5 mx-auto max-w-4xl text-2xl font-semibold leading-tight text-foreground/95 sm:text-3xl"
         >
-          I troubleshoot production stacks, then build software with the same
-          evidence-first habits.
+          I build reliable web and tooling systems, with a support-engineering
+          background that makes me unusually strong at debugging messy
+          production failures.
         </motion.h2>
 
         <motion.p
@@ -53,11 +54,12 @@ export function Hero() {
           transition={fadeTrans(0.16)}
           className="mt-6 mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
-          I currently work with Auxillium, supporting Full Swing software and
-          technology, where hardware, software, networking, and OS behavior often
-          overlap. Outside of work I build web apps, audio tools, and occasional
-          ML experiments. This site is where I host my projects and where those
-          interests overlap: troubleshooting, software, and sound.
+          I currently work with Auxillium supporting Full Swing software and
+          simulator systems, where hardware, software, networking, and Windows
+          behavior often overlap. Outside of work I build production-shaped web
+          apps, audio tools, and data/ML prototypes. This site collects the
+          projects, case studies, and engineering notes that show how I reason
+          under constraints.
         </motion.p>
 
         <motion.div
@@ -124,13 +126,19 @@ export function Hero() {
               size: "lg",
             })}
           >
-            See Case Studies <ArrowRight className="ml-2 h-4 w-4" />
+            View strongest case studies <ArrowRight className="ml-2 h-4 w-4" />
+          </Link>
+          <Link
+            href="/resume"
+            className={buttonVariants({ variant: "outline", size: "lg" })}
+          >
+            View resume
           </Link>
           <Link
             href="/contact"
             className={buttonVariants({ variant: "outline", size: "lg" })}
           >
-            Get in Touch
+            Contact me
           </Link>
         </motion.div>
 
