@@ -61,32 +61,32 @@ const representativeIncident = [
   {
     label: "Symptom",
     detail:
-      "Simulator software fails to launch or behaves inconsistently on Windows installs that previously worked, often after security/OS update windows or local IT changes, with no obvious application-level error message.",
+      "FS Core reported that it could not communicate with the required Full Swing API service. At first glance this looked like a network outage because the Core-side communication check failed, but the API endpoint was reachable in a browser on the same machine.",
   },
   {
     label: "Candidate causes",
     detail:
-      "Locked-down Windows policies, disabled or restricted WMI/admin APIs, missing service permissions, antivirus or endpoint-protection interference, and post-update environment drift on the host.",
+      "DNS or ISP issue, firewall or endpoint-security block, expired license/session state, damaged local service state, restricted Windows admin surface, broken WMI namespace/class data, or a vendor-side service issue.",
   },
   {
     label: "Branch elimination path",
     detail:
-      "Confirm a clean reproduction on the customer machine, then probe Windows-side surfaces in a defined order: service state, WMI availability, admin API access, antivirus exclusions, and recent policy/update activity, removing layers that do not change behavior.",
+      "First separate basic internet reachability from application-layer communication. Browser access showed the machine could reach the API endpoint, so the next branch moved to local Windows surfaces that Core depends on: service state, Windows management APIs, WMI namespace availability, endpoint policy, and recent update/security changes.",
   },
   {
     label: "Root cause pattern",
     detail:
-      "Tightened Windows administration surface (WMI/admin API access, service permissions, or endpoint-protection rules) preventing the simulator stack from reaching the system state it needs, rather than a defect in the application itself.",
+      "The failure was not a simple whitelist or port-forwarding problem. WMI namespace errors indicated the Windows management layer was damaged or unavailable, which made the simulator stack behave as if external communication had failed even though basic browser access still worked. This pattern is not universal: treat it as one branch when evidence points at WMI, not a default explanation for every API communication failure.",
   },
   {
     label: "Fix pattern",
     detail:
-      "Restore the minimum required Windows admin surface, document the specific policy/API requirements, and verify against a reproducible baseline so the same install pattern survives the next update or reimage cycle.",
+      "Run the approved WMI namespace repair batch process, reboot, and re-test Core communication from a clean baseline. In this incident pattern, Core recovered after restart. A changed remote-support ID after reboot was treated as an observed follow-up clue that local Windows management or support-session identity state had been repaired, reset, or reinitialized—not definitive proof of the exact subsystem that changed.",
   },
   {
     label: "What changed after",
     detail:
-      "The pattern became a reusable checklist: similar Windows-locked-down environments could be triaged faster by checking WMI/admin API surface and endpoint policy first instead of starting from application-level reinstall steps.",
+      "This became a reusable troubleshooting branch: when browser access works but Core still reports API communication failure, check WMI/admin-surface health before assuming firewall, DNS, port forwarding, or vendor API outage.",
   },
 ];
 
@@ -98,13 +98,14 @@ const branchEliminationRows = [
     finalPattern: "Mixed-state config after update + calibration mismatch",
   },
   {
-    symptom: "Simulator fails to launch on a previously working Windows install",
+    symptom:
+      "Core reports API communication failure while a browser on the same machine can still reach the API endpoint",
     plausibleLayers:
-      "Application install + Windows admin surface (WMI / admin APIs / services) + endpoint-protection policy",
+      "ISP/DNS, firewall or endpoint block, license/session, local service state, Windows WMI/management layer, vendor API outage",
     ruledOutBy:
-      "Reinstall and application repair did not change behavior; service and WMI access checks did",
+      "Browser reachability made a simple external-outage theory less likely; WMI namespace errors pointed at the Windows management layer",
     finalPattern:
-      "Tightened Windows admin surface or endpoint-protection policy blocking required WMI / admin API access",
+      "Damaged or unavailable WMI namespace/management layer; approved WMI namespace repair batch + reboot restored Core communication in this pattern",
   },
 ];
 
@@ -139,7 +140,8 @@ export default function FullSwingCaseStudyPage() {
             I work this role at Auxillium, which provides technical support for
             Full Swing simulator customers. The examples here center on that
             stack; many of the same environments also include Laser Shot or E6
-            Golf from TruGolf, supported in the same workflow.             The case study is about how multi-layer issues get diagnosed with
+            Golf from TruGolf, supported in the same workflow. The case study is
+            about how multi-layer issues get diagnosed with
             remote-only access, incomplete logs, and privacy limits on what can
             be shared—where hardware, software, networking, and operating-system
             behavior frequently overlap.
@@ -216,9 +218,9 @@ export default function FullSwingCaseStudyPage() {
             Representative Incident Pattern
           </h2>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            This walkthrough composites recurring escalation patterns into one
-            narrative; details are anonymized and scoped to troubleshooting I can
-            defend publicly.
+            This walkthrough composites real escalation patterns into one
+            public-safe narrative. Customer-specific details, internal identifiers,
+            and proprietary support tooling are intentionally excluded.
           </p>
           <div className="space-y-3">
             {representativeIncident.map((item) => (
