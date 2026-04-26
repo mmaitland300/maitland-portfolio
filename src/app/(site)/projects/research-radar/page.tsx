@@ -25,7 +25,7 @@ const mainSurfaces = [
   {
     title: "Ranked recommendations",
     detail:
-      "Visitors can browse emerging papers, undercited papers, and an experimental bridge view. Each list is generated ahead of time and includes enough detail to show why a paper was recommended.",
+      "Visitors can browse emerging papers, undercited papers, and a bridge preview route for diagnostics. Each list is generated ahead of time and includes enough detail to show why a paper was recommended.",
   },
   {
     title: "Paper detail with similar papers",
@@ -58,37 +58,64 @@ const technicalPoints = [
   {
     title: "Experimental ideas stay visible and clearly bounded",
     detail:
-      "Some ideas are still exploratory, especially bridge-style recommendations that try to connect papers across areas. They stay in the UI with explicit framing and stay off the default path until the signals deserve first-class billing.",
+      "Some ideas are still exploratory, especially bridge-style cross-cluster signal. It stays visible as a preview/diagnostics surface with explicit framing; first-class recommender language waits until weighting and evaluation match the label.",
   },
 ];
 
 const screenshotGallery = [
   {
-    title: "Step 1: ranked feed with visible signals",
+    title: "Step 1: Ranked feed with visible signals",
     src: "/images/projects/research-radar/recommended-emerging.png",
     route: "/recommended?family=emerging",
-    why: "Start here. The feed is useful only if someone can inspect why each paper surfaced and how it was scored.",
+    inspectPoints: [
+      "Paper cards show score, family, topic labels, signal breakdown, run label, and snapshot version.",
+      'The useful claim is not “these are objectively the best MIR papers.” The useful claim is “the system exposes why each paper surfaced in this corpus snapshot.”',
+    ],
+    supports:
+      "Ranking behavior is inspectable and reviewable rather than hidden behind a black-box feed.",
+    doesNotProve:
+      "It does not prove human relevance quality across the full MIR/audio-ML field.",
     alt: "Research Radar recommended emerging page showing ranked paper cards with visible signal breakdowns",
   },
   {
-    title: "Step 2: paper dossier + embedding neighbors",
+    title: "Step 2: Paper dossier and similar-papers pivot",
     src: "/images/projects/research-radar/paper-detail-similar.png",
     route: "/papers/https%3A%2F%2Fopenalex.org%2FW3093121331",
-    why: "Open a paper to inspect metadata and ranking placement, then pivot into embedding-backed similar papers.",
+    inspectPoints: [
+      "Metadata, venue/year, citation count, topic labels, and where this paper sits in the pinned ranking run.",
+      "Similar papers (when embeddings are configured) as a second hop from a known anchor.",
+    ],
+    supports:
+      "You can move from a ranked row into a dossier and back out without losing the run context.",
+    doesNotProve:
+      "Similar-paper cosine similarity is not a human-labeled relevance benchmark; it is an inspectable retrieval convenience in this prototype.",
     alt: "Research Radar paper detail page for GiantMIDI Piano showing metadata and similar papers",
   },
   {
-    title: "Step 3: baseline comparison in evaluation",
+    title: "Step 3: Proxy evaluation vs citation/date baselines",
     src: "/images/projects/research-radar/evaluation-emerging.png",
     route: "/evaluation?family=emerging",
-    why: "Use this to compare ranking output against citation and recency baselines before making quality claims.",
+    inspectPoints: [
+      "Side-by-side lists or columns for ranked output versus simple citation-count and recency baselines.",
+      "Distribution-level and overlap-style checks that match what the API exposes today.",
+    ],
+    supports:
+      "You can sanity-check ranking behavior against scores everyone already understands, before making stronger quality claims.",
+    doesNotProve:
+      "This is not a temporal backtest or a hand-reviewed relevance benchmark unless/until those artifacts exist and are documented.",
     alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
   },
   {
-    title: "Step 4: corpus-scoped trends",
+    title: "Step 4: Corpus-scoped trends",
     src: "/images/projects/research-radar/trends.png",
     route: "/trends",
-    why: "This adds momentum context inside this curated corpus, not a claim about the full field.",
+    inspectPoints: [
+      "Topic momentum inside the same corpus snapshot the ranker sees—not OpenAlex-wide popularity.",
+    ],
+    supports:
+      "Trends give local context for why a topic cluster might be heating up inside this slice.",
+    doesNotProve:
+      "It does not prove global field trends outside the curated ingest.",
     alt: "Research Radar trends page showing topic momentum inside the curated corpus slice",
   },
 ];
@@ -100,13 +127,13 @@ const currentState = {
     "The strongest current value is inspecting and comparing recommendations with the ranking logic in plain sight.",
   ],
   experimental: [
-    "Bridge recommendations are still experimental and stay behind the main feeds until the signals earn first-class billing.",
+    "Bridge is a preview/diagnostics route: bridge signal is measured and shown, but in the current public run it is not weighted into final_score, so it should not be read as a validated bridge recommender.",
     "I tested weighted variations; with the current signals the deck order barely moved, so the next lever is the bridge features themselves.",
     "The next step is likely better bridge signals and tighter filtering before touching the scalar weights again.",
   ],
   caveats: [
-    "Semantic ranking stays out of the default ranking path for now.",
-    "Bridge is available as an explicitly labeled experimental feed, but it is not the default recommendation path.",
+    "General semantic relevance is not treated as a default quality score. Some pinned emerging runs use embedding slice-fit as one bounded ranking feature, and the live UI labels when that feature is used.",
+    "Bridge is available as an explicitly labeled preview/diagnostics surface; it is not the default recommendation path and bridge weight is zero in the current public run.",
     "The corpus is still curated and narrower than the long-term vision.",
   ],
 };
@@ -171,9 +198,10 @@ export default function ResearchRadarCaseStudyPage() {
             detail without losing the reasoning behind the order.
           </p>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            The live app is deployed separately from this case study. Bridge
-            recommendations remain exploratory, while the core flow focuses on
-            explainable ranking plus transparent baseline comparison.
+            The live app is deployed separately from this case study. Bridge is a
+            preview/diagnostics route (signal measured; not weighted into
+            final_score in the current public run), while the core flow focuses on
+            explainable emerging/undercited feeds plus transparent baseline comparison.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
@@ -262,9 +290,10 @@ export default function ResearchRadarCaseStudyPage() {
             <h2 className="text-xl font-semibold">Visual walkthrough</h2>
           </div>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            These captures come from the live prototype and are ordered to match
-            the intended user journey: start in a ranked feed, open a dossier,
-            verify against baselines, and then inspect broader corpus momentum.
+            Each step lists a route, what to look at in the UI, what honest claim
+            that view supports, and what it still does not prove. Screenshots come
+            from the live prototype and follow the usual review path: ranked feed,
+            dossier, proxy evaluation, then corpus-scoped trends.
           </p>
           <div className="space-y-6">
             {screenshotGallery.map((target) => {
@@ -303,11 +332,61 @@ export default function ResearchRadarCaseStudyPage() {
                         </code>
                       )}
                     </div>
-                    <p className="text-muted-foreground">{target.why}</p>
+                    <div className="mt-3 space-y-3 text-muted-foreground">
+                      <div>
+                        <p className="font-medium text-foreground">What to inspect</p>
+                        <ul className="mt-1 list-disc pl-5">
+                          {target.inspectPoints.map((pt) => (
+                            <li key={pt}>{pt}</li>
+                          ))}
+                        </ul>
+                      </div>
+                      <p>
+                        <span className="font-medium text-foreground">What this supports:</span>{" "}
+                        {target.supports}
+                      </p>
+                      <p>
+                        <span className="font-medium text-foreground">What this does not prove:</span>{" "}
+                        {target.doesNotProve}
+                      </p>
+                    </div>
                   </figcaption>
                 </figure>
               );
             })}
+          </div>
+          <div className="mt-6 rounded-lg border border-border bg-card/30 px-4 py-4 text-sm">
+            <h3 className="font-medium text-foreground">
+              Optional: Bridge preview (diagnostics)
+            </h3>
+            <p className="mt-2 text-muted-foreground">
+              Route:{" "}
+              {buildLiveRoute(liveDemoUrl, "/recommended?family=bridge") ? (
+                <a
+                  href={buildLiveRoute(liveDemoUrl, "/recommended?family=bridge")!}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand-cyan underline-offset-4 hover:underline"
+                >
+                  /recommended?family=bridge
+                </a>
+              ) : (
+                <code className="rounded bg-muted px-2 py-1 text-xs text-foreground">
+                  /recommended?family=bridge
+                </code>
+              )}
+            </p>
+            <ul className="mt-2 list-disc pl-5 text-muted-foreground">
+              <li>Bridge signal is measured and shown.</li>
+              <li>
+                In the current public run, bridge weight is zero, so{" "}
+                <code className="rounded bg-muted px-1 py-0.5 text-xs">final_score</code> does not
+                use the bridge signal.
+              </li>
+              <li>
+                Treat this as diagnostics / preview, not a validated bridge recommender.
+              </li>
+            </ul>
           </div>
           <div className="mt-6 border-t border-border pt-4">
             {liveDemoUrl ? (
@@ -432,6 +511,7 @@ export default function ResearchRadarCaseStudyPage() {
         <CaseStudyEvidenceFooter
           project={project}
           statusIcon={<Microscope className="h-5 w-5 text-brand-cyan" />}
+          currentCaseStudyPath="/projects/research-radar"
         />
 
         <Suspense fallback={null}>
