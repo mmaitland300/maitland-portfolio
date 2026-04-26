@@ -337,10 +337,11 @@ export default function ResearchRadarCaseStudyPage() {
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-3 text-xl font-semibold">Operational proof</h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Operational evidence here is public and reviewer-facing: repository
-            history, roadmap notes, test coverage, and reproducible walkthrough
-            captures. The live prototype is linked above when configured, but this
-            section intentionally avoids internal hosting configuration details.
+            Operational evidence is public and reviewer-facing: repository
+            history, linked tests, roadmap notes, and the screenshot baseline
+            captured from the deployed prototype below. Internal hosting
+            details are intentionally omitted; the live prototype is linked
+            when explicitly configured.
           </p>
         </section>
 

@@ -53,6 +53,10 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // suppressHydrationWarning on <html>/<body> only suppresses attribute drift
+  // injected by browser tooling/extensions (e.g. data-cursor-ref, theme/locale
+  // attributes). It does not hide real component-tree hydration mismatches,
+  // which still surface from child components.
   return (
     <html
       lang="en"
