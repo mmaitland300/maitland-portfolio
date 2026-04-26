@@ -122,7 +122,7 @@ const screenshotGallery = [
 
 const currentState = {
   stable: [
-    "The main product is a set of ranked paper feeds that show why items appear where they do.",
+    "The centerpiece is materialized emerging and undercited feeds that show why items appear where they do, plus bridge diagnostics—not a validated bridge recommender family yet.",
     "Paper detail, trends, and evaluation are all working parts of the prototype.",
     "The strongest current value is inspecting and comparing recommendations with the ranking logic in plain sight.",
   ],
@@ -147,7 +147,7 @@ const lessonsLearned = [
 export const metadata: Metadata = {
   title: "Research Radar: Explainable Discovery Prototype",
   description:
-    "Case study for Research Radar, an explainable paper-discovery prototype for MIR and audio ML papers with ranked feeds, similarity, trends, and transparent evaluation.",
+    "Case study for Research Radar, a product-shaped prototype for MIR and audio ML: emerging and undercited rankings, bridge diagnostics, similarity, trends, and transparent evaluation.",
 };
 
 function buildLiveRoute(demoUrl: string | undefined, route: string) {
@@ -192,10 +192,11 @@ export default function ResearchRadarCaseStudyPage() {
             Research Radar: explainable discovery for MIR and audio ML papers
           </h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">
-            Research Radar is a paper-discovery prototype for MIR and audio ML.
-            The goal is simple: make ranking behavior inspectable, not hidden.
-            You can move from ranked feeds to evaluation, trends, and paper
-            detail without losing the reasoning behind the order.
+            Research Radar is a product-shaped prototype for MIR and audio ML,
+            not a proven production product. The goal is simple: make ranking
+            behavior inspectable, not hidden. You can move from emerging and
+            undercited feeds through evaluation, trends, and paper detail without
+            losing the reasoning behind the order.
           </p>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
             The live app is deployed separately from this case study. Bridge is a

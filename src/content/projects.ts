@@ -106,7 +106,7 @@ export const projects: Project[] = [
     slug: "research-radar",
     title: "Research Radar",
     description:
-      "A prototype for finding MIR and audio ML papers, with explainable recommendations, paper detail, topic trends, and transparent evaluation.",
+      "A product-shaped prototype for MIR and audio ML papers: materialized emerging and undercited rankings, bridge diagnostics (not a validated recommender family yet), paper detail, trends, and transparent evaluation.",
     problem:
       "Paper discovery tools often hide why something surfaced. I wanted ranked lists where the signals are visible so you can compare versions without guessing what moved.",
     constraints:
@@ -114,12 +114,12 @@ export const projects: Project[] = [
     tradeoff:
       "I focused first on saving ranking runs, exposing signal breakdowns, and making the prototype understandable before pushing harder on more experimental ranking ideas.",
     outcome:
-      "The current prototype includes ranked recommendation feeds, paper detail with similar papers, corpus-scoped trends, and an evaluation view for comparing output against simple baselines.",
+      "The current prototype includes materialized emerging and undercited recommendation feeds, a bridge preview/diagnostics surface, paper detail with similar papers, corpus-scoped trends, and an evaluation view for comparing output against simple baselines.",
     status: researchRadarDemoUrl ? "operational" : "in-progress",
     evidence:
       "The strongest stable claim today is that the prototype makes its ranking behavior visible and understandable over a curated set of MIR and audio ML papers.",
     knownLimits:
-      "Bridge recommendations are still experimental, semantic ranking stays off the default path, and the corpus is still narrower than the long-term plan.",
+      "Bridge is preview/diagnostics, not a validated recommender family; general semantic relevance is not the default score (embedding slice-fit may appear on pinned emerging runs when labeled); corpus remains narrower than the long-term plan.",
     proofLinks: [
       {
         label: "Research Radar case study",
