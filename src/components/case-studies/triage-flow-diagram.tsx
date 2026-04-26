@@ -6,7 +6,7 @@ export function TriageFlowDiagram() {
         Figure: branch-based triage (symptom to verified fix)
       </figcaption>
       <svg
-        viewBox="0 0 668 120"
+        viewBox="0 0 688 120"
         className="mx-auto h-auto w-full max-w-2xl text-foreground"
         role="img"
         aria-label="Flow from symptoms through classification, branch tests, fix, and verification"
@@ -29,7 +29,7 @@ export function TriageFlowDiagram() {
           { x: 228, label: "Branch test" },
           { x: 358, label: "Fix" },
           { x: 468, label: "Verify" },
-          { x: 558, label: "Document" },
+          { x: 578, label: "Document" },
         ].map((box, i, arr) => (
           <g key={box.label}>
             <rect
