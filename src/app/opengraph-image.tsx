@@ -9,6 +9,6 @@ export const contentType = "image/png";
 export default function OgImage() {
   return createOgImage(
     "Matt Maitland",
-    "Technical support specialist building web, audio & research software"
+    "Technical support specialist building reliable web tools, audio software, and research prototypes"
   );
 }

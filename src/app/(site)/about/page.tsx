@@ -7,7 +7,7 @@ import { getPublicContactEmail } from "@/lib/site-contact";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Technical support specialist at Auxillium (Full Swing simulators): how triage habits carry into practical web, audio, and research software built on the side.",
+    "Technical support specialist at Auxillium (Full Swing simulators): how triage habits carry into reliable web tools, audio software, and research prototypes built on the side.",
 };
 
 export default function AboutPage() {
