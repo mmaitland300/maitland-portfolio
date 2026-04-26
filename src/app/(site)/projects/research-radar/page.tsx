@@ -274,14 +274,14 @@ export default function ResearchRadarCaseStudyPage() {
                   key={target.title}
                   className="overflow-hidden rounded-lg border border-border bg-card/30"
                 >
-                  <div className="relative aspect-[1440/2200] w-full bg-muted/20">
+                  <div className="relative aspect-video w-full bg-muted/20">
                     <Image
                       src={target.src}
                       alt={target.alt}
                       data-testid="research-radar-walkthrough-image"
                       fill
                       unoptimized
-                      className="object-cover object-top"
+                      className="object-contain object-top"
                       sizes="(max-width: 768px) 100vw, 896px"
                     />
                   </div>
