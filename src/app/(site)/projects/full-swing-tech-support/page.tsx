@@ -61,32 +61,32 @@ const representativeIncident = [
   {
     label: "Symptom",
     detail:
-      "Customer reports inconsistent launch and spin reads after a software/OS update window, with occasional sessions that appear normal and then degrade.",
+      "Simulator software fails to launch or behaves inconsistently on Windows installs that previously worked, often after security/OS update windows or local IT changes, with no obvious application-level error message.",
   },
   {
     label: "Candidate causes",
     detail:
-      "Calibration state drift, graphics/driver mismatch, peripheral input instability, and environment changes introduced during updates.",
+      "Locked-down Windows policies, disabled or restricted WMI/admin APIs, missing service permissions, antivirus or endpoint-protection interference, and post-update environment drift on the host.",
   },
   {
     label: "Branch elimination path",
     detail:
-      "Reproduce in a controlled baseline, then isolate one subsystem at a time (calibration checks, display pipeline checks, peripheral checks) to remove non-causal branches.",
+      "Confirm a clean reproduction on the customer machine, then probe Windows-side surfaces in a defined order: service state, WMI availability, admin API access, antivirus exclusions, and recent policy/update activity, removing layers that do not change behavior.",
   },
   {
     label: "Root cause pattern",
     detail:
-      "A mixed-state configuration where calibration assumptions and post-update environment behavior no longer matched clean baseline expectations.",
+      "Tightened Windows administration surface (WMI/admin API access, service permissions, or endpoint-protection rules) preventing the simulator stack from reaching the system state it needs, rather than a defect in the application itself.",
   },
   {
     label: "Fix pattern",
     detail:
-      "Apply reversible corrective actions in order (restore known-good settings, recalibrate in sequence, re-verify environment) before deeper changes.",
+      "Restore the minimum required Windows admin surface, document the specific policy/API requirements, and verify against a reproducible baseline so the same install pattern survives the next update or reimage cycle.",
   },
   {
     label: "What changed after",
     detail:
-      "Issue handling sped up on similar escalations once the incident became a checklist the next tech could reopen verbatim.",
+      "The pattern became a reusable checklist: similar Windows-locked-down environments could be triaged faster by checking WMI/admin API surface and endpoint policy first instead of starting from application-level reinstall steps.",
   },
 ];
 
@@ -98,10 +98,13 @@ const branchEliminationRows = [
     finalPattern: "Mixed-state config after update + calibration mismatch",
   },
   {
-    symptom: "Tracking drops only in specific sessions",
-    plausibleLayers: "Licensing timeout + network path + peripheral state",
-    ruledOutBy: "Connectivity and licensing checks stayed stable",
-    finalPattern: "Peripheral/OS interaction causing intermittent state drift",
+    symptom: "Simulator fails to launch on a previously working Windows install",
+    plausibleLayers:
+      "Application install + Windows admin surface (WMI / admin APIs / services) + endpoint-protection policy",
+    ruledOutBy:
+      "Reinstall and application repair did not change behavior; service and WMI access checks did",
+    finalPattern:
+      "Tightened Windows admin surface or endpoint-protection policy blocking required WMI / admin API access",
   },
 ];
 

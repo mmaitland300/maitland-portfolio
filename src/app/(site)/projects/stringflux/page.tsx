@@ -271,6 +271,73 @@ export default function StringFluxCaseStudyPage() {
         </section>
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
+          <h2 className="mb-3 text-xl font-semibold">Validation Evidence</h2>
+          <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+            Current public evidence is intentionally bounded. StringFlux is
+            still in active development, so this section records what has
+            actually been checked rather than implying release-level
+            compatibility.
+          </p>
+          <div className="space-y-4 text-sm">
+            <div>
+              <h3 className="font-medium text-foreground">
+                Host and format checks
+              </h3>
+              <ul className="mt-2 space-y-1 text-muted-foreground">
+                <li>- Format under active validation: VST3 on Windows.</li>
+                <li>- Primary development host: Cubase.</li>
+                <li>
+                  - Additional host coverage: not yet claimed publicly unless
+                  confirmed by current test logs.
+                </li>
+                <li>
+                  - Public release status: not released; compatibility claims
+                  are still provisional.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-medium text-foreground">
+                Safety checks completed
+              </h3>
+              <ul className="mt-2 space-y-1 text-muted-foreground">
+                <li>
+                  - Oversampling mode changes are queued instead of rebuilding
+                  processing state directly inside the audio callback.
+                </li>
+                <li>
+                  - Wet-path oversampling transitions have been exercised
+                  during active playback in development sessions.
+                </li>
+                <li>
+                  - Multiband routing, history/freeze capture, feedback-bus
+                  flow, and limiter output path are operational in the current
+                  development build.
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="font-medium text-foreground">
+                Still unproven publicly
+              </h3>
+              <ul className="mt-2 space-y-1 text-muted-foreground">
+                <li>- No published pluginval matrix yet.</li>
+                <li>- No published Steinberg VST3 Validator result yet.</li>
+                <li>
+                  - No published CPU table across sample rates and buffer
+                  sizes yet.
+                </li>
+                <li>- No broad DAW compatibility guarantee yet.</li>
+                <li>
+                  - No public latency table yet beyond the current
+                  architecture notes.
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-3 text-xl font-semibold">Validation boundary</h2>
           <div className="space-y-4 text-sm">
             <div>
