@@ -370,6 +370,7 @@ export default function StringFluxCaseStudyPage() {
         <CaseStudyEvidenceFooter
           project={project}
           statusIcon={<AudioLines className="h-5 w-5 text-rose-400" />}
+          currentCaseStudyPath="/projects/stringflux"
         />
 
         <Suspense fallback={null}>

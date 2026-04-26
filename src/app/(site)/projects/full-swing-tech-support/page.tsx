@@ -279,6 +279,7 @@ export default function FullSwingCaseStudyPage() {
         <CaseStudyEvidenceFooter
           project={project}
           statusIcon={<CheckCircle2 className="h-5 w-5 text-emerald-400" />}
+          currentCaseStudyPath="/projects/full-swing-tech-support"
         />
 
         <Suspense fallback={null}>

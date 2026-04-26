@@ -12,18 +12,35 @@ const statusLabel: Record<NonNullable<Project["status"]>, string> = {
 interface CaseStudyEvidenceFooterProps {
   project: Project;
   statusIcon: ReactNode;
+  /** When set, internal proof links pointing at this path are hidden (avoids same-page “case study” loops). */
+  currentCaseStudyPath?: string;
+}
+
+function normalizeProofPath(href: string): string {
+  const withoutQuery = href.split("?")[0] ?? href;
+  const trimmed = withoutQuery.replace(/\/$/, "");
+  return trimmed || "/";
 }
 
 export function CaseStudyEvidenceFooter({
   project,
   statusIcon,
+  currentCaseStudyPath,
 }: CaseStudyEvidenceFooterProps) {
+  const casePath = currentCaseStudyPath
+    ? normalizeProofPath(currentCaseStudyPath)
+    : null;
+  const evidenceLinks = (project.proofLinks ?? []).filter((item) => {
+    if (!casePath || item.href.startsWith("http")) return true;
+    return normalizeProofPath(item.href) !== casePath;
+  });
+
   return (
     <>
       <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
         <h2 className="mb-3 text-xl font-semibold">Evidence links</h2>
         <div className="space-y-2">
-          {(project.proofLinks ?? []).map((item) => {
+          {evidenceLinks.map((item) => {
             const isExternal = item.href.startsWith("http");
             const className =
               "block rounded-lg border border-border bg-card/30 px-4 py-3 text-sm text-muted-foreground transition-colors hover:text-foreground";

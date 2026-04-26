@@ -136,6 +136,7 @@ export default function PortfolioSiteCaseStudyPage() {
         <CaseStudyEvidenceFooter
           project={project}
           statusIcon={<CheckCircle2 className="h-5 w-5 text-emerald-400" />}
+          currentCaseStudyPath="/projects/portfolio-site"
         />
 
         <Suspense fallback={null}>
