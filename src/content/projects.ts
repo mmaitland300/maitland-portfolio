@@ -132,8 +132,8 @@ export const projects: Project[] = [
         kind: "repo",
       },
       {
-        label: "Roadmap and ML notes",
-        href: "https://github.com/mmaitland300/Research-Radar/blob/main/docs/roadmap.md",
+        label: "Reviewer brief and proof map",
+        href: "https://github.com/mmaitland300/Research-Radar/blob/main/docs/reviewer-brief.md",
         kind: "post",
       },
       {
