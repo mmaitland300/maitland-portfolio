@@ -10,6 +10,7 @@ export function SiteChrome({ children }: { children: React.ReactNode }) {
     <div className="min-h-full flex flex-col relative bg-background text-foreground">
       <a
         href="#main-content"
+        suppressHydrationWarning
         className={cn(
           "fixed top-4 z-[100] whitespace-nowrap rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-lg",
           "outline-none transition-[left] duration-150",

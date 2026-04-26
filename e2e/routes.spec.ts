@@ -101,3 +101,73 @@ test("navbar links are visible on desktop", async ({ page }) => {
     await expect(nav.getByRole("link", { name: label })).toBeVisible();
   }
 });
+
+test("Research Radar case study renders walkthrough and evidence links", async ({
+  page,
+}) => {
+  await page.goto("/projects/research-radar");
+
+  await expect(
+    page.getByRole("heading", { name: /Research Radar/i }).first()
+  ).toBeVisible();
+  await expect(page.getByRole("link", { name: /View source/i })).toHaveAttribute(
+    "href",
+    /github\.com\/mmaitland300\/Research-Radar/
+  );
+  await expect(page.locator("#visual-walkthrough")).toBeVisible();
+
+  const walkthroughImages = page.locator(
+    '[data-testid="research-radar-walkthrough-image"]'
+  );
+  await expect(walkthroughImages).toHaveCount(4);
+
+  const imageCount = await walkthroughImages.count();
+  for (let i = 0; i < imageCount; i += 1) {
+    const image = walkthroughImages.nth(i);
+    await image.scrollIntoViewIfNeeded();
+    await expect
+      .poll(
+        async () =>
+          image.evaluate((img) => ({
+            complete: (img as HTMLImageElement).complete,
+            width: (img as HTMLImageElement).naturalWidth,
+          })),
+        { message: `walkthrough image ${i} should load` }
+      )
+      .toEqual(
+        expect.objectContaining({
+          complete: true,
+          width: expect.any(Number),
+        })
+      );
+    const naturalWidth = await image.evaluate(
+      (img) => (img as HTMLImageElement).naturalWidth
+    );
+    expect(naturalWidth).toBeGreaterThan(0);
+  }
+});
+
+test("Research Radar project card opens case study by default", async ({
+  page,
+}) => {
+  await page.goto("/projects");
+  const cardOverlay = page.locator(
+    '[data-testid="project-card-research-radar"] a[aria-label="Open Research Radar"]'
+  );
+  await expect(cardOverlay).toHaveAttribute("href", "/projects/research-radar");
+
+  await page.click(
+    '[data-testid="project-card-research-radar"] a:has-text("Case study")'
+  );
+  await expect(page).toHaveURL(/\/projects\/research-radar$/);
+});
+
+test("homepage Research Radar card opens case study by default", async ({
+  page,
+}) => {
+  await page.goto("/");
+  const overlay = page.locator(
+    '[data-testid="project-card-research-radar"] a[aria-label="Open Research Radar"]'
+  );
+  await expect(overlay).toHaveAttribute("href", "/projects/research-radar");
+});

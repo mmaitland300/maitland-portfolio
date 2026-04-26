@@ -44,11 +44,21 @@ function demoPrimaryLabel(project: Project): string {
   return "Try live demo";
 }
 
-/** Demo first when present, otherwise case study — matches primary CTA order. */
+/**
+ * Featured projects should open the case study first.
+ * Experiments can continue using demo-first behavior.
+ */
 function getProjectCardDestination(project: Project): {
   href: string;
   external: boolean;
 } | null {
+  if (project.category === "featured" && project.caseStudy) {
+    if (project.caseStudy.startsWith("/")) {
+      return { href: project.caseStudy, external: false };
+    }
+    return { href: project.caseStudy, external: true };
+  }
+
   if (project.demo) {
     if (project.demo.startsWith("/")) {
       return { href: project.demo, external: false };
@@ -72,6 +82,9 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
   const internalCaseStudyHref = project.caseStudy?.startsWith("/")
     ? project.caseStudy
     : null;
+  const hasCaseStudy = Boolean(project.caseStudy);
+  const hasDemo = Boolean(project.demo);
+  const preferCaseStudyCtaOrder = project.category === "featured";
   const evidenceKinds = Array.from(
     new Set(
       (project.proofLinks ?? [])
@@ -90,6 +103,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group relative rounded-xl border border-border bg-card/50 backdrop-blur-sm overflow-hidden hover:border-brand-violet/30 transition-all duration-300"
+      data-testid={`project-card-${project.slug}`}
     >
       {cardDestination ? (
         cardDestination.external ? (
@@ -287,15 +301,30 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
           </div>
         )}
 
-        {/* Links: demo first, then case study, then code (GitHub). */}
+        {/* CTA hierarchy for featured work: case study -> live prototype -> code. */}
         <div className="relative z-[3] flex flex-wrap items-center gap-x-4 gap-y-2">
-          {internalDemoHref ? (
+          {preferCaseStudyCtaOrder && hasCaseStudy ? (
+            internalCaseStudyHref ? (
+              <Link href={internalCaseStudyHref} className={demoPrimaryLinkClass}>
+                <ExternalLink size={14} /> Case study
+              </Link>
+            ) : (
+              <a
+                href={project.caseStudy!}
+                className={demoPrimaryLinkClass}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <ExternalLink size={14} /> Case study
+              </a>
+            )
+          ) : internalDemoHref ? (
             <Link href={internalDemoHref} className={demoPrimaryLinkClass}>
               <ExternalLink size={14} /> {demoPrimaryLabel(project)}
             </Link>
-          ) : project.demo ? (
+          ) : hasDemo ? (
             <a
-              href={project.demo}
+              href={project.demo!}
               target="_blank"
               rel="noopener noreferrer"
               className={demoPrimaryLinkClass}
@@ -303,14 +332,33 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
               <ExternalLink size={14} /> {demoPrimaryLabel(project)}
             </a>
           ) : null}
-          {internalCaseStudyHref ? (
+
+          {preferCaseStudyCtaOrder && hasDemo ? (
+            internalDemoHref ? (
+              <Link
+                href={internalDemoHref}
+                className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <ExternalLink size={14} /> {demoPrimaryLabel(project)}
+              </Link>
+            ) : (
+              <a
+                href={project.demo!}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
+              >
+                <ExternalLink size={14} /> {demoPrimaryLabel(project)}
+              </a>
+            )
+          ) : !preferCaseStudyCtaOrder && internalCaseStudyHref ? (
             <Link
               href={internalCaseStudyHref}
               className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"
             >
               <ExternalLink size={14} /> Case study
             </Link>
-          ) : project.caseStudy ? (
+          ) : !preferCaseStudyCtaOrder && project.caseStudy ? (
             <a
               href={project.caseStudy}
               className="flex items-center gap-1.5 text-xs text-muted-foreground transition-colors hover:text-foreground"

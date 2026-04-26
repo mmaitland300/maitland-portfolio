@@ -81,7 +81,7 @@ export async function ProjectComments({
       )}
 
       {authConfigured && !loadFailed && (
-        <div className="mt-6 border-t border-border pt-4">
+        <div className="mt-6 border-t border-border pt-4" suppressHydrationWarning>
           <CommentForm
             projectSlug={projectSlug}
             currentPath={currentPath}
