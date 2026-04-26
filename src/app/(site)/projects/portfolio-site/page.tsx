@@ -12,9 +12,9 @@ import { getProjectBySlug } from "@/content/projects";
 const PORTFOLIO_ARTIFACT_SRC = "/images/projects/portfolio-delivery-artifact.svg";
 
 export const metadata: Metadata = {
-  title: "Personal Site: Engineering and Operational Choices",
+  title: "Personal Site: Technical and Operational Choices",
   description:
-    "Engineering notes for mmaitland.dev: typed content, contact form with validation and rate limiting, optional admin inbox behind GitHub OAuth, and pragmatic tradeoffs for a solo-maintained site.",
+    "Technical notes for mmaitland.dev: typed content, contact form with validation and rate limiting, optional admin inbox behind GitHub OAuth, and pragmatic tradeoffs for a solo-maintained site.",
 };
 
 export const dynamic = "force-dynamic";
@@ -70,7 +70,7 @@ export default function PortfolioSiteCaseStudyPage() {
             <Badge variant="secondary">Contact &amp; admin</Badge>
           </div>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Personal Site: Engineering and Operational Choices
+            Personal Site: Technical and Operational Choices
           </h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">
             This page documents how mmaitland.dev handles contact submissions,

@@ -19,7 +19,7 @@ import { getProjectBySlug } from "@/content/projects";
 export const metadata: Metadata = {
   title: "StringFlux DSP Case Study",
   description:
-    "An engineering deep-dive on StringFlux: transient-aware multiband granular delay architecture, constraints, and implementation tradeoffs.",
+    "A technical deep-dive on StringFlux: transient-aware multiband granular delay architecture, limits, and implementation tradeoffs.",
 };
 
 export const dynamic = "force-dynamic";

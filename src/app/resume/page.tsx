@@ -6,7 +6,7 @@ import { getPublicContactEmail } from "@/lib/site-contact";
 export const metadata: Metadata = {
   title: "Resume",
   description:
-    "Resume for Matt Maitland covering full-stack development and technical support experience.",
+    "Resume for Matt Maitland: technical support (Full Swing via Auxillium), web and audio side projects, and self-directed software.",
 };
 
 export default function ResumePage() {

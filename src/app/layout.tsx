@@ -18,17 +18,17 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: "Matt Maitland | Developer",
+    default: "Matt Maitland",
     template: "%s | Matt Maitland",
   },
   description:
-    "Matt Maitland: web systems, audio/DSP, and production troubleshooting. Projects, blog, and contact.",
+    "Technical support specialist building practical web, audio, and research software. Case studies, blog, and contact.",
   keywords: [
     "Matt Maitland",
-    "production troubleshooting",
-    "web systems",
-    "audio DSP",
+    "technical support",
     "Full Swing",
+    "web apps",
+    "audio DSP",
     "Next.js",
     "TypeScript",
   ],

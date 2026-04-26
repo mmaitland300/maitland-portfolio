@@ -34,8 +34,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-              Side projects in web apps and audio tools, with public write-ups.
-              Day job: Full Swing simulator support through Auxillium.
+              Technical support specialist building practical web, audio, and
+              research software.
             </p>
           </div>
 

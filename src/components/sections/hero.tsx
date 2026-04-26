@@ -26,7 +26,7 @@ export function Hero() {
         >
           <div className="accent-pill mb-6 inline-flex items-center gap-3 rounded-full px-4 py-2 text-xs font-medium uppercase tracking-[0.24em] text-muted-foreground/90 backdrop-blur-sm">
             <span className="accent-pill-dot shrink-0" />
-            Systems Troubleshooting - Web Application Design - Audio DSP
+            Technical Support • Practical Web Software • Audio Tools
           </div>
         </motion.div>
 
@@ -44,8 +44,9 @@ export function Hero() {
           transition={fadeTrans(0.12)}
           className="mt-5 mx-auto max-w-4xl text-2xl font-semibold leading-tight text-foreground/95 sm:text-3xl"
         >
-          I like building interesting software—web apps, audio tools, and side
-          projects—and I would welcome doing more of that kind of work over time.
+          I work in technical support for complex simulator systems, then use
+          the same troubleshooting habits to build web apps, audio tools, and
+          research prototypes.
         </motion.h2>
 
         <motion.p
@@ -54,11 +55,11 @@ export function Hero() {
           className="mt-6 mx-auto max-w-3xl text-base leading-relaxed text-muted-foreground sm:text-lg"
         >
           I currently work with Auxillium supporting Full Swing software and
-          simulator systems, where hardware, software, networking, and Windows
-          behavior often overlap. When I have time outside that, I tinker on
-          things I care enough about to document: case studies for the bigger
-          pieces, and longer posts when I want to spell out what I tried and
-          what I would change next time.
+          simulator technology, where hardware, software, networking, Windows
+          behavior, calibration, and customer constraints often overlap. Outside
+          of work I build web apps, audio tools, and research prototypes. This
+          site collects the projects, notes, and music that come out of that
+          overlap.
         </motion.p>
 
         <motion.div

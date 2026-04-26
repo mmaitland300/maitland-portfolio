@@ -32,7 +32,7 @@ export type ResumeSkillTier = {
 };
 
 export const resumeSummary =
-  "Engineer and support specialist focused on diagnosing multi-layer failures and building software around clear constraints. Full-time I support Full Swing simulator environments through Auxillium across calibration, licensing, display, networking, and Windows behavior. Outside of work I build production web software and develop StringFlux, a JUCE/C++ audio plugin project shaped by real-time DSP constraints.";
+  "Technical support specialist building practical web, audio, and research software. Full-time I support Full Swing simulator environments through Auxillium—calibration, licensing, display, networking, and Windows behavior—usually with remote diagnosis and incomplete information. Outside of work I build web apps, develop StringFlux (JUCE/C++), and ship research-shaped prototypes like Research Radar, carrying the same habit of naming limits and evidence up front.";
 
 export const resumeSkillTiers: ResumeSkillTier[] = [
   {
@@ -79,14 +79,14 @@ export const resumeExperience: ResumeExperienceItem[] = [
     company: "Self-directed",
     period: "2022 - Present",
     description:
-      "Build and ship production web software and audio tooling with explicit constraints, documented tradeoffs, and public engineering notes.",
+      "Self-directed web and audio software with documented tradeoffs and public write-ups—scoped for nights-and-weekends time, solo maintenance, and the same incomplete-information habits as remote support.",
     highlights: [
       {
         text: "Built and shipped mmaitland.dev with typed content, CI, smoke tests, contact validation, rate limiting, and optional admin workflows.",
         href: "https://www.mmaitland.dev",
       },
       {
-        text: "Developing StringFlux in JUCE/C++ with focus on real-time-safe behavior, constrained scope, and transparent engineering tradeoffs.",
+        text: "Developing StringFlux in JUCE/C++ with focus on real-time-safe behavior, narrow scope, and transparent tradeoffs.",
         href: "https://www.mmaitland.dev/stringflux",
       },
       {

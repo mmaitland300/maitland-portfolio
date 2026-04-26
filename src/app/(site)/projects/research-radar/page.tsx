@@ -48,7 +48,7 @@ const technicalPoints = [
   {
     title: 'Recommendations should answer "why is this here?"',
     detail:
-      "Each ranked list stores the signal mix that produced it, same as keeping scratchwork attached to the answer sheet. That makes regressions obvious when ranking code changes and gives another engineer something concrete to react to.",
+      "Each ranked list stores the signal mix that produced it, same as keeping scratchwork attached to the answer sheet. That makes regressions obvious when ranking code changes and gives another reviewer something concrete to react to.",
   },
   {
     title: "Splitting the site from the prototype is intentional",

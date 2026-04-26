@@ -6,5 +6,8 @@ export const size = ogSize;
 export const contentType = "image/png";
 
 export default function OgImage() {
-  return createOgImage("About", "Developer and technical support specialist based in Colorado");
+  return createOgImage(
+    "About",
+    "Technical support specialist and practical software builder"
+  );
 }

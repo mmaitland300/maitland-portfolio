@@ -47,9 +47,9 @@ function researchRadarProofHeadline(
 /** Curated proof-first copy; URLs come from each project's proofLinks (see projects.ts). */
 const PROOF_HEADLINES_BASE = {
   "full-swing-tech-support": {
-    what: "Production troubleshooting",
+    what: "Simulator technical support",
     whyItMatters:
-      "Remote triage across calibration, licensing, display, networking, and Windows behavior. The public case study shows how multi-layer failures are isolated under incomplete information.",
+      "Remote triage across calibration, licensing, display, networking, and Windows behavior. The public case study shows how multi-layer failures are isolated with incomplete logs and privacy limits on what can be shared.",
     linkPick: (links: ProofLink[]) =>
       links.filter((l) =>
         ["artifact", "post"].includes(l.kind ?? "")

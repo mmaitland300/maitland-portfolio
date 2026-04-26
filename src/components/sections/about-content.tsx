@@ -51,11 +51,11 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
           distrust fixes that cannot be reproduced.
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
-          That same approach carries into everything else I build: web software,
-          audio tools, and music production. I want the parts that ship to stay
-          usable under real load: support queues, flaky networks, live audio
-          callbacks, and the messy middle between a clean demo and a customer
-          site.
+          Those habits still apply when I work on my own projects: web apps,
+          audio tools, and music. I still care about naming real limits—remote
+          diagnosis with incomplete information, Windows and display stack
+          overlap, real-time audio deadline pressure, and small-scope solo
+          maintenance.
         </p>
       </motion.section>
 

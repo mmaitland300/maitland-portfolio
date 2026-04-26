@@ -139,10 +139,10 @@ export default function FullSwingCaseStudyPage() {
             I work this role at Auxillium, which provides technical support for
             Full Swing simulator customers. The examples here center on that
             stack; many of the same environments also include Laser Shot or E6
-            Golf from TruGolf, supported in the same workflow. The case study is
-            about how multi-layer issues get diagnosed under tight constraints,
-            where hardware, software, networking, and operating-system behavior
-            frequently overlap.
+            Golf from TruGolf, supported in the same workflow.             The case study is about how multi-layer issues get diagnosed with
+            remote-only access, incomplete logs, and privacy limits on what can
+            be shared—where hardware, software, networking, and operating-system
+            behavior frequently overlap.
           </p>
         </header>
 

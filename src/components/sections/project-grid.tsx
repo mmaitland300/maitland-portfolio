@@ -88,7 +88,7 @@ export function ProjectGrid() {
             </div>
             <p className="mx-auto max-w-md text-sm text-muted-foreground">
               Interactive experiments and small-scope builds used to explore
-              engineering patterns, runtime behavior, and implementation tradeoffs.
+              implementation patterns, runtime behavior, and tradeoffs.
             </p>
           </motion.div>
 

@@ -6,5 +6,8 @@ export const size = ogSize;
 export const contentType = "image/png";
 
 export default function OgImage() {
-  return createOgImage("Blog", "Technical writing on web development, DSP, and engineering decisions");
+  return createOgImage(
+    "Blog",
+    "Technical writing on web development, DSP, and implementation tradeoffs"
+  );
 }

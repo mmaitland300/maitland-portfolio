@@ -62,7 +62,7 @@ export const projects: Project[] = [
     problem:
       "Most granular processors treat every input the same. For stringed instruments, that means pick attacks get smeared and the effect feels disconnected from the performance.",
     constraints:
-      "Everything runs in the audio callback, so oversampling changes and grain scheduling have to be real-time safe. I can't rebuild state mid-buffer without risking glitches.",
+      "Real-time audio code cannot rely on mid-buffer rebuilds, allocation-heavy behavior, or vague \"we'll fix it later\" DSP decisions.",
     tradeoff:
       "I've kept the feature set narrow on purpose. Getting the engine stable and the transient response right matters more than adding controls nobody can trust yet.",
     outcome:
@@ -110,7 +110,7 @@ export const projects: Project[] = [
     problem:
       "Paper discovery tools often hide why something surfaced. I wanted ranked lists where the signals are visible so you can compare versions without guessing what moved.",
     constraints:
-      "The corpus is intentionally curated and still limited. The strongest current result is clear, explainable ranking, while some experimental ranking ideas still need more work.",
+      "Solo prototype, curated corpus, no human-labeled relevance benchmark, and ranking claims limited to visible signals and baseline comparisons.",
     tradeoff:
       "I focused first on saving ranking runs, exposing signal breakdowns, and making the prototype understandable before pushing harder on more experimental ranking ideas.",
     outcome:
@@ -233,7 +233,7 @@ export const projects: Project[] = [
     problem:
       "Simulator issues rarely have one cause. A customer reports \"the ball isn't tracking\" and the root cause could be calibration drift, a licensing timeout, a network config problem, or a Windows update that broke a driver.",
     constraints:
-      "Incomplete information is the norm. Customers are frustrated, logs aren't always available, and you're working remotely across all of these layers at once.",
+      "Remote support, incomplete logs, frustrated users, mixed hardware/software/network symptoms, and privacy limits on public evidence.",
     tradeoff:
       "More time upfront on isolation and logging pays back when the same failure signature shows up again—you reopen the checklist instead of re-deriving the path from memory.",
     role: "Technical support specialist at Auxillium. Scope is Full Swing simulator deployments plus Laser Shot and E6 Golf from TruGolf when those are part of the install.",
