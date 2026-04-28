@@ -66,6 +66,7 @@ describe("projects data integrity", () => {
     const allowedStatus = new Set([
       "in-progress",
       "operational",
+      "live-prototype",
       "shipped",
       "archived",
     ]);
