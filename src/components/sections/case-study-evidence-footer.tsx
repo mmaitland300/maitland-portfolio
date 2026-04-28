@@ -5,6 +5,7 @@ import type { Project } from "@/content/projects";
 const statusLabel: Record<NonNullable<Project["status"]>, string> = {
   "in-progress": "In Progress",
   operational: "Operational",
+  "live-prototype": "Live prototype",
   shipped: "Shipped",
   archived: "Archived",
 };

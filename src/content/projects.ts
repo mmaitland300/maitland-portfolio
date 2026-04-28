@@ -10,7 +10,12 @@ const snakeDemoUrl = getSnakeDemoUrl();
 const researchRadarDemoUrl = getResearchRadarDemoUrl();
 
 export type ProjectCategory = "featured" | "experiment";
-export type ProjectStatus = "in-progress" | "operational" | "shipped" | "archived";
+export type ProjectStatus =
+  | "in-progress"
+  | "operational"
+  | "live-prototype"
+  | "shipped"
+  | "archived";
 export type ProofLinkKind = "repo" | "test" | "ci" | "post" | "artifact";
 
 export interface ProofLink {
@@ -115,7 +120,7 @@ export const projects: Project[] = [
       "I focused first on saving ranking runs, exposing signal breakdowns, and making the prototype understandable before pushing harder on more experimental ranking ideas.",
     outcome:
       "The current prototype includes materialized emerging and undercited recommendation feeds, a bridge preview/diagnostics surface, paper detail with similar papers, corpus-scoped trends, and an evaluation view for comparing output against simple baselines.",
-    status: researchRadarDemoUrl ? "operational" : "in-progress",
+    status: "live-prototype",
     evidence:
       "The strongest stable claim today is that the prototype makes its ranking behavior visible and understandable over a curated set of MIR and audio ML papers.",
     knownLimits:

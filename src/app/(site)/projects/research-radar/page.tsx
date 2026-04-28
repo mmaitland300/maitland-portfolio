@@ -415,9 +415,9 @@ export default function ResearchRadarCaseStudyPage() {
         </section>
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
-          <h2 className="mb-3 text-xl font-semibold">Operational proof</h2>
+          <h2 className="mb-3 text-xl font-semibold">Public, reviewer-facing evidence</h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            Operational evidence is public and reviewer-facing: repository
+            What you can verify without special access: repository
             history, linked tests, roadmap notes, and the screenshot baseline
             shown in the walkthrough above. Internal hosting
             details are intentionally omitted; the live prototype uses the stable
