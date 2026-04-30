@@ -35,7 +35,7 @@ const mainSurfaces = [
   {
     title: "Trends in the current dataset",
     detail:
-      "The trends page reads momentum inside this corpus slice. This is helpful for tuning here, scoped to what the ranker actually sees.",
+      "The trends page shows which topics are gaining traction inside the papers the ranker is working with. Useful context for why something keeps surfacing in the feeds.",
   },
   {
     title: "Evaluation and comparison",
@@ -130,9 +130,9 @@ const screenshotGallery = [
 
 const currentState = {
   stable: [
-    "The centerpiece is materialized emerging and undercited feeds that show why items appear where they do, plus bridge diagnostics, not a validated bridge recommender family yet.",
+    "The two main feeds (emerging and undercited) are working and show you why each paper ranked where it did. Bridge is visible as a diagnostics surface, not a full recommender yet.",
     "Paper detail, trends, and evaluation are all working parts of the prototype.",
-    "The strongest current value is inspecting and comparing recommendations with the ranking logic in plain sight.",
+    "The most useful thing it does right now: you can see the ranking logic, compare runs, and check it against simpler sorts.",
   ],
   experimental: [
     "Bridge is a preview/diagnostics route: bridge signal is measured and shown, but in the current public run it is not weighted into final_score, so it should not be read as a validated bridge recommender.",
@@ -146,11 +146,8 @@ const currentState = {
   ],
 };
 
-const lessonsLearned = [
-  "Building explanation and versioning in early made it easier to compare changes and improve the system over time.",
-  "Keeping experimental features visible but off by default kept the core product more focused.",
-  "Evaluation stayed useful as a comparison grid; a single headline score never bought enough confidence on its own.",
-];
+const lessonsLearned =
+  "Building the explanation layer early turned out to matter more than I expected. Once each run stored why it ranked the way it did, comparing versions became straightforward instead of guesswork. Keeping bridge visible but clearly off by default also helped: the core flow stayed focused, and I could work on the experimental side without it polluting the main results. The evaluation page earned its place too. I kept expecting a single summary score to be enough, and it never was. Seeing the full comparison grid against simple sorts was always more honest.";
 
 export const metadata: Metadata = {
   title: "Research Radar: Explainable Discovery Prototype",
@@ -200,17 +197,14 @@ export default function ResearchRadarCaseStudyPage() {
             Research Radar: explainable discovery for MIR and audio ML papers
           </h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">
-            Research Radar is a product-shaped prototype for MIR and audio ML,
-            not a proven production product. The goal is simple: make ranking
-            behavior inspectable, not hidden. You can move from emerging and
-            undercited feeds through evaluation, trends, and paper detail without
-            losing the reasoning behind the order.
-          </p>
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            The live app is deployed separately from this case study. Bridge is a
-            preview/diagnostics route (signal measured; not weighted into
-            final_score in the current public run), while the core flow focuses on
-            explainable emerging/undercited feeds plus transparent baseline comparison.
+            Research Radar is a working prototype, not a finished product. The
+            goal is straightforward: ranked lists of MIR and audio ML papers
+            where you can see why each result landed where it did. You can move
+            from the main feed into a paper, check the evaluation against simpler
+            sorts, and follow trends in the current dataset without losing the
+            reasoning behind the order. The live app runs separately from this
+            case study; the bridge feature is visible as a diagnostics surface
+            but is not part of the main recommendation flow yet.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
@@ -519,13 +513,7 @@ export default function ResearchRadarCaseStudyPage() {
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-3 text-xl font-semibold">Lessons learned</h2>
-          <div className="space-y-4">
-            {lessonsLearned.map((item) => (
-              <p key={item} className="text-sm leading-relaxed text-muted-foreground">
-                {item}
-              </p>
-            ))}
-          </div>
+          <p className="text-sm leading-relaxed text-muted-foreground">{lessonsLearned}</p>
         </section>
 
         <CaseStudyEvidenceFooter
