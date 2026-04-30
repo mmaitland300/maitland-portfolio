@@ -25,7 +25,7 @@ const mainSurfaces = [
   {
     title: "Ranked recommendations",
     detail:
-      "Visitors can browse emerging papers, undercited papers, and a bridge preview route for diagnostics. Each list is generated ahead of time and includes enough detail to show why a paper was recommended.",
+      "Two main feeds: emerging papers and undercited papers. Each list is precomputed and every card includes enough context to show why that paper ranked where it did.",
   },
   {
     title: "Paper detail with similar papers",
@@ -48,7 +48,7 @@ const technicalPoints = [
   {
     title: 'Recommendations should answer "why is this here?"',
     detail:
-      "Each ranked list stores the signal mix that produced it, same as keeping scratchwork attached to the answer sheet. That makes regressions obvious when ranking code changes and gives another reviewer something concrete to react to.",
+      "Each ranked list stores the signal mix that produced it alongside the results. When the ranking code changes and something moves, you can check what actually shifted instead of guessing. It also gives anyone reviewing the work something concrete to push back on.",
   },
   {
     title: "Splitting the site from the prototype is intentional",
@@ -56,9 +56,9 @@ const technicalPoints = [
       "This page is the case study, while the prototype runs as its own app. Under the hood there is a Next.js frontend, a FastAPI backend, Postgres with pgvector for storage and similarity search, and Python jobs for ingest, ranking, and clustering. Keeping those pieces separate makes it easier to update the ranking workflow without turning every change into a full-site deploy.",
   },
   {
-    title: "Experimental ideas stay visible and clearly bounded",
+    title: "Experimental ideas stay visible and clearly labelled",
     detail:
-      "Some ideas are still exploratory, especially bridge-style cross-cluster signal. It stays visible as a preview/diagnostics surface with explicit framing; first-class recommender language waits until weighting and evaluation match the label.",
+      "Bridge is the main example: the signal is measured and shown in the UI, but it's not weighted into the final score yet, and it's clearly marked as a diagnostics surface rather than a finished feature. I'd rather show the work in progress than hide it.",
   },
 ];
 

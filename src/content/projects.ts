@@ -111,7 +111,7 @@ export const projects: Project[] = [
     slug: "research-radar",
     title: "Research Radar",
     description:
-      "A product-shaped prototype for MIR and audio ML papers: materialized emerging and undercited rankings, bridge diagnostics (not a validated recommender family yet), paper detail, trends, and transparent evaluation.",
+      "A working prototype for MIR and audio ML papers: ranked emerging and undercited feeds where you can see why each result landed where it did, plus paper detail, trends, evaluation, and bridge diagnostics.",
     problem:
       "Paper discovery tools often hide why something surfaced. I wanted ranked lists where the signals are visible so you can compare versions without guessing what moved.",
     constraints:
@@ -119,12 +119,12 @@ export const projects: Project[] = [
     tradeoff:
       "I focused first on saving ranking runs, exposing signal breakdowns, and making the prototype understandable before pushing harder on more experimental ranking ideas.",
     outcome:
-      "The current prototype includes materialized emerging and undercited recommendation feeds, a bridge preview/diagnostics surface, paper detail with similar papers, corpus-scoped trends, and an evaluation view for comparing output against simple baselines.",
+      "The current prototype has working emerging and undercited feeds, paper detail with similar papers, a trends view, an evaluation page for comparing output against simple baselines, and bridge as a diagnostics surface.",
     status: "live-prototype",
     evidence:
       "The strongest stable claim today is that the prototype makes its ranking behavior visible and understandable over a curated set of MIR and audio ML papers.",
     knownLimits:
-      "Bridge is preview/diagnostics, not a validated recommender family; general semantic relevance is not the default score (embedding slice-fit may appear on pinned emerging runs when labeled); corpus remains narrower than the long-term plan.",
+      "Bridge is diagnostics only, not a full recommender; semantic similarity is not the default ranking signal (it may appear on certain runs when the UI labels it); the corpus is still narrower than the long-term plan.",
     proofLinks: [
       {
         label: "Research Radar case study",
