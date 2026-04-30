@@ -240,7 +240,7 @@ export const projects: Project[] = [
     constraints:
       "Remote support, incomplete logs, frustrated users, mixed hardware/software/network symptoms, and privacy limits on public evidence.",
     tradeoff:
-      "More time upfront on isolation and logging pays back when the same failure signature shows up again—you reopen the checklist instead of re-deriving the path from memory.",
+      "More time upfront on isolation and logging pays back when the same failure signature shows up again: you reopen the checklist instead of re-deriving the path from memory.",
     role: "Technical support specialist at Auxillium. Scope is Full Swing simulator deployments plus Laser Shot and E6 Golf from TruGolf when those are part of the install.",
     outcome:
       "Built repeatable triage workflows that I now use across calibration, licensing, display, networking, and OS subsystems. Documented publicly as a case study.",

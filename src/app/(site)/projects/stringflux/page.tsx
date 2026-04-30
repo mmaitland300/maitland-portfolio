@@ -240,7 +240,7 @@ export default function StringFluxCaseStudyPage() {
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-2 text-xl font-semibold">Current Validation Checks</h2>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            Informal development checks only—no published CPU or latency numbers
+            Informal development checks only; no published CPU or latency numbers
             yet. Benchmarking waits until the core behavior is feature-stable.
           </p>
           <div className="space-y-3">

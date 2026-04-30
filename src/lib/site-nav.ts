@@ -1,4 +1,4 @@
-/** Primary IA links — shared by navbar and footer so labels and order stay aligned. */
+/** Primary IA links: shared by navbar and footer so labels and order stay aligned. */
 export const siteNavLinks = [
   { href: "/", label: "Home" },
   { href: "/projects", label: "Projects" },

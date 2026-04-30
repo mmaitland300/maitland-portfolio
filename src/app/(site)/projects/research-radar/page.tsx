@@ -110,7 +110,7 @@ const screenshotGallery = [
     src: "/images/projects/research-radar/trends.png",
     route: "/trends",
     inspectPoints: [
-      "Topic momentum inside the same corpus snapshot the ranker sees—not OpenAlex-wide popularity.",
+      "Topic momentum inside the same corpus snapshot the ranker sees, not OpenAlex-wide popularity.",
     ],
     supports:
       "Trends give local context for why a topic cluster might be heating up inside this slice.",
@@ -122,7 +122,7 @@ const screenshotGallery = [
 
 const currentState = {
   stable: [
-    "The centerpiece is materialized emerging and undercited feeds that show why items appear where they do, plus bridge diagnostics—not a validated bridge recommender family yet.",
+    "The centerpiece is materialized emerging and undercited feeds that show why items appear where they do, plus bridge diagnostics, not a validated bridge recommender family yet.",
     "Paper detail, trends, and evaluation are all working parts of the prototype.",
     "The strongest current value is inspecting and comparing recommendations with the ranking logic in plain sight.",
   ],

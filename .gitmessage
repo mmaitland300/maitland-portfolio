@@ -1,7 +1,7 @@
-Short imperative summary — replace this entire line (~50 chars; do not start with #)
+Short imperative summary: replace this entire line (~50 chars; do not start with #)
 
 # Optional body after a blank line above. Wrap at ~72. Example: Fixes #123
 #
-# Git removes lines that start with # — your real subject must be on line 1 with no #.
+# Git removes lines that start with #. Your real subject must be on line 1 with no #.
 # Avoid: checkpoint / trigger redeploy-only commits; trailing vendor or tool footers
 # unless a project policy explicitly requires them.

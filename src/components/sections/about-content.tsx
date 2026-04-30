@@ -52,7 +52,7 @@ export function AboutContent({ publicEmail }: AboutContentProps) {
         </p>
         <p className="mt-4 text-lg text-muted-foreground leading-relaxed">
           Those habits still apply when I work on my own projects: web apps,
-          audio tools, and music. I still care about naming real limits—remote
+          audio tools, and music. I still care about naming real limits: remote
           diagnosis with incomplete information, Windows and display stack
           overlap, real-time audio deadline pressure, and small-scope solo
           maintenance.

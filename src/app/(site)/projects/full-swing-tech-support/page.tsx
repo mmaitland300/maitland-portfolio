@@ -81,7 +81,7 @@ const representativeIncident = [
   {
     label: "Fix pattern",
     detail:
-      "Run the approved WMI namespace repair batch process, reboot, and re-test Core communication from a clean baseline. In this incident pattern, Core recovered after restart. A changed remote-support ID after reboot was treated as an observed follow-up clue that local Windows management or support-session identity state had been repaired, reset, or reinitialized—not definitive proof of the exact subsystem that changed.",
+      "Run the approved WMI namespace repair batch process, reboot, and re-test Core communication from a clean baseline. In this incident pattern, Core recovered after restart. A changed remote-support ID after reboot was treated as an observed follow-up clue that local Windows management or support-session identity state had been repaired, reset, or reinitialized, not definitive proof of the exact subsystem that changed.",
   },
   {
     label: "What changed after",
@@ -143,7 +143,7 @@ export default function FullSwingCaseStudyPage() {
             Golf from TruGolf, supported in the same workflow. The case study is
             about how multi-layer issues get diagnosed with
             remote-only access, incomplete logs, and privacy limits on what can
-            be shared—where hardware, software, networking, and operating-system
+            be shared, where hardware, software, networking, and operating-system
             behavior frequently overlap.
           </p>
         </header>
