@@ -1,4 +1,4 @@
-# Matt Maitland: Personal site & case studies
+# Matt Maitland — Personal site & case studies
 
 **Live site:** [www.mmaitland.dev](https://www.mmaitland.dev)
 
