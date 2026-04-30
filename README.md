@@ -94,7 +94,7 @@ Copy `.env.example` to `.env` and fill in the values.
 
 **Rows marked No** are only for **admin GitHub OAuth** (`AUTH_*`, `ADMIN_GITHUB_IDS`) and the optional **`NEXT_PUBLIC_RESUME_PDF_LINK_BASE`**. Leave them unset if you do not need those features; the app still runs and tests/build stay predictable. **Database-backed** admin inbox also needs real **Neon** URLs in the **Yes** Prisma rows (see **Database Setup (Optional)**), not just the auth vars.
 
-**Rows marked Yes** cover normal local or production use: public site URL, Resend for contact mail, and Prisma placeholders for `npm install` / `npm run build`. **Upstash** is optional but recommended for deployments that expect public traffic (see footnote [2]). **CI** stubs `DATABASE_URL`, `DIRECT_URL`, and `NEXT_PUBLIC_SITE_URL` (`https://www.mmaitland.dev`, matching production canonical) and does not pass Resend or Redis secrets—the same idea as compiling a production build without those values in the environment.
+**Rows marked Yes** cover normal local or production use: public site URL, Resend for contact mail, and Prisma placeholders for `npm install` / `npm run build`. **Upstash** is optional but recommended for deployments that expect public traffic (see footnote [2]). **CI** stubs `DATABASE_URL`, `DIRECT_URL`, and `NEXT_PUBLIC_SITE_URL` (`https://www.mmaitland.dev`, matching production canonical) and does not pass Resend or Redis secrets: the same idea as compiling a production build without those values in the environment.
 
 | Variable | Required | Purpose |
 |---|---|---|

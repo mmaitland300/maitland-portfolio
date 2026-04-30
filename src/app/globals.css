@@ -115,7 +115,7 @@
   --ring: oklch(0.556 0 0);
 
   /*
-   * Brand gradients — cyan ↔ violet family tuned to match .page-title / .hero-name,
+   * Brand gradients: cyan ↔ violet family tuned to match .page-title / .hero-name,
    * not Tailwind’s default purple-600 / cyan-600 pair.
    */
   --brand-cta-from: #5746d4;

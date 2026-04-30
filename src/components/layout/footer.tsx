@@ -100,7 +100,7 @@ export function Footer() {
             </a>
             <span className="text-muted-foreground">
               {" "}
-              — Next.js, TypeScript, Tailwind
+              · Next.js, TypeScript, Tailwind
             </span>
           </p>
         </div>

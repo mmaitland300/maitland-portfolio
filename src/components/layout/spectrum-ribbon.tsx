@@ -6,7 +6,7 @@
  * motion stays slow and non-distracting.
  *
  * Vertical ticks sit at spatial quarter-periods of the fundamental (phase 2π·cycles·x),
- * like scope graticule lines—subsampled so the strip never gets visually noisy.
+ * like scope graticule lines, subsampled so the strip never gets visually noisy.
  */
 
 import {

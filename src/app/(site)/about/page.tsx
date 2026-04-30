@@ -18,7 +18,7 @@ export default function AboutPage() {
         <SectionHeader
           eyebrow="About"
           title="Technical support specialist, practical software builder"
-          description="How customer-facing triage—observe, isolate, validate—shows up in the web apps, audio tools, and research prototypes I build outside my Auxillium role."
+          description="How customer-facing triage (observe, isolate, validate) shows up in the web apps, audio tools, and research prototypes I build outside my Auxillium role."
           className="mb-16"
         />
         <AboutContent publicEmail={getPublicContactEmail()} />

@@ -25,7 +25,7 @@ const mainSurfaces = [
   {
     title: "Ranked recommendations",
     detail:
-      "Visitors can browse emerging papers, undercited papers, and a bridge preview route for diagnostics. Each list is generated ahead of time and includes enough detail to show why a paper was recommended.",
+      "Two main feeds: emerging papers and undercited papers. Each list is precomputed and every card includes enough context to show why that paper ranked where it did.",
   },
   {
     title: "Paper detail with similar papers",
@@ -35,7 +35,7 @@ const mainSurfaces = [
   {
     title: "Trends in the current dataset",
     detail:
-      "The trends page reads momentum inside this corpus slice. This is helpful for tuning here, scoped to what the ranker actually sees.",
+      "The trends page shows which topics are gaining traction inside the papers the ranker is working with. Useful context for why something keeps surfacing in the feeds.",
   },
   {
     title: "Evaluation and comparison",
@@ -48,7 +48,7 @@ const technicalPoints = [
   {
     title: 'Recommendations should answer "why is this here?"',
     detail:
-      "Each ranked list stores the signal mix that produced it, same as keeping scratchwork attached to the answer sheet. That makes regressions obvious when ranking code changes and gives another reviewer something concrete to react to.",
+      "Each ranked list stores the signal mix that produced it alongside the results. When the ranking code changes and something moves, you can check what actually shifted instead of guessing. It also gives anyone reviewing the work something concrete to push back on.",
   },
   {
     title: "Splitting the site from the prototype is intentional",
@@ -56,75 +56,83 @@ const technicalPoints = [
       "This page is the case study, while the prototype runs as its own app. Under the hood there is a Next.js frontend, a FastAPI backend, Postgres with pgvector for storage and similarity search, and Python jobs for ingest, ranking, and clustering. Keeping those pieces separate makes it easier to update the ranking workflow without turning every change into a full-site deploy.",
   },
   {
-    title: "Experimental ideas stay visible and clearly bounded",
+    title: "Experimental ideas stay visible and clearly labelled",
     detail:
-      "Some ideas are still exploratory, especially bridge-style cross-cluster signal. It stays visible as a preview/diagnostics surface with explicit framing; first-class recommender language waits until weighting and evaluation match the label.",
+      "Bridge is the main example: the signal is measured and shown in the UI, but it's not weighted into the final score yet, and it's clearly marked as a diagnostics surface rather than a finished feature. I'd rather show the work in progress than hide it.",
   },
 ];
 
 const screenshotGallery = [
   {
-    title: "Step 1: Ranked feed with visible signals",
+    title: "Step 1: The ranked feed",
     src: "/images/projects/research-radar/recommended-emerging.png",
     route: "/recommended?family=emerging",
+    plainSummary:
+      "This is the main list. Each card shows a paper and a short breakdown of what pushed it up in the ranking for this snapshot. You don't have to take the order on faith.",
     inspectPoints: [
-      "Paper cards show score, family, topic labels, signal breakdown, run label, and snapshot version.",
-      'The useful claim is not “these are objectively the best MIR papers.” The useful claim is “the system exposes why each paper surfaced in this corpus snapshot.”',
+      "Pick any card and read the signal block below the title. That's the system's reasoning for that result.",
+      "The feed is either emerging (newer papers gaining traction in this set) or undercited (papers that look underappreciated relative to their signals).",
     ],
-    supports:
-      "Ranking behavior is inspectable and reviewable rather than hidden behind a black-box feed.",
-    doesNotProve:
-      "It does not prove human relevance quality across the full MIR/audio-ML field.",
+    conclude:
+      "The ranking isn't a black box. You can see what drove each result and compare runs when the code changes.",
+    limit:
+      "This is a curated slice of papers, not a comprehensive index of the field. It tells you what ranked highly here, not what's objectively best.",
     alt: "Research Radar recommended emerging page showing ranked paper cards with visible signal breakdowns",
   },
   {
-    title: "Step 2: Paper dossier and similar-papers pivot",
+    title: "Step 2: Paper detail and similar papers",
     src: "/images/projects/research-radar/paper-detail-similar.png",
     route: "/papers/https%3A%2F%2Fopenalex.org%2FW3093121331",
+    plainSummary:
+      "Click any card from the feed and you land here. You get the paper's full details, where it sat in the ranked list, and a set of similar papers so you can keep exploring without starting over.",
     inspectPoints: [
-      "Metadata, venue/year, citation count, topic labels, and where this paper sits in the pinned ranking run.",
-      "Similar papers (when embeddings are configured) as a second hop from a known anchor.",
+      "Venue, year, citation count, and topic tags are all in one place.",
+      "The similar papers section finds nearby results by content. Useful when one paper looks relevant and you want to see what else is around it.",
     ],
-    supports:
-      "You can move from a ranked row into a dossier and back out without losing the run context.",
-    doesNotProve:
-      "Similar-paper cosine similarity is not a human-labeled relevance benchmark; it is an inspectable retrieval convenience in this prototype.",
+    conclude:
+      "You can move from a ranked result to a full paper view and keep moving through related work without losing your place.",
+    limit:
+      "Similar papers are matched by content similarity, not hand-curated. Useful for navigation, not a quality judgment.",
     alt: "Research Radar paper detail page for GiantMIDI Piano showing metadata and similar papers",
   },
   {
-    title: "Step 3: Proxy evaluation vs citation/date baselines",
+    title: "Step 3: Evaluation against simpler sorts",
     src: "/images/projects/research-radar/evaluation-emerging.png",
     route: "/evaluation?family=emerging",
+    plainSummary:
+      "This is where I check whether the ranking is actually doing something useful. It puts the system's output next to the most obvious alternatives: sort by citation count, sort by date. If the ranking is adding value, you should be able to see it here.",
     inspectPoints: [
-      "Side-by-side lists or columns for ranked output versus simple citation-count and recency baselines.",
-      "Distribution-level and overlap-style checks that match what the API exposes today.",
+      "Compare which papers appear in the ranked list versus what you'd get from a simple sort by citations or recency.",
+      "Look at the overall shape, not just individual rows. Does the ranked list feel meaningfully different from the simple sorts?",
     ],
-    supports:
-      "You can sanity-check ranking behavior against scores everyone already understands, before making stronger quality claims.",
-    doesNotProve:
-      "This is not a temporal backtest or a hand-reviewed relevance benchmark unless/until those artifacts exist and are documented.",
+    conclude:
+      "A quick sanity check that the ranking is doing something beyond what a spreadsheet sort would give you.",
+    limit:
+      "This is a comparison against simple baselines, not a formal relevance benchmark. A useful starting point, not a final verdict.",
     alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
   },
   {
-    title: "Step 4: Corpus-scoped trends",
+    title: "Step 4: Trends in this dataset",
     src: "/images/projects/research-radar/trends.png",
     route: "/trends",
+    plainSummary:
+      "The trends page shows which topics are picking up momentum inside this particular set of papers. Not the whole field, just what the ranker actually sees.",
     inspectPoints: [
-      "Topic momentum inside the same corpus snapshot the ranker sees—not OpenAlex-wide popularity.",
+      "Topic clusters gaining momentum within this snapshot. Useful for understanding why certain papers are surfacing in the emerging feed.",
     ],
-    supports:
-      "Trends give local context for why a topic cluster might be heating up inside this slice.",
-    doesNotProve:
-      "It does not prove global field trends outside the curated ingest.",
+    conclude:
+      "Gives context for why a topic might be heating up in the ranked lists right now.",
+    limit:
+      "This reflects momentum inside the curated set only. It won't match broader field trends.",
     alt: "Research Radar trends page showing topic momentum inside the curated corpus slice",
   },
 ];
 
 const currentState = {
   stable: [
-    "The centerpiece is materialized emerging and undercited feeds that show why items appear where they do, plus bridge diagnostics—not a validated bridge recommender family yet.",
+    "The two main feeds (emerging and undercited) are working and show you why each paper ranked where it did. Bridge is visible as a diagnostics surface, not a full recommender yet.",
     "Paper detail, trends, and evaluation are all working parts of the prototype.",
-    "The strongest current value is inspecting and comparing recommendations with the ranking logic in plain sight.",
+    "The most useful thing it does right now: you can see the ranking logic, compare runs, and check it against simpler sorts.",
   ],
   experimental: [
     "Bridge is a preview/diagnostics route: bridge signal is measured and shown, but in the current public run it is not weighted into final_score, so it should not be read as a validated bridge recommender.",
@@ -138,11 +146,8 @@ const currentState = {
   ],
 };
 
-const lessonsLearned = [
-  "Building explanation and versioning in early made it easier to compare changes and improve the system over time.",
-  "Keeping experimental features visible but off by default kept the core product more focused.",
-  "Evaluation stayed useful as a comparison grid; a single headline score never bought enough confidence on its own.",
-];
+const lessonsLearned =
+  "Building the explanation layer early turned out to matter more than I expected. Once each run stored why it ranked the way it did, comparing versions became straightforward instead of guesswork. Keeping bridge visible but clearly off by default also helped: the core flow stayed focused, and I could work on the experimental side without it polluting the main results. The evaluation page earned its place too. I kept expecting a single summary score to be enough, and it never was. Seeing the full comparison grid against simple sorts was always more honest.";
 
 export const metadata: Metadata = {
   title: "Research Radar: Explainable Discovery Prototype",
@@ -192,17 +197,14 @@ export default function ResearchRadarCaseStudyPage() {
             Research Radar: explainable discovery for MIR and audio ML papers
           </h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">
-            Research Radar is a product-shaped prototype for MIR and audio ML,
-            not a proven production product. The goal is simple: make ranking
-            behavior inspectable, not hidden. You can move from emerging and
-            undercited feeds through evaluation, trends, and paper detail without
-            losing the reasoning behind the order.
-          </p>
-          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-muted-foreground">
-            The live app is deployed separately from this case study. Bridge is a
-            preview/diagnostics route (signal measured; not weighted into
-            final_score in the current public run), while the core flow focuses on
-            explainable emerging/undercited feeds plus transparent baseline comparison.
+            Research Radar is a working prototype, not a finished product. The
+            goal is straightforward: ranked lists of MIR and audio ML papers
+            where you can see why each result landed where it did. You can move
+            from the main feed into a paper, check the evaluation against simpler
+            sorts, and follow trends in the current dataset without losing the
+            reasoning behind the order. The live app runs separately from this
+            case study; the bridge feature is visible as a diagnostics surface
+            but is not part of the main recommendation flow yet.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
@@ -291,10 +293,14 @@ export default function ResearchRadarCaseStudyPage() {
             <h2 className="text-xl font-semibold">Visual walkthrough</h2>
           </div>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            Each step lists a route, what to look at in the UI, what honest claim
-            that view supports, and what it still does not prove. Screenshots come
-            from the live prototype and follow the usual review path: ranked feed,
-            dossier, proxy evaluation, then corpus-scoped trends.
+            Most paper tools give you a sorted list and no explanation of why
+            anything landed where it did. I built this partly to fix that and
+            partly to understand what it actually takes to build something like
+            this end to end. The way I use it: open the emerging or undercited
+            feed, read the signal note on each card before trusting the order,
+            click into a paper if it looks worth following, then check the
+            evaluation page to see whether the ranking makes sense against
+            simpler sorts like citation count or date.
           </p>
           <div className="space-y-6">
             {screenshotGallery.map((target) => {
@@ -333,23 +339,30 @@ export default function ResearchRadarCaseStudyPage() {
                         </code>
                       )}
                     </div>
+                    {"plainSummary" in target && (
+                      <p className="mt-2 text-muted-foreground">{target.plainSummary}</p>
+                    )}
                     <div className="mt-3 space-y-3 text-muted-foreground">
                       <div>
-                        <p className="font-medium text-foreground">What to inspect</p>
+                        <p className="font-medium text-foreground">What to look at</p>
                         <ul className="mt-1 list-disc pl-5">
                           {target.inspectPoints.map((pt) => (
                             <li key={pt}>{pt}</li>
                           ))}
                         </ul>
                       </div>
-                      <p>
-                        <span className="font-medium text-foreground">What this supports:</span>{" "}
-                        {target.supports}
-                      </p>
-                      <p>
-                        <span className="font-medium text-foreground">What this does not prove:</span>{" "}
-                        {target.doesNotProve}
-                      </p>
+                      {"conclude" in target && (
+                        <p>
+                          <span className="font-medium text-foreground">What you can take from this:</span>{" "}
+                          {target.conclude}
+                        </p>
+                      )}
+                      {"limit" in target && (
+                        <p>
+                          <span className="font-medium text-foreground">{"What it doesn't tell you"}:</span>{" "}
+                          {target.limit}
+                        </p>
+                      )}
                     </div>
                   </figcaption>
                 </figure>
@@ -500,13 +513,7 @@ export default function ResearchRadarCaseStudyPage() {
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-3 text-xl font-semibold">Lessons learned</h2>
-          <div className="space-y-4">
-            {lessonsLearned.map((item) => (
-              <p key={item} className="text-sm leading-relaxed text-muted-foreground">
-                {item}
-              </p>
-            ))}
-          </div>
+          <p className="text-sm leading-relaxed text-muted-foreground">{lessonsLearned}</p>
         </section>
 
         <CaseStudyEvidenceFooter

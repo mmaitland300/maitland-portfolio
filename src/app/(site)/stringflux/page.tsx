@@ -81,7 +81,7 @@ export default function StringFluxPage() {
           <p className="mt-3 text-center text-sm text-muted-foreground">
             Three interface layouts from the dev build: Core (primary controls
             only), Waveform (grain region editor), and Advanced (modulation matrix and
-            deeper shaping). Preset names visible in the captures are incidental—many
+            deeper shaping). Preset names visible in the captures are incidental; many
             presets will use these same panels. Mod-source envelope meters show live
             activity; polish is ongoing.
           </p>

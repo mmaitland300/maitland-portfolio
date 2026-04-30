@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client";
 import { MessageSquare } from "lucide-react";
 import { parseAppEnv } from "@/lib/env";
 import { isAdminAuthConfigured } from "@/lib/feature-config";
@@ -52,7 +53,25 @@ export async function ProjectComments({
       createdAt: c.createdAt,
     }));
   } catch (error) {
-    console.error("ProjectComments: failed to load comments", error);
+    const missingProjectCommentTable =
+      error instanceof Prisma.PrismaClientKnownRequestError &&
+      error.code === "P2021" &&
+      (error.meta?.modelName === "ProjectComment" ||
+        String(error.message).includes("ProjectComment"));
+
+    if (missingProjectCommentTable) {
+      if (process.env.NODE_ENV === "production") {
+        console.error(
+          "ProjectComments: ProjectComment table missing; apply database migrations.",
+        );
+      } else {
+        console.warn(
+          "ProjectComments: ProjectComment table missing; run `npx prisma migrate dev` (or deploy migrations) to enable comments.",
+        );
+      }
+    } else {
+      console.error("ProjectComments: failed to load comments", error);
+    }
     loadFailed = true;
   }
 

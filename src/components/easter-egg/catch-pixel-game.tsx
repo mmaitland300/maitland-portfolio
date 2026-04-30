@@ -291,7 +291,7 @@ export function CatchPixelGame() {
         />
       </div>
       <p className="text-center text-xs text-muted-foreground">
-        Walls and ceiling bounce. Only the bottom is a miss—keep the paddle under
+        Walls and ceiling bounce. Only the bottom is a miss; keep the paddle under
         the cyan pixel.
       </p>
       <Link
