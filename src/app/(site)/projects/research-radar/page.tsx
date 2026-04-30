@@ -64,58 +64,66 @@ const technicalPoints = [
 
 const screenshotGallery = [
   {
-    title: "Step 1: Ranked feed with visible signals",
+    title: "Step 1: The ranked feed",
     src: "/images/projects/research-radar/recommended-emerging.png",
     route: "/recommended?family=emerging",
+    plainSummary:
+      "This is the main list. Each card shows a paper and a short breakdown of what pushed it up in the ranking for this snapshot. You don't have to take the order on faith.",
     inspectPoints: [
-      "Paper cards show score, family, topic labels, signal breakdown, run label, and snapshot version.",
-      'The useful claim is not “these are objectively the best MIR papers.” The useful claim is “the system exposes why each paper surfaced in this corpus snapshot.”',
+      "Pick any card and read the signal block below the title. That's the system's reasoning for that result.",
+      "The feed is either emerging (newer papers gaining traction in this set) or undercited (papers that look underappreciated relative to their signals).",
     ],
-    supports:
-      "Ranking behavior is inspectable and reviewable rather than hidden behind a black-box feed.",
-    doesNotProve:
-      "It does not prove human relevance quality across the full MIR/audio-ML field.",
+    conclude:
+      "The ranking isn't a black box. You can see what drove each result and compare runs when the code changes.",
+    limit:
+      "This is a curated slice of papers, not a comprehensive index of the field. It tells you what ranked highly here, not what's objectively best.",
     alt: "Research Radar recommended emerging page showing ranked paper cards with visible signal breakdowns",
   },
   {
-    title: "Step 2: Paper dossier and similar-papers pivot",
+    title: "Step 2: Paper detail and similar papers",
     src: "/images/projects/research-radar/paper-detail-similar.png",
     route: "/papers/https%3A%2F%2Fopenalex.org%2FW3093121331",
+    plainSummary:
+      "Click any card from the feed and you land here. You get the paper's full details, where it sat in the ranked list, and a set of similar papers so you can keep exploring without starting over.",
     inspectPoints: [
-      "Metadata, venue/year, citation count, topic labels, and where this paper sits in the pinned ranking run.",
-      "Similar papers (when embeddings are configured) as a second hop from a known anchor.",
+      "Venue, year, citation count, and topic tags are all in one place.",
+      "The similar papers section finds nearby results by content. Useful when one paper looks relevant and you want to see what else is around it.",
     ],
-    supports:
-      "You can move from a ranked row into a dossier and back out without losing the run context.",
-    doesNotProve:
-      "Similar-paper cosine similarity is not a human-labeled relevance benchmark; it is an inspectable retrieval convenience in this prototype.",
+    conclude:
+      "You can move from a ranked result to a full paper view and keep moving through related work without losing your place.",
+    limit:
+      "Similar papers are matched by content similarity, not hand-curated. Useful for navigation, not a quality judgment.",
     alt: "Research Radar paper detail page for GiantMIDI Piano showing metadata and similar papers",
   },
   {
-    title: "Step 3: Proxy evaluation vs citation/date baselines",
+    title: "Step 3: Evaluation against simpler sorts",
     src: "/images/projects/research-radar/evaluation-emerging.png",
     route: "/evaluation?family=emerging",
+    plainSummary:
+      "This is where I check whether the ranking is actually doing something useful. It puts the system's output next to the most obvious alternatives: sort by citation count, sort by date. If the ranking is adding value, you should be able to see it here.",
     inspectPoints: [
-      "Side-by-side lists or columns for ranked output versus simple citation-count and recency baselines.",
-      "Distribution-level and overlap-style checks that match what the API exposes today.",
+      "Compare which papers appear in the ranked list versus what you'd get from a simple sort by citations or recency.",
+      "Look at the overall shape, not just individual rows. Does the ranked list feel meaningfully different from the simple sorts?",
     ],
-    supports:
-      "You can sanity-check ranking behavior against scores everyone already understands, before making stronger quality claims.",
-    doesNotProve:
-      "This is not a temporal backtest or a hand-reviewed relevance benchmark unless/until those artifacts exist and are documented.",
+    conclude:
+      "A quick sanity check that the ranking is doing something beyond what a spreadsheet sort would give you.",
+    limit:
+      "This is a comparison against simple baselines, not a formal relevance benchmark. A useful starting point, not a final verdict.",
     alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
   },
   {
-    title: "Step 4: Corpus-scoped trends",
+    title: "Step 4: Trends in this dataset",
     src: "/images/projects/research-radar/trends.png",
     route: "/trends",
+    plainSummary:
+      "The trends page shows which topics are picking up momentum inside this particular set of papers. Not the whole field, just what the ranker actually sees.",
     inspectPoints: [
-      "Topic momentum inside the same corpus snapshot the ranker sees, not OpenAlex-wide popularity.",
+      "Topic clusters gaining momentum within this snapshot. Useful for understanding why certain papers are surfacing in the emerging feed.",
     ],
-    supports:
-      "Trends give local context for why a topic cluster might be heating up inside this slice.",
-    doesNotProve:
-      "It does not prove global field trends outside the curated ingest.",
+    conclude:
+      "Gives context for why a topic might be heating up in the ranked lists right now.",
+    limit:
+      "This reflects momentum inside the curated set only. It won't match broader field trends.",
     alt: "Research Radar trends page showing topic momentum inside the curated corpus slice",
   },
 ];
@@ -291,10 +299,14 @@ export default function ResearchRadarCaseStudyPage() {
             <h2 className="text-xl font-semibold">Visual walkthrough</h2>
           </div>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            Each step lists a route, what to look at in the UI, what honest claim
-            that view supports, and what it still does not prove. Screenshots come
-            from the live prototype and follow the usual review path: ranked feed,
-            dossier, proxy evaluation, then corpus-scoped trends.
+            Most paper tools give you a sorted list and no explanation of why
+            anything landed where it did. I built this partly to fix that and
+            partly to understand what it actually takes to build something like
+            this end to end. The way I use it: open the emerging or undercited
+            feed, read the signal note on each card before trusting the order,
+            click into a paper if it looks worth following, then check the
+            evaluation page to see whether the ranking makes sense against
+            simpler sorts like citation count or date.
           </p>
           <div className="space-y-6">
             {screenshotGallery.map((target) => {
@@ -333,23 +345,30 @@ export default function ResearchRadarCaseStudyPage() {
                         </code>
                       )}
                     </div>
+                    {"plainSummary" in target && (
+                      <p className="mt-2 text-muted-foreground">{target.plainSummary}</p>
+                    )}
                     <div className="mt-3 space-y-3 text-muted-foreground">
                       <div>
-                        <p className="font-medium text-foreground">What to inspect</p>
+                        <p className="font-medium text-foreground">What to look at</p>
                         <ul className="mt-1 list-disc pl-5">
                           {target.inspectPoints.map((pt) => (
                             <li key={pt}>{pt}</li>
                           ))}
                         </ul>
                       </div>
-                      <p>
-                        <span className="font-medium text-foreground">What this supports:</span>{" "}
-                        {target.supports}
-                      </p>
-                      <p>
-                        <span className="font-medium text-foreground">What this does not prove:</span>{" "}
-                        {target.doesNotProve}
-                      </p>
+                      {"conclude" in target && (
+                        <p>
+                          <span className="font-medium text-foreground">What you can take from this:</span>{" "}
+                          {target.conclude}
+                        </p>
+                      )}
+                      {"limit" in target && (
+                        <p>
+                          <span className="font-medium text-foreground">{"What it doesn't tell you"}:</span>{" "}
+                          {target.limit}
+                        </p>
+                      )}
                     </div>
                   </figcaption>
                 </figure>
