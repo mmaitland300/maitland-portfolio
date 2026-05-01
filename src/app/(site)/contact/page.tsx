@@ -20,7 +20,7 @@ export default function ContactPage() {
         <SectionHeader
           eyebrow="Contact"
           title="Get in Touch"
-          description="Whether it's a web project, a technical problem, something about the music, or just a question — send a message and I'll get back to you."
+          description="Whether it's a web project, a technical problem, something about the music, or just a question: send a message and I'll get back to you."
           className="mb-16"
         />
 
@@ -29,7 +29,7 @@ export default function ContactPage() {
           <div className="space-y-6 lg:col-span-1">
             <div>
               <p className="text-sm leading-relaxed text-muted-foreground">
-                I'm open to web projects — full-stack builds, fixing or improving
+                I'm open to web projects: full-stack builds, fixing or improving
                 existing sites, or just talking through an idea. If you're
                 thinking about a role or collaboration, I'm happy to hear it.
               </p>

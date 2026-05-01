@@ -7,7 +7,7 @@ import { getPublicContactEmail } from "@/lib/site-contact";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Full-stack web developer and technical support specialist. Day job is Auxillium supporting Full Swing simulators; side work is web apps, audio software, and research prototypes — same habits, different problem domains.",
+    "Full-stack web developer and technical support specialist. Day job is Auxillium supporting Full Swing simulators; side work is web apps, audio software, and research prototypes. Same habits, different problem domains.",
 };
 
 export default function AboutPage() {
