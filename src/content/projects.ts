@@ -111,20 +111,20 @@ export const projects: Project[] = [
     slug: "research-radar",
     title: "Research Radar",
     description:
-      "A working prototype for MIR and audio ML papers: ranked emerging and undercited feeds where you can see why each result landed where it did, plus paper detail, trends, evaluation, and bridge diagnostics.",
+      "A working prototype for MIR and audio ML papers: ranked emerging and undercited feeds with visible signal breakdowns, plus paper detail, trends, evaluation, and bridge experiments.",
     problem:
-      "Paper discovery tools often hide why something surfaced. I wanted ranked lists where the signals are visible so you can compare versions without guessing what moved.",
+      "Paper discovery tools often hide the signals behind ranking. I wanted ranked lists where those signals are visible so you can compare versions without guessing what moved.",
     constraints:
       "Solo prototype, curated corpus, no human-labeled relevance benchmark, and ranking claims limited to visible signals and baseline comparisons.",
     tradeoff:
       "I focused first on saving ranking runs, exposing signal breakdowns, and making the prototype understandable before pushing harder on more experimental ranking ideas.",
     outcome:
-      "The current prototype has working emerging and undercited feeds, paper detail with similar papers, a trends view, an evaluation page for comparing output against simple baselines, and bridge as a diagnostics surface.",
+      "The current prototype has working emerging and undercited feeds, paper detail with similar papers, a trends view, an evaluation page for comparing output against simple baselines, and a separate bridge experiment.",
     status: "live-prototype",
     evidence:
       "The strongest stable claim today is that the prototype makes its ranking behavior visible and understandable over a curated set of MIR and audio ML papers.",
     knownLimits:
-      "Bridge is diagnostics only, not a full recommender; semantic similarity is not the default ranking signal (it may appear on certain runs when the UI labels it); the corpus is still narrower than the long-term plan.",
+      "Bridge is an experimental view separate from the main recommender; semantic similarity only appears in runs where the UI labels it; the corpus is still narrower than the long-term plan.",
     proofLinks: [
       {
         label: "Research Radar case study",
@@ -276,7 +276,7 @@ export const projects: Project[] = [
     slug: "snake-detector",
     title: "Snake Detector",
     description:
-      "Bounded snake vs no-snake computer vision with a reproducible evaluation workflow, explicit limits, and a public case study plus training repo.",
+      "Narrow snake vs no-snake computer vision with a reproducible evaluation workflow, explicit limits, and a public case study plus training repo.",
     problem:
       "The original prototype was easy to overstate: noisy data, uneven image quality, and weak licensing assumptions made headline accuracy a bad proxy for operational reliability.",
     outcome:
@@ -285,7 +285,7 @@ export const projects: Project[] = [
     evidence:
       "Public case study, reproducible CLI flow, saved artifact, and legally safe demo boundary.",
     knownLimits:
-      "Demo is a bounded snake vs no-snake experiment and should not be treated as species identification or field-safe classification.",
+      "Demo is a narrow snake vs no-snake experiment and should not be treated as species identification or field-safe classification.",
     proofLinks: [
       {
         label: "Snake Detector case study",

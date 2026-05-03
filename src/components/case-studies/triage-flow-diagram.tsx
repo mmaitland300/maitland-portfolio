@@ -3,13 +3,13 @@ export function TriageFlowDiagram() {
   return (
     <figure className="my-6 overflow-x-auto rounded-lg border border-border bg-muted/30 p-4">
       <figcaption className="mb-3 text-center text-xs font-medium text-muted-foreground">
-        Figure: branch-based triage (symptom to verified fix)
+        Figure: hypothesis-driven triage (symptom to verified fix)
       </figcaption>
       <svg
         viewBox="0 0 688 120"
         className="mx-auto h-auto w-full max-w-2xl text-foreground"
         role="img"
-        aria-label="Flow from symptoms through classification, branch tests, fix, and verification"
+        aria-label="Flow from symptoms through classification, targeted checks, fix, and verification"
       >
         <defs>
           <marker
@@ -26,7 +26,7 @@ export function TriageFlowDiagram() {
         {[
           { x: 8, label: "Symptoms" },
           { x: 118, label: "Classify" },
-          { x: 228, label: "Branch test" },
+          { x: 228, label: "Layer test" },
           { x: 358, label: "Fix" },
           { x: 468, label: "Verify" },
           { x: 578, label: "Document" },

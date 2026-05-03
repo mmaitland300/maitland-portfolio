@@ -16,7 +16,7 @@ What changed since the original baseline:
 
 - **Hero** - No longer frames the site as an active "build log"; headline and body tie Auxillium/Full Swing support to web and audio work explicitly. A short line under the body links **case studies** and **engineering notes** as where constraints, evidence, and limits are documented.
 - **Proof strip** - Portfolio tile **surfaces CI and test links** via `proofLinks` and `linkPick` in `proof-strip.tsx` (artifact, decision record, CI or test). Full Swing and StringFlux tiles still summarize; deep proof stays on case studies.
-- **Case studies** - StringFlux includes a **Validation boundary** block (true now / being validated / not yet claimed). Full Swing includes a **branch elimination** table. Portfolio case study **proof links** include CI workflow, env tests, contact tests, and case study + decision record.
+- **Case studies** - StringFlux includes a **Validation boundary** block (true now / being validated / not yet claimed). Full Swing includes a **hypothesis elimination** table. Portfolio case study **proof links** include CI workflow, env tests, contact tests, and case study + decision record.
 - **Projects page** - Copy and metadata separate **featured case studies** from **experiments** in the header and description.
 - **About** - Section title and lead are **method-first** ("Systems Diagnosis, Then Delivery" and layered-failure framing).
 - **Resume** - **Tiered skills** (`core` / `working` / `familiar`) include **C++, JUCE, and DSP** under Production / Working.
@@ -49,7 +49,7 @@ Each row:
 | `projects/page.tsx` | Strongest evidence is visually and verbally separated from experiments | Section header + metadata describe featured-first vs experiments | None material | keep |
 | `resume.ts` | Skills match claimed strengths | Tiered skills; C++/JUCE/DSP in working tier | Summary is still dense | optional: shorten summary |
 | `projects/portfolio-site/page.tsx` | Portfolio case study matches repo reality | Safeguards list, architecture artifact, full `proofLinks` (case study, decision record, tests, CI) | `knownLimits` still notes broad dynamic routes | optional: soften when narrowed |
-| `projects/full-swing-tech-support/page.tsx` | Multi-layer diagnosis is defensible publicly | Workflow, incident pattern, branch elimination table, evidence links | None material | keep |
+| `projects/full-swing-tech-support/page.tsx` | Multi-layer diagnosis is defensible publicly | Workflow, incident pattern, hypothesis elimination table, evidence links | None material | keep |
 | `projects/stringflux/page.tsx` | Engineering claims are grounded and bounded | Architecture, constraints, tradeoffs, validation checks, **validation boundary**, shared evidence footer | None material | keep |
 | `blog/page.tsx` | Blog reads as useful engineering writing, not a dev diary | Title, description, and list alignment with decision records / troubleshooting | No formal post-type taxonomy in frontmatter | optional: future taxonomy |
 | `projects.ts` + `projects/snake-detector/page.tsx` | Snake Detector stays an **experiment**: bounded snake vs no-snake demo, honest limits, proof package + repo; not species ID or field-ready claims | Case study sections order, known-limits callout, `proofLinks` (case study + repo), `NEXT_PUBLIC_SNAKE_DEMO_URL` (prefer direct `*.hf.space` app URL in `.env.example`) | Without URL: **shipped**, no Try demo CTA, copy stays accurate without a demo link; with URL: **operational**, demo opens in new tab | keep |

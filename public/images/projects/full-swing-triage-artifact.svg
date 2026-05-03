@@ -14,7 +14,7 @@
   <rect x="48" y="48" width="1104" height="579" rx="18" fill="#0f172a" stroke="#334155" stroke-width="2"/>
 
   <text x="84" y="110" fill="#e2e8f0" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="34" font-weight="700">
-    Full Swing Support: Branch-Based Triage Artifact
+    Full Swing Support: Hypothesis-Driven Triage
   </text>
   <text x="84" y="146" fill="#94a3b8" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="20">
     Representative production workflow used to isolate multi-layer simulator failures.
@@ -27,7 +27,7 @@
   <text x="417" y="231" text-anchor="middle" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17">Build baseline</text>
 
   <rect x="556" y="186" width="194" height="72" rx="10" fill="#111827" stroke="#475569"/>
-  <text x="653" y="231" text-anchor="middle" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17">Branch testing</text>
+  <text x="653" y="231" text-anchor="middle" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17">Layer testing</text>
 
   <rect x="792" y="186" width="194" height="72" rx="10" fill="#111827" stroke="#475569"/>
   <text x="889" y="231" text-anchor="middle" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="17">Apply low-risk fix</text>
@@ -38,7 +38,7 @@
 
   <rect x="84" y="304" width="420" height="248" rx="12" fill="#111827" stroke="#374151"/>
   <text x="108" y="340" fill="#e2e8f0" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="22" font-weight="600">
-    Failure branches checked
+    Failure paths checked
   </text>
   <text x="108" y="380" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18">- Calibration state and drift</text>
   <text x="108" y="414" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18">- Licensing and activation path</text>
@@ -54,7 +54,7 @@
     Replaced ad hoc fixes with repeatable triage paths.
   </text>
   <text x="558" y="416" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18">
-    Faster recurring-issue resolution through documented branch elimination.
+    Faster recurring-issue resolution through documented hypothesis checks.
   </text>
   <text x="558" y="450" fill="#cbd5e1" font-family="Inter, Segoe UI, Arial, sans-serif" font-size="18">
     Improved consistency under mixed hardware/software/network constraints.

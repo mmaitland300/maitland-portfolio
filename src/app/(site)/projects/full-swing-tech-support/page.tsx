@@ -41,9 +41,9 @@ const workflow = [
       "Capture current environment state and reproduce under controlled conditions to reduce noise and identify which variables are actually causal.",
   },
   {
-    step: "3. Isolate likely failure branches",
+    step: "3. Isolate likely failure paths",
     detail:
-      "Use branch-based diagnostics: test one subsystem at a time, log each result, and let evidence retire competing hypotheses.",
+      "Use layer-by-layer checks: test one subsystem at a time, log each result, and let evidence retire competing hypotheses.",
   },
   {
     step: "4. Apply lowest-risk corrective action",
@@ -69,14 +69,14 @@ const representativeIncident = [
       "DNS or ISP issue, firewall or endpoint-security block, expired license/session state, damaged local service state, restricted Windows admin surface, broken WMI namespace/class data, or a vendor-side service issue.",
   },
   {
-    label: "Branch elimination path",
+    label: "Hypothesis elimination path",
     detail:
-      "First separate basic internet reachability from application-layer communication. Browser access showed the machine could reach the API endpoint, so the next branch moved to local Windows surfaces that Core depends on: service state, Windows management APIs, WMI namespace availability, endpoint policy, and recent update/security changes.",
+      "First separate basic internet reachability from application-layer communication. Browser access showed the machine could reach the API endpoint, so the next checks moved to local Windows dependencies: service state, Windows management APIs, WMI namespace availability, endpoint policy, and recent update/security changes.",
   },
   {
     label: "Root cause pattern",
     detail:
-      "The failure was not a simple whitelist or port-forwarding problem. WMI namespace errors indicated the Windows management layer was damaged or unavailable, which made the simulator stack behave as if external communication had failed even though basic browser access still worked. This pattern is not universal: treat it as one branch when evidence points at WMI, not a default explanation for every API communication failure.",
+      "The failure pointed past whitelist or port-forwarding checks. WMI namespace errors indicated the Windows management layer was damaged or unavailable, which made the simulator stack behave as if external communication had failed even though basic browser access still worked. Use this path only when evidence points at WMI.",
   },
   {
     label: "Fix pattern",
@@ -86,11 +86,11 @@ const representativeIncident = [
   {
     label: "What changed after",
     detail:
-      "This became a reusable troubleshooting branch: when browser access works but Core still reports API communication failure, check WMI/admin-surface health before assuming firewall, DNS, port forwarding, or vendor API outage.",
+      "This became a reusable troubleshooting path: when browser access works but Core still reports API communication failure, check WMI/admin health before assuming firewall, DNS, port forwarding, or vendor API outage.",
   },
 ];
 
-const branchEliminationRows = [
+const hypothesisEliminationRows = [
   {
     symptom: "Intermittent misreads after update window",
     plausibleLayers: "Calibration + GPU/driver + OS mixed state",
@@ -184,7 +184,7 @@ export default function FullSwingCaseStudyPage() {
             <div className="relative aspect-[1200/675] w-full">
               <Image
                 src={TRIAGE_ARTIFACT_SRC}
-                alt="Branch-based triage workflow: classify symptoms, build baseline, branch testing, apply fix, verify, and document"
+                alt="Hypothesis-driven triage workflow: classify symptoms, build baseline, test likely layers, apply fix, verify, and document"
                 fill
                 unoptimized
                 className="object-contain object-center p-2 sm:p-4"
@@ -193,9 +193,8 @@ export default function FullSwingCaseStudyPage() {
               />
             </div>
             <figcaption className="border-t border-border bg-card/50 px-4 py-3 text-center text-xs leading-relaxed text-muted-foreground">
-              Same overview as the project card preview: an Auxillium-authored
-              branch-based triage sketch for multi-layer simulator support, not
-              vendor-supplied artwork from Full Swing.
+              Auxillium-authored triage sketch for multi-layer simulator
+              support, separate from Full Swing vendor artwork.
             </figcaption>
           </figure>
           <p className="mb-4 text-sm text-muted-foreground">
@@ -236,7 +235,7 @@ export default function FullSwingCaseStudyPage() {
         </section>
 
         <section className="mb-10 overflow-x-auto rounded-xl border border-border bg-card/40 p-6">
-          <h2 className="mb-3 text-xl font-semibold">Branch elimination table</h2>
+          <h2 className="mb-3 text-xl font-semibold">Hypothesis elimination table</h2>
           <p className="mb-4 text-sm text-muted-foreground">
             A compact view of how plausible layers are ruled out before locking a
             final cause pattern.
@@ -246,12 +245,12 @@ export default function FullSwingCaseStudyPage() {
               <tr className="border-b border-border text-xs uppercase tracking-wide text-muted-foreground">
                 <th className="py-2 pr-4 font-medium">Symptom</th>
                 <th className="py-2 pr-4 font-medium">Plausible layers</th>
-                <th className="py-2 pr-4 font-medium">What ruled out branches</th>
+                <th className="py-2 pr-4 font-medium">What ruled out alternatives</th>
                 <th className="py-2 font-medium">Final cause pattern</th>
               </tr>
             </thead>
             <tbody>
-              {branchEliminationRows.map((row) => (
+              {hypothesisEliminationRows.map((row) => (
                 <tr key={row.symptom} className="border-b border-border/60 align-top">
                   <td className="py-3 pr-4 text-muted-foreground">{row.symptom}</td>
                   <td className="py-3 pr-4 text-muted-foreground">
