@@ -31,7 +31,7 @@
   <text x="190" y="573" fill="#8FB1C7" font-family="Arial, sans-serif" font-size="16">useful result to the next</text>
 
   <rect x="164" y="608" width="506" height="110" rx="18" fill="#122737"/>
-  <text x="190" y="631" fill="#EDF7FF" font-family="Arial, sans-serif" font-size="24" font-weight="700">Why it is honest</text>
+  <text x="190" y="631" fill="#EDF7FF" font-family="Arial, sans-serif" font-size="24" font-weight="700">Review guardrails</text>
   <text x="190" y="659" fill="#8FB1C7" font-family="Arial, sans-serif" font-size="16">Bridge stays experimental, semantic ranking</text>
   <text x="190" y="680" fill="#8FB1C7" font-family="Arial, sans-serif" font-size="16">is labelled when used, and evaluation</text>
   <text x="190" y="701" fill="#8FB1C7" font-family="Arial, sans-serif" font-size="16">makes ranking behavior inspectable.</text>
@@ -57,8 +57,8 @@
   <text x="764" y="587" fill="#EDF7FF" font-family="Arial, sans-serif" font-size="24" font-weight="700">What is stable today</text>
   <text x="764" y="621" fill="#8FB1C7" font-family="Arial, sans-serif" font-size="16">Stable: explainable ranked feeds with</text>
   <text x="764" y="642" fill="#8FB1C7" font-family="Arial, sans-serif" font-size="16">visible signal breakdowns</text>
-  <text x="764" y="667" fill="#8FB1C7" font-family="Arial, sans-serif" font-size="16">Experimental: bridge view is visible, but</text>
-  <text x="764" y="688" fill="#8FB1C7" font-family="Arial, sans-serif" font-size="16">still off by default</text>
+  <text x="764" y="667" fill="#8FB1C7" font-family="Arial, sans-serif" font-size="16">Experimental: bridge view is visible and</text>
+  <text x="764" y="688" fill="#8FB1C7" font-family="Arial, sans-serif" font-size="16">separate from the default feed</text>
 
   <rect x="764" y="737" width="112" height="34" rx="17" fill="#163247"/>
   <text x="792" y="759" fill="#8EDBFF" font-family="Arial, sans-serif" font-size="16" font-weight="700">Next.js</text>

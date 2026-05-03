@@ -135,19 +135,19 @@ const currentState = {
     "The most useful thing it does right now: you can see the ranking logic, compare runs, and check it against simpler sorts.",
   ],
   experimental: [
-    "Bridge signal is measured and shown, but the deployed build keeps its weight at zero in final_score while the feature is being tested.",
+    "In the referenced stable run, bridge weight is zero, so final_score does not use the bridge signal.",
     "I tested weighted variations; with the current signals the deck order barely moved, so the next lever is the bridge features themselves.",
     "The next step is likely better bridge signals and tighter filtering before touching the scalar weights again.",
   ],
   caveats: [
     "General semantic relevance is not treated as a default quality score. Some pinned emerging runs use embedding fit as one ranking feature, and the live UI labels when that feature is used.",
-    "Bridge is separate from the main recommendation path, and its deployed weight is currently zero.",
+    "Bridge is currently presented as an experiment, separate from the main recommendation path.",
     "The corpus is still curated and narrower than the long-term vision.",
   ],
 };
 
 const lessonsLearned =
-  "Building the explanation layer early turned out to matter more than I expected. Once each run stored why it ranked the way it did, comparing versions became straightforward instead of guesswork. Keeping bridge visible but clearly off by default also helped: the core flow stayed focused, and I could work on the experimental side without it polluting the main results. The evaluation page earned its place too. I kept expecting a single summary score to be enough, and it never was. Seeing the full comparison grid against simple sorts was always more honest.";
+  "Building the explanation layer early turned out to matter more than I expected. Once each run stored why it ranked the way it did, comparing versions became straightforward instead of guesswork. Keeping bridge visible as a separate experimental view also helped: the core flow stayed focused, and I could work on the experimental side without it polluting the main results. The evaluation page earned its place too. I kept expecting a single summary score to be enough, and it never was. Seeing the full comparison grid against simple sorts was always more honest.";
 
 export const metadata: Metadata = {
   title: "Research Radar: Explainable Discovery Prototype",
@@ -197,7 +197,7 @@ export default function ResearchRadarCaseStudyPage() {
             Research Radar: explainable discovery for MIR and audio ML papers
           </h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">
-            Research Radar is still a working prototype. The goal is
+            Research Radar is a working prototype. The goal is
             straightforward: ranked lists of MIR and audio ML papers
             where you can see why each result landed where it did. You can move
             from the main feed into a paper, check the evaluation against simpler
@@ -393,7 +393,7 @@ export default function ResearchRadarCaseStudyPage() {
             <ul className="mt-2 list-disc pl-5 text-muted-foreground">
               <li>Bridge signal is measured and shown.</li>
               <li>
-                In the deployed build, bridge weight is zero, so{" "}
+                In the referenced stable run, bridge weight is zero, so{" "}
                 <code className="rounded bg-muted px-1 py-0.5 text-xs">final_score</code> does not
                 use the bridge signal.
               </li>
