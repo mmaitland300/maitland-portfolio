@@ -35,7 +35,7 @@ const mainSurfaces = [
   {
     title: "Trends in the current dataset",
     detail:
-      "The trends page shows which topics are gaining traction inside the papers the ranker is working with. Useful context for why something keeps surfacing in the feeds.",
+      "The trends page shows which topics are gaining traction inside the papers the ranker is working with. Useful context for recurring topics in the feeds.",
   },
   {
     title: "Evaluation and comparison",
@@ -58,7 +58,7 @@ const technicalPoints = [
   {
     title: "Experimental ideas stay visible and clearly labelled",
     detail:
-      "Bridge is the main example: the signal is measured and shown in the UI, but it's not weighted into the final score yet, and it's clearly marked as a diagnostics surface rather than a finished feature. I'd rather show the work in progress than hide it.",
+      "Bridge is the main example: the signal is measured and shown in the UI, but it is kept out of the final score until the feature is strong enough to earn that role. I'd rather show the work in progress than hide it.",
   },
 ];
 
@@ -74,9 +74,9 @@ const screenshotGallery = [
       "The feed is either emerging (newer papers gaining traction in this set) or undercited (papers that look underappreciated relative to their signals).",
     ],
     conclude:
-      "The ranking isn't a black box. You can see what drove each result and compare runs when the code changes.",
+      "The signal mix is visible enough to explain each result and compare runs when the code changes.",
     limit:
-      "This is a curated slice of papers, not a comprehensive index of the field. It tells you what ranked highly here, not what's objectively best.",
+      "The corpus is curated and narrower than the field. Objective best-paper claims are out of scope.",
     alt: "Research Radar recommended emerging page showing ranked paper cards with visible signal breakdowns",
   },
   {
@@ -92,7 +92,7 @@ const screenshotGallery = [
     conclude:
       "You can move from a ranked result to a full paper view and keep moving through related work without losing your place.",
     limit:
-      "Similar papers are matched by content similarity, not hand-curated. Useful for navigation, not a quality judgment.",
+      "Similar papers are matched by content similarity. Treat them as navigation aids, not quality judgments.",
     alt: "Research Radar paper detail page for GiantMIDI Piano showing metadata and similar papers",
   },
   {
@@ -108,7 +108,7 @@ const screenshotGallery = [
     conclude:
       "A quick sanity check that the ranking is doing something beyond what a spreadsheet sort would give you.",
     limit:
-      "This is a comparison against simple baselines, not a formal relevance benchmark. A useful starting point, not a final verdict.",
+      "This compares against simple baselines. It is a useful starting point before a formal relevance benchmark exists.",
     alt: "Research Radar evaluation page comparing ranked output against citation and date baselines",
   },
   {
@@ -116,7 +116,7 @@ const screenshotGallery = [
     src: "/images/projects/research-radar/trends.png",
     route: "/trends",
     plainSummary:
-      "The trends page shows which topics are picking up momentum inside this particular set of papers. Not the whole field, just what the ranker actually sees.",
+      "The trends page shows which topics are picking up momentum inside the papers the ranker actually sees.",
     inspectPoints: [
       "Topic clusters gaining momentum within this snapshot. Useful for understanding why certain papers are surfacing in the emerging feed.",
     ],
@@ -124,24 +124,24 @@ const screenshotGallery = [
       "Gives context for why a topic might be heating up in the ranked lists right now.",
     limit:
       "This reflects momentum inside the curated set only. It won't match broader field trends.",
-    alt: "Research Radar trends page showing topic momentum inside the curated corpus slice",
+    alt: "Research Radar trends page showing topic momentum inside the curated corpus",
   },
 ];
 
 const currentState = {
   stable: [
-    "The two main feeds (emerging and undercited) are working and show you why each paper ranked where it did. Bridge is visible as a diagnostics surface, not a full recommender yet.",
+    "The two main feeds (emerging and undercited) are working and show you why each paper ranked where it did. Bridge is visible as a separate experimental view.",
     "Paper detail, trends, and evaluation are all working parts of the prototype.",
     "The most useful thing it does right now: you can see the ranking logic, compare runs, and check it against simpler sorts.",
   ],
   experimental: [
-    "Bridge is a preview/diagnostics route: bridge signal is measured and shown, but in the current public run it is not weighted into final_score, so it should not be read as a validated bridge recommender.",
+    "Bridge signal is measured and shown, but the deployed build keeps its weight at zero in final_score while the feature is being tested.",
     "I tested weighted variations; with the current signals the deck order barely moved, so the next lever is the bridge features themselves.",
     "The next step is likely better bridge signals and tighter filtering before touching the scalar weights again.",
   ],
   caveats: [
-    "General semantic relevance is not treated as a default quality score. Some pinned emerging runs use embedding slice-fit as one bounded ranking feature, and the live UI labels when that feature is used.",
-    "Bridge is available as an explicitly labeled preview/diagnostics surface; it is not the default recommendation path and bridge weight is zero in the current public run.",
+    "General semantic relevance is not treated as a default quality score. Some pinned emerging runs use embedding fit as one ranking feature, and the live UI labels when that feature is used.",
+    "Bridge is separate from the main recommendation path, and its deployed weight is currently zero.",
     "The corpus is still curated and narrower than the long-term vision.",
   ],
 };
@@ -152,7 +152,7 @@ const lessonsLearned =
 export const metadata: Metadata = {
   title: "Research Radar: Explainable Discovery Prototype",
   description:
-    "Case study for Research Radar, a product-shaped prototype for MIR and audio ML: emerging and undercited rankings, bridge diagnostics, similarity, trends, and transparent evaluation.",
+    "Case study for Research Radar, a working prototype for MIR and audio ML: emerging and undercited rankings, bridge experiments, similarity, trends, and evaluation.",
 };
 
 function buildLiveRoute(demoUrl: string | undefined, route: string) {
@@ -197,14 +197,14 @@ export default function ResearchRadarCaseStudyPage() {
             Research Radar: explainable discovery for MIR and audio ML papers
           </h1>
           <p className="mt-4 max-w-3xl text-muted-foreground">
-            Research Radar is a working prototype, not a finished product. The
-            goal is straightforward: ranked lists of MIR and audio ML papers
+            Research Radar is still a working prototype. The goal is
+            straightforward: ranked lists of MIR and audio ML papers
             where you can see why each result landed where it did. You can move
             from the main feed into a paper, check the evaluation against simpler
             sorts, and follow trends in the current dataset without losing the
             reasoning behind the order. The live app runs separately from this
-            case study; the bridge feature is visible as a diagnostics surface
-            but is not part of the main recommendation flow yet.
+            case study; the bridge feature is visible as a separate experimental
+            view and is kept out of the main recommendation flow for now.
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
             <a
@@ -233,8 +233,8 @@ export default function ResearchRadarCaseStudyPage() {
           <p className="max-w-3xl text-[15px] leading-7 text-muted-foreground">
             Research Radar focuses on one reviewer workflow: inspect ranked
             recommendations, open a paper dossier, compare against baselines, and
-            read trends in corpus context. The core value is transparency, not a
-            black-box recommendation claim.
+            read trends in corpus context. The core value is showing the signals
+            behind the ranking.
           </p>
           <div className="mt-6 grid gap-3 md:grid-cols-2">
             {mainSurfaces.map((surface) => (
@@ -257,7 +257,7 @@ export default function ResearchRadarCaseStudyPage() {
           <div className="mb-4 flex items-center gap-2">
             <Network className="h-5 w-5 text-brand-violet" />
             <h2 className="text-xl font-semibold">
-              Engineering choices, in plain language
+              Engineering choices
             </h2>
           </div>
           <div className="space-y-4">
@@ -273,9 +273,9 @@ export default function ResearchRadarCaseStudyPage() {
         <section className="mb-10 rounded-xl border border-amber-500/35 bg-amber-500/5 p-6">
           <h2 className="mb-3 text-xl font-semibold">Scope and evaluation boundaries</h2>
           <p className="mb-3 text-sm leading-relaxed text-muted-foreground">
-            Current corpus scope is intentionally narrow. The deployed slice is a
-            curated prototype around the currently wired bootstrap sources, and it
-            should not be read as a comprehensive index of audio-ML literature.
+            Current corpus scope is intentionally narrow. The deployed corpus is
+            curated around the currently wired bootstrap sources, and it should
+            not be read as a comprehensive index of audio-ML literature.
           </p>
           <p className="text-sm leading-relaxed text-muted-foreground">
             Evaluation here is proxy-only: citation/date baselines, topic-mix and
@@ -359,7 +359,7 @@ export default function ResearchRadarCaseStudyPage() {
                       )}
                       {"limit" in target && (
                         <p>
-                          <span className="font-medium text-foreground">{"What it doesn't tell you"}:</span>{" "}
+                          <span className="font-medium text-foreground">Boundary:</span>{" "}
                           {target.limit}
                         </p>
                       )}
@@ -371,7 +371,7 @@ export default function ResearchRadarCaseStudyPage() {
           </div>
           <div className="mt-6 rounded-lg border border-border bg-card/30 px-4 py-4 text-sm">
             <h3 className="font-medium text-foreground">
-              Optional: Bridge preview (diagnostics)
+              Optional: Bridge experiment
             </h3>
             <p className="mt-2 text-muted-foreground">
               Route:{" "}
@@ -393,13 +393,11 @@ export default function ResearchRadarCaseStudyPage() {
             <ul className="mt-2 list-disc pl-5 text-muted-foreground">
               <li>Bridge signal is measured and shown.</li>
               <li>
-                In the current public run, bridge weight is zero, so{" "}
+                In the deployed build, bridge weight is zero, so{" "}
                 <code className="rounded bg-muted px-1 py-0.5 text-xs">final_score</code> does not
                 use the bridge signal.
               </li>
-              <li>
-                Treat this as diagnostics / preview, not a validated bridge recommender.
-              </li>
+              <li>Bridge is still experimental and separate from the main recommender.</li>
             </ul>
           </div>
           <div className="mt-6 border-t border-border pt-4">
@@ -415,13 +413,9 @@ export default function ResearchRadarCaseStudyPage() {
               </a>
             ) : (
               <p className="max-w-md text-sm text-muted-foreground">
-                The live prototype is deployed separately from this site, but no
-                public demo URL is configured right now. Set{" "}
-                <code className="rounded bg-muted px-1 py-0.5 text-xs">
-                  NEXT_PUBLIC_RESEARCH_RADAR_URL
-                </code>{" "}
-                to a valid https URL (or remove an invalid value) to restore the
-                link.
+                The live prototype is deployed separately from this site, but the
+                public demo link is not configured right now. The case study and
+                source repository remain available below.
               </p>
             )}
           </div>
@@ -434,8 +428,7 @@ export default function ResearchRadarCaseStudyPage() {
             history, linked tests, roadmap notes, and the screenshot baseline
             shown in the walkthrough above. Internal hosting
             details are intentionally omitted; the live prototype uses the stable
-            radar.mmaitland.dev subdomain, with an environment override
-            available for preview or migration deployments.
+            radar.mmaitland.dev subdomain.
           </p>
         </section>
 

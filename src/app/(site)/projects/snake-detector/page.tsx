@@ -18,9 +18,9 @@ import { getProjectBySlug } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
-  title: "Snake Detector: Bounded CV Demo",
+  title: "Snake Detector: Narrow CV Demo",
   description:
-    "A bounded snake vs no-snake demo with reproducible training workflow, explicit limits, and proof artifacts. Scope stops short of species ID or field wildlife workflows.",
+    "A snake vs no-snake demo with reproducible training workflow, explicit limits, and proof artifacts. Scope stops short of species ID or field wildlife workflows.",
 };
 
 export const dynamic = "force-dynamic";
@@ -83,7 +83,7 @@ export default function SnakeDetectorCaseStudyPage() {
             <Badge variant="secondary">Experiment</Badge>
           </div>
           <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Snake Detector: a bounded computer-vision demo with reproducible proof
+            Snake Detector: a narrow computer-vision demo with reproducible proof
           </h1>
           <p className="mt-4 max-w-3xl text-muted-foreground leading-relaxed">
             This project started as a model experiment. The workflow, dataset
@@ -110,13 +110,8 @@ export default function SnakeDetectorCaseStudyPage() {
               </a>
             ) : (
               <p className="max-w-md text-sm text-muted-foreground">
-                No public demo URL is configured. Set{" "}
-                <code className="rounded bg-muted px-1 py-0.5 text-xs">
-                  NEXT_PUBLIC_SNAKE_DEMO_URL
-                </code>{" "}
-                to a valid https URL (or remove an invalid value) to restore the
-                link. Use the proof package and repository below for artifacts
-                and reproduction.
+                No public demo link is configured right now. Use the proof
+                package and repository below for artifacts and reproduction.
               </p>
             )}
             <a
@@ -166,7 +161,7 @@ export default function SnakeDetectorCaseStudyPage() {
                 >
                   live demo
                 </a>{" "}
-                in a new tab. Upload a photo and get a bounded snake vs no-snake
+                in a new tab. Upload a photo and get a narrow snake vs no-snake
                 prediction from the current public build.
               </p>
               <p className="mt-3 text-xs text-muted-foreground">
@@ -197,7 +192,7 @@ export default function SnakeDetectorCaseStudyPage() {
                 <span className="font-medium text-foreground/90">
                   Deployment and inference path:
                 </span>{" "}
-                a working public endpoint with bounded inputs and outputs.
+                a working public endpoint with limited inputs and outputs.
               </li>
             ) : (
               <li>
@@ -205,7 +200,7 @@ export default function SnakeDetectorCaseStudyPage() {
                   Deployment and inference path:
                 </span>{" "}
                 there is no in-browser demo linked from this site; scripts and
-                saved artifacts in the repository define bounded inference and how
+                saved artifacts in the repository define the inference boundary and how
                 to run it.
               </li>
             )}

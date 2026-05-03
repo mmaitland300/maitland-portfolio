@@ -34,8 +34,8 @@ export function Footer() {
               </span>
             </Link>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-              Technical support specialist building reliable web tools, audio
-              software, and research prototypes.
+              Technical support specialist building practical web software,
+              audio tools, and research prototypes.
             </p>
           </div>
 
@@ -99,8 +99,8 @@ export function Footer() {
               Site source
             </a>
             <span className="text-muted-foreground">
-              {" "}
-              · Next.js, TypeScript, Tailwind
+              {" | "}
+              Next.js, TypeScript, Tailwind
             </span>
           </p>
         </div>
