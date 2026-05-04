@@ -63,7 +63,7 @@ export const projects: Project[] = [
     slug: "stringflux",
     title: "StringFlux",
     description:
-      "A multiband granular delay and freeze plugin I'm building for guitar. It listens for transients and uses them to drive grain scheduling, so pick attacks and sustained lines steer the grain cloud the same way they steer your hands.",
+      "A multiband granular delay and freeze plugin for guitar. The effect reacts to how you play, not just what you play — pick attacks and sustained lines drive grain scheduling so the texture follows the performance.",
     problem:
       "Most granular processors treat every input the same. For stringed instruments, that means pick attacks get smeared and the effect feels disconnected from the performance.",
     constraints:
