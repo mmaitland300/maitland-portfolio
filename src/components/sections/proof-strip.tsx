@@ -77,10 +77,13 @@ export function ProofStrip() {
 
   return (
     <section
-      aria-label="Evidence links for featured work"
+      aria-labelledby="proof-strip-heading"
       className="border-t border-border/30 pt-8 pb-8 md:pt-10"
     >
       <div className="mx-auto max-w-6xl px-6">
+        <h2 id="proof-strip-heading" className="sr-only">
+          Evidence links for featured work
+        </h2>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((project) => {
             const curated = isHomepageFeaturedSlug(project.slug)
@@ -96,9 +99,9 @@ export function ProofStrip() {
                 key={project.slug}
                 className="rounded-lg border border-border bg-card/40 px-4 py-3"
               >
-                <h2 className="text-sm font-medium text-foreground">
+                <h3 className="text-sm font-medium text-foreground">
                   {curated?.what ?? project.title}
-                </h2>
+                </h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
                   {curated?.whyItMatters ?? project.evidence ?? project.description}
                 </p>
