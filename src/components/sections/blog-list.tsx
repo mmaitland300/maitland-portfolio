@@ -26,13 +26,20 @@ export function BlogList({ posts, tags }: BlogListProps) {
     <div>
       {/* Tag filter */}
       {tags.length > 0 && (
-        <div className="flex flex-wrap justify-center gap-2 mb-10">
+        <div
+          role="group"
+          aria-label="Filter posts by tag"
+          className="mb-10 flex flex-wrap justify-center gap-2"
+        >
           <button
+            type="button"
+            aria-pressed={activeTag === null}
+            aria-controls="blog-list-filter-results"
             onClick={() => setActiveTag(null)}
             className={cn(
-              "px-3 py-1.5 rounded-md text-xs font-medium transition-colors",
+              "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
               !activeTag
-                ? "bg-brand-violet/20 text-brand-violet border border-brand-violet/30"
+                ? "border border-brand-violet/30 bg-brand-violet/20 text-brand-violet"
                 : "bg-muted text-muted-foreground hover:text-foreground"
             )}
           >
@@ -41,11 +48,14 @@ export function BlogList({ posts, tags }: BlogListProps) {
           {tags.map((tag) => (
             <button
               key={tag}
+              type="button"
+              aria-pressed={activeTag === tag}
+              aria-controls="blog-list-filter-results"
               onClick={() => setActiveTag(tag === activeTag ? null : tag)}
               className={cn(
-                "px-3 py-1.5 rounded-md text-xs font-medium transition-colors",
+                "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
                 tag === activeTag
-                  ? "bg-brand-violet/20 text-brand-violet border border-brand-violet/30"
+                  ? "border border-brand-violet/30 bg-brand-violet/20 text-brand-violet"
                   : "bg-muted text-muted-foreground hover:text-foreground"
               )}
             >
@@ -56,7 +66,7 @@ export function BlogList({ posts, tags }: BlogListProps) {
       )}
 
       {/* Post list */}
-      <div className="space-y-6">
+      <div id="blog-list-filter-results" className="space-y-6">
         {filtered.map((post, i) => (
           <motion.article
             key={post.slug}

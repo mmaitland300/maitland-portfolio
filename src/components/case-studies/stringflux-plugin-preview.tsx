@@ -49,7 +49,10 @@ export function StringFluxPluginPreview() {
   return (
     <>
       <figure className="overflow-hidden rounded-xl border border-border bg-zinc-950">
-        <div className="flex justify-center bg-zinc-950 p-2">
+        <div
+          id="stringflux-plugin-preview-panel"
+          className="flex justify-center bg-zinc-950 p-2"
+        >
           <button
             type="button"
             onClick={() => setZoomed(true)}
@@ -71,19 +74,28 @@ export function StringFluxPluginPreview() {
           </button>
         </div>
         <div className="flex items-center justify-center gap-2 border-t border-border bg-zinc-950/80 px-4 py-2.5">
-          {views.map((view, i) => (
-            <button
-              key={view.label}
-              onClick={() => setActive(i)}
-              className={`rounded-md px-3 py-1 font-mono text-xs transition-colors ${
-                i === active
-                  ? "bg-brand-violet/20 text-brand-violet"
-                  : "text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {view.label}
-            </button>
-          ))}
+          <div
+            role="group"
+            aria-label="Plugin interface layout"
+            className="flex items-center gap-2"
+          >
+            {views.map((view, i) => (
+              <button
+                key={view.label}
+                type="button"
+                aria-pressed={i === active}
+                aria-controls="stringflux-plugin-preview-panel"
+                onClick={() => setActive(i)}
+                className={`rounded-md px-3 py-1 font-mono text-xs transition-colors ${
+                  i === active
+                    ? "bg-brand-violet/20 text-brand-violet"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                {view.label}
+              </button>
+            ))}
+          </div>
           <span className="ml-auto font-mono text-[10px] text-muted-foreground/50">
             v0.3-dev
           </span>

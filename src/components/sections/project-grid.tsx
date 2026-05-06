@@ -31,8 +31,15 @@ export function ProjectGrid() {
         </p>
       </div>
 
-      <div className="mb-10 flex flex-wrap justify-center gap-2">
+      <div
+        role="group"
+        aria-label="Filter projects by tag"
+        className="mb-10 flex flex-wrap justify-center gap-2"
+      >
         <button
+          type="button"
+          aria-pressed={activeTag === null}
+          aria-controls="project-grid-filter-results"
           onClick={() => setActiveTag(null)}
           className={cn(
             "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
@@ -46,6 +53,9 @@ export function ProjectGrid() {
         {allTags.map((tag) => (
           <button
             key={tag}
+            type="button"
+            aria-pressed={activeTag === tag}
+            aria-controls="project-grid-filter-results"
             onClick={() => setActiveTag(tag === activeTag ? null : tag)}
             className={cn(
               "rounded-md px-3 py-1.5 text-xs font-medium transition-colors",
@@ -59,7 +69,10 @@ export function ProjectGrid() {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+      <div
+        id="project-grid-filter-results"
+        className="grid grid-cols-1 gap-6 md:grid-cols-2"
+      >
         {filtered.map((project, i) => (
           <ProjectCard key={project.slug} project={project} index={i} />
         ))}
