@@ -18,6 +18,7 @@ import { ProjectComments } from "@/components/sections/project-comments";
 import { CaseStudyEvidenceFooter } from "@/components/sections/case-study-evidence-footer";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button-variants";
+import { SectionHeader } from "@/components/ui/section-header";
 import { getProjectBySlug } from "@/content/projects";
 import { cn } from "@/lib/utils";
 
@@ -187,42 +188,40 @@ export default function ResearchRadarCaseStudyPage() {
         </Link>
 
         <header className="mb-12">
-          <div className="mb-4 flex flex-wrap gap-2">
-            <Badge variant="secondary">Next.js</Badge>
-            <Badge variant="secondary">FastAPI</Badge>
-            <Badge variant="secondary">Postgres + pgvector</Badge>
-            <Badge variant="secondary">Ranking prototype</Badge>
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Research Radar: explainable discovery for MIR and audio ML papers
-          </h1>
-          <p className="mt-4 max-w-3xl text-muted-foreground">
-            Research Radar is a working prototype. The goal is
-            straightforward: ranked lists of MIR and audio ML papers
-            where you can see why each result landed where it did. You can move
-            from the main feed into a paper, check the evaluation against simpler
-            sorts, and follow trends in the current dataset without losing the
-            reasoning behind the order. The live app runs separately from this
-            case study; the bridge feature is visible as a separate experimental
-            view and is kept out of the main recommendation flow for now.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
-            >
-              <Github className="mr-1.5 h-4 w-4" />
-              View source
-            </a>
-            <a
-              href="#visual-walkthrough"
-              className={cn(buttonVariants({ variant: "ghost", size: "lg" }))}
-            >
-              See walkthrough
-            </a>
-          </div>
+          <SectionHeader
+            align="left"
+            eyebrow="Case Study"
+            title="Research Radar: explainable discovery for MIR and audio ML papers"
+            description="Research Radar is a working prototype. The goal is straightforward: ranked lists of MIR and audio ML papers where you can see why each result landed where it did. You can move from the main feed into a paper, check the evaluation against simpler sorts, and follow trends in the current dataset without losing the reasoning behind the order. The live app runs separately from this case study; the bridge feature is visible as a separate experimental view and is kept out of the main recommendation flow for now."
+            descriptionClassName="max-w-3xl"
+            badges={
+              <>
+                <Badge variant="secondary">Next.js</Badge>
+                <Badge variant="secondary">FastAPI</Badge>
+                <Badge variant="secondary">Postgres + pgvector</Badge>
+                <Badge variant="secondary">Ranking prototype</Badge>
+              </>
+            }
+            actions={
+              <>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(buttonVariants({ variant: "outline", size: "lg" }))}
+                >
+                  <Github className="mr-1.5 h-4 w-4" />
+                  View source
+                </a>
+                <a
+                  href="#visual-walkthrough"
+                  className={cn(buttonVariants({ variant: "ghost", size: "lg" }))}
+                >
+                  See walkthrough
+                </a>
+              </>
+            }
+          />
         </header>
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6 sm:p-7">

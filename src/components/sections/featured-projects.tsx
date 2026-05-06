@@ -13,8 +13,8 @@ export function FeaturedProjects() {
   const featured = getHomepageFeaturedProjects();
   const researchRadarDemoUrl = getResearchRadarDemoUrl();
   const featuredDescription = researchRadarDemoUrl
-    ? "Three live projects with public case studies: StringFlux, Research Radar, and Full Swing support. More on the projects page."
-    : "Three projects with public case studies and repositories: StringFlux, Research Radar, and Full Swing support. More on the projects page.";
+    ? "Three live projects with public case studies: StringFlux, Research Radar, and Full Swing support. This homepage row is a compact preview; the projects page expands each case study card."
+    : "Three projects with public case studies and repositories: StringFlux, Research Radar, and Full Swing support. This homepage row is a compact preview; the projects page expands each case study card.";
 
   return (
     <section className="py-24 relative z-10">

@@ -11,6 +11,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { SectionHeader } from "@/components/ui/section-header";
 import { StringFluxSignalDiagram } from "@/components/case-studies/stringflux-signal-diagram";
 import { CaseStudyEvidenceFooter } from "@/components/sections/case-study-evidence-footer";
 import { ProjectComments } from "@/components/sections/project-comments";
@@ -126,20 +127,21 @@ export default function StringFluxCaseStudyPage() {
         </Link>
 
         <header className="mb-12">
-          <div className="mb-4 flex flex-wrap gap-2">
-            <Badge variant="secondary">Audio Plugin</Badge>
-            <Badge variant="secondary">DSP</Badge>
-            <Badge variant="secondary">Granular Synthesis</Badge>
-            <Badge variant="secondary">Transient Processing</Badge>
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            StringFlux: DSP Architecture Case Study
-          </h1>
-          <p className="mt-4 max-w-3xl text-muted-foreground">
-            StringFlux is a transient-aware, multiband granular delay and freeze
-            plugin for stringed instruments. The design goal is to turn one
-            performance into layered texture while preserving playable response.
-          </p>
+          <SectionHeader
+            align="left"
+            eyebrow="Case Study"
+            title="StringFlux: DSP Architecture Case Study"
+            description="StringFlux is a transient-aware, multiband granular delay and freeze plugin for stringed instruments. The design goal is to turn one performance into layered texture while preserving playable response."
+            descriptionClassName="max-w-3xl"
+            badges={
+              <>
+                <Badge variant="secondary">Audio Plugin</Badge>
+                <Badge variant="secondary">DSP</Badge>
+                <Badge variant="secondary">Granular Synthesis</Badge>
+                <Badge variant="secondary">Transient Processing</Badge>
+              </>
+            }
+          />
         </header>
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">

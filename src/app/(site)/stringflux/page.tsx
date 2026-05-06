@@ -3,6 +3,7 @@ import Link from "next/link";
 import { MainContentAnchor } from "@/components/layout/main-content-anchor";
 import { FileText, Layers3, Music2, Zap, ArrowRight } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { SectionHeader } from "@/components/ui/section-header";
 import { StringFluxPluginPreview } from "@/components/case-studies/stringflux-plugin-preview";
 import { StringFluxWaitlistForm } from "@/components/sections/stringflux-waitlist-form";
 
@@ -38,39 +39,42 @@ export default function StringFluxPage() {
     <div className="py-24">
       <MainContentAnchor />
       <div className="mx-auto max-w-4xl px-6">
-        <header className="mb-16 text-center">
-          <div className="mb-4 flex flex-wrap justify-center gap-2">
-            <Badge variant="secondary">Audio Plugin</Badge>
-            <Badge variant="secondary">DSP</Badge>
-            <Badge
-              variant="secondary"
-              className="border-amber-500/30 bg-amber-500/10 text-amber-400"
-            >
-              In Development
-            </Badge>
-          </div>
-          <h1 className="text-gradient-brand text-4xl font-bold tracking-tight sm:text-5xl">
-            StringFlux
-          </h1>
-          <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-            Transient-aware multiband granular delay and freeze for guitar and
-            stringed instruments. Turn a single performance into layered texture
-            while keeping the response playable.
-          </p>
-          <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <a
-              href="#waitlist"
-              className="inline-flex items-center gap-2 rounded-lg border-0 bg-brand-cta-gradient px-5 py-2.5 text-sm font-medium text-white shadow-brand-cta"
-            >
-              Join the waitlist <ArrowRight className="h-4 w-4" />
-            </a>
-            <Link
-              href="/projects/stringflux"
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
-              <FileText className="h-4 w-4" /> DSP case study
-            </Link>
-          </div>
+        <header className="mb-16">
+          <SectionHeader
+            eyebrow="Product"
+            title="StringFlux"
+            titleClassName="text-gradient-brand font-bold"
+            description="Transient-aware multiband granular delay and freeze for guitar and stringed instruments. Turn a single performance into layered texture while keeping the response playable."
+            descriptionClassName="text-lg leading-relaxed"
+            badges={
+              <>
+                <Badge variant="secondary">Audio Plugin</Badge>
+                <Badge variant="secondary">DSP</Badge>
+                <Badge
+                  variant="secondary"
+                  className="border-amber-500/30 bg-amber-500/10 text-amber-400"
+                >
+                  In Development
+                </Badge>
+              </>
+            }
+            actions={
+              <>
+                <a
+                  href="#waitlist"
+                  className="inline-flex items-center gap-2 rounded-lg border-0 bg-brand-cta-gradient px-5 py-2.5 text-sm font-medium text-white shadow-brand-cta"
+                >
+                  Join the waitlist <ArrowRight className="h-4 w-4" />
+                </a>
+                <Link
+                  href="/projects/stringflux"
+                  className="inline-flex items-center gap-2 rounded-lg border border-border px-5 py-2.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  <FileText className="h-4 w-4" /> DSP case study
+                </Link>
+              </>
+            }
+          />
         </header>
 
         <section className="mb-16" aria-labelledby="ui-section">

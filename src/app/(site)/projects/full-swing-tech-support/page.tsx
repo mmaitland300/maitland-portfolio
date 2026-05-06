@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ArrowLeft, AlertTriangle, CheckCircle2, Wrench } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { SectionHeader } from "@/components/ui/section-header";
 import { MainContentAnchor } from "@/components/layout/main-content-anchor";
 import { TriageFlowDiagram } from "@/components/case-studies/triage-flow-diagram";
 import { CaseStudyEvidenceFooter } from "@/components/sections/case-study-evidence-footer";
@@ -127,25 +128,21 @@ export default function FullSwingCaseStudyPage() {
         </Link>
 
         <header className="mb-12">
-          <div className="mb-4 flex flex-wrap gap-2">
-            <Badge variant="secondary">Technical Support</Badge>
-            <Badge variant="secondary">Troubleshooting</Badge>
-            <Badge variant="secondary">Failure Analysis</Badge>
-            <Badge variant="secondary">Operational Workflow</Badge>
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Full Swing Technical Support Case Study
-          </h1>
-          <p className="mt-4 max-w-3xl text-muted-foreground">
-            I work this role at Auxillium, which provides technical support for
-            Full Swing simulator customers. The examples here center on that
-            stack; many of the same environments also include Laser Shot or E6
-            Golf from TruGolf, supported in the same workflow. The case study is
-            about how multi-layer issues get diagnosed with
-            remote-only access, incomplete logs, and privacy limits on what can
-            be shared, where hardware, software, networking, and operating-system
-            behavior frequently overlap.
-          </p>
+          <SectionHeader
+            align="left"
+            eyebrow="Case Study"
+            title="Full Swing Technical Support Case Study"
+            description="I work this role at Auxillium, which provides technical support for Full Swing simulator customers. The examples here center on that stack; many of the same environments also include Laser Shot or E6 Golf from TruGolf, supported in the same workflow. The case study is about how multi-layer issues get diagnosed with remote-only access, incomplete logs, and privacy limits on what can be shared, where hardware, software, networking, and operating-system behavior frequently overlap."
+            descriptionClassName="max-w-3xl"
+            badges={
+              <>
+                <Badge variant="secondary">Technical Support</Badge>
+                <Badge variant="secondary">Troubleshooting</Badge>
+                <Badge variant="secondary">Failure Analysis</Badge>
+                <Badge variant="secondary">Operational Workflow</Badge>
+              </>
+            }
+          />
         </header>
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">

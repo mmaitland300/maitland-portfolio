@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import { ArrowLeft, CheckCircle2, FileCode2, Shield } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { SectionHeader } from "@/components/ui/section-header";
 import { MainContentAnchor } from "@/components/layout/main-content-anchor";
 import { CaseStudyEvidenceFooter } from "@/components/sections/case-study-evidence-footer";
 import { ProjectComments } from "@/components/sections/project-comments";
@@ -63,21 +64,21 @@ export default function PortfolioSiteCaseStudyPage() {
         </Link>
 
         <header className="mb-12">
-          <div className="mb-4 flex flex-wrap gap-2">
-            <Badge variant="secondary">Next.js</Badge>
-            <Badge variant="secondary">Auth.js</Badge>
-            <Badge variant="secondary">Prisma</Badge>
-            <Badge variant="secondary">Contact &amp; admin</Badge>
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Personal Site: Technical and Operational Choices
-          </h1>
-          <p className="mt-4 max-w-3xl text-muted-foreground">
-            This page documents how mmaitland.dev handles contact submissions,
-            optional admin access, and content delivery - the same problems as
-            any small production site, with choices tuned for one maintainer and
-            low operational overhead.
-          </p>
+          <SectionHeader
+            align="left"
+            eyebrow="Case Study"
+            title="Personal Site: Technical and Operational Choices"
+            description="This page documents how mmaitland.dev handles contact submissions, optional admin access, and content delivery - the same problems as any small production site, with choices tuned for one maintainer and low operational overhead."
+            descriptionClassName="max-w-3xl"
+            badges={
+              <>
+                <Badge variant="secondary">Next.js</Badge>
+                <Badge variant="secondary">Auth.js</Badge>
+                <Badge variant="secondary">Prisma</Badge>
+                <Badge variant="secondary">Contact &amp; admin</Badge>
+              </>
+            }
+          />
         </header>
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">

@@ -12,6 +12,7 @@ import {
   Github,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { SectionHeader } from "@/components/ui/section-header";
 import { ProjectComments } from "@/components/sections/project-comments";
 import { MlEvalWorkflowDiagram } from "@/components/case-studies/ml-eval-workflow-diagram";
 import { getProjectBySlug } from "@/content/projects";
@@ -76,60 +77,60 @@ export default function SnakeDetectorCaseStudyPage() {
         </Link>
 
         <header className="mb-10">
-          <div className="mb-4 flex flex-wrap gap-2">
-            <Badge variant="secondary">Computer Vision</Badge>
-            <Badge variant="secondary">CNN</Badge>
-            <Badge variant="secondary">Evaluation</Badge>
-            <Badge variant="secondary">Experiment</Badge>
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Snake Detector: a narrow computer-vision demo with reproducible proof
-          </h1>
-          <p className="mt-4 max-w-3xl text-muted-foreground leading-relaxed">
-            This project started as a model experiment. The workflow, dataset
-            boundary, and limitations are explicit so the story stays honest for
-            readers of the case study and anyone reproducing from the repo.
-            {demoUrl
-              ? " A live demo runs on a separate host so you can try uploads in the browser."
-              : " Proof lives in this case study and the training repository, with a reproducible path from the code."}
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            {demoUrl ? (
-              <a
-                href={demoUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={cn(
-                  ctaBaseClassName,
-                  ctaDefaultClassName,
-                  "gap-2"
+          <SectionHeader
+            align="left"
+            eyebrow="Case Study"
+            title="Snake Detector: a narrow computer-vision demo with reproducible proof"
+            description={`This project started as a model experiment. The workflow, dataset boundary, and limitations are explicit so the story stays honest for readers of the case study and anyone reproducing from the repo.${demoUrl ? " A live demo runs on a separate host so you can try uploads in the browser." : " Proof lives in this case study and the training repository, with a reproducible path from the code."}`}
+            descriptionClassName="max-w-3xl leading-relaxed"
+            badges={
+              <>
+                <Badge variant="secondary">Computer Vision</Badge>
+                <Badge variant="secondary">CNN</Badge>
+                <Badge variant="secondary">Evaluation</Badge>
+                <Badge variant="secondary">Experiment</Badge>
+              </>
+            }
+            actions={
+              <>
+                {demoUrl ? (
+                  <a
+                    href={demoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={cn(
+                      ctaBaseClassName,
+                      ctaDefaultClassName,
+                      "gap-2"
+                    )}
+                  >
+                    <ExternalLink size={16} />
+                    Try live demo
+                  </a>
+                ) : (
+                  <p className="max-w-md text-sm text-muted-foreground">
+                    No public demo link is configured right now. Use the proof
+                    package and repository below for artifacts and reproduction.
+                  </p>
                 )}
-              >
-                <ExternalLink size={16} />
-                Try live demo
-              </a>
-            ) : (
-              <p className="max-w-md text-sm text-muted-foreground">
-                No public demo link is configured right now. Use the proof
-                package and repository below for artifacts and reproduction.
-              </p>
-            )}
-            <a
-              href="#proof-package"
-              className={cn(ctaBaseClassName, ctaOutlineClassName)}
-            >
-              View proof package
-            </a>
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={cn(ctaBaseClassName, ctaGhostClassName)}
-            >
-              <Github size={16} className="mr-1.5" />
-              Code
-            </a>
-          </div>
+                <a
+                  href="#proof-package"
+                  className={cn(ctaBaseClassName, ctaOutlineClassName)}
+                >
+                  View proof package
+                </a>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn(ctaBaseClassName, ctaGhostClassName)}
+                >
+                  <Github size={16} className="mr-1.5" />
+                  Code
+                </a>
+              </>
+            }
+          />
         </header>
 
         <section
