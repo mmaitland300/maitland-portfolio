@@ -47,5 +47,6 @@ next-env.d.ts
 # IDE
 .vscode/
 .idea/
+.cursorignore
 
 /src/generated/prisma
