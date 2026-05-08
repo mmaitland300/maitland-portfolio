@@ -95,6 +95,7 @@ const validationChecks = [
 
 const validationBoundaries = {
   trueNow: [
+    "Windows VST3 development builds have passed private pluginval strictness 10 and Steinberg VST3 Validator runs; public logs are pending.",
     "Safe oversampling state transitions are implemented and used in active development.",
     "Transient-aware behavior is a current design target in the scheduling model.",
     "Core multiband routing, freeze/history capture, and feedback-bus flow are operational.",
@@ -242,8 +243,9 @@ export default function StringFluxCaseStudyPage() {
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-2 text-xl font-semibold">Current Validation Checks</h2>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            Informal development checks only; no published CPU or latency numbers
-            yet. Benchmarking waits until the core behavior is feature-stable.
+            Development validation now includes private pluginval strictness 10,
+            Steinberg VST3 Validator, and Plugin Doctor runs. Public logs,
+            screenshots, CPU tables, and latency tables are still pending.
           </p>
           <div className="space-y-3">
             {validationChecks.map((item) => (
@@ -288,6 +290,16 @@ export default function StringFluxCaseStudyPage() {
                 <li>Format under active validation: VST3 on Windows.</li>
                 <li>Primary development host: Cubase.</li>
                 <li>
+                  Private validation runs completed: pluginval strictness 10
+                  and Steinberg VST3 Validator have passed for current
+                  development builds.
+                </li>
+                <li>
+                  Plugin Doctor has been used for development signal and
+                  behavior inspection; public screenshots and measurement
+                  notes are still pending.
+                </li>
+                <li>
                   Additional host coverage: not yet claimed publicly unless
                   confirmed by current test logs.
                 </li>
@@ -319,11 +331,17 @@ export default function StringFluxCaseStudyPage() {
             </div>
             <div>
               <h3 className="font-medium text-foreground">
-                Still unproven publicly
+                Still unpublished publicly
               </h3>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-muted-foreground">
-                <li>No published pluginval matrix yet.</li>
-                <li>No published Steinberg VST3 Validator result yet.</li>
+                <li>
+                  Fresh pluginval and Steinberg VST3 Validator logs are not
+                  published yet.
+                </li>
+                <li>
+                  Plugin Doctor screenshots and measurement notes are not
+                  published yet.
+                </li>
                 <li>
                   No published CPU table across sample rates and buffer
                   sizes yet.

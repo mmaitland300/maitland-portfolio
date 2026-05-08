@@ -1,4 +1,5 @@
 import { Prisma } from "@prisma/client";
+import { unstable_rethrow } from "next/navigation";
 import { MessageSquare } from "lucide-react";
 import { parseAppEnv } from "@/lib/env";
 import { isAdminAuthConfigured } from "@/lib/feature-config";
@@ -10,6 +11,30 @@ import { CommentList, type CommentData } from "@/components/sections/comment-lis
 interface ProjectCommentsProps {
   projectSlug: string;
   currentPath: string;
+}
+
+function isProjectCommentTableMissing(error: unknown) {
+  return (
+    error instanceof Prisma.PrismaClientKnownRequestError &&
+    error.code === "P2021" &&
+    (error.meta?.modelName === "ProjectComment" ||
+      String(error.message).includes("ProjectComment"))
+  );
+}
+
+function isPrismaConnectionUnavailable(error: unknown) {
+  if (error instanceof Prisma.PrismaClientInitializationError) {
+    return true;
+  }
+
+  if (!(error instanceof Error)) {
+    return false;
+  }
+
+  return (
+    error.message.includes("Can't reach database server") ||
+    error.message.includes("ECONNREFUSED")
+  );
 }
 
 export async function ProjectComments({
@@ -53,13 +78,9 @@ export async function ProjectComments({
       createdAt: c.createdAt,
     }));
   } catch (error) {
-    const missingProjectCommentTable =
-      error instanceof Prisma.PrismaClientKnownRequestError &&
-      error.code === "P2021" &&
-      (error.meta?.modelName === "ProjectComment" ||
-        String(error.message).includes("ProjectComment"));
+    unstable_rethrow(error);
 
-    if (missingProjectCommentTable) {
+    if (isProjectCommentTableMissing(error)) {
       if (process.env.NODE_ENV === "production") {
         console.error(
           "ProjectComments: ProjectComment table missing; apply database migrations.",
@@ -67,6 +88,17 @@ export async function ProjectComments({
       } else {
         console.warn(
           "ProjectComments: ProjectComment table missing; run `npx prisma migrate dev` (or deploy migrations) to enable comments.",
+        );
+      }
+    } else if (isPrismaConnectionUnavailable(error)) {
+      const message =
+        "ProjectComments: database unavailable; comments are disabled for this request.";
+
+      if (process.env.NODE_ENV === "production") {
+        console.error(message);
+      } else {
+        console.warn(
+          `${message} Start Postgres or unset DATABASE_URL to hide the optional comments section locally.`,
         );
       }
     } else {
