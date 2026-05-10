@@ -311,7 +311,7 @@ export const projects: Project[] = [
       "A PyQt5 desktop app (Musicians Organizer) for large local audio libraries: recursive scanning, SQLite persistence with SQLAlchemy Core and Alembic migrations, filtering and multi-dimensional tagging, duplicate detection, background audio-feature extraction, similarity-style recommendations, and waveform/spectrogram preview in the app.",
     image: "/images/projects/sample-organizer-loaded.png",
     tags: ["Python", "PyQt", "SQLite", "Audio"],
-    github: "https://github.com/mmaitland300/organizer_project",
+    github: "https://github.com/mmaitland300/musicians-organizer",
     category: "experiment",
   },
 ];
