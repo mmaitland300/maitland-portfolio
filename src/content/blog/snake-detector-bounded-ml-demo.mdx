@@ -1,19 +1,39 @@
 ---
-title: "Field Note: Making a Snake Detector Demo Honest Enough to Publish"
-description: "How I turned a fragile computer-vision demo into a bounded project with a live model, release assets, and clear limits."
+title: "From Colab Prototype to Publishable Snake Detector"
+description: "How I refactored an old notebook-style computer-vision project into a bounded repo with a live model, release assets, and clear limits."
 date: "2026-05-10"
 type: "Field Note"
 tags: ["Machine Learning", "Computer Vision"]
 published: true
 ---
 
-## The Problem With Demo Projects
+## The Problem With Old Notebook Projects
 
-Machine-learning demos can look more complete than they are.
+Notebook projects are great for getting an idea moving. They are not always great at showing what still works six months later.
 
-A model can run, a notebook can produce a chart, and a demo can return a confident label while the surrounding project is still hard to trust. The weak parts are often outside the prediction call: unclear data rights, missing release artifacts, no version boundary, no repeatable local path, and claims that sound broader than the model actually supports.
+Snake Detector started in that familiar shape: a computer-vision experiment that could train and predict, but lived too close to the original exploratory workflow. The interesting part was not just whether a model could classify `snake` or `no_snake`. It was whether the project could become something another person could inspect without needing my local notebook, my local folders, or my memory of how the run was assembled.
 
-That was the problem I wanted to fix with Snake Detector. The original idea was small: classify an image as `snake` or `no_snake`. The cleanup work was not about making that sound bigger. It was about making the project honest enough to publish.
+The weak parts were outside the prediction call:
+
+- scripts and notebooks were too easy to run in only one environment
+- dataset status was mixed together with model behavior
+- the live demo path was separate from the repo story
+- release artifacts were not clearly named or versioned
+- the README could not quickly explain what was real, what was placeholder-safe, and what was out of scope
+
+The cleanup work was not about making the project sound bigger. It was about turning an old Colab-style demo into a repo-shaped project with enough structure to publish.
+
+## What Changed In The Refactor
+
+The first pass was basic engineering hygiene:
+
+- move the maintained workflow into a package and CLI
+- keep old Colab-era scripts under `legacy/`
+- document `split -> train -> eval -> predict` instead of relying on notebook cell order
+- add CI so tests and linting run outside my machine
+- separate the local placeholder-safe baseline from the real model powering the hosted demo
+
+That last point mattered most. The live demo now uses a real-photo iNaturalist-trained Keras model, but the repo still needs a reproducible path that does not require committing raw third-party wildlife images. Those are different jobs. Treating them as different lanes made the README and release story much easier to explain.
 
 ## The Boundary Came First
 
@@ -30,6 +50,18 @@ That boundary changes the whole project. Instead of stretching the README toward
 - a placeholder-safe local benchmark so the engineering flow can be reproduced without committing third-party wildlife photos
 
 The narrower claim is actually stronger because it gives reviewers something concrete to inspect.
+
+## Why The Placeholder Baseline Still Exists
+
+The placeholder-safe benchmark is not trying to prove the model is useful in the real world. It proves the project shape still runs.
+
+That distinction can feel awkward at first. The live model is the stronger public demo, but the generated placeholder data is the safer reproducibility path. I kept both because they answer different reviewer questions:
+
+- "Can I inspect a real trained model and metrics?" Yes, through the release package.
+- "Can I run the project workflow without downloading restricted images?" Yes, through the placeholder-safe baseline.
+- "Are these the same thing?" No, and the repo should say that plainly.
+
+That is the kind of boring clarity that makes an ML repo easier to trust.
 
 ## Separating The Model From The Package
 
@@ -79,11 +111,12 @@ Those limits are not disclaimers pasted on at the end. They define the project.
 
 The main pattern I would reuse is this:
 
-1. Decide the smallest true claim.
-2. Separate data, model, package, and demo versions.
-3. Publish enough artifacts to inspect the result.
-4. Keep restricted data out of the repo.
-5. Write the README so the limits are visible before the charts.
+1. Move the maintained path out of notebook memory and into package commands.
+2. Decide the smallest true claim.
+3. Separate data, model, package, and demo versions.
+4. Publish enough artifacts to inspect the result.
+5. Keep restricted data out of the repo.
+6. Write the README so the limits are visible before the charts.
 
 That pattern is useful beyond computer vision. Research prototypes, audio tools, and support utilities all get easier to evaluate when the repo says what is real, what is provisional, and what is intentionally out of scope.
 
