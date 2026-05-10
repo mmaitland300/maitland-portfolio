@@ -1,0 +1,90 @@
+---
+title: "Field Note: Making a Snake Detector Demo Honest Enough to Publish"
+description: "How I turned a fragile computer-vision demo into a bounded project with a live model, release assets, and clear limits."
+date: "2026-05-10"
+type: "Field Note"
+tags: ["Machine Learning", "Computer Vision"]
+published: true
+---
+
+## The Problem With Demo Projects
+
+Machine-learning demos can look more complete than they are.
+
+A model can run, a notebook can produce a chart, and a demo can return a confident label while the surrounding project is still hard to trust. The weak parts are often outside the prediction call: unclear data rights, missing release artifacts, no version boundary, no repeatable local path, and claims that sound broader than the model actually supports.
+
+That was the problem I wanted to fix with Snake Detector. The original idea was small: classify an image as `snake` or `no_snake`. The cleanup work was not about making that sound bigger. It was about making the project honest enough to publish.
+
+## The Boundary Came First
+
+The most useful decision was to narrow the claim before improving the packaging.
+
+Snake Detector is not a field safety tool. It is not species identification. It does not tell someone whether an animal is dangerous. It is a bounded image-classification demo with one job: separate whole images into `snake` and `no_snake` classes under documented conditions.
+
+That boundary changes the whole project. Instead of stretching the README toward impressive language, the repo can explain exactly what exists:
+
+- a live Hugging Face demo backed by a real-photo iNaturalist-trained Keras model
+- a GitHub Release for the model, metrics, threshold sweep, config, and evaluation assets
+- a package-based CLI for split/train/eval/predict workflows
+- model and dataset cards that explain scope, data posture, metrics, and limits
+- a placeholder-safe local benchmark so the engineering flow can be reproduced without committing third-party wildlife photos
+
+The narrower claim is actually stronger because it gives reviewers something concrete to inspect.
+
+## Separating The Model From The Package
+
+One small but important cleanup was versioning.
+
+The Python package still has its own version because the CLI/API surface is one thing. The trained model release is another thing. Treating both as the same version would make the repo feel cleaner for about ten seconds, then confusing forever.
+
+So the package can stay at `0.1.0` while the model release is named `v1.1.0-real-dataset`. That release label says what changed: the public demo is no longer only a placeholder-safe engineering baseline; it is backed by a real-photo dataset lane and published model assets.
+
+That distinction matters because future changes might update the app without changing the model, or update the model without changing the Python package. Keeping those lanes separate makes the project easier to reason about.
+
+## Data Rights Shape The Repo
+
+The uncomfortable part of public ML work is that "I trained a model" is not the same as "I can publish everything I trained on."
+
+For Snake Detector, raw third-party images stay out of git. The repo documents dataset lanes instead:
+
+- the older local prototype corpus, which is excluded until rights are verified
+- the generated placeholder dataset, which is safe for reproducible local checks
+- the real-image retraining lane, which is documented through source/license notes and release artifacts rather than raw image redistribution
+
+That is less flashy than dropping a folder full of images into the repo, but it is much easier to stand behind.
+
+## What The Release Adds
+
+The real model release gives the project a better center of gravity.
+
+The live demo uses a Keras model trained on iNaturalist-sourced images. The release package mirrors the model artifact, configuration, held-out metrics, threshold sweep, and visual evaluation assets. The README can now point to the release instead of asking readers to infer what the demo is running.
+
+That also makes the placeholder benchmark less confusing. It is still useful, but for a different reason. It proves the local engineering path can run without distributing restricted images. It is not the thing powering the live demo.
+
+## What I Still Won't Claim
+
+The more public evidence a project has, the more tempting it is to make the language louder. I am trying to do the opposite.
+
+I still would not claim:
+
+- species identification
+- field-ready wildlife safety
+- broad real-world robustness
+- complete dataset redistribution
+- that a single confidence score should drive a safety decision
+
+Those limits are not disclaimers pasted on at the end. They define the project.
+
+## What I Would Reuse
+
+The main pattern I would reuse is this:
+
+1. Decide the smallest true claim.
+2. Separate data, model, package, and demo versions.
+3. Publish enough artifacts to inspect the result.
+4. Keep restricted data out of the repo.
+5. Write the README so the limits are visible before the charts.
+
+That pattern is useful beyond computer vision. Research prototypes, audio tools, and support utilities all get easier to evaluate when the repo says what is real, what is provisional, and what is intentionally out of scope.
+
+For Snake Detector, the outcome is not a grand ML product. It is something better for this stage: a small demo with a real model, a reproducible project shape, and boundaries clear enough that I do not have to oversell it.

@@ -19,6 +19,8 @@ export const BLOG_CORE_TAGS = [
   "TypeScript",
   "Next.js",
   "Audio DSP",
+  "Machine Learning",
+  "Computer Vision",
 ] as const;
 export type BlogCoreTag = (typeof BLOG_CORE_TAGS)[number];
 
