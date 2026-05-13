@@ -14,6 +14,7 @@ export type ProjectStatus =
   | "in-progress"
   | "operational"
   | "live-prototype"
+  | "live-demo"
   | "shipped"
   | "archived";
 export type ProofLinkKind = "repo" | "test" | "ci" | "post" | "artifact";
@@ -281,7 +282,7 @@ export const projects: Project[] = [
       "The original prototype was easy to overstate: noisy data, uneven image quality, and weak licensing assumptions made headline accuracy a bad proxy for operational reliability.",
     outcome:
       "Scripted training and evaluation with inspectable artifacts; limits and disclaimers are documented in the case study.",
-    status: snakeDemoUrl ? "operational" : "shipped",
+    status: "live-demo",
     evidence:
       "Public case study, reproducible CLI flow, saved artifact, and legally safe demo boundary.",
     knownLimits:

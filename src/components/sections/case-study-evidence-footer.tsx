@@ -6,6 +6,7 @@ const statusLabel: Record<NonNullable<Project["status"]>, string> = {
   "in-progress": "In Progress",
   operational: "Operational",
   "live-prototype": "Live prototype",
+  "live-demo": "Live demo",
   shipped: "Shipped",
   archived: "Archived",
 };

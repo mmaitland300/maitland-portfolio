@@ -67,6 +67,7 @@ describe("projects data integrity", () => {
       "in-progress",
       "operational",
       "live-prototype",
+      "live-demo",
       "shipped",
       "archived",
     ]);
@@ -99,6 +100,15 @@ describe("projects data integrity", () => {
         }
       }
     }
+  });
+
+  it("labels Snake Detector as a live demo, not operational", () => {
+    const snake = projects.find((p) => p.slug === "snake-detector");
+    expect(snake).toBeDefined();
+    expect(snake?.status).toBe("live-demo");
+    expect(snake?.knownLimits).toContain(
+      "not be treated as species identification"
+    );
   });
 });
 
