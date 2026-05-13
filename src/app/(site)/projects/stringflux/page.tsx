@@ -93,19 +93,105 @@ const validationChecks = [
   },
 ];
 
+const releaseEvidenceSummary = [
+  {
+    label: "Build under test",
+    value: "v1.0.0-beta / f27ea6d",
+    note: "Current main pre-RC validation build, not the final v1.0.0 release build.",
+  },
+  {
+    label: "Format and platform",
+    value: "Windows VST3",
+    note: "Primary development validation is currently on Windows, with Cubase as the main host.",
+  },
+  {
+    label: "Public release status",
+    value: "Not released",
+    note: "Validation evidence is useful, but compatibility claims remain provisional until final release validation is rerun.",
+  },
+];
+
+const automatedValidationResults = [
+  {
+    check: "pluginval 1.0.4",
+    result: "Pass",
+    details: "Strictness 10, repeat 200 randomized run, exit code 0.",
+  },
+  {
+    check: "Steinberg VST3 Validator",
+    result: "Pass",
+    details: "Standalone validator run reported 47 tests passed and 0 failed.",
+  },
+  {
+    check: "VST3 moduleinfo",
+    result: "Pass",
+    details: "Vendor check found the expected Matt Maitland module metadata.",
+  },
+  {
+    check: "Standalone app smoke flow",
+    result: "Pass",
+    details:
+      "Launch, audio, resize/no-crash, and settings/preset memory were checked on Windows 11.",
+  },
+];
+
+const latencyResults = [
+  {
+    mode: "Studio",
+    oversampling: "Standard 1x",
+    samples: "512",
+    milliseconds: "10.7",
+    note: "Cubase host-reported insert latency at 48 kHz.",
+  },
+  {
+    mode: "Studio",
+    oversampling: "High 2x",
+    samples: "305",
+    milliseconds: "6.4",
+    note: "Host-reported Cubase value; FIR delay is converted from oversampled domain.",
+  },
+  {
+    mode: "Studio",
+    oversampling: "Ultra 4x",
+    samples: "187",
+    milliseconds: "3.9",
+    note: "Host-reported Cubase value; lower than 1x/2x because the FIR delay runs oversampled.",
+  },
+  {
+    mode: "Live",
+    oversampling: "Forced 1x",
+    samples: "0",
+    milliseconds: "0.00",
+    note: "Live mode exposes forced 1x only; Cubase showed no latency value.",
+  },
+];
+
+const pendingBeforeStrongerClaims = [
+  "CPU table across representative sessions, sample rates, and buffer sizes.",
+  "Controlled Plugin Doctor notes that explain what mode-to-mode response differences mean.",
+  "Full Cubase host notes beyond the latency table.",
+  "Preset tuning and final v1.0.0 release validation rerun.",
+  "A broader DAW compatibility matrix; Cubase is the primary development host for now.",
+];
+
 const validationBoundaries = {
   trueNow: [
-    "Windows VST3 development builds have passed private pluginval strictness 10 and Steinberg VST3 Validator runs; public logs are pending.",
+    "One Windows VST3 pre-RC build has passed pluginval strictness 10 repeat 200 and a standalone Steinberg VST3 Validator run.",
+    "Cubase host-reported latency has been captured at 48 kHz for Studio 1x/2x/4x and Live forced-1x modes.",
+    "Plugin Doctor LinearAnalysis captures have been collected for private visual DSP review, but are not published as release evidence yet.",
+    "Standalone launch/audio/UI/state validation passed on Windows 11.",
     "Safe oversampling state transitions are implemented and used in active development.",
     "Transient-aware behavior is a current design target in the scheduling model.",
     "Core multiband routing, freeze/history capture, and feedback-bus flow are operational.",
   ],
   beingValidated: [
+    "CPU behavior under broader sample-rate, buffer-size, and preset conditions.",
     "Consistency across broader host/session combinations.",
     "Playability under wider performance dynamics and gain staging contexts.",
   ],
   notYetClaimed: [
-    "No public benchmark or latency claims yet.",
+    "No final release compatibility claim yet.",
+    "No public CPU benchmark claim yet.",
     "No broad compatibility guarantee beyond currently tested host/dev setups.",
   ],
 };
@@ -243,9 +329,13 @@ export default function StringFluxCaseStudyPage() {
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-2 text-xl font-semibold">Current Validation Checks</h2>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            Development validation now includes private pluginval strictness 10,
-            Steinberg VST3 Validator, and Plugin Doctor runs. Public logs,
-            screenshots, CPU tables, and latency tables are still pending.
+            Pre-RC validation evidence now covers automated VST3 checks,
+            Cubase host-reported latency, and a standalone app smoke flow.
+            Plugin Doctor captures have been collected privately for DSP review,
+            but are not published here until the mode-to-mode response
+            differences are documented clearly. This is evidence for the
+            current development build, not a final release compatibility
+            guarantee.
           </p>
           <div className="space-y-3">
             {validationChecks.map((item) => (
@@ -281,79 +371,101 @@ export default function StringFluxCaseStudyPage() {
             still in active development, so this section records what has
             actually been checked without implying release-level compatibility.
           </p>
-          <div className="space-y-4 text-sm">
-            <div>
-              <h3 className="font-medium text-foreground">
-                Host and format checks
-              </h3>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-muted-foreground">
-                <li>Format under active validation: VST3 on Windows.</li>
-                <li>Primary development host: Cubase.</li>
-                <li>
-                  Private validation runs completed: pluginval strictness 10
-                  and Steinberg VST3 Validator have passed for current
-                  development builds.
-                </li>
-                <li>
-                  Plugin Doctor has been used for development signal and
-                  behavior inspection; public screenshots and measurement
-                  notes are still pending.
-                </li>
-                <li>
-                  Additional host coverage: not yet claimed publicly unless
-                  confirmed by current test logs.
-                </li>
-                <li>
-                  Public release status: not released; compatibility claims
-                  are still provisional.
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-medium text-foreground">
-                Safety checks completed
-              </h3>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-muted-foreground">
-                <li>
-                  Oversampling mode changes are queued instead of rebuilding
-                  processing state directly inside the audio callback.
-                </li>
-                <li>
-                  Wet-path oversampling transitions have been exercised
-                  during active playback in development sessions.
-                </li>
-                <li>
-                  Multiband routing, history/freeze capture, feedback-bus
-                  flow, and limiter output path are operational in the current
-                  development build.
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="font-medium text-foreground">
-                Still unpublished publicly
-              </h3>
-              <ul className="mt-2 list-disc space-y-1 pl-5 text-muted-foreground">
-                <li>
-                  Fresh pluginval and Steinberg VST3 Validator logs are not
-                  published yet.
-                </li>
-                <li>
-                  Plugin Doctor screenshots and measurement notes are not
-                  published yet.
-                </li>
-                <li>
-                  No published CPU table across sample rates and buffer
-                  sizes yet.
-                </li>
-                <li>No broad DAW compatibility guarantee yet.</li>
-                <li>
-                  No public latency table yet beyond the current
-                  architecture notes.
-                </li>
-              </ul>
-            </div>
+          <div className="mb-5 grid gap-3 sm:grid-cols-3">
+            {releaseEvidenceSummary.map((item) => (
+              <div
+                key={item.label}
+                className="rounded-lg border border-border bg-card/30 px-4 py-3 text-sm"
+              >
+                <p className="text-xs uppercase tracking-wide text-muted-foreground">
+                  {item.label}
+                </p>
+                <p className="mt-1 font-medium text-foreground">{item.value}</p>
+                <p className="mt-1 text-muted-foreground">{item.note}</p>
+              </div>
+            ))}
           </div>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[640px] border-collapse text-left text-sm">
+              <thead>
+                <tr className="border-b border-border text-xs uppercase tracking-wide text-muted-foreground">
+                  <th className="py-2 pr-4 font-medium">Check</th>
+                  <th className="py-2 pr-4 font-medium">Result</th>
+                  <th className="py-2 font-medium">Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                {automatedValidationResults.map((row) => (
+                  <tr key={row.check} className="border-b border-border/60">
+                    <td className="py-3 pr-4 font-medium text-foreground">
+                      {row.check}
+                    </td>
+                    <td className="py-3 pr-4 text-emerald-400">
+                      {row.result}
+                    </td>
+                    <td className="py-3 text-muted-foreground">
+                      {row.details}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section className="mb-10 overflow-x-auto rounded-xl border border-border bg-card/40 p-6">
+          <h2 className="mb-3 text-xl font-semibold">
+            Cubase host-reported latency
+          </h2>
+          <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
+            These values were captured from Cubase Channel Latency Overview at
+            48 kHz. They are host-reported development measurements, not a
+            cross-DAW latency guarantee.
+          </p>
+          <table className="w-full min-w-[680px] border-collapse text-left text-sm">
+            <thead>
+              <tr className="border-b border-border text-xs uppercase tracking-wide text-muted-foreground">
+                <th className="py-2 pr-4 font-medium">Mode</th>
+                <th className="py-2 pr-4 font-medium">Oversampling</th>
+                <th className="py-2 pr-4 font-medium">Samples</th>
+                <th className="py-2 pr-4 font-medium">ms</th>
+                <th className="py-2 font-medium">Note</th>
+              </tr>
+            </thead>
+            <tbody>
+              {latencyResults.map((row) => (
+                <tr
+                  key={`${row.mode}-${row.oversampling}`}
+                  className="border-b border-border/60"
+                >
+                  <td className="py-3 pr-4 font-medium text-foreground">
+                    {row.mode}
+                  </td>
+                  <td className="py-3 pr-4 text-muted-foreground">
+                    {row.oversampling}
+                  </td>
+                  <td className="py-3 pr-4 font-mono text-muted-foreground">
+                    {row.samples}
+                  </td>
+                  <td className="py-3 pr-4 font-mono text-muted-foreground">
+                    {row.milliseconds}
+                  </td>
+                  <td className="py-3 text-muted-foreground">{row.note}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </section>
+
+        <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
+          <h2 className="mb-3 text-xl font-semibold">
+            Pending before stronger claims
+          </h2>
+          <ul className="list-disc space-y-1 pl-5 text-sm text-muted-foreground">
+            {pendingBeforeStrongerClaims.map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
         </section>
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">

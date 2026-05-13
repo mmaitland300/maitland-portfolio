@@ -64,7 +64,7 @@ export const projects: Project[] = [
     slug: "stringflux",
     title: "StringFlux",
     description:
-      "A multiband granular delay and freeze plugin for guitar. The effect reacts to how you play, not just what you play — pick attacks and sustained lines drive grain scheduling so the texture follows the performance.",
+      "A multiband granular delay and freeze plugin for guitar. The effect reacts to how you play, not just what you play - pick attacks and sustained lines drive grain scheduling so the texture follows the performance.",
     problem:
       "Most granular processors treat every input the same. For stringed instruments, that means pick attacks get smeared and the effect feels disconnected from the performance.",
     constraints:
@@ -75,9 +75,9 @@ export const projects: Project[] = [
       "Still in progress. The current build has 3-band crossover routing, transient-driven grain scheduling, history/freeze capture, and safe 1x/2x/4x oversampling transitions.",
     status: "in-progress",
     evidence:
-      "Public DSP case study and decision records document architecture, constraints, and validation. Core implementation details are kept private for licensing and commercial release planning.",
+      "Public DSP case study and decision records document architecture, constraints, a pre-RC validation snapshot, latency data, Plugin Doctor captures, and current limits. Core implementation details are kept private for licensing and commercial release planning.",
     knownLimits:
-      "No public benchmark or latency claims yet; still validating consistency and host behavior under broader session conditions.",
+      "Validation currently covers one Windows VST3 pre-RC build. CPU table, broader host compatibility, and final release validation are still pending.",
     proofLinks: [
       {
         label: "StringFlux case study",
