@@ -168,7 +168,7 @@ const latencyResults = [
 
 const pendingBeforeStrongerClaims = [
   "CPU table across representative sessions, sample rates, and buffer sizes.",
-  "Controlled Plugin Doctor notes that explain what mode-to-mode response differences mean.",
+  "Controlled DSP notes that explain what mode-to-mode response differences mean.",
   "Full Cubase host notes beyond the latency table.",
   "Preset tuning and final v1.0.0 release validation rerun.",
   "A broader DAW compatibility matrix; Cubase is the primary development host for now.",
@@ -178,7 +178,6 @@ const validationBoundaries = {
   trueNow: [
     "One Windows VST3 pre-RC build has passed pluginval strictness 10 repeat 200 and a standalone Steinberg VST3 Validator run.",
     "Cubase host-reported latency has been captured at 48 kHz for Studio 1x/2x/4x and Live forced-1x modes.",
-    "Plugin Doctor LinearAnalysis captures have been collected for private visual DSP review, but are not published as release evidence yet.",
     "Standalone launch/audio/UI/state validation passed on Windows 11.",
     "Safe oversampling state transitions are implemented and used in active development.",
     "Transient-aware behavior is a current design target in the scheduling model.",
@@ -329,13 +328,10 @@ export default function StringFluxCaseStudyPage() {
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-2 text-xl font-semibold">Current Validation Checks</h2>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            Pre-RC validation evidence now covers automated VST3 checks,
-            Cubase host-reported latency, and a standalone app smoke flow.
-            Plugin Doctor captures have been collected privately for DSP review,
-            but are not published here until the mode-to-mode response
-            differences are documented clearly. This is evidence for the
-            current development build, not a final release compatibility
-            guarantee.
+            Pre-RC validation currently covers automated VST3 checks, Cubase
+            host-reported latency, and a standalone app smoke flow. These checks
+            describe the current development build, not a final release
+            compatibility guarantee.
           </p>
           <div className="space-y-3">
             {validationChecks.map((item) => (

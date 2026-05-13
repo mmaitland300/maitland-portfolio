@@ -75,7 +75,7 @@ export const projects: Project[] = [
       "Still in progress. The current build has 3-band crossover routing, transient-driven grain scheduling, history/freeze capture, and safe 1x/2x/4x oversampling transitions.",
     status: "in-progress",
     evidence:
-      "Public DSP case study and decision records document architecture, constraints, a pre-RC validation snapshot, latency data, Plugin Doctor captures, and current limits. Core implementation details are kept private for licensing and commercial release planning.",
+      "Public DSP case study and decision records document architecture, constraints, a pre-RC validation snapshot, latency data, and current limits. Core implementation details are kept private for licensing and commercial release planning.",
     knownLimits:
       "Validation currently covers one Windows VST3 pre-RC build. CPU table, broader host compatibility, and final release validation are still pending.",
     proofLinks: [
