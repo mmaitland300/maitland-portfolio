@@ -44,7 +44,7 @@ const workflow = [
   {
     step: "3. Isolate likely failure paths",
     detail:
-      "Use layer-by-layer checks: test one subsystem at a time, log each result, and let each result retire competing hypotheses.",
+      "Use layer-by-layer checks: test one subsystem at a time, log each result, and use those results to narrow the hypothesis list.",
   },
   {
     step: "4. Apply lowest-risk corrective action",

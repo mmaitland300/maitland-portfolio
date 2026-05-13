@@ -107,7 +107,7 @@ const releaseEvidenceSummary = [
   {
     label: "Public release status",
     value: "Not released",
-    note: "Validation logs are useful, but compatibility claims remain provisional until final release validation is rerun.",
+    note: "Validation logs help define the current boundary, but compatibility claims remain provisional until final release validation is rerun.",
   },
 ];
 

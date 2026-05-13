@@ -202,7 +202,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
 
         {compact && evidenceKinds.length > 0 && (
           <p className="mb-4 text-xs text-muted-foreground">
-            <span className="font-medium text-foreground/80">Links: </span>
+            <span className="font-medium text-foreground/80">Project links: </span>
             {evidenceKinds.join(" / ")}
           </p>
         )}
@@ -247,9 +247,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
             )}
             {project.evidence && (
               <div>
-                <span className="font-medium text-foreground/80">
-                  Supporting detail:{" "}
-                </span>
+                <span className="font-medium text-foreground/80">Notes: </span>
                 <span className="text-muted-foreground">{project.evidence}</span>
               </div>
             )}

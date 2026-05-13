@@ -230,10 +230,10 @@ export default function ResearchRadarCaseStudyPage() {
             <h2 className="text-xl font-semibold">What the project does</h2>
           </div>
           <p className="max-w-3xl text-[15px] leading-7 text-muted-foreground">
-            Research Radar focuses on one review workflow: inspect ranked
+            Research Radar centers on one workflow: inspect ranked
             recommendations, open a paper dossier, compare against baselines,
-            and read trends in corpus context. The core value is showing the
-            signals behind the ranking.
+            and read trends in corpus context. The core value is making the
+            ranking signals visible.
           </p>
           <div className="mt-6 grid gap-3 md:grid-cols-2">
             {mainSurfaces.map((surface) => (

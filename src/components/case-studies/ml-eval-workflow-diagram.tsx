@@ -56,7 +56,7 @@ export function MlEvalWorkflowDiagram() {
   return (
     <figure className="my-6 overflow-x-auto rounded-lg border border-border bg-muted/30 p-4">
       <figcaption className="mb-3 text-center text-xs font-medium text-muted-foreground">
-        Interactive workflow: inspect each stage of the reproducible evaluation loop
+        Interactive workflow: inspect each stage of the training and evaluation loop
       </figcaption>
       <svg
         viewBox="0 0 640 100"

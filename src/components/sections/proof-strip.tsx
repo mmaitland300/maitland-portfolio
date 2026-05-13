@@ -25,8 +25,8 @@ function researchRadarProofHeadline(
   return {
     what: demoUrl ? "Research Radar (demo linked)" : "Research Radar",
     whyItMatters: demoUrl
-      ? `${core} The case study is the primary portfolio entry point, with the hosted prototype linked as a secondary path.`
-      : `${core} There is no outbound demo link from this site right now, so the case study and repository carry the details.`,
+      ? `${core} The case study is the primary portfolio entry point, with the hosted prototype linked separately.`
+      : `${core} There is no outbound demo link from this site right now, so the case study and repository are the best places to inspect it.`,
     linkPick: (links: ProofLink[]) => {
       const byKind = (k: ProofLink["kind"]) =>
         links.find((l) => l.kind === k);

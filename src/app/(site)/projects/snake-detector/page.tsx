@@ -21,7 +21,7 @@ import { cn } from "@/lib/utils";
 export const metadata: Metadata = {
   title: "Snake Detector: Narrow CV Demo",
   description:
-    "A snake vs no-snake demo with reproducible training workflow, explicit limits, and evaluation artifacts. Scope stops short of species ID or field wildlife workflows.",
+    "A snake vs no-snake demo with a reproducible training workflow, explicit limits, and saved evaluation artifacts. Scope stops short of species ID or field wildlife workflows.",
 };
 
 export const dynamic = "force-dynamic";
@@ -80,8 +80,8 @@ export default function SnakeDetectorCaseStudyPage() {
           <SectionHeader
             align="left"
             eyebrow="Case Study"
-            title="Snake Detector: a narrow computer-vision demo with reproducible evaluation"
-            description={`This project started as a model experiment. The workflow, dataset boundary, and limitations are explicit so the story stays honest for readers of the case study and anyone reproducing from the repo.${demoUrl ? " A live demo runs on a separate host so you can try uploads in the browser." : " Evaluation details live in this case study and the training repository, with a reproducible path from the code."}`}
+            title="Snake Detector: a narrow computer-vision demo with a reproducible workflow"
+            description={`This project started as a model experiment. The workflow, dataset boundary, and limitations are explicit so the story stays honest for readers of the case study and anyone reproducing from the repo.${demoUrl ? " A live demo runs on a separate host so you can try uploads in the browser." : " The case study and training repository show the reproducible path from code to artifacts."}`}
             descriptionClassName="max-w-3xl leading-relaxed"
             badges={
               <>
@@ -110,14 +110,14 @@ export default function SnakeDetectorCaseStudyPage() {
                 ) : (
                   <p className="max-w-md text-sm text-muted-foreground">
                     No public demo link is configured right now. Use the
-                    evaluation artifacts and repository below for reproduction.
+                    workflow artifacts and repository below for reproduction.
                   </p>
                 )}
                 <a
                   href="#evaluation-artifacts"
                   className={cn(ctaBaseClassName, ctaOutlineClassName)}
                 >
-                  View evaluation artifacts
+                  View workflow artifacts
                 </a>
                 <a
                   href={project.github}
@@ -177,7 +177,7 @@ export default function SnakeDetectorCaseStudyPage() {
                 href="#evaluation-artifacts"
                 className="text-brand-cyan underline-offset-4 hover:underline"
               >
-                evaluation artifacts
+                workflow artifacts
               </a>{" "}
               and training repository to inspect artifacts and reproduce evaluation
               runs in your own environment.
@@ -235,7 +235,7 @@ export default function SnakeDetectorCaseStudyPage() {
           ) : (
             <ol className="list-inside list-decimal space-y-2 text-sm text-muted-foreground">
               <li>
-                Open the evaluation artifacts and training repo to understand
+                Open the workflow artifacts and training repo to understand
                 splits, metrics, and limits.
               </li>
               <li>
@@ -269,7 +269,7 @@ export default function SnakeDetectorCaseStudyPage() {
         >
           <div className="mb-3 flex items-center gap-2">
             <ListChecks className="h-5 w-5 text-brand-violet" />
-            <h2 className="text-xl font-semibold">Evaluation artifacts</h2>
+            <h2 className="text-xl font-semibold">Workflow artifacts</h2>
           </div>
           <MlEvalWorkflowDiagram />
           <div className="mt-4 overflow-x-auto">
