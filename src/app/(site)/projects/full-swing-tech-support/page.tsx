@@ -77,7 +77,7 @@ const representativeIncident = [
   {
     label: "Root cause pattern",
     detail:
-      "The failure pointed past whitelist or port-forwarding checks. WMI namespace errors indicated the Windows management layer was damaged or unavailable, which made the simulator stack behave as if external communication had failed even though basic browser access still worked. Use this path only when checks point at WMI.",
+      "The failure pointed past whitelist or port-forwarding checks. WMI namespace errors indicated the Windows management layer was damaged or unavailable, which made the simulator stack behave as if external communication had failed even though basic browser access still worked. Use this path only when evidence points at WMI.",
   },
   {
     label: "Fix pattern",
