@@ -14,7 +14,7 @@ const statusLabel: Record<NonNullable<Project["status"]>, string> = {
 interface CaseStudyEvidenceFooterProps {
   project: Project;
   statusIcon: ReactNode;
-  /** When set, internal proof links pointing at this path are hidden (avoids same-page “case study” loops). */
+  /** When set, internal supporting links pointing at this path are hidden (avoids same-page "case study" loops). */
   currentCaseStudyPath?: string;
 }
 
@@ -40,7 +40,7 @@ export function CaseStudyEvidenceFooter({
   return (
     <>
       <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
-        <h2 className="mb-3 text-xl font-semibold">Evidence links</h2>
+        <h2 className="mb-3 text-xl font-semibold">Supporting links</h2>
         <div className="space-y-2">
           {evidenceLinks.map((item) => {
             const isExternal = item.href.startsWith("http");

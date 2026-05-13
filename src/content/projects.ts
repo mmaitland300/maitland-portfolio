@@ -3,8 +3,8 @@ import { getSnakeDemoUrl } from "@/lib/snake-demo";
 
 /**
  * Promotion rule:
- * featured projects should have a case-study proof path (dedicated caseStudy page
- * with explicit artifacts/tradeoffs/current-state/evidence links).
+ * featured projects should have a case-study path (dedicated caseStudy page
+ * with explicit artifacts/tradeoffs/current-state/supporting links).
  */
 const snakeDemoUrl = getSnakeDemoUrl();
 const researchRadarDemoUrl = getResearchRadarDemoUrl();
@@ -138,7 +138,7 @@ export const projects: Project[] = [
         kind: "repo",
       },
       {
-        label: "Reviewer brief and proof map",
+        label: "Technical brief and evaluation notes",
         href: "https://github.com/mmaitland300/Research-Radar/blob/main/docs/reviewer-brief.md",
         kind: "post",
       },
@@ -173,7 +173,7 @@ export const projects: Project[] = [
     description:
       "This site. Next.js 16 with MDX blogging, a contact form that sends email through Resend and falls back gracefully when the database is down, and a GitHub OAuth admin inbox for managing submissions.",
     problem:
-      "GitHub alone was a weak container for case studies, limits, and proof links. I also needed contact that survives spam without turning into ops work, plus a stack I could iterate on without fearing every deploy.",
+      "GitHub alone was a weak container for case studies, limits, and supporting links. I also needed contact that survives spam without turning into ops work, plus a stack I could iterate on without fearing every deploy.",
     constraints:
       "Solo project, so operational overhead had to stay low. No dedicated backend: managed services (Resend for email, Upstash for rate limiting, Neon for Postgres) handle the heavy parts.",
     tradeoff:
@@ -239,7 +239,7 @@ export const projects: Project[] = [
     problem:
       "Simulator issues rarely have one cause. A customer reports \"the ball isn't tracking\" and the root cause could be calibration drift, a licensing timeout, a network config problem, or a Windows update that broke a driver.",
     constraints:
-      "Remote support, incomplete logs, frustrated users, mixed hardware/software/network symptoms, and privacy limits on public evidence.",
+      "Remote support, incomplete logs, frustrated users, mixed hardware/software/network symptoms, and privacy limits on public detail.",
     tradeoff:
       "More time upfront on isolation and logging pays back when the same failure signature shows up again: you reopen the checklist instead of re-deriving the path from memory.",
     role: "Technical support specialist at Auxillium. Scope is Full Swing simulator deployments plus Laser Shot and E6 Golf from TruGolf when those are part of the install.",
@@ -284,7 +284,7 @@ export const projects: Project[] = [
       "Scripted training and evaluation with inspectable artifacts; limits and disclaimers are documented in the case study.",
     status: "live-demo",
     evidence:
-      "Public case study, reproducible CLI flow, saved artifact, and legally safe demo boundary.",
+      "Public case study, reproducible CLI flow, saved artifact, and demo boundary that avoids redistributing third-party images.",
     knownLimits:
       "Demo is a narrow snake vs no-snake experiment and should not be treated as species identification or field-safe classification.",
     proofLinks: [

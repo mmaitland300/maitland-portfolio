@@ -202,7 +202,7 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
 
         {compact && evidenceKinds.length > 0 && (
           <p className="mb-4 text-xs text-muted-foreground">
-            <span className="font-medium text-foreground/80">Evidence: </span>
+            <span className="font-medium text-foreground/80">Links: </span>
             {evidenceKinds.join(" / ")}
           </p>
         )}
@@ -247,7 +247,9 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
             )}
             {project.evidence && (
               <div>
-                <span className="font-medium text-foreground/80">Evidence: </span>
+                <span className="font-medium text-foreground/80">
+                  Supporting detail:{" "}
+                </span>
                 <span className="text-muted-foreground">{project.evidence}</span>
               </div>
             )}
@@ -277,7 +279,9 @@ export function ProjectCard({ project, index, compact }: ProjectCardProps) {
 
         {project.proofLinks && project.proofLinks.length > 0 && (
           <div className="mb-4 text-xs">
-            <span className="font-medium text-foreground/80">Evidence links: </span>
+            <span className="font-medium text-foreground/80">
+              Supporting links:{" "}
+            </span>
             <div className="mt-1 flex flex-wrap gap-x-3 gap-y-1">
               {project.proofLinks.slice(0, 3).map((link) => {
                 const isInternal = link.href.startsWith("/");

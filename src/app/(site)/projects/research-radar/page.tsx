@@ -230,10 +230,10 @@ export default function ResearchRadarCaseStudyPage() {
             <h2 className="text-xl font-semibold">What the project does</h2>
           </div>
           <p className="max-w-3xl text-[15px] leading-7 text-muted-foreground">
-            Research Radar focuses on one reviewer workflow: inspect ranked
-            recommendations, open a paper dossier, compare against baselines, and
-            read trends in corpus context. The core value is showing the signals
-            behind the ranking.
+            Research Radar focuses on one review workflow: inspect ranked
+            recommendations, open a paper dossier, compare against baselines,
+            and read trends in corpus context. The core value is showing the
+            signals behind the ranking.
           </p>
           <div className="mt-6 grid gap-3 md:grid-cols-2">
             {mainSurfaces.map((surface) => (
@@ -421,7 +421,7 @@ export default function ResearchRadarCaseStudyPage() {
         </section>
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
-          <h2 className="mb-3 text-xl font-semibold">Public, reviewer-facing evidence</h2>
+          <h2 className="mb-3 text-xl font-semibold">Public project notes</h2>
           <p className="text-sm leading-relaxed text-muted-foreground">
             What you can verify without special access: repository
             history, linked tests, roadmap notes, and the screenshot baseline

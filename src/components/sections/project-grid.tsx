@@ -27,7 +27,7 @@ export function ProjectGrid() {
         </h2>
         <p className="mt-2 mx-auto max-w-2xl text-sm text-muted-foreground">
           Each entry has a dedicated case-study page with artifacts, tradeoffs,
-          and linked evidence. Cards are expanded here for deeper scanning than
+          and supporting links. Cards are expanded here for deeper scanning than
           the homepage preview row.
         </p>
       </div>

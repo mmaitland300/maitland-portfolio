@@ -25,8 +25,8 @@ function researchRadarProofHeadline(
   return {
     what: demoUrl ? "Research Radar (demo linked)" : "Research Radar",
     whyItMatters: demoUrl
-      ? `${core} The case study is the primary portfolio entry point, with the hosted prototype linked as secondary evidence.`
-      : `${core} There is no outbound demo link from this site right now, so the case study and repository carry the evidence.`,
+      ? `${core} The case study is the primary portfolio entry point, with the hosted prototype linked as a secondary path.`
+      : `${core} There is no outbound demo link from this site right now, so the case study and repository carry the details.`,
     linkPick: (links: ProofLink[]) => {
       const byKind = (k: ProofLink["kind"]) =>
         links.find((l) => l.kind === k);
@@ -44,7 +44,7 @@ function researchRadarProofHeadline(
   };
 }
 
-/** Curated proof-first copy; URLs come from each project's proofLinks (see projects.ts). */
+/** Curated homepage copy; URLs come from each project's proofLinks (see projects.ts). */
 const PROOF_HEADLINES_BASE = {
   "full-swing-tech-support": {
     what: "Simulator technical support",
@@ -82,7 +82,7 @@ export function ProofStrip() {
     >
       <div className="mx-auto max-w-6xl px-6">
         <h2 id="proof-strip-heading" className="sr-only">
-          Evidence links for featured work
+          Supporting links for featured work
         </h2>
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
           {featured.map((project) => {
@@ -107,7 +107,7 @@ export function ProofStrip() {
                 </p>
                 <div className="mt-3 border-t border-border/60 pt-3">
                   <p className="text-[11px] font-medium uppercase tracking-wide text-muted-foreground">
-                    Evidence links
+                    Supporting links
                   </p>
                   <ul className="mt-1.5 space-y-1">
                     {proofLinks.map((item) => {

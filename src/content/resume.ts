@@ -32,7 +32,7 @@ export type ResumeSkillTier = {
 };
 
 export const resumeSummary =
-  "Technical support specialist building practical web software, audio tools, and research prototypes. Full-time I support Full Swing simulator environments through Auxillium. Most issues come in remote, with incomplete logs and no direct hardware access, across calibration, licensing, display, networking, and Windows behavior. Outside of work I build web apps, develop StringFlux (JUCE/C++), and ship research prototypes like Research Radar, carrying the same habit of naming limits and evidence up front.";
+  "Technical support specialist building practical web software, audio tools, and research prototypes. Full-time I support Full Swing simulator environments through Auxillium. Most issues come in remote, with incomplete logs and no direct hardware access, across calibration, licensing, display, networking, and Windows behavior. Outside of work I build web apps, develop StringFlux (JUCE/C++), and ship research prototypes like Research Radar. I build tools the way I troubleshoot: isolate the problem, test the fix, and document the tradeoffs.";
 
 export const resumeSkillTiers: ResumeSkillTier[] = [
   {

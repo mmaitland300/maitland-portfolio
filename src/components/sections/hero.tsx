@@ -76,7 +76,7 @@ export function Hero() {
             </Link>
             <span className="text-muted-foreground">
               {" "}
-              — JUCE plugin: transient-aware granular delay and freeze for guitar
+              - JUCE plugin: transient-aware granular delay and freeze for guitar
             </span>
           </p>
           <p>
@@ -88,7 +88,7 @@ export function Hero() {
             </Link>
             <span className="text-muted-foreground">
               {" "}
-              — original music (write, record, produce, master)
+              - original music (write, record, produce, master)
             </span>
           </p>
         </motion.div>

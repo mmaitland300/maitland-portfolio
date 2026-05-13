@@ -107,7 +107,7 @@ const releaseEvidenceSummary = [
   {
     label: "Public release status",
     value: "Not released",
-    note: "Validation evidence is useful, but compatibility claims remain provisional until final release validation is rerun.",
+    note: "Validation logs are useful, but compatibility claims remain provisional until final release validation is rerun.",
   },
 ];
 
@@ -361,11 +361,11 @@ export default function StringFluxCaseStudyPage() {
         </section>
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
-          <h2 className="mb-3 text-xl font-semibold">Validation Evidence</h2>
+          <h2 className="mb-3 text-xl font-semibold">Validation Status</h2>
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
-            Current public evidence is intentionally bounded. StringFlux is
-            still in active development, so this section records what has
-            actually been checked without implying release-level compatibility.
+            Current public validation is intentionally bounded. StringFlux is
+            still in active development, so this section records what has been
+            checked without implying release-level compatibility.
           </p>
           <div className="mb-5 grid gap-3 sm:grid-cols-3">
             {releaseEvidenceSummary.map((item) => (

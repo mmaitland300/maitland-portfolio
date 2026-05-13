@@ -44,7 +44,7 @@ const workflow = [
   {
     step: "3. Isolate likely failure paths",
     detail:
-      "Use layer-by-layer checks: test one subsystem at a time, log each result, and let evidence retire competing hypotheses.",
+      "Use layer-by-layer checks: test one subsystem at a time, log each result, and let each result retire competing hypotheses.",
   },
   {
     step: "4. Apply lowest-risk corrective action",
@@ -77,12 +77,12 @@ const representativeIncident = [
   {
     label: "Root cause pattern",
     detail:
-      "The failure pointed past whitelist or port-forwarding checks. WMI namespace errors indicated the Windows management layer was damaged or unavailable, which made the simulator stack behave as if external communication had failed even though basic browser access still worked. Use this path only when evidence points at WMI.",
+      "The failure pointed past whitelist or port-forwarding checks. WMI namespace errors indicated the Windows management layer was damaged or unavailable, which made the simulator stack behave as if external communication had failed even though basic browser access still worked. Use this path only when checks point at WMI.",
   },
   {
     label: "Fix pattern",
     detail:
-      "Run the approved WMI namespace repair batch process, reboot, and re-test Core communication from a clean baseline. In this incident pattern, Core recovered after restart. A changed remote-support ID after reboot was treated as an observed follow-up clue that local Windows management or support-session identity state had been repaired, reset, or reinitialized, not definitive proof of the exact subsystem that changed.",
+      "Run the approved WMI namespace repair batch process, reboot, and re-test Core communication from a clean baseline. In this incident pattern, Core recovered after restart. A changed remote-support ID after reboot was treated as an observed follow-up clue that local Windows management or support-session identity state had been repaired, reset, or reinitialized, not a definitive diagnosis of the exact subsystem that changed.",
   },
   {
     label: "What changed after",
