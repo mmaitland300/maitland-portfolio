@@ -19,6 +19,7 @@ const statusLabel: Record<NonNullable<Project["status"]>, string> = {
   operational: "Operational",
   "live-prototype": "Live prototype",
   "live-demo": "Live demo",
+  "source-installable": "Source-installable milestone",
   shipped: "Shipped",
   archived: "Archived",
 };

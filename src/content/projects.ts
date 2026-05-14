@@ -15,6 +15,7 @@ export type ProjectStatus =
   | "operational"
   | "live-prototype"
   | "live-demo"
+  | "source-installable"
   | "shipped"
   | "archived";
 export type ProofLinkKind = "repo" | "test" | "ci" | "post" | "artifact";
@@ -272,6 +273,41 @@ export const projects: Project[] = [
     image: "/images/projects/full-swing-triage-artifact.svg",
     caseStudy: "/projects/full-swing-tech-support",
     category: "featured",
+  },
+  {
+    slug: "smart-project-backup",
+    title: "Smart Project Backup",
+    description:
+      "Source-installable Python CLI for incremental project backups. It hashes files with SHA-256, copies only new or changed content, tracks state in SQLite manifests, and can watch a configured source tree for DAW-style save bursts.",
+    problem:
+      "Manual project backups are easy to skip and hard to trust when large creative folders change in small bursts.",
+    outcome:
+      "Milestone build with manual backup, config defaults, watch mode, Linux/Windows CI, and restore-safety guidance in the README.",
+    status: "source-installable",
+    evidence:
+      "Public repo includes CLI usage, tests, CI, config behavior, watch-mode behavior, and restore-safety notes.",
+    knownLimits:
+      "No GitHub release artifacts, PyPI package, or packaged app yet; restore flow should be tested on copies before relying on it for active projects.",
+    proofLinks: [
+      {
+        label: "Source repo",
+        href: "https://github.com/mmaitland300/DAWBackup",
+        kind: "repo",
+      },
+      {
+        label: "CLI tests",
+        href: "https://github.com/mmaitland300/DAWBackup/blob/main/tests/test_cli.py",
+        kind: "test",
+      },
+      {
+        label: "CI workflow",
+        href: "https://github.com/mmaitland300/DAWBackup/blob/main/.github/workflows/ci.yml",
+        kind: "ci",
+      },
+    ],
+    tags: ["Python", "CLI", "SQLite", "Backups", "File Watching"],
+    github: "https://github.com/mmaitland300/DAWBackup",
+    category: "experiment",
   },
   {
     slug: "snake-detector",

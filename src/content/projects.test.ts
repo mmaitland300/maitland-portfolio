@@ -68,6 +68,7 @@ describe("projects data integrity", () => {
       "operational",
       "live-prototype",
       "live-demo",
+      "source-installable",
       "shipped",
       "archived",
     ]);
@@ -109,6 +110,14 @@ describe("projects data integrity", () => {
     expect(snake?.knownLimits).toContain(
       "not be treated as species identification"
     );
+  });
+
+  it("includes Smart Project Backup as a source-installable milestone", () => {
+    const spb = projects.find((p) => p.slug === "smart-project-backup");
+    expect(spb).toBeDefined();
+    expect(spb?.status).toBe("source-installable");
+    expect(spb?.github).toBe("https://github.com/mmaitland300/DAWBackup");
+    expect(spb?.knownLimits).toContain("No GitHub release artifacts");
   });
 });
 
