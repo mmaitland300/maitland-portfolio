@@ -58,7 +58,6 @@ export const resumeSkillTiers: ResumeSkillTier[] = [
       "Auth.js",
       "Tailwind CSS",
       "Python",
-      "Flask / Django",
       "Zod",
       "Resend / Upstash",
       "C++",
@@ -69,7 +68,7 @@ export const resumeSkillTiers: ResumeSkillTier[] = [
   {
     id: "familiar",
     title: "Familiar / Earlier work",
-    skills: ["MySQL", "MongoDB", "Machine Learning / CNN", "Apache"],
+    skills: ["Flask / Django", "MySQL", "MongoDB", "Machine Learning / CNN", "Apache"],
   },
 ];
 
