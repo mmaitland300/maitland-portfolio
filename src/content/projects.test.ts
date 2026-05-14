@@ -117,7 +117,7 @@ describe("projects data integrity", () => {
     expect(spb).toBeDefined();
     expect(spb?.status).toBe("source-installable");
     expect(spb?.github).toBe("https://github.com/mmaitland300/DAWBackup");
-    expect(spb?.knownLimits).toContain("No GitHub release artifacts");
+    expect(spb?.knownLimits).toContain("v0.2.0 source release is published");
   });
 });
 
