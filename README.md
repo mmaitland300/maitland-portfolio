@@ -6,7 +6,7 @@ Personal site and engineering case-study repo for mmaitland.dev. Built with Next
 
 ## What It Is
 
-- Public portfolio and case-study site for Matt Maitland.
+- This is my portfolio and case-study site.
 - Next.js app for project writeups, resume content, engineering notes, contact flow, and optional admin inbox features.
 - A repo that demonstrates maintainable web software: typed env gates, tests, CI, security notes, and documented limits.
 
