@@ -49,6 +49,29 @@ const artifactTable = [
   },
 ];
 
+const currentModelMetrics = [
+  { label: "Release", value: "v1.1.0-real-dataset" },
+  { label: "Held-out test split", value: "1,283 images" },
+  { label: "Decision threshold", value: "0.76" },
+  { label: "Accuracy", value: "0.9026" },
+  { label: "Snake recall", value: "0.6667" },
+];
+
+const currentModelLinks = [
+  {
+    label: "GitHub model release",
+    href: "https://github.com/mmaitland300/Snake-detector/releases/tag/v1.1.0-real-dataset",
+  },
+  {
+    label: "Model card",
+    href: "https://github.com/mmaitland300/Snake-detector/blob/main/MODEL_CARD.md",
+  },
+  {
+    label: "Dataset card",
+    href: "https://github.com/mmaitland300/Snake-detector/blob/main/DATASET_CARD.md",
+  },
+];
+
 const ctaBaseClassName =
   "inline-flex items-center justify-center rounded-lg border border-transparent bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:translate-y-px";
 const ctaDefaultClassName =
@@ -186,6 +209,54 @@ export default function SnakeDetectorCaseStudyPage() {
         </section>
 
         <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
+          <div className="mb-3 flex items-center gap-2">
+            <BarChart3 className="h-5 w-5 text-brand-cyan" />
+            <h2 className="text-xl font-semibold">Current public model</h2>
+          </div>
+          <p className="text-sm leading-relaxed text-muted-foreground">
+            The live demo uses a real-photo iNaturalist-trained Keras model. The
+            model file stays out of normal git history, but the release package
+            mirrors the model, deployment config, held-out metrics, threshold
+            sweep, confusion matrix, training curves, sample predictions, and
+            checksum manifest.
+          </p>
+          <div className="mt-4 grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
+            {currentModelMetrics.map((item) => (
+              <div
+                key={item.label}
+                className="rounded-lg border border-border/70 bg-background/40 p-3"
+              >
+                <div className="text-[11px] uppercase tracking-wide text-muted-foreground">
+                  {item.label}
+                </div>
+                <div className="mt-1 text-sm font-semibold text-foreground">
+                  {item.value}
+                </div>
+              </div>
+            ))}
+          </div>
+          <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
+            The held-out split is 255 snake images and 1,028 no-snake images at
+            threshold 0.76. The snake recall number is why this page keeps the
+            safety boundary explicit: the demo can miss snakes and is not
+            field-safe wildlife software.
+          </p>
+          <div className="mt-4 flex flex-wrap gap-3 text-sm">
+            {currentModelLinks.map((item) => (
+              <a
+                key={item.href}
+                href={item.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-medium text-brand-cyan underline-offset-4 hover:underline"
+              >
+                {item.label}
+              </a>
+            ))}
+          </div>
+        </section>
+
+        <section className="mb-10 rounded-xl border border-border bg-card/40 p-6">
           <h2 className="mb-3 text-xl font-semibold">What the demo shows</h2>
           <ul className="list-inside list-disc space-y-2 text-sm text-muted-foreground">
             {demoUrl ? (
@@ -213,8 +284,8 @@ export default function SnakeDetectorCaseStudyPage() {
               back the story on this page.
             </li>
             <li>
-              It does{" "}
-              <span className="font-medium text-foreground/90">not</span> prove
+              It is{" "}
+              <span className="font-medium text-foreground/90">not</span>{" "}
               field-ready wildlife identification, species-level reliability, or
               licensing-cleared training data suitable for commercial redistribution.
             </li>
