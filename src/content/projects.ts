@@ -285,14 +285,19 @@ export const projects: Project[] = [
       "Milestone build with manual backup, config defaults, watch mode, Linux/Windows CI, and restore-safety guidance in the README.",
     status: "source-installable",
     evidence:
-      "Public repo includes CLI usage, tests, CI, config behavior, watch-mode behavior, and restore-safety notes.",
+      "Public repo includes CLI usage, source release notes, tests, CI, config behavior, watch-mode behavior, and restore-safety notes.",
     knownLimits:
-      "No GitHub release artifacts, PyPI package, or packaged app yet; restore flow should be tested on copies before relying on it for active projects.",
+      "The v0.2.0 source release is published; no PyPI package, standalone installer, or packaged app yet. Restore flow should be tested on copies before relying on it for active projects.",
     proofLinks: [
       {
         label: "Source repo",
         href: "https://github.com/mmaitland300/DAWBackup",
         kind: "repo",
+      },
+      {
+        label: "v0.2.0 source release",
+        href: "https://github.com/mmaitland300/DAWBackup/releases/tag/v0.2.0",
+        kind: "artifact",
       },
       {
         label: "CLI tests",
