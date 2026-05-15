@@ -51,7 +51,7 @@ export interface Project {
   category: ProjectCategory;
 }
 
-/** Homepage grid: flagship DSP, a live shipped prototype, and employer story. */
+/** Homepage grid: flagship DSP, research prototype, and support story. */
 export const HOMEPAGE_FEATURED_SLUGS = [
   "stringflux",
   "research-radar",
