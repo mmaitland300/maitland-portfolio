@@ -17,8 +17,10 @@ interface ProjectCardProps {
 const statusLabel: Record<NonNullable<Project["status"]>, string> = {
   "in-progress": "In Progress",
   operational: "Operational",
+  "live-site": "Live site",
   "live-prototype": "Live prototype",
   "live-demo": "Live demo",
+  "current-role": "Current role",
   "source-installable": "Source-installable milestone",
   shipped: "Shipped",
   archived: "Archived",

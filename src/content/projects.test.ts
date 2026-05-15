@@ -66,8 +66,10 @@ describe("projects data integrity", () => {
     const allowedStatus = new Set([
       "in-progress",
       "operational",
+      "live-site",
       "live-prototype",
       "live-demo",
+      "current-role",
       "source-installable",
       "shipped",
       "archived",
@@ -110,6 +112,16 @@ describe("projects data integrity", () => {
     expect(snake?.knownLimits).toContain(
       "not be treated as species identification"
     );
+  });
+
+  it("uses plain status labels for the site and support entries", () => {
+    const site = projects.find((p) => p.slug === "portfolio-site");
+    const support = projects.find((p) => p.slug === "full-swing-tech-support");
+
+    expect(site).toBeDefined();
+    expect(site?.status).toBe("live-site");
+    expect(support).toBeDefined();
+    expect(support?.status).toBe("current-role");
   });
 
   it("includes Smart Project Backup as a source-installable milestone", () => {

@@ -13,8 +13,10 @@ export type ProjectCategory = "featured" | "experiment";
 export type ProjectStatus =
   | "in-progress"
   | "operational"
+  | "live-site"
   | "live-prototype"
   | "live-demo"
+  | "current-role"
   | "source-installable"
   | "shipped"
   | "archived";
@@ -181,7 +183,7 @@ export const projects: Project[] = [
       "Server Actions plus Resend, Upstash, and Neon keep the solo-operator footprint small; the trade is accepting vendor-shaped limits I can live with on a personal site.",
     outcome:
       "Live at mmaitland.dev with honeypot + Redis rate limiting on contact, GitHub OAuth admin gating, and MDX blog with draft protection.",
-    status: "operational",
+    status: "live-site",
     evidence:
       "Production safeguards are documented in a public case study and decision record, with CI and smoke tests in the repository.",
     knownLimits:
@@ -246,7 +248,7 @@ export const projects: Project[] = [
     role: "Technical support specialist at Auxillium. Scope is Full Swing simulator deployments plus Laser Shot and E6 Golf from TruGolf when those are part of the install.",
     outcome:
       "Built repeatable triage workflows that I now use across calibration, licensing, display, networking, and OS subsystems. Documented publicly as a case study.",
-    status: "operational",
+    status: "current-role",
     evidence:
       "Public case study includes workflow artifact, representative incident pattern, and troubleshooting playbook linkage.",
     knownLimits:
