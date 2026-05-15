@@ -8,6 +8,16 @@ import { defineConfig, env } from "prisma/config";
 config({ path: resolve(process.cwd(), ".env") });
 config({ path: resolve(process.cwd(), ".env.local"), override: true });
 
+const prismaPreviewPlaceholderUrl =
+  "postgresql://placeholder:placeholder@127.0.0.1:5432/placeholder";
+
+// Vercel Preview builds should not need production database secrets, but
+// `prisma generate` still requires syntactically valid datasource URLs.
+if (process.env.VERCEL_ENV === "preview") {
+  process.env.DATABASE_URL ||= prismaPreviewPlaceholderUrl;
+  process.env.DIRECT_URL ||= prismaPreviewPlaceholderUrl;
+}
+
 export default defineConfig({
   schema: "prisma/schema.prisma",
   migrations: {
