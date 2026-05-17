@@ -18,6 +18,7 @@ export type ProjectStatus =
   | "live-demo"
   | "current-role"
   | "source-installable"
+  | "desktop-prototype"
   | "shipped"
   | "archived";
 export type ProofLinkKind = "repo" | "test" | "ci" | "post" | "artifact" | "release";
@@ -352,7 +353,29 @@ export const projects: Project[] = [
     slug: "sample-organizer",
     title: "Sample Library Organizer",
     description:
-      "A PyQt5 desktop app (Musicians Organizer) for large local audio libraries: recursive scanning, SQLite persistence with SQLAlchemy Core and Alembic migrations, filtering and multi-dimensional tagging, duplicate detection, background audio-feature extraction, similarity-style recommendations, and waveform/spectrogram preview in the app.",
+      "A local-first PyQt desktop app for scanning, tagging, previewing, and cleaning up large sample and audio libraries without uploading media.",
+    status: "desktop-prototype",
+    evidence:
+      "The repo includes dark-mode screenshots, a workflow walkthrough, setup checks, scoped CI, and explicit packaging limits.",
+    knownLimits:
+      "Not packaged as a consumer installer yet. Setup is still developer-oriented and can depend on local Python/audio-library behavior.",
+    proofLinks: [
+      {
+        label: "Visual walkthrough",
+        href: "https://github.com/mmaitland300/musicians-organizer#visual-walkthrough",
+        kind: "artifact",
+      },
+      {
+        label: "Workflow walkthrough",
+        href: "https://github.com/mmaitland300/musicians-organizer/blob/main/docs/workflow-walkthrough.md",
+        kind: "artifact",
+      },
+      {
+        label: "CI workflow",
+        href: "https://github.com/mmaitland300/musicians-organizer/blob/main/.github/workflows/ci.yml",
+        kind: "ci",
+      },
+    ],
     image: "/images/projects/sample-organizer-loaded.png",
     tags: ["Python", "PyQt", "SQLite", "Audio"],
     github: "https://github.com/mmaitland300/musicians-organizer",

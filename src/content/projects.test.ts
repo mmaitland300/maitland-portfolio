@@ -71,6 +71,7 @@ describe("projects data integrity", () => {
       "live-demo",
       "current-role",
       "source-installable",
+      "desktop-prototype",
       "shipped",
       "archived",
     ]);
@@ -138,6 +139,21 @@ describe("projects data integrity", () => {
     expect(spb?.github).toBe("https://github.com/mmaitland300/DAWBackup");
     expect(spb?.knownLimits).toContain("v0.2.0 source release is published");
     expect(spb?.proofLinks?.some((link) => link.kind === "release")).toBe(true);
+  });
+
+  it("surfaces Musicians Organizer as a desktop prototype", () => {
+    const organizer = projects.find((p) => p.slug === "sample-organizer");
+    expect(organizer).toBeDefined();
+    expect(organizer?.status).toBe("desktop-prototype");
+    expect(organizer?.github).toBe(
+      "https://github.com/mmaitland300/musicians-organizer"
+    );
+    expect(organizer?.knownLimits).toContain("Not packaged");
+    expect(
+      organizer?.proofLinks?.some((link) =>
+        link.href.includes("docs/workflow-walkthrough.md")
+      )
+    ).toBe(true);
   });
 });
 
