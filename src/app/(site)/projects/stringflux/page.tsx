@@ -365,7 +365,9 @@ export default function StringFluxCaseStudyPage() {
           <p className="mb-4 text-sm leading-relaxed text-muted-foreground">
             Current public validation is intentionally bounded. StringFlux is
             still in active development, so this section records what has been
-            checked without implying release-level compatibility.
+            checked without implying release-level compatibility. The product-page
+            screenshots may show a `v0.3-dev` UI label; the build label below refers
+            to the validation candidate captured for these checks.
           </p>
           <div className="mb-5 grid gap-3 sm:grid-cols-3">
             {releaseEvidenceSummary.map((item) => (

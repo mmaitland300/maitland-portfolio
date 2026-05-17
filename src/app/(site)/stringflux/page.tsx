@@ -87,7 +87,9 @@ export default function StringFluxPage() {
             only), Waveform (grain region editor), and Advanced (modulation matrix and
             deeper shaping). Preset names visible in the captures are incidental; many
             presets will use these same panels. Mod-source envelope meters show live
-            activity; polish is ongoing.
+            activity; polish is ongoing. The `v0.3-dev` label in the screenshots is
+            a UI/dev marker, not the validation candidate label used in the case
+            study.
           </p>
         </section>
 
