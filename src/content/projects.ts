@@ -20,7 +20,7 @@ export type ProjectStatus =
   | "source-installable"
   | "shipped"
   | "archived";
-export type ProofLinkKind = "repo" | "test" | "ci" | "post" | "artifact";
+export type ProofLinkKind = "repo" | "test" | "ci" | "post" | "artifact" | "release";
 
 export interface ProofLink {
   label: string;
@@ -299,7 +299,7 @@ export const projects: Project[] = [
       {
         label: "v0.2.0 source release",
         href: "https://github.com/mmaitland300/DAWBackup/releases/tag/v0.2.0",
-        kind: "artifact",
+        kind: "release",
       },
       {
         label: "CLI tests",

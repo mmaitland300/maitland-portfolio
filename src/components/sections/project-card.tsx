@@ -35,6 +35,7 @@ const proofKindLabel: Record<
   ci: "ci",
   post: "decision record",
   artifact: "case study",
+  release: "release",
 };
 
 /** Same on homepage (compact) and /projects so the primary demo CTA reads consistently. */

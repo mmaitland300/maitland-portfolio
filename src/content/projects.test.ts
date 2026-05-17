@@ -74,7 +74,14 @@ describe("projects data integrity", () => {
       "shipped",
       "archived",
     ]);
-    const allowedProofKinds = new Set(["repo", "test", "ci", "post", "artifact"]);
+    const allowedProofKinds = new Set([
+      "repo",
+      "test",
+      "ci",
+      "post",
+      "artifact",
+      "release",
+    ]);
 
     for (const p of featured) {
       expect(p.status, `${p.slug} missing status`).toBeTruthy();
@@ -130,6 +137,7 @@ describe("projects data integrity", () => {
     expect(spb?.status).toBe("source-installable");
     expect(spb?.github).toBe("https://github.com/mmaitland300/DAWBackup");
     expect(spb?.knownLimits).toContain("v0.2.0 source release is published");
+    expect(spb?.proofLinks?.some((link) => link.kind === "release")).toBe(true);
   });
 });
 
