@@ -172,25 +172,25 @@ export const projects: Project[] = [
   },
   {
     slug: "portfolio-site",
-    title: "Personal Site",
+    title: "mmaitland.dev",
     description:
-      "This site. Next.js 16 with MDX blogging, a contact form that sends email through Resend and falls back gracefully when the database is down, and a GitHub OAuth admin inbox for managing submissions.",
+      "The site where I keep project writeups, music, blog notes, and things I am learning. It uses Next.js 16 with typed content, a Resend contact flow, graceful database fallbacks, and a GitHub OAuth admin inbox for managing submissions.",
     problem:
-      "GitHub alone was a weak container for case studies, limits, and supporting links. I also needed contact that survives spam without turning into ops work, plus a stack I could iterate on without fearing every deploy.",
+      "GitHub alone was a weak container for case studies, limits, and supporting links. I also needed contact that survives spam without turning into extra maintenance work, plus a stack I could iterate on without fearing every deploy.",
     constraints:
-      "Solo project, so operational overhead had to stay low. No dedicated backend: managed services (Resend for email, Upstash for rate limiting, Neon for Postgres) handle the heavy parts.",
+      "Solo-maintained site, so the moving parts have to stay small. No dedicated backend: managed services (Resend for email, Upstash for rate limiting, Neon for Postgres) handle the heavy parts.",
     tradeoff:
-      "Server Actions plus Resend, Upstash, and Neon keep the solo-operator footprint small; the trade is accepting vendor-shaped limits I can live with on a personal site.",
+      "Server Actions plus Resend, Upstash, and Neon keep the site small; the trade is accepting vendor-shaped limits I can live with on a personal site.",
     outcome:
       "Live at mmaitland.dev with honeypot + Redis rate limiting on contact, GitHub OAuth admin gating, and MDX blog with draft protection.",
     status: "live-site",
     evidence:
-      "Production safeguards are documented in a public case study and decision record, with CI and smoke tests in the repository.",
+      "The case study and decision record document the contact flow, admin path, CI, and smoke tests.",
     knownLimits:
       "Some route-level dynamic behavior remains broader than needed and will be narrowed in later optimization work.",
     proofLinks: [
       {
-        label: "Personal site case study",
+        label: "mmaitland.dev build notes",
         href: "/projects/portfolio-site",
         kind: "artifact",
       },

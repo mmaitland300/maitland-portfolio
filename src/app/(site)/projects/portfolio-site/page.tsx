@@ -13,9 +13,9 @@ import { getProjectBySlug } from "@/content/projects";
 const PORTFOLIO_ARTIFACT_SRC = "/images/projects/portfolio-delivery-artifact.svg";
 
 export const metadata: Metadata = {
-  title: "Personal Site: Technical and Operational Choices",
+  title: "How I Built mmaitland.dev",
   description:
-    "Technical notes for mmaitland.dev: typed content, contact form with validation and rate limiting, optional admin inbox behind GitHub OAuth, and pragmatic tradeoffs for a solo-maintained site.",
+    "How mmaitland.dev is built as a home for projects, music, writing, and things I am learning, including typed content, contact validation, an optional admin inbox, and the small set of services behind it.",
 };
 
 export const dynamic = "force-dynamic";
@@ -30,9 +30,9 @@ const safeguards = [
 
 const tradeoffs = [
   {
-    title: "Managed services to keep solo ops small",
+    title: "Managed services to keep the site small",
     detail:
-      "Used Resend, Upstash, and Neon-backed Prisma integration to reduce ops burden and improve reliability during solo iteration.",
+      "Used Resend, Upstash, and Neon-backed Prisma integration so the site can handle contact, rate limits, and optional persistence without becoming a separate backend project.",
   },
   {
     title: "Delivery first, then persistence",
@@ -67,8 +67,8 @@ export default function PortfolioSiteCaseStudyPage() {
           <SectionHeader
             align="left"
             eyebrow="Case Study"
-            title="Personal Site: Technical and Operational Choices"
-            description="This page documents how mmaitland.dev handles contact submissions, optional admin access, and content delivery - the same problems as any small production site, with choices tuned for one maintainer and low operational overhead."
+            title="How I Built mmaitland.dev"
+            description="This site is where I keep project writeups, music, blog notes, and things I am learning. This case study covers the contact flow, optional admin inbox, typed content, and service setup without turning it into a bigger app than it needed to be."
             descriptionClassName="max-w-3xl"
             badges={
               <>
