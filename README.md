@@ -1,8 +1,8 @@
-# Matt Maitland - Personal Site and Case Studies
+# mmaitland.dev - Portfolio and Case Studies
 
 **Live site:** [www.mmaitland.dev](https://www.mmaitland.dev)
 
-Personal site and engineering case-study repo for mmaitland.dev. Built with Next.js, TypeScript, and Tailwind CSS, with MDX blogging, a contact pipeline with optional rate limiting, and optional admin inbox/auth features behind explicit configuration.
+The repo behind mmaitland.dev: project writeups, resume content, blog notes, contact flow, and optional admin inbox features. Built with Next.js, TypeScript, and Tailwind CSS, with optional rate limiting and auth features behind explicit configuration.
 
 ## What It Is
 
