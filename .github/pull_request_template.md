@@ -10,5 +10,5 @@
 
 - [ ] Lint, tests, and production build pass locally (`npm run lint`, `npm test`, `npm run build`)
 - [ ] If nav, focus, or keyboard behavior changed: ran `npx playwright test`
-- [ ] If public messaging changed: answered the public copy check above and updated `docs/proof-audit.md` if needed
+- [ ] If public messaging changed: answered the public copy check above and kept claims tied to case studies, tests, CI, screenshots, validation notes, or documented limits
 - [ ] No secrets or local-only paths committed

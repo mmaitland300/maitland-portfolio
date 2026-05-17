@@ -6,7 +6,10 @@ This guide keeps maintainer workflow details out of the README while preserving 
 
 This project is a personal site with portfolio depth, not a build diary. The intent is to show how work is reasoned about, shipped, and checked.
 
-- **Clear claims over hype.** Public claims should point at something checkable: case studies, decision records, tests, CI, or other artifacts. When support lags copy, soften the claim rather than inventing placeholder support. Messaging changes that touch claims should align with [proof-audit.md](proof-audit.md).
+- **Clear claims over hype.** Public claims should point at something
+  checkable: case studies, decision records, tests, CI, screenshots, validation
+  notes, or documented limits. When support lags copy, soften the claim rather
+  than inventing placeholder support.
 - **One coherent story across domains.** Production troubleshooting, shipping web software, and audio/DSP work are presented as one discipline: diagnose constraints, then deliver within them.
 - **Featured work carries a higher bar.** Anything marked `featured` in `src/content/projects.ts` is expected to have a substantive write-up: constraints, tradeoffs, status, known limits, and supporting links where applicable. Experiments stay visible but separate so they do not dilute the main signal.
 - **Production-shaped engineering.** Optional services are gated by typed env so the app runs and tests cleanly without them; contact and admin flows degrade predictably when configuration is partial.
@@ -20,8 +23,9 @@ CI on `main` runs lint, unit/data tests, production build, and Playwright smoke 
 
 ## Maintenance Cadence
 
-- **Weekly:** Ship one content/status task and one polish/maintenance task. If homepage, featured-project, or resume-adjacent copy changed, skim [proof-audit.md](proof-audit.md) before merge and update any row whose public claim moved.
-- **Weekly:** For messaging changes, answer this in the PR: what support got stronger, or what language got softer?
+- **Weekly:** Ship one content/status task and one polish/maintenance task.
+- **Weekly:** For messaging changes, answer this in the PR: what support got
+  stronger, or what language got softer?
 - **Publishing cadence:** Aim for one short post per maintenance cycle when possible, even if brief, as long as it has a clear job: decision, tradeoff, or incident pattern.
 - **Monthly:** Do one resume parity check. After any user-visible `src/content/resume.ts` change, run `npm run resume:pdf` with the dev server running so `public/resume.pdf` does not drift.
 - **Monthly:** Re-check canonical URL / metadata consistency, featured-project supporting links, and dependency hygiene so the public story and shipped repo stay aligned.

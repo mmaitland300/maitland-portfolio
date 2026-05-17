@@ -11,10 +11,16 @@ This repo uses a lightweight workflow. Keep changes small, reviewable, and consi
 
 ## Project intent
 
-Contributions should respect the portfolio's **evidence-first** bar (see **Goals and intent** in [README.md](README.md)):
+Contributions should keep the portfolio's public claims grounded in the actual
+site, repo, and case-study material:
 
-- **Featured projects** are expected to stay aligned with a real case study: constraints, outcomes, honest limits, and proof links where the site makes verifiable claims.
-- **Copy and marketing-style changes** that affect what the site claims in public should be checked against [docs/proof-audit.md](docs/proof-audit.md); prefer tightening or softening language over unfounded claims.
+- **Featured projects** are expected to stay aligned with a real case study:
+  constraints, outcomes, honest limits, and supporting links where the site
+  makes verifiable claims.
+- **Copy and marketing-style changes** that affect what the site claims in
+  public should point to case studies, decision records, tests, CI, screenshots,
+  validation notes, or documented limits. Prefer tightening or softening
+  language over adding claims that are not supported yet.
 - **Optional features** should remain safely gated by environment configuration so default and CI paths stay predictable.
 
 ## Commit Message Convention
