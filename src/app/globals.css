@@ -115,8 +115,8 @@
   --ring: oklch(0.556 0 0);
 
   /*
-   * Brand gradients: cyan ↔ violet family tuned to match .page-title / .hero-name,
-   * not Tailwind’s default purple-600 / cyan-600 pair.
+   * Brand gradients: cyan to violet family tuned to match .page-title / .hero-name,
+   * not Tailwind's default purple-600 / cyan-600 pair.
    */
   --brand-cta-from: #5746d4;
   --brand-cta-to: #1299be;
@@ -456,6 +456,17 @@
 
 /* /resume/print: browser print dialog (PDF export uses the same DOM) */
 @media print {
+  html,
+  body {
+    background: white !important;
+  }
+
+  .resume-print-document {
+    min-height: 100vh;
+    background: white !important;
+    print-color-adjust: exact;
+  }
+
   .resume-print-root {
     background: white !important;
   }
