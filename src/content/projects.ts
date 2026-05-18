@@ -1,11 +1,6 @@
 import { getResearchRadarDemoUrl } from "@/lib/research-radar";
 import { getSnakeDemoUrl } from "@/lib/snake-demo";
 
-/**
- * Promotion rule:
- * featured projects should have a case-study path (dedicated caseStudy page
- * with explicit artifacts/tradeoffs/current-state/supporting links).
- */
 const snakeDemoUrl = getSnakeDemoUrl();
 const researchRadarDemoUrl = getResearchRadarDemoUrl();
 
@@ -21,7 +16,14 @@ export type ProjectStatus =
   | "desktop-prototype"
   | "shipped"
   | "archived";
-export type ProofLinkKind = "repo" | "test" | "ci" | "post" | "artifact" | "release";
+export type ProofLinkKind =
+  | "repo"
+  | "test"
+  | "ci"
+  | "post"
+  | "artifact"
+  | "release"
+  | "workflow";
 
 export interface ProofLink {
   label: string;
@@ -54,11 +56,12 @@ export interface Project {
   category: ProjectCategory;
 }
 
-/** Homepage grid: flagship DSP, research prototype, and support story. */
+/** Homepage grid: practical tooling first, then support, research, and audio work. */
 export const HOMEPAGE_FEATURED_SLUGS = [
-  "stringflux",
-  "research-radar",
+  "smart-project-backup",
   "full-swing-tech-support",
+  "research-radar",
+  "stringflux",
 ] as const;
 
 export type HomepageFeaturedSlug = (typeof HOMEPAGE_FEATURED_SLUGS)[number];
@@ -303,6 +306,11 @@ export const projects: Project[] = [
         kind: "release",
       },
       {
+        label: "Workflow walkthrough",
+        href: "https://github.com/mmaitland300/DAWBackup/blob/main/docs/workflow-walkthrough.md",
+        kind: "workflow",
+      },
+      {
         label: "CLI tests",
         href: "https://github.com/mmaitland300/DAWBackup/blob/main/tests/test_cli.py",
         kind: "test",
@@ -368,7 +376,7 @@ export const projects: Project[] = [
       {
         label: "Workflow walkthrough",
         href: "https://github.com/mmaitland300/musicians-organizer/blob/main/docs/workflow-walkthrough.md",
-        kind: "artifact",
+        kind: "workflow",
       },
       {
         label: "CI workflow",

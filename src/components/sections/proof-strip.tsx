@@ -46,6 +46,15 @@ function researchRadarProofHeadline(
 
 /** Curated homepage copy; URLs come from each project's proofLinks (see projects.ts). */
 const PROOF_HEADLINES_BASE = {
+  "smart-project-backup": {
+    what: "Smart Project Backup",
+    whyItMatters:
+      "A source-installable Python CLI for project backups: SHA-256 change detection, SQLite manifests, config defaults, watch mode, and explicit restore-safety boundaries.",
+    linkPick: (links: ProofLink[]) =>
+      links.filter((l) =>
+        ["repo", "release", "workflow"].includes(l.kind ?? "")
+      ),
+  },
   "full-swing-tech-support": {
     what: "Simulator technical support",
     whyItMatters:
@@ -84,7 +93,7 @@ export function ProofStrip() {
         <h2 id="proof-strip-heading" className="sr-only">
           Supporting links for featured work
         </h2>
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           {featured.map((project) => {
             const curated = isHomepageFeaturedSlug(project.slug)
               ? proofHeadlines[project.slug]

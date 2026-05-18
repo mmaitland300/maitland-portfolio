@@ -13,8 +13,8 @@ export function FeaturedProjects() {
   const featured = getHomepageFeaturedProjects();
   const researchRadarDemoUrl = getResearchRadarDemoUrl();
   const featuredDescription = researchRadarDemoUrl
-    ? "Three live projects with public case studies: StringFlux, Research Radar, and Full Swing support. This homepage row is a compact preview; the projects page expands each case study card."
-    : "Three projects with public case studies and repositories: StringFlux, Research Radar, and Full Swing support. This homepage row is a compact preview; the projects page expands each case study card.";
+    ? "Four project anchors: a practical backup CLI, current support work, a live research prototype, and in-development audio software. The projects page expands the details, links, and limits."
+    : "Four project anchors: a practical backup CLI, current support work, a research prototype, and in-development audio software. The projects page expands the details, links, and limits.";
 
   return (
     <section className="py-24 relative z-10">
@@ -34,7 +34,7 @@ export function FeaturedProjects() {
           />
         </motion.div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
           {featured.map((project, i) => (
             <ProjectCard key={project.slug} project={project} index={i} compact />
           ))}

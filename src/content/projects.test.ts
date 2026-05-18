@@ -61,6 +61,15 @@ describe("projects data integrity", () => {
     }
   });
 
+  it("leads the homepage with practical tooling and support anchors", () => {
+    expect(getHomepageFeaturedProjects().map((p) => p.slug)).toEqual([
+      "smart-project-backup",
+      "full-swing-tech-support",
+      "research-radar",
+      "stringflux",
+    ]);
+  });
+
   it("featured projects include frozen proof contracts", () => {
     const featured = getFeaturedProjects();
     const allowedStatus = new Set([
@@ -82,6 +91,7 @@ describe("projects data integrity", () => {
       "post",
       "artifact",
       "release",
+      "workflow",
     ]);
 
     for (const p of featured) {
@@ -139,6 +149,11 @@ describe("projects data integrity", () => {
     expect(spb?.github).toBe("https://github.com/mmaitland300/DAWBackup");
     expect(spb?.knownLimits).toContain("v0.2.0 source release is published");
     expect(spb?.proofLinks?.some((link) => link.kind === "release")).toBe(true);
+    expect(
+      spb?.proofLinks?.some((link) =>
+        link.href.includes("docs/workflow-walkthrough.md")
+      )
+    ).toBe(true);
   });
 
   it("surfaces Musicians Organizer as a desktop prototype", () => {
