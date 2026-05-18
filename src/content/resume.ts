@@ -78,18 +78,18 @@ export const resumeExperience: ResumeExperienceItem[] = [
     company: "Self-directed",
     period: "2022 - Present",
     description:
-      "Self-directed web and audio software with documented tradeoffs and public write-ups, scoped for nights-and-weekends time, solo maintenance, and the same incomplete-information habits as remote support.",
+      "Self-directed web and audio software built around things I wanted to understand better or tools I wanted to use, maintained around full-time work with public notes on scope, decisions, and limits.",
     highlights: [
       {
-        text: "Built and shipped mmaitland.dev with typed content, CI, smoke tests, contact validation, rate limiting, and optional admin workflows.",
+        text: "Built mmaitland.dev with typed content, CI, smoke tests, contact validation, rate limiting, and optional admin workflows.",
         href: "https://www.mmaitland.dev",
       },
       {
-        text: "Developing StringFlux in JUCE/C++ with focus on real-time-safe behavior, narrow scope, and documented tradeoffs.",
+        text: "Building StringFlux in JUCE/C++ with focus on real-time-safe behavior, narrow scope, and documented tradeoffs.",
         href: "https://www.mmaitland.dev/stringflux",
       },
       {
-        text: "Publish case studies and decision records so architecture and tradeoffs ship in the same bundle as the demos and repositories.",
+        text: "Write case studies and decision notes so project pages explain the decisions, limits, and current state behind the demos and repositories.",
       },
     ],
   },
@@ -101,7 +101,7 @@ export const resumeExperience: ResumeExperienceItem[] = [
       "Diagnose remote simulator issues across calibration, licensing, display, networking, OS, and peripheral layers in customer production environments.",
     highlights: [
       {
-        text: "Built repeatable triage paths for recurring failures so similar tickets reopen the same isolation checklist each time the signature returns.",
+        text: "Built repeatable triage notes for recurring failure patterns so similar tickets start from the right isolation steps instead of from scratch.",
         href: "/projects/full-swing-tech-support",
       },
       {
